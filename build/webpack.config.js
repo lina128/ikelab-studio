@@ -125,8 +125,7 @@ webpackConfig.module.loaders.push({
   exclude : null,
   loaders : [
     'style',
-    BASE_CSS_LOADER,
-    'postcss'
+    'css'
   ]
 })
 

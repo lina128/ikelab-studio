@@ -71,14 +71,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davezuko/react-redux-starter-kit.git"
+    "url": "git+https://github.com/Lina128/ikelab-studio.git"
   },
   "author": "Na Li <linazhao128@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "babel-loader": "^6.2.5",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-runtime": "^6.15.0",
+		"babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.13.0",
@@ -102,7 +102,6 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.8.0",
     "redux": "^3.6.0",
-    "reduce-reducers": "^0.1.2",
     "redux-thunk": "^2.0.0",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
