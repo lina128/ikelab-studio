@@ -46,7 +46,6 @@ export default class ConditionPane extends Component {
 		for(let i=0; i<condition.length; i++) {
 			conditionList.push(
 				<ListItem key={condition[i].id} id={condition[i].id}>
-					<HorizontalBar backgroundColor={condition[i].color} />
 					<Input customStyle={{border:'none', color:condition[i].color}} value={condition[i].name} onBlur={(event)=>{onRenameCondition(condition[i].id, event.target.value)}} />
 					<MagicWand id={'cond_sele_'+condition[i].id} content={{condition: [condition[i].color]}} onWandClick={this.handleWandClick}>Select trials</MagicWand>
 				</ListItem>

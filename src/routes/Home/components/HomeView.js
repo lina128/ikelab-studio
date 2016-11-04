@@ -7,8 +7,6 @@ export default class HomeView extends Component {
 		return (
 		  <div>
 		    <h4>Welcome!</h4>
-		    <div
-					className='duck' />
 		  </div>
 		)
 	}

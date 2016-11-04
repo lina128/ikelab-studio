@@ -1,3 +1,5 @@
+import { insertNodeAfter } from '../utils/node'
+
 const addTrial = (state, action) => {
 	let newCounterT = state.counter + 1;
 	if(state.currentTrial) {

@@ -1,11 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-
-const style = {
-	display: "inline-block",
-	width: '10px',
-	height: '5px',
-	margin: '2px'
-}
+import './HorizontalBar.scss'
 
 export default class HorizontalBar extends Component {
 	static propTypes = {
@@ -18,7 +12,7 @@ export default class HorizontalBar extends Component {
 		backgroundColor = backgroundColor || '#000000';
 		
 		return (
-			<div style={{...style, backgroundColor}} />
+			<div className={'design_horizontalBar_default'} style={{backgroundColor: backgroundColor}} />
 		)
 	}
 }

@@ -1,15 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import { DropTarget } from 'react-dnd';
-import { connect } from 'react-redux';
-
-const style = {
-	float: 'left',
-	width: '60%',
-	minWidth: '700px',
-	maxWidth: '700px',
-	height: '1000px',
-	border: '1px solid grey'
-}
+import React, { Component, PropTypes } from 'react'
+import { DropTarget } from 'react-dnd'
+import { connect } from 'react-redux'
+import './TrialArea.scss'
 
 const mapStateToProps = (state) => {
 	return {
@@ -35,13 +27,13 @@ export default class TrialArea extends Component {
 
 		if(currentTrial) {
 			return (
-				<div style={style}>
+				<div className={'design_trialArea_default'}>
 				 Trial {currentTrial}
 				</div>
 			)
 		} else {
 			return (
-				<div style={style} />
+				<div className={'design_trialArea_default'} />
 			)
 		}
 	}

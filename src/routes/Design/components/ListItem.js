@@ -1,10 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 
-const style = {
-	paddingLeft: '1em',
-	textIndex: '-.7em'
-}
-
 export default class ListItem extends Component {
 	static propTypes = {
 		id: PropTypes.number.isRequired
@@ -12,7 +7,7 @@ export default class ListItem extends Component {
 	render() {
 		const { id } = this.props
 		return (
-			<li id={id} style={style}>
+			<li id={id}>
 				{this.props.children}
 			</li>
 		)

@@ -1,65 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import classNames from 'classnames';
 import { ItemTypes, Dimensions } from '../modules/constants';
 import { DragSource, DropTarget } from 'react-dnd';
 import Trial from './Trial'
+import './Block.scss'
 
-const style = {
-	position: 'relative',
-	float: 'right',
-	padding: '0px',
-	cursor: 'move',
-	width: Dimensions.TRIALWIDTH + 80 + 'px',
-	minHeight: '30px'
-}
-
-const handleStyle = {
-	position: 'absolute',
-  width: '1rem',
-  height: '1rem',
-  display: 'inline-block',
-  marginRight: '0.75rem',
-  cursor: 'move'
-};
-
-const blockBranch = {
-	blockBranchStyleSingle: {
-		position: 'absolute',
-		top: '50%',
-		left: '-84px',
-		width: '80px',
-		height: '2px',
-		borderTop: '1px solid grey',
-		borderLeft: '1px solid grey',
-		borderBottom: '1px solid grey'
-	},
-	blockBranchStyleTop: {
-		position: 'absolute',
-		top: '46px',
-		bottom: '0px',
-		left: '-84px',
-		width: '80px',
-		borderTop: '1px solid grey',
-		borderLeft: '1px solid grey'
-	},
-	blockBranchStyleMiddle: {
-		position: 'absolute',
-		top: '0px',
-		bottom: '0px',
-		left: '-84px',
-		width: '80px',
-		borderLeft: '1px solid grey'
-	},
-	blockBranchStyleBottom: {
-		position: 'absolute',
-		top: '0px',
-		bottom: '55px',
-		left: '-84px',
-		width: '80px',
-		borderLeft: '1px solid grey',
-		borderBottom: '1px solid grey'
-	}
-}
 
 const blockSource = {
 	beginDrag(props) {
@@ -131,33 +77,35 @@ export default class Block extends Component {
 	render() {
 		const { connectDragSource, connectDragPreview, isDragging, connectDropTarget, selectMode, id, color, name, branchStyle, children, moveNode, moveOutside, moveInside, clickTrial } = this.props;
 		
-		if(selectMode) {
-			const blockTrials = [];
+		const classnames = classNames('design_block_branch', branchStyle);
+		
+		const blockTrials = [];
 
-			for(let i=0; i<children.length; i++) {
-				if(children.length === 1) {
+		for(let i=0; i<children.length; i++) {
+			if(children.length === 1) {
+				blockTrials.push(
+					<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'design_trial_branch_single'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
+				);
+			} else {
+				if(i === 0) {
 					blockTrials.push(
-						<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'trialBranchStyleSingle'} clickTrial={clickTrial} />
+						<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'design_trial_branch_top'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
+					);
+				} else if(i === children.length-1) {
+					blockTrials.push(
+						<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'design_trial_branch_bottom'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
 					);
 				} else {
-					if(i === 0) {
-						blockTrials.push(
-							<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'trialBranchStyleTop'} clickTrial={clickTrial} />
-						);
-					} else if(i === children.length-1) {
-						blockTrials.push(
-							<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'trialBranchStyleBottom'} clickTrial={clickTrial} />
-						);
-					} else {
-						blockTrials.push(
-							<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'trialBranchStyleMiddle'} clickTrial={clickTrial} />
-						);
-					}
+					blockTrials.push(
+						<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'design_trial_branch_middle'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
+					);
 				}
 			}
-
+		}
+		
+		if(selectMode) {
 			return (
-				<div style={style}>
+				<div className={'design_block_default'}>
 				<div>
 					{blockTrials}	
 					<div style={{
@@ -170,53 +118,29 @@ export default class Block extends Component {
 						{name}
 					</div>
 				</div>
-				<div style={branchStyle?blockBranch[branchStyle]:{}} />	
+				<div className={classnames} />	
 				</div>
 			)
 		} else {
 			const opacity = isDragging ? 0 : 1;
-	
-			const blockTrials = [];
-
-			for(let i=0; i<children.length; i++) {
-				if(children.length === 1) {
-					blockTrials.push(
-						<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'trialBranchStyleSingle'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
-					);
-				} else {
-					if(i === 0) {
-						blockTrials.push(
-							<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'trialBranchStyleTop'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
-						);
-					} else if(i === children.length-1) {
-						blockTrials.push(
-							<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'trialBranchStyleBottom'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
-						);
-					} else {
-						blockTrials.push(
-							<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'trialBranchStyleMiddle'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
-						);
-					}
-				}
-			}
 
 			return connectDropTarget(
-				<div style={style}>
-				{connectDragSource(
-				<div style={{ opacity }}>
-					{blockTrials}	
-					<div style={{
-						position: 'absolute',
-						top: '0px',
-						left: '0px',
-						fontSize: '12pt',
-						fontFamily: 'Helvetica'
-					}}>
-						{name}
-					</div>
-				</div>
-				)}
-				<div style={branchStyle?blockBranch[branchStyle]:{}} />	
+				<div className={'design_block_default'}>
+					{connectDragSource(
+						<div style={{ opacity }}>
+							{blockTrials}	
+							<div style={{
+								position: 'absolute',
+								top: '0px',
+								left: '0px',
+								fontSize: '12pt',
+								fontFamily: 'Helvetica'
+							}}>
+								{name}
+							</div>
+						</div>
+					)}
+					<div className={classnames} />	
 				</div>
 			);
 		}

@@ -5,8 +5,7 @@ export const ItemTypes = {
 
 export const Dimensions = {
 	TRIALHEIGHT: 45,
-	TRIALWIDTH: 60,
-	TRIALMARGINBOTTOM: 10
+	TRIALWIDTH: 60
 }
 
 export const ColorPalette = [

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import './AddButton.scss'
-import SquareButton from './SquareButton'
 import AddButtonImage from '../assets/plus-box.png'
 
 export default class AddButton extends Component {
@@ -8,8 +7,8 @@ export default class AddButton extends Component {
 		const { clickHandler, text } = this.props;
 
 		return (
-			<div className='designAddButton' onClick={clickHandler}>
-				<SquareButton customStyle={{backgroundImage: 'url('+AddButtonImage+')'}} />
+			<div className='design_addButton_btn' onClick={clickHandler}>
+				<img alt={'Add'} style={{display: 'block'}} src={AddButtonImage} />
 				{text}
 			</div>
 		)

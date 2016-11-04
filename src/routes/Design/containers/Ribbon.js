@@ -37,11 +37,13 @@ export default class Ribbon extends Component {
 		
 		return (
 			<div style={style}>
-				<AddButton clickHandler={addTrial} text={"Add Trial"}/>
-				<AddButton clickHandler={addBlock} text={"Add Block"}/>
-				<AddButton clickHandler={addRun} text={"Add Run"}/>
-				<AddButton clickHandler={addCondition} text={"Add Condition"}/>
-				<Trash />
+				<div>
+					<AddButton clickHandler={addTrial} text={"Add Trial"}/>
+					<AddButton clickHandler={addBlock} text={"Add Block"}/>
+					<AddButton clickHandler={addRun} text={"Add Run"}/>
+					<AddButton clickHandler={addCondition} text={"Add Condition"}/>
+					<Trash />
+				</div>
 			</div>
 		)
 	}

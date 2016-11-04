@@ -10,7 +10,7 @@ import Block from './Block'
 import Run from './Run'
 
 const style = {
-	width: '220px',
+	width: '235px',
 	padding: '5px 0 0 0'
 }
 

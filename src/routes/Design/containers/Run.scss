@@ -1,0 +1,11 @@
+@import 'base';
+
+.design_run_default {
+	position: relative;
+	float: right;
+	clear: both;
+	padding: 0;
+	cursor: move;
+	width: $trialWidth + 160px;
+	min-height: 30px;
+}

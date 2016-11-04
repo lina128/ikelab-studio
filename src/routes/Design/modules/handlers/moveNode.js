@@ -7,7 +7,7 @@ const moveNode = (state, action) => {
 	const id = action.payload.id;
 	const afterId = action.payload.afterId;
 	const direction = action.payload.direction;
-	
+
 	if(!direction) return state;
 
 	const trial = findNode(state.structure, id);
@@ -23,6 +23,7 @@ const moveNode = (state, action) => {
 	} else {
 		// direction is DOWN
 		const newState2 = insertNodeAfter(newState1, afterId, trial);
+		console.log(newState2);
 		return {
 			...state,
 			structure: newState2

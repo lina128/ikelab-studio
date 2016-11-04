@@ -1,10 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 
-const style = {
-	display: "inline-block",
-	margin: "0 5px"
-}
-
 export default class Input extends Component {
 	constructor(props) {
 		super(props);
@@ -20,7 +15,7 @@ export default class Input extends Component {
 		const { customStyle, onBlur } = this.props;
 		
 		return (
-			<input style={{...style, ...customStyle}} type="text" value={this.state.value} onChange={this.handleChange} onBlur={onBlur} />
+			<input style={customStyle} type="text" value={this.state.value} onChange={this.handleChange} onBlur={onBlur} />
 		)
 	}
 }

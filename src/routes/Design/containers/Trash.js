@@ -1,12 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { toggleSelectMode } from '../modules/design'
-import SquareButton from '../components/SquareButton'
 import TrashcanImage from '../assets/delete.png'
-
-const style = {
-	display: "inline-block"
-}
+import './Trash.scss'
 
 const mapDispatchToProps = (dispatch) => {
 	return {
@@ -21,8 +17,8 @@ export default class Trash extends Component {
 	render() {
 		const { onSelectMode } = this.props;
 		return (
-			<div style={style} id={'trash_sele_1'} onClick={onSelectMode}>
-				<SquareButton customStyle={{backgroundImage: 'url(' + TrashcanImage + ')'}} />
+			<div className={'design_trash_default'} id={'trash_sele_1'} onClick={onSelectMode}>
+				<img alt={'Trash'} style={{display:'block'}} src={TrashcanImage} />
 				Trash
 			</div>
 		)

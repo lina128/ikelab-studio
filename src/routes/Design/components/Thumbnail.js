@@ -1,28 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { Dimensions } from '../modules/constants'
 import HorizontalBar from './HorizontalBar'
-
-const style = {
-	position: 'relative',
-	float: 'right',
-	clear: 'both',
-	border: '1px solid grey',
-	padding: '0px',
-	marginLeft: '30px',
-	marginBottom: Dimensions.TRIALMARGINBOTTOM + 'px',
-	backgroundColor: 'white',
-	cursor: 'move',
-	width: Dimensions.TRIALWIDTH + 'px',
-	height: Dimensions.TRIALHEIGHT + 'px'
-}
-
-const conditionStyle = {
-	position: 'absolute',
-	left: Dimensions.TRIALWIDTH + 5 + 'px',
-	top: '0px',
-	width: '10px',
-	height: Dimensions.TRIALHEIGHT + 'px'
-}
+import './Thumbnail.scss'
 
 export default class Thumbnail extends Component {
 	constructor(props) {
@@ -43,9 +21,7 @@ export default class Thumbnail extends Component {
 		const { id, branchStyle } = this.props;
 		
 		return (
-			<div style={{
-				height: '30px',
-				padding: '5px'}}  onClick={this._onClick}>
+			<div className={'design_thumbnail_default'} onClick={this._onClick}>
 				Trial{id}
 			</div>
 		)

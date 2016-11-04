@@ -15,7 +15,7 @@ export default class MagicWand extends Component {
 	}
 	render() {
 		return (
-			<div className='designMagicWand' onClick={this._onClick}></div>
+			<div className='design_magicWand_default' onClick={this._onClick}></div>
 		)
 	}
 }

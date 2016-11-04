@@ -1,72 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
+import classNames from 'classnames'
 import { ItemTypes, Dimensions } from '../modules/constants'
 import { DragSource, DropTarget } from 'react-dnd'
-import HorizontalBar from '../components/HorizontalBar'
 import Thumbnail from '../components/Thumbnail'
-
-const style = {
-	position: 'relative',
-	float: 'right',
-	clear: 'both',
-	border: '1px solid grey',
-	padding: '0px',
-	marginLeft: '30px',
-	marginBottom: Dimensions.TRIALMARGINBOTTOM + 'px',
-	backgroundColor: 'white',
-	cursor: 'move',
-	width: Dimensions.TRIALWIDTH + 'px',
-	height: Dimensions.TRIALHEIGHT + 'px'
-}
-
-const branch = {
-	trialBranchStyleSingle: {
-		position: 'absolute',
-		top: '23px',
-		left: '-82px',
-		width: '80px',
-		height: '2px',
-		borderTop: '1px solid grey',
-		borderLeft: '1px solid grey',
-		borderBottom: '1px solid grey'
-	},
-	trialBranchStyleTop: {
-		position: 'absolute',
-		top: '23px',
-		left: '-82px',
-		width: '80px',
-		height: '57px',
-		borderTop: '1px solid grey',
-		borderLeft: '1px solid grey'
-	},
-	trialBranchStyleMiddle: {
-		position: 'absolute',
-		top: '23px',
-		left: '-82px',
-		width: '80px',
-		height: '57px',
-		borderLeft: '1px solid grey'
-	},
-	trialBranchStyleBottom: {
-		position: 'absolute',
-		top: '23px',
-		left: '-82px',
-		width: '80px',
-		height: '1px',
-		borderTop: '1px solid grey'
-	}
-}
-
-const conditionStyle = {
-	position: 'absolute',
-	left: Dimensions.TRIALWIDTH + 5 + 'px',
-	top: '0px',
-	width: '10px',
-	height: Dimensions.TRIALHEIGHT + 'px',
-	wordSpacing: '0px',
-	fontSize: '0px',
-	letterSpacing: '0px'
-}
+import Sidebar from '../components/Sidebar'
+import HorizontalBar from '../components/HorizontalBar'
+import './Trial.scss'
 
 const trialSource = {
 	beginDrag(props) {
@@ -86,11 +26,13 @@ const trialTarget = {
 		const droppedComponentPosition = ReactDOM.findDOMNode(component).getBoundingClientRect();
 		const draggedComponentPosition = monitor.getClientOffset();
 		var direction;
+
 		if(draggedComponentPosition.y<droppedComponentPosition.bottom && draggedComponentPosition.y>droppedComponentPosition.top) {
 			direction = 'UP';
 		} else if(draggedComponentPosition.y+Dimensions.TRIALHEIGHT<droppedComponentPosition.bottom && draggedComponentPosition.y+Dimensions.TRIALHEIGHT>droppedComponentPosition.top) {
 			direction = 'DOWN';
 		}
+
 		if(draggedId !== props.id && direction) {
 			props.moveNode(draggedId, props.id, direction);
 		}
@@ -125,11 +67,11 @@ export default class Trial extends Component {
 		moveNode: PropTypes.func,
 		moveOutside: PropTypes.func,
 		selectMode: PropTypes.bool.isRequired,
+		condition: PropTypes.array.isRequired,
 		id: PropTypes.number.isRequired,
 		selected: PropTypes.bool.isRequired,
 		branchStyle: PropTypes.string,
 		clickTrial: PropTypes.func.isRequired,
-		condition: PropTypes.array.isRequired
 	}
 	
 	handleThumbnailClick() {
@@ -138,17 +80,7 @@ export default class Trial extends Component {
 	
 	renderOverlay() {
 		return (
-			<div style={{
-				position: 'absolute',
-				width: '100%',
-				height: '100%',
-				top: '0',
-				left: '0',
-				zIndex: '0',
-				backgroundColor: 'red',
-				opacity: '0.4',
-				pointerEvents: 'none'
-			}} />
+			<div className={'design_trial_overlay'} />
 		)
 	}
 	
@@ -163,14 +95,16 @@ export default class Trial extends Component {
 			)
 		}
 		
+		const classnames = classNames('design_trial_branch', branchStyle);
+
 		if(selectMode) {
 			return (
-				<div style={style}>
+				<div className='design_trial_default'>
 					<Thumbnail id={id} condition={condition} onThumbnailClick={this.handleThumbnailClick} />
-					<div style={branchStyle?branch[branchStyle]:{}} />
-					<div style={conditionStyle}>
+					<Sidebar>
 						{conditionList}
-					</div>
+					</Sidebar>
+					<div className={classnames} />
 					{selected && this.renderOverlay()}
 				</div>
 			)
@@ -184,18 +118,18 @@ export default class Trial extends Component {
 					<HorizontalBar key={condition[i]} backgroundColor={condition[i]} />
 				)
 			}
-			
+
 			return connectDropTarget(
-				<div style={style}>
+				<div className='design_trial_default'>
 					{connectDragSource(
 						<div>
 							<Thumbnail id={id} condition={condition} onThumbnailClick={this.handleThumbnailClick} />
-							<div style={conditionStyle}>
+							<Sidebar>
 								{conditionList}
-							</div>
+							</Sidebar>
 						</div>
 					)}
-					<div style={branchStyle?branch[branchStyle]:{}} />
+					<div className={classnames} />
 				</div>
 			);
 		}

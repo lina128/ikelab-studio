@@ -1,27 +1,10 @@
-import React, { PropTypes, Component } from 'react';
-import ReactDOM from 'react-dom';
-import { ItemTypes, Dimensions } from '../modules/constants';
-import { DropTarget } from 'react-dnd';
-import Block from './Block';
+import React, { PropTypes, Component } from 'react'
+import ReactDOM from 'react-dom'
+import { ItemTypes, Dimensions } from '../modules/constants'
+import { DropTarget } from 'react-dnd'
+import Block from './Block'
+import './Run.scss'
 
-
-const style = {
-	position: 'relative',
-	float: 'right',
-	padding: '0px',
-	cursor: 'move',
-	width: Dimensions.TRIALWIDTH + 160 + 'px',
-	minHeight: '30px'
-}
-
-const handleStyle = {
-	position: 'absolute',
-  width: '1rem',
-  height: '1rem',
-  display: 'inline-block',
-  marginRight: '0.75rem',
-  cursor: 'move'
-};
 
 const runTarget = {
 	hover(props, monitor, component) {
@@ -60,31 +43,31 @@ export default class Run extends Component {
 			for(let i=0; i<children.length; i++) {
 				if(children.length === 1) {
 					runBlocks.push(
-						<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'blockBranchStyleSingle'} children={children[i].children} clickTrial={clickTrial} />
+						<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'design_block_branch_single'} children={children[i].children} clickTrial={clickTrial} />
 					)
 				} else {
 					if(i === 0) {
 						runBlocks.push(
-							<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'blockBranchStyleTop'} children={children[i].children} clickTrial={clickTrial} />
+							<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'design_block_branch_top'} children={children[i].children} clickTrial={clickTrial} />
 						)
 					} else if(i === children.length-1) {
 						runBlocks.push(
-							<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'blockBranchStyleBottom'} children={children[i].children} clickTrial={clickTrial} />
+							<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'design_block_branch_bottom'} children={children[i].children} clickTrial={clickTrial} />
 						)
 					} else {
 						runBlocks.push(
-							<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'blockBranchStyleMiddle'} children={children[i].children} clickTrial={clickTrial} />
+							<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'design_block_branch_middle'} children={children[i].children} clickTrial={clickTrial} />
 						)
 					}
 				}
 			}
 
 			return (
-				<div style={style}>
+				<div className={'design_run_default'}>
 					{runBlocks}
 					<div style={{
 						position: 'absolute',
-						top: '20px',
+						top: '0px',
 						left: '0px',
 						fontSize: '12pt',
 						fontFamily: 'Helvetica'
@@ -99,27 +82,27 @@ export default class Run extends Component {
 			for(let i=0; i<children.length; i++) {
 				if(children.length === 1) {
 					runBlocks.push(
-						<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'blockBranchStyleSingle'} children={children[i].children} moveNode={moveNode} moveOutside={moveOutside} moveInside={moveInside} clickTrial={clickTrial} />
+						<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'design_block_branch_single'} children={children[i].children} moveNode={moveNode} moveOutside={moveOutside} moveInside={moveInside} clickTrial={clickTrial} />
 					)
 				} else {
 					if(i === 0) {
 						runBlocks.push(
-							<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'blockBranchStyleTop'} children={children[i].children} moveNode={moveNode} moveOutside={moveOutside} moveInside={moveInside} clickTrial={clickTrial} />
+							<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'design_block_branch_top'} children={children[i].children} moveNode={moveNode} moveOutside={moveOutside} moveInside={moveInside} clickTrial={clickTrial} />
 						)
 					} else if(i === children.length-1) {
 						runBlocks.push(
-							<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'blockBranchStyleBottom'} children={children[i].children} moveNode={moveNode} moveOutside={moveOutside} moveInside={moveInside} clickTrial={clickTrial} />
+							<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'design_block_branch_bottom'} children={children[i].children} moveNode={moveNode} moveOutside={moveOutside} moveInside={moveInside} clickTrial={clickTrial} />
 						)
 					} else {
 						runBlocks.push(
-							<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'blockBranchStyleMiddle'} children={children[i].children} moveNode={moveNode} moveOutside={moveOutside} moveInside={moveInside} clickTrial={clickTrial} />
+							<Block key={children[i].id} selectMode={selectMode} id={children[i].id} color={children[i].color} name={children[i].name} branchStyle={'design_block_branch_middle'} children={children[i].children} moveNode={moveNode} moveOutside={moveOutside} moveInside={moveInside} clickTrial={clickTrial} />
 						)
 					}
 				}
 			}
 
 			return connectDropTarget(
-				<div style={style}>
+				<div className={'design_run_default'}>
 					{runBlocks}
 					<div style={{
 						position: 'absolute',
