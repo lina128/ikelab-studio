@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import flow from 'lodash/flow'
 import { DropTarget } from 'react-dnd'
 import { connect } from 'react-redux'
 import './TrialArea.scss'
@@ -15,9 +16,7 @@ function collect(connect, monitor) {
 	}
 }
 
-@DropTarget('', {}, collect)
-@connect(mapStateToProps)
-export default class TrialArea extends Component {
+export class TrialArea extends Component {
 	static propTypes = {
 		currentTrial: PropTypes.number
 	}
@@ -38,3 +37,8 @@ export default class TrialArea extends Component {
 		}
 	}
 }
+
+export default flow(
+	DropTarget('', {}, collect),
+	connect(mapStateToProps)
+)(TrialArea)

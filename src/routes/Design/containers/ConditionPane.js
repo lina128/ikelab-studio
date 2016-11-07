@@ -30,8 +30,7 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-@connect(mapStateToProps, mapDispatchToProps)
-export default class ConditionPane extends Component {
+export class ConditionPane extends Component {
 	constructor(props) {
 		super(props);
 		this.handleWandClick = this.handleWandClick.bind(this);
@@ -61,3 +60,5 @@ export default class ConditionPane extends Component {
 		)
 	}
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConditionPane)

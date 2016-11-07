@@ -14,8 +14,7 @@ const mapStateToProps = (state) => {
 	}
 }
 
-@connect(mapStateToProps)
-export default class Note extends Component {
+export class Note extends Component {
 	render() {
 		const { message } = this.props;
 		const visibility = message ? 'visible' : 'hidden';
@@ -27,3 +26,5 @@ export default class Note extends Component {
 		)
 	}
 }
+
+export default connect(mapStateToProps)(Note)

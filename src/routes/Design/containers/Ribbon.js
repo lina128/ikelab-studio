@@ -30,8 +30,7 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-@connect(null, mapDispatchToProps)
-export default class Ribbon extends Component {
+export class Ribbon extends Component {
 	render() {
 		const { addTrial, addBlock, addRun, addCondition } = this.props;
 		
@@ -48,3 +47,5 @@ export default class Ribbon extends Component {
 		)
 	}
 }
+
+export default connect(null, mapDispatchToProps)(Ribbon)

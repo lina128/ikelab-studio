@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
+import flow from 'lodash/flow'
 import classNames from 'classnames'
 import { ItemTypes, Dimensions } from '../modules/constants'
 import { DragSource, DropTarget } from 'react-dnd'
@@ -52,9 +53,7 @@ function collectSource(connect, monitor) {
 	}
 }
 
-@DragSource(ItemTypes.TRIAL, trialSource, collectSource)
-@DropTarget(ItemTypes.TRIAL, trialTarget, collectTarget)
-export default class Trial extends Component {
+export class Trial extends Component {
 	constructor(props) {
 		super(props);
 		this.handleThumbnailClick = this.handleThumbnailClick.bind(this);
@@ -135,3 +134,8 @@ export default class Trial extends Component {
 		}
 	}
 }
+
+export default flow(
+	DragSource(ItemTypes.TRIAL, trialSource, collectSource),
+	DropTarget(ItemTypes.TRIAL, trialTarget, collectTarget)
+)(Trial)

@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import classNames from 'classnames';
-import { ItemTypes, Dimensions } from '../modules/constants';
-import { DragSource, DropTarget } from 'react-dnd';
+import React, { Component, PropTypes } from 'react'
+import ReactDOM from 'react-dom'
+import flow from 'lodash/flow'
+import classNames from 'classnames'
+import { ItemTypes, Dimensions } from '../modules/constants'
+import { DragSource, DropTarget } from 'react-dnd'
 import Trial from './Trial'
 import './Block.scss'
 
@@ -56,9 +57,7 @@ function collectSource(connect, monitor) {
 	}
 }
 
-@DragSource(ItemTypes.BLOCK, blockSource, collectSource)
-@DropTarget([ItemTypes.BLOCK, ItemTypes.TRIAL], blockTarget, collectTarget)
-export default class Block extends Component {
+export class Block extends Component {
 	static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		connectDragPreview: PropTypes.func.isRequired,
@@ -146,3 +145,8 @@ export default class Block extends Component {
 		}
 	}
 }
+
+export default flow(
+	DragSource(ItemTypes.BLOCK, blockSource, collectSource),
+	DropTarget([ItemTypes.BLOCK, ItemTypes.TRIAL], blockTarget, collectTarget)
+)(Block)

@@ -41,8 +41,7 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-@connect(mapStateToProps, mapDispatchToProps)
-export default class DesignPane extends Component {
+export class DesignPane extends Component {
 	static propTypes = {
 		selectMode: PropTypes.bool.isRequired,
 		structure: PropTypes.array.isRequired,
@@ -95,3 +94,5 @@ export default class DesignPane extends Component {
 		}
 	}
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(DesignPane)

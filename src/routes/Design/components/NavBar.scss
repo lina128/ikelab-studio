@@ -1,0 +1,10 @@
+@import 'base';
+
+.design_navbar_default {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 1000px;
+	max-width: $firstCol+px;
+	min-width: $firstCol+px;
+}

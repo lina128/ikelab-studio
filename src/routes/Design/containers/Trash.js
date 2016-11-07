@@ -12,8 +12,7 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-@connect(null, mapDispatchToProps)
-export default class Trash extends Component {
+export class Trash extends Component {
 	render() {
 		const { onSelectMode } = this.props;
 		return (
@@ -24,3 +23,5 @@ export default class Trash extends Component {
 		)
 	}
 }
+
+export default connect(null, mapDispatchToProps)(Trash)
