@@ -2,9 +2,14 @@ import React, { Component, PropTypes } from 'react'
 
 export default class Input extends Component {
 	constructor(props) {
-		super(props);
-		this.state = this.props;
-		this.handleChange = this.handleChange.bind(this);
+		super(props)
+		this.state = {value: ''}
+		this.handleChange = this.handleChange.bind(this)
+	}
+	
+	static propTypes = {
+		customStyle: PropTypes.object,
+		onBlur: PropTypes.func.isRequired
 	}
 	
 	handleChange(event) {

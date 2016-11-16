@@ -4,21 +4,26 @@ import AddButton from 'routes/Design/components/AddButton'
 import { shallow } from 'enzyme'
 
 describe('(Component) AddButton', () => {
-	let _wrapper, _props
+	let _wrapper, _props, _spies
 	
 	beforeEach(() => {
 		_spies = {}
 		_props = {
-			...bindActionaCreators({
-				addTrial: (_spies.addAtrial = sinon.spy())
+			text: 'Add',
+			...bindActionCreators({
+				clickHandler: (_spies.clickHandler = sinon.spy())
 			}, _spies.dispatch = sinon.spy())
-			text: 'Add'
 		}
+
 		_wrapper = shallow(<AddButton { ..._props }/>)
 	})
 	
 	it('Should render as a div.', () => {
 		expect(_wrapper.is('div')).to.equal(true)
+	})
+	
+	it('Should has a className.', () => {
+		expect(_wrapper.find('div').hasClass('design_addButton_btn')).to.be.true
 	})
 	
 	it('Should render with an <img> that shows an add icon.', () => {
@@ -34,9 +39,9 @@ describe('(Component) AddButton', () => {
 	it('Should dispatch an action when clicked', () => {
 		_spies.dispatch.should.have.not.been.called
 		
-		_wrapper.simulate('click')
+		_wrapper.find('div').simulate('click')
 		
 		_spies.dispatch.should.have.been.called
-		_spies.addTrial.should.have.been.called
+		_spies.clickHandler.should.have.been.called
 	})
 })
