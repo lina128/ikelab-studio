@@ -1,12 +1,6 @@
 @import 'base';
 
 .design_settingPane_default {
-	position: relative;
-	float: right;
-	overflow: auto;
 	border: 1px solid grey;
 	height: 1000px;
-	width: 20%;
-	max-width: $thirdCol + px;
-	min-width: $thirdCol + px;
 }

@@ -1,0 +1,23 @@
+.design_container1 {
+	display: flex; /*NEW, Spec - Opera 12.1, Firefox 20+ */
+	display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box; /*OLD - Firefox 19- */
+	display: -ms-flexbox; /* TWEENER - IE 10 */
+	display: -webkit-flex; /*NEW -Chrome */
+	flex-direction: column;
+	-webkit-box-orient: vertical;
+	-moz-box-orient: vertical;
+	box-orient: vertical;
+}
+
+.design_container2 {
+	display: flex; /*NEW, Spec - Opera 12.1, Firefox 20+ */
+	display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box; /*OLD - Firefox 19- */
+	display: -ms-flexbox; /* TWEENER - IE 10 */
+	display: -webkit-flex; /*NEW -Chrome */
+	flex-direction: row;
+	-webkit-box-orient: horizontal;
+	-moz-box-orient: horizontal;
+	box-orient: horizontal;
+}

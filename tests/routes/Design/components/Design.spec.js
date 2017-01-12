@@ -13,7 +13,7 @@ describe('(Component) Design', () => {
 		expect(_wrapper.is('div')).to.equal(true)
 	})
 	
-	it('Should contain five children.', () => {
-		expect(_wrapper.children()).to.have.length(5)
+	it('Should contain three children.', () => {
+		expect(_wrapper.children()).to.have.length(3)
 	})
 })

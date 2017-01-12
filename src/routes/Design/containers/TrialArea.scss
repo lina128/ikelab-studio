@@ -1,10 +1,7 @@
 @import 'base';
 
 .design_trialArea_default {
-	float: left;
-	width: '60%';
-	height: 1000px;
+	width: $secondCol + px;
+	height: 600px;
 	border: 1px solid grey;
-	min-width: $secondCol + px;
-	max-width: $secondCol + px;
 }

@@ -23,7 +23,6 @@ const moveNode = (state, action) => {
 	} else {
 		// direction is DOWN
 		const newState2 = insertNodeAfter(newState1, afterId, trial);
-		console.log(newState2);
 		return {
 			...state,
 			structure: newState2

@@ -20,73 +20,73 @@ export const TOGGLE_SELECT_MODE = 'TOGGLE_SELECT_MODE'
 // ------------------------------------
 export const addTrial = () => {
 	return {
-		type: 'ADD_TRIAL'
+		type: ADD_TRIAL
 	}
 }
 
 export const addBlock = () => {
 	return {
-		type: 'ADD_BLOCK'
+		type: ADD_BLOCK
 	}
 }
 
 export const addRun = () => {
 	return {
-		type: 'ADD_RUN'
+		type: ADD_RUN
 	}
 }
 
 export const addCondition = () => {
 	return {
-		type: 'ADD_CONDITION'
+		type: ADD_CONDITION
 	}
 }
 
 export const clickTrial = (id) => {
 	return {
-		type: 'CLICK_TRIAL',
+		type: CLICK_TRIAL,
 		payload: { id }
 	}
 }
 
 export const moveInside = (id, parentId) => {
 	return {
-		type: 'MOVE_INSIDE',
+		type: MOVE_INSIDE,
 		payload: { id, parentId }
 	}
 }
 
 export const moveNode = (id, afterId, direction) => {
 	return {
-		type: 'MOVE_NODE',
+		type: MOVE_NODE,
 		payload: { id, afterId, direction }
 	}
 }
 
 export const moveOutside = (id) => {
 	return {
-		type: 'MOVE_OUTSIDE',
+		type: MOVE_OUTSIDE,
 		payload: { id }
 	}
 }
 
 export const renameCondition = (id, value) => {
 	return {
-		type: 'RENAME_CONDITION',
+		type: RENAME_CONDITION,
 		payload: { id, value }
 	}
 }
 
 export const selectTrial = (id) => {
 	return {
-		type: 'SELECT_TRIAL',
+		type: SELECT_TRIAL,
 		payload: { id }
 	}
 }
 
 export const toggleSelectMode = (id, setting, op) => {
 	return {
-		type: 'TOGGLE_SELECT_MODE',
+		type: TOGGLE_SELECT_MODE,
 		payload: { id, setting, op }
 	}
 }

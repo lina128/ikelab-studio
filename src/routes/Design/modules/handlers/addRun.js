@@ -8,7 +8,6 @@ const addRun = (state, action) => {
 			{
 				id: newCounterR,
 				level: 'run',
-				color: '#000000',
 				name: 'Run'+newCounterR,
 				children: []
 			}

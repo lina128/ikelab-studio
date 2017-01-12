@@ -8,7 +8,6 @@ const addBlock = (state, action) => {
 			{
 				id: newCounterB,
 				level: 'block',
-				color: '#000000',
 				name: 'Block'+newCounterB,
 				children: []
 			}

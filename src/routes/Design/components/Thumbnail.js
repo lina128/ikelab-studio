@@ -18,7 +18,7 @@ export default class Thumbnail extends Component {
 	}
 	
 	render() {
-		const { id, branchStyle } = this.props;
+		const { id } = this.props;
 		
 		return (
 			<div className={'design_thumbnail_default'} onClick={this._onClick}>

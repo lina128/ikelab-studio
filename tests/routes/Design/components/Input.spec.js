@@ -9,6 +9,7 @@ describe('(Component) Input', () => {
 	beforeEach(() => {
 		_spies = {}
 		_props = {
+			value: '',
 			...bindActionCreators({
 				onBlur: (_spies.onBlur = sinon.spy())
 			}, _spies.dispatch = sinon.spy())

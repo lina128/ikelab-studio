@@ -1,12 +1,29 @@
 import React, { Component, PropTypes } from 'react'
+import { createSelector } from 'reselect'
 import flow from 'lodash/flow'
 import { DropTarget } from 'react-dnd'
 import { connect } from 'react-redux'
+import { findIndexById } from '../utils/findIndex'
+import TrialWrapper from '../components/TrialWrapper'
 import './TrialArea.scss'
+
+const getEntities = (state) => state.design.entities
+const getCurrentTrial = (state) => state.design.currentTrial
+
+const getTrialMemoized = createSelector(
+	[ getEntities, getCurrentTrial ],
+	(entities, currentTrial) => {
+		if(!currentTrial) {
+			return null
+		} else {
+			return entities[findIndexById(entities, currentTrial)]
+		}
+	}
+)
 
 const mapStateToProps = (state) => {
 	return {
-		currentTrial: state.design.currentTrial
+		currentTrialObject: getTrialMemoized(state)
 	}
 }
 
@@ -18,23 +35,17 @@ function collect(connect, monitor) {
 
 export class TrialArea extends Component {
 	static propTypes = {
-		currentTrial: PropTypes.number
+		currentTrial: PropTypes.object
 	}
 	
 	render() {
-		const { currentTrial } = this.props;
+		const { currentTrialObject } = this.props;
 
-		if(currentTrial) {
-			return (
-				<div className={'design_trialArea_default'}>
-				 Trial {currentTrial}
-				</div>
-			)
-		} else {
-			return (
-				<div className={'design_trialArea_default'} />
-			)
-		}
+		return (
+			<div className={'design_trialArea_default'}>
+				<TrialWrapper trial={currentTrialObject} />
+			</div>
+		)
 	}
 }
 

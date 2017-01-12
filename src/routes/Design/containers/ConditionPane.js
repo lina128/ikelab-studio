@@ -7,11 +7,7 @@ import ListItem from '../components/ListItem'
 import HorizontalBar from '../components/HorizontalBar'
 import Input from '../components/Input'
 import MagicWand from '../components/MagicWand'
-
-const style = {
-	width: '100%',
-	border: '1px solid grey'
-}
+import './ConditionPane.scss'
 
 const mapStateToProps = (state) => {
 	return {
@@ -35,11 +31,17 @@ export class ConditionPane extends Component {
 		super(props);
 		this.handleWandClick = this.handleWandClick.bind(this);
 	}
+	
+	static propTypes = {
+		condition: PropTypes.array.isRequired
+	}
+	
 	handleWandClick(key, content) {
 		this.props.onSelectMode(key, content, 'extend')
 	}
+	
 	render() {
-		const { condition, detailSettings, onRenameCondition, onSelectMode } = this.props;
+		const { condition, onRenameCondition, onSelectMode } = this.props;
 		const conditionList = [];
 
 		for(let i=0; i<condition.length; i++) {
@@ -51,7 +53,7 @@ export class ConditionPane extends Component {
 			);
 		}
 		return (
-			<div style={style}>
+			<div className={'design_conditionPane_default'}>
 				<h1>Condition</h1>
 				<List customStyle={{listStyle: 'none'}}>
 					{conditionList}

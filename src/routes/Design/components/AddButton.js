@@ -12,7 +12,7 @@ export default class AddButton extends Component {
 		const { clickHandler, text } = this.props;
 
 		return (
-			<div className='design_addButton_btn' onClick={clickHandler}>
+			<div className={'design_addButton_btn'} onClick={clickHandler}>
 				<img 
 					alt='Add' 
 					style={{display: 'block'}} 

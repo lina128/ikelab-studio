@@ -22,7 +22,7 @@ describe('(Component) AddButton', () => {
 		expect(_wrapper.is('div')).to.equal(true)
 	})
 	
-	it('Should has a className.', () => {
+	it('Should has a className design_addButton_btn.', () => {
 		expect(_wrapper.find('div').hasClass('design_addButton_btn')).to.be.true
 	})
 	

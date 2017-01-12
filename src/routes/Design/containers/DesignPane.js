@@ -8,11 +8,7 @@ import { selectTrial } from '../modules/design'
 import Trial from './Trial'
 import Block from './Block'
 import Run from './Run'
-
-const style = {
-	width: '235px',
-	padding: '5px 0 0 0'
-}
+import './DesignPane.scss'
 
 const mapStateToProps = (state) => {
 	return { 
@@ -57,7 +53,7 @@ export class DesignPane extends Component {
 
 		if(selectMode) {
 			return (
-				<div style={style}>
+				<div className={'design_designPane_default'}>
 				{	
 					structure.map(x => {
 						if(x.level === 'trial') {
@@ -75,7 +71,7 @@ export class DesignPane extends Component {
 			)
 		} else {
 			return (
-				<div style={style}>
+				<div className={'design_designPane_default'}>
 				{	
 					structure.map(x => {
 						if(x.level === 'trial') {

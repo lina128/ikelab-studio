@@ -9,7 +9,7 @@ export default class MagicWand extends Component {
 	}
 	
 	static propTypes = {
-		id: PropTypes.number.isRequired,
+		id: PropTypes.string.isRequired,
 		content: PropTypes.object.isRequired,
 		onWandClick: PropTypes.func.isRequired
 	}

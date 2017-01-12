@@ -3,11 +3,15 @@ import React, { Component, PropTypes } from 'react'
 export default class Input extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {value: ''}
+		this.state = {value: props.value}
 		this.handleChange = this.handleChange.bind(this)
 	}
 	
 	static propTypes = {
+		value: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.number
+		]).isRequired,
 		customStyle: PropTypes.object,
 		onBlur: PropTypes.func.isRequired
 	}

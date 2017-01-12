@@ -6,16 +6,18 @@ import NavBar from './NavBar'
 import TrialArea from '../containers/TrialArea'
 import SettingPane from '../containers/SettingPane'
 import Note from '../containers/Note'
-
+import './Design.scss'
 
 export class App extends Component {
 	render() {
 		return (
-			<div>
+			<div className='design_container1'>
 				<Ribbon />
-				<NavBar />
-				<TrialArea />
-				<SettingPane />
+				<div className='design_container2'>
+					<NavBar />
+					<TrialArea />
+					<SettingPane />
+				</div>
 				<Note />
 			</div>
 		)

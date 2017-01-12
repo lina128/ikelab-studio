@@ -4,13 +4,23 @@ const addCondition = (state, action) => {
 	let color, inc = 0;;
 	while(inc < ColorPalette.length) {
 		color = ColorPalette[inc];
-		if(state.condition.findIndex((c)=>(c.color === color)) === -1) {
+
+		let idx = -1;
+		for(let i=0; i<state.condition.length; i++) {
+			if(state.condition[i].color === color) {
+				idx = i;
+				break;
+			}
+		}
+		
+		if(idx === -1) {
 			break;
 		} else {
 			color = null;
 			inc++;
 		}
 	}
+	
 	if(color) {
 		let newCounterC = state.counter + 1;
 		return {

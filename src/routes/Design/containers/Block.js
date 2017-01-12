@@ -59,13 +59,9 @@ function collectSource(connect, monitor) {
 
 export class Block extends Component {
 	static propTypes = {
-		connectDragSource: PropTypes.func.isRequired,
-		connectDragPreview: PropTypes.func.isRequired,
-		connectDropTarget: PropTypes.func.isRequired,
 		isDragging: PropTypes.bool.isRequired,
 		selectMode: PropTypes.bool.isRequired,
 		id: PropTypes.number.isRequired,
-		color: PropTypes.string.isRequired,
 		name: PropTypes.string.isRequired,
 		branchStyle: PropTypes.string,
 		children: PropTypes.array.isRequired,
@@ -74,7 +70,7 @@ export class Block extends Component {
 	}
 	
 	render() {
-		const { connectDragSource, connectDragPreview, isDragging, connectDropTarget, selectMode, id, color, name, branchStyle, children, moveNode, moveOutside, moveInside, clickTrial } = this.props;
+		const { connectDragSource, connectDragPreview, isDragging, connectDropTarget, selectMode, id, name, branchStyle, children, moveNode, moveOutside, moveInside, clickTrial } = this.props;
 		
 		const classnames = classNames('design_block_branch', branchStyle);
 		
