@@ -20,3 +20,36 @@ export const ColorPalette = [
 	"#2c3e50",
 	"#d2527f"
 ]
+
+export const defaultType = 'TEXT'
+
+export const defaultSetting = {
+	content: {
+		type: 'TextArea',
+		value: ''
+	},
+	font: {
+		type: 'List',
+		value: 'Arial'
+	},
+	fontSize: {
+		type: 'Number',
+		value: 16
+	},
+	fontWeight: {
+		type: 'List',
+		value: 'normal'
+	},
+	fontColor: {
+		type: 'ColorPicker',
+		value: '#000000'
+	},
+	alignH: {
+		type: 'List',
+		value: 'center'
+	},
+	alignV: {
+		type: 'List',
+		value: 'middle'
+	}
+}

@@ -15,6 +15,7 @@ import {
 
 describe('(Design/modules)', () => {
 	let _initialState
+	
 	const defaultTrialSetting = {
 		content: {
 			type: 'TextArea',
@@ -26,7 +27,7 @@ describe('(Design/modules)', () => {
 		},
 		fontSize: {
 			type: 'Number',
-			value: 12
+			value: 16
 		},
 		fontWeight: {
 			type: 'List',
@@ -241,6 +242,7 @@ describe('(Design/modules)', () => {
 		it('Should handle ADD_TRIAL', () => {
 			const state1 = designReducer(undefined, {})
 			const state2 = designReducer(state1, addTrial())
+
 			expect(state2).to.deep.equal({
 				counter: 1,
 				condition: [],

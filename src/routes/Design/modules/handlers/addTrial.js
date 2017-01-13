@@ -1,36 +1,5 @@
 import { insertNodeAfter } from '../utils/node'
-
-const defaultType = 'TEXT'
-const defaultSetting = {
-	content: {
-		type: 'TextArea',
-		value: 'TEXT'
-	},
-	font: {
-		type: 'List',
-		value: 'Arial'
-	},
-	fontSize: {
-		type: 'Number',
-		value: 12
-	},
-	fontWeight: {
-		type: 'List',
-		value: 'normal'
-	},
-	fontColor: {
-		type: 'ColorPicker',
-		value: '#000000'
-	},
-	alignH: {
-		type: 'List',
-		value: 'center'
-	},
-	alignV: {
-		type: 'List',
-		value: 'middle'
-	}
-}
+import { defaultType, defaultSetting } from '../constants'
 
 const addTrial = (state, action) => {
 	let newCounterT = state.counter + 1;

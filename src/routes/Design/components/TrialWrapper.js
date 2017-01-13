@@ -25,7 +25,7 @@ export default class TrialWrapper extends Component {
 
 			return (
 				<div className="design_trialWrapper_default">
-					<MyComponent trial={trial} />
+					<MyComponent style={{width: '100%', height: '100%'}} trial={trial} />
 				</div>
 			)
 		} else {

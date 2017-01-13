@@ -12,7 +12,7 @@ export default (store) => ({
       const Design = require('./components/Design').default
       const reducer = require('./modules/design').default
 
-      /*  Add the reducer to the store on key 'counter'  */
+      /*  Add the reducer to the store on key 'design'  */
       injectReducer(store, { key: 'design', reducer })
 
       /*  Return getComponent   */
