@@ -5,6 +5,7 @@ import { DropTarget } from 'react-dnd'
 import { connect } from 'react-redux'
 import { findIndexById } from '../utils/findIndex'
 import TrialWrapper from '../components/TrialWrapper'
+import SettingPane from '../components/SettingPane'
 import './TrialArea.scss'
 
 const getEntities = (state) => state.design.entities
@@ -44,6 +45,7 @@ export class TrialArea extends Component {
 		return (
 			<div className={'design_trialArea_default'}>
 				<TrialWrapper trial={currentTrialObject} />
+				<SettingPane trial={currentTrialObject} />
 			</div>
 		)
 	}

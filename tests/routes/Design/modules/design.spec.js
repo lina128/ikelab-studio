@@ -13,39 +13,12 @@ import {
 	default as designReducer
 } from 'routes/Design/modules/design'
 
+import { defaultSetting } from 'routes/Design/modules/constants'
+
 describe('(Design/modules)', () => {
 	let _initialState
 	
-	const defaultTrialSetting = {
-		content: {
-			type: 'TextArea',
-			value: ''
-		},
-		font: {
-			type: 'List',
-			value: 'Arial'
-		},
-		fontSize: {
-			type: 'Number',
-			value: 16
-		},
-		fontWeight: {
-			type: 'List',
-			value: 'normal'
-		},
-		fontColor: {
-			type: 'ColorPicker',
-			value: '#000000'
-		},
-		alignH: {
-			type: 'List',
-			value: 'center'
-		},
-		alignV: {
-			type: 'List',
-			value: 'middle'
-		}
-	}
+	const defaultTrialSetting = defaultSetting
 	const defaultTrialType = 'TEXT'
 	
 	beforeEach(() => {

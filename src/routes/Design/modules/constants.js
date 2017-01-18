@@ -25,31 +25,52 @@ export const defaultType = 'TEXT'
 
 export const defaultSetting = {
 	content: {
+		name: 'Content',
 		type: 'TextArea',
-		value: ''
+		value: '',
+		display: false,
+		hints: ''
 	},
 	font: {
+		name: 'Font',
 		type: 'List',
-		value: 'Arial'
+		value: 'Arial',
+		display: true,
+		hints: ''
 	},
 	fontSize: {
-		type: 'Number',
-		value: 16
+		name: 'Font Size',
+		type: 'Input',
+		value: 16,
+		display: true,
+		hints: 'pt'
 	},
 	fontWeight: {
+		name: 'Font Weight',
 		type: 'List',
-		value: 'normal'
+		value: 'normal',
+		display: true,
+		hints: ''
 	},
 	fontColor: {
+		name: 'Font Color',
 		type: 'ColorPicker',
-		value: '#000000'
+		value: '#000000',
+		display: true,
+		hints: ''
 	},
 	alignH: {
+		name: 'Horizontal Align',
 		type: 'List',
-		value: 'center'
+		value: 'center',
+		display: true,
+		hints: ''
 	},
 	alignV: {
+		name: 'Vertical Align',
 		type: 'List',
-		value: 'middle'
+		value: 'middle',
+		display: true,
+		hints: ''
 	}
 }

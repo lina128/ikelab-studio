@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './HomeView.scss'
+import styles from './HomeView.scss'
 
 export default class HomeView extends Component {
 	render() {

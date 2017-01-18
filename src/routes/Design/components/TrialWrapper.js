@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import './TrialWrapper.scss'
 import DefaultDisplay from './paradigms/DefaultDisplay'
 import Text from './paradigms/Text'
-import './TrialWrapper.scss'
 
 // ------------------------------------
 // Constants
@@ -16,7 +16,12 @@ export const Components = {
 	[DEFAULT]: DefaultDisplay,
 	[TEXT]: Text
 }
+
 export default class TrialWrapper extends Component {
+	static propTypes = {
+		trial: PropTypes.object
+	}
+	
 	render() {
 		const { trial } = this.props
 
@@ -30,7 +35,7 @@ export default class TrialWrapper extends Component {
 			)
 		} else {
 			return (
-				<div className="design_trialWrapper_default"/>
+				<div className="design_trialWrapper_default" />
 			)
 		}
 	}

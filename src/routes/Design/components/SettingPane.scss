@@ -1,6 +1,9 @@
 @import 'base';
 
 .design_settingPane_default {
+	background-color: #ddd;
 	border: 1px solid grey;
+	min-width: $thirdCol+px;
+	flex-grow: 1;
 	height: 1000px;
 }

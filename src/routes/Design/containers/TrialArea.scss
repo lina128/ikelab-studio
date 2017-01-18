@@ -1,7 +1,10 @@
-@import 'base';
-
 .design_trialArea_default {
-	width: $secondCol + px;
-	height: 600px;
-	border: 1px solid grey;
+	display: flex; /*NEW, Spec - Opera 12.1, Firefox 20+ */
+	display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box; /*OLD - Firefox 19- */
+	display: -ms-flexbox; /* TWEENER - IE 10 */
+	display: -webkit-flex; /*NEW -Chrome */
+	flex-grow: 1;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import Text from 'routes/Design/components/paradigms/Text'
+import { defaultSetting } from 'routes/Design/modules/constants'
 
 describe('(Design/components/paradigms) Text', () => {
 	let _wrapper, _props
@@ -10,36 +11,7 @@ describe('(Design/components/paradigms) Text', () => {
 			trial: {
 				id: 1,
 				type: 'TEXT',
-				setting: {
-					content: {
-						type: 'TextArea',
-						value: 'TEXT'
-					},
-					font: {
-						type: 'List',
-						value: 'Arial'
-					},
-					fontSize: {
-						type: 'Number',
-						value: 16
-					},
-					fontWeight: {
-						type: 'List',
-						value: 'normal'
-					},
-					fontColor: {
-						type: 'ColorPicker',
-						value: '#000000'
-					},
-					alignH: {
-						type: 'List',
-						value: 'center'
-					},
-					alignV: {
-						type: 'List',
-						value: 'middle'
-					}
-				}
+				setting: defaultSetting
 			}
 		}
 		
@@ -84,34 +56,19 @@ describe('(Design/components/paradigms) Text', () => {
 			trial: {
 				id: 1,
 				type: 'TEXT',
-				setting: {
-					content: {
-						type: 'TextArea',
-						value: 'TEXT'
-					},
-					font: {
-						type: 'List',
-						value: 'Arial'
-					},
-					fontSize: {
-						type: 'Number',
-						value: 16
-					},
-					fontWeight: {
-						type: 'List',
-						value: 'normal'
-					},
-					fontColor: {
-						type: 'ColorPicker',
-						value: '#000000'
-					},
+				setting: { 
+					...defaultSetting, 
 					alignH: {
 						type: 'List',
-						value: 'left'
+						value: 'left',
+						display: true,
+						hints: ''
 					},
 					alignV: {
 						type: 'List',
-						value: 'top'
+						value: 'top',
+						display: true,
+						hints: ''
 					}
 				}
 			}

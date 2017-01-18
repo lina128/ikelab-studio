@@ -4,7 +4,6 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import Ribbon from '../containers/Ribbon'
 import NavBar from './NavBar'
 import TrialArea from '../containers/TrialArea'
-import SettingPane from '../containers/SettingPane'
 import Note from '../containers/Note'
 import './Design.scss'
 
@@ -16,7 +15,6 @@ export class App extends Component {
 				<div className='design_container2'>
 					<NavBar />
 					<TrialArea />
-					<SettingPane />
 				</div>
 				<Note />
 			</div>
