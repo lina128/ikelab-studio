@@ -1,15 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { Card, CardTitle, CardText } from 'react-toolbox/lib/card'
+import Button from 'react-mdl/lib/Button'
 
 export default class ListCard extends Component {
 	render() {
 		const { setting } = this.props;
 		
 		return (
-			<Card>
-				<CardTitle title={setting.name} />
-				<CardText>test</CardText>
-			</Card>
+			<Button raised primary>foo</Button>
 		)
 	}
 }
