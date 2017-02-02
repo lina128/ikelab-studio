@@ -143,6 +143,8 @@ export const insertNodeIn = (arr, id, node) => {
 
 //only one key-value pair in c is allowed
 export const extend = (arr, id, c) => {
+	if(!c) return arr;
+
 	const keys = Object.keys(c);
 	if(keys.length === 0 || keys.length > 1) return arr;
 

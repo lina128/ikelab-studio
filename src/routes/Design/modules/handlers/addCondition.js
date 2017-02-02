@@ -1,4 +1,4 @@
-import { ColorPalette } from '../constants'
+import { ColorPalette } from '../../constants'
 
 const addCondition = (state, action) => {
 	let color, inc = 0;;

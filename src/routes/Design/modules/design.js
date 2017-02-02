@@ -7,6 +7,7 @@ export const ADD_TRIAL = 'ADD_TRIAL'
 export const ADD_BLOCK = 'ADD_BLOCK'
 export const ADD_RUN = 'ADD_RUN'
 export const ADD_CONDITION = 'ADD_CONDITION'
+export const CHANGE_SETTING = 'CHANGE_SETTING'
 export const CLICK_TRIAL = 'CLICK_TRIAL'
 export const MOVE_INSIDE = 'MOVE_INSIDE'
 export const MOVE_NODE = 'MOVE_NODE'
@@ -14,6 +15,7 @@ export const MOVE_OUTSIDE = 'MOVE_OUTSIDE'
 export const RENAME_CONDITION = 'RENAME_CONDITION'
 export const SELECT_TRIAL = 'SELECT_TRIAL'
 export const TOGGLE_SELECT_MODE = 'TOGGLE_SELECT_MODE'
+export const UPDATE_STRUCTURE_CHANGE = 'UPDATE_STRUCTURE_CHANGE'
 
 // ------------------------------------
 // Actions
@@ -39,6 +41,13 @@ export const addRun = () => {
 export const addCondition = () => {
 	return {
 		type: ADD_CONDITION
+	}
+}
+
+export const changeSetting = (id, setting) => {
+	return {
+		type: CHANGE_SETTING,
+		payload: { id, setting }
 	}
 }
 
@@ -91,6 +100,13 @@ export const toggleSelectMode = (id, setting, op) => {
 	}
 }
 
+export const updateStructureChange = (id, change) => {
+	return {
+		type: UPDATE_STRUCTURE_CHANGE,
+		payload: { id, change }
+	}
+}
+
 /*  This is a thunk, meaning it is a function that immediately
     returns a function for lazy evaluation. It is incredibly useful for
     creating async actions, especially when combined with redux-thunk!
@@ -118,12 +134,14 @@ export const actions = {
 	addRun,
 	addCondition,
 	clickTrial,
+	changeSetting,
 	moveInside,
 	moveNode,
 	moveOutside,
 	renameCondition,
 	selectTrial,
-	toggleSelectMode
+	toggleSelectMode,
+	updateStructureChange
 }
 
 // ------------------------------------
@@ -134,13 +152,15 @@ const ACTION_HANDLERS = {
 	[ADD_BLOCK] : handle.addBlock,
 	[ADD_RUN] : handle.addRun,
 	[ADD_CONDITION] : handle.addCondition,
+	[CHANGE_SETTING] : handle.changeSetting,
 	[CLICK_TRIAL] : handle.clickTrial,
 	[MOVE_INSIDE] : handle.moveInside,
 	[MOVE_NODE] : handle.moveNode,
 	[MOVE_OUTSIDE] : handle.moveOutside,
 	[RENAME_CONDITION] : handle.renameCondition,
 	[SELECT_TRIAL] : handle.selectTrial,
-	[TOGGLE_SELECT_MODE] : handle.toggleSelectMode
+	[TOGGLE_SELECT_MODE] : handle.toggleSelectMode,
+	[UPDATE_STRUCTURE_CHANGE] : handle.updateStructureChange
 }
 
 // ------------------------------------
@@ -159,7 +179,6 @@ const initialState = {
 }
 export default function designReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
-
 
   return handler ? handler(state, action) : state
 }

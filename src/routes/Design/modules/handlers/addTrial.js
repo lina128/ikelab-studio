@@ -1,5 +1,17 @@
 import { insertNodeAfter } from '../utils/node'
-import { defaultType, defaultSetting } from '../constants'
+import { TEXT } from '../../constants/field.constants'
+
+const defaultType = 'TEXT';
+
+function defaultSetting() {
+	let setting = {};
+	
+	for(let s in TEXT) {
+		setting[s] = TEXT[s].value
+	}
+	
+	return setting
+}
 
 const addTrial = (state, action) => {
 	let newCounterT = state.counter + 1;
@@ -14,14 +26,15 @@ const addTrial = (state, action) => {
 					id: newCounterT,
 					level: 'trial',
 					selected: false,
-					condition: []
+					condition: [],
+					screenshot: null
 				}),
 			entities: [
 				...state.entities,
 				{
 					id: newCounterT,
 					type: defaultType,
-					setting: defaultSetting
+					setting: defaultSetting()
 				}
 			]
 		}
@@ -35,7 +48,8 @@ const addTrial = (state, action) => {
 					id: newCounterT,
 					level: 'trial',
 					selected: false,
-					condition: []
+					condition: [],
+					screenshot: null
 				}
 			],
 			entities: [
@@ -43,7 +57,7 @@ const addTrial = (state, action) => {
 				{
 					id: newCounterT,
 					type: defaultType,
-					setting: defaultSetting
+					setting: defaultSetting()
 				}
 			]
 		}

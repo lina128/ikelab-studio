@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import HorizontalBar from './HorizontalBar'
+import { Dimensions } from '../constants'
 import './Thumbnail.scss'
 
 export default class Thumbnail extends Component {
@@ -10,6 +11,7 @@ export default class Thumbnail extends Component {
 	
 	static propTypes = {
 		id: PropTypes.number.isRequired,
+		screenshot: PropTypes.string,
 		onThumbnailClick: PropTypes.func.isRequired
 	}
 	
@@ -18,11 +20,11 @@ export default class Thumbnail extends Component {
 	}
 	
 	render() {
-		const { id } = this.props;
+		const { id, screenshot } = this.props;
 		
 		return (
 			<div className={'design_thumbnail_default'} onClick={this._onClick}>
-				Trial{id}
+				<img src={screenshot} style={{height:Dimensions.TRIALHEIGHT+'px',width:Dimensions.TRIALWIDTH+'px'}} />
 			</div>
 		)
 	}

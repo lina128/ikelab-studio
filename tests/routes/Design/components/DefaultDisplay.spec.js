@@ -1,9 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import DefaultDisplay from 'routes/Design/components/paradigms/DefaultDisplay'
+import DefaultDisplay from 'routes/Design/components/frames/DefaultDisplay'
 import { defaultSetting } from 'routes/Design/modules/constants'
 
-describe('(Design/components/paradigms) DefaultDisplay', () => {
+describe('(Design/components/frames) DefaultDisplay', () => {
 	let _wrapper, _props
 	
 	beforeEach(() => {

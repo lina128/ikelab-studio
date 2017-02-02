@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import flow from 'lodash/flow'
 import classNames from 'classnames'
-import { ItemTypes, Dimensions } from '../modules/constants'
+import { ItemTypes, Dimensions } from '../constants'
 import { DragSource, DropTarget } from 'react-dnd'
 import Thumbnail from '../components/Thumbnail'
 import Sidebar from '../components/Sidebar'
@@ -60,14 +60,12 @@ export class Trial extends Component {
 	}
 	
 	static propTypes = {
-		connectDragSource: PropTypes.func.isRequired,
-		connectDropTarget: PropTypes.func.isRequired,
-		isDragging: PropTypes.bool.isRequired,
 		moveNode: PropTypes.func,
 		moveOutside: PropTypes.func,
 		selectMode: PropTypes.bool.isRequired,
 		condition: PropTypes.array.isRequired,
 		id: PropTypes.number.isRequired,
+		screenshot: PropTypes.string,
 		selected: PropTypes.bool.isRequired,
 		branchStyle: PropTypes.string,
 		clickTrial: PropTypes.func.isRequired,
@@ -84,7 +82,7 @@ export class Trial extends Component {
 	}
 	
 	render() {
-		const { connectDragSource, connectDropTarget, isDragging, selectMode, condition, id, selected, branchStyle, clickTrial } = this.props;
+		const { connectDragSource, connectDropTarget, isDragging, selectMode, condition, id, screenshot, selected, branchStyle, clickTrial } = this.props;
 
 		const conditionList = [];
 		
@@ -99,7 +97,7 @@ export class Trial extends Component {
 		if(selectMode) {
 			return (
 				<div className='design_trial_default'>
-					<Thumbnail id={id} condition={condition} onThumbnailClick={this.handleThumbnailClick} />
+					<Thumbnail id={id} screenshot={screenshot} condition={condition} onThumbnailClick={this.handleThumbnailClick} />
 					<Sidebar>
 						{conditionList}
 					</Sidebar>
@@ -122,7 +120,7 @@ export class Trial extends Component {
 				<div className='design_trial_default'>
 					{connectDragSource(
 						<div>
-							<Thumbnail id={id} condition={condition} onThumbnailClick={this.handleThumbnailClick} />
+							<Thumbnail id={id} screenshot={screenshot} condition={condition} onThumbnailClick={this.handleThumbnailClick} />
 							<Sidebar>
 								{conditionList}
 							</Sidebar>

@@ -1,33 +1,9 @@
-export const ItemTypes = {
-	TRIAL: 'trial',
-	BLOCK: 'block'
-}
-
-export const Dimensions = {
-	TRIALHEIGHT: 45,
-	TRIALWIDTH: 60
-}
-
-export const ColorPalette = [
-	"#3498db",
-	"#e74c3c",
-	"#1abc9c",
-	"#f39c12",
-	"#446cb3",
-	"#e08283",
-	"#674172",
-	"#1e824c",
-	"#2c3e50",
-	"#d2527f"
-]
-
-export const defaultType = 'TEXT'
-
-export const defaultSetting = {
+export const TEXT = {
 	content: {
 		name: 'Content',
 		type: 'TextArea',
 		value: '',
+		options: null,
 		display: false,
 		hints: ''
 	},
@@ -35,6 +11,7 @@ export const defaultSetting = {
 		name: 'Font',
 		type: 'List',
 		value: 'Arial',
+		options: ['Courier', 'Arial', 'Times', 'sans-serif', 'serif'],
 		display: true,
 		hints: ''
 	},
@@ -42,6 +19,7 @@ export const defaultSetting = {
 		name: 'Font Size',
 		type: 'Input',
 		value: 16,
+		options: null,
 		display: true,
 		hints: 'pt'
 	},
@@ -49,6 +27,15 @@ export const defaultSetting = {
 		name: 'Font Weight',
 		type: 'List',
 		value: 'normal',
+		options: ['normal', 'bold'],
+		display: true,
+		hints: ''
+	},
+	fontWeight: {
+		name: 'Font Weight',
+		type: 'List',
+		value: 'normal',
+		options: ['normal', 'bold'],
 		display: true,
 		hints: ''
 	},
@@ -56,6 +43,7 @@ export const defaultSetting = {
 		name: 'Font Color',
 		type: 'ColorPicker',
 		value: '#000000',
+		options: null,
 		display: true,
 		hints: ''
 	},
@@ -63,6 +51,7 @@ export const defaultSetting = {
 		name: 'Horizontal Align',
 		type: 'List',
 		value: 'center',
+		options: ['left', 'center', 'right'],
 		display: true,
 		hints: ''
 	},
@@ -70,6 +59,7 @@ export const defaultSetting = {
 		name: 'Vertical Align',
 		type: 'List',
 		value: 'middle',
+		options: ['top', 'middle', 'bottom'],
 		display: true,
 		hints: ''
 	}

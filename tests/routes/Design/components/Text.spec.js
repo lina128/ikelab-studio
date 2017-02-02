@@ -1,9 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import Text from 'routes/Design/components/paradigms/Text'
+import Text from 'routes/Design/components/frames/Text'
 import { defaultSetting } from 'routes/Design/modules/constants'
 
-describe('(Design/components/paradigms) Text', () => {
+describe('(Design/components/frames) Text', () => {
 	let _wrapper, _props
 	
 	beforeEach(() => {

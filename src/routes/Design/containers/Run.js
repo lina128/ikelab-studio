@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import ReactDOM from 'react-dom'
-import { ItemTypes, Dimensions } from '../modules/constants'
+import { ItemTypes, Dimensions } from '../constants'
 import { DropTarget } from 'react-dnd'
 import Block from './Block'
 import './Run.scss'

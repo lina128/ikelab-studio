@@ -1,44 +1,67 @@
 import React, { Component, PropTypes } from 'react'
 import './SettingPane.scss'
-import DefaultCard from './cards/DefaultCard'
-import ListCard from './cards/ListCard'
+import * as fieldConstantHandler from '../constants/field.constants'
+import { Card, CardTitle, CardActions } from 'react-mdl/lib/Card'
+import Button from 'react-mdl/lib/Button'
+import DefaultField from './fields/DefaultField'
+import ListField from './fields/ListField'
+import InputField from './fields/InputField'
+import ColorPickerField from './fields/ColorPickerField'
 
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const DEFAULT = 'DEFAULTCARD'
+export const DEFAULT = 'DEFAULTFIELD'
 export const LIST = 'List'
+export const INPUT = 'Input'
+export const COLORPICKER = 'ColorPicker'
 
 // ------------------------------------
-// Card Handlers
+// Field Handlers
 // ------------------------------------
-export const Cards = {
-	[DEFAULT]: DefaultCard,
-	[LIST]: ListCard
+export const Fields = {
+	[DEFAULT]: DefaultField,
+	[LIST]: ListField,
+	[INPUT]: InputField,
+	[COLORPICKER]: ColorPickerField
 }
 
 export default class SettingPane extends Component {
 	static propTypes = {
-		trial: PropTypes.object
+		trial: PropTypes.object,
+		onChange: PropTypes.func.isRequired
 	}
-	
+
 	render() {
-		const { trial } = this.props;
+		const { trial, onChange } = this.props;
+		
 		
 		if(trial) {
-			let MyCard, cardList = [], key=1;
+			const fieldConstant = fieldConstantHandler[trial.type];
+			const fieldSetting = trial.setting;
+			
+			let Field, fieldList = [];
 
-			for(let s in trial.setting) {
-				MyCard = Cards[trial.setting[s].type] || Cards[DEFAULT];
-				if(trial.setting[s].display) {
-					cardList.push(<MyCard key={key} setting={trial.setting[s]} />);
+			for(let s in fieldConstant) {
+				if(fieldConstant[s].display) {
+					Field = Fields[fieldConstant[s].type] || Fields[DEFAULT];
+					fieldList.push(<Field key={s} trialId={trial.id} fieldConstantKey={s} fieldConstant={fieldConstant[s]} fieldSetting={fieldSetting[s]} onChange={onChange} />);
 				}
-				key++;
 			}
 
 			return (
 				<div className={'design_settingPane_default'}>
-					{cardList}
+					<Card shadow={1}>
+						<CardTitle>
+							{trial.id}
+						</CardTitle>
+						<CardActions border>
+							{fieldList}
+						</CardActions>
+						<CardActions border>
+							<Button raised accent ripple>Done</Button>
+						</CardActions>
+					</Card>
 				</div>
 			)
 		} else {

@@ -57,7 +57,7 @@ export class DesignPane extends Component {
 				{	
 					structure.map(x => {
 						if(x.level === 'trial') {
-							return <Trial key={x.id} selectMode={selectMode} id={x.id} selected={x.selected} condition={x.condition} clickTrial={onSelectTrial} />
+							return <Trial key={x.id} selectMode={selectMode} id={x.id} screenshot={x.screenshot} selected={x.selected} condition={x.condition} clickTrial={onSelectTrial} />
 						}
 						if(x.level === 'block') {
 							return <Block key={x.id} selectMode={selectMode} id={x.id} color={x.color} name={x.name} children={x.children} clickTrial={onSelectTrial} />
@@ -75,7 +75,7 @@ export class DesignPane extends Component {
 				{	
 					structure.map(x => {
 						if(x.level === 'trial') {
-							return <Trial key={x.id} selectMode={selectMode} id={x.id} selected={x.selected} condition={x.condition} moveNode={onNodeMove} moveOutside={onMoveOutside} clickTrial={onClickTrial} />
+							return <Trial key={x.id} selectMode={selectMode} id={x.id} screenshot={x.screenshot} selected={x.selected} condition={x.condition} moveNode={onNodeMove} moveOutside={onMoveOutside} clickTrial={onClickTrial} />
 						}
 						if(x.level === 'block') {
 							return <Block key={x.id} selectMode={selectMode} id={x.id} color={x.color} name={x.name} children={x.children} moveNode={onNodeMove} moveOutside={onMoveOutside} moveInside={onMoveInside} clickTrial={onClickTrial} />
