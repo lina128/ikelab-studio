@@ -1,13 +1,12 @@
 import { insertNodeAfter } from '../utils/node'
-import { TEXT } from '../../constants/field.constants'
-
-const defaultType = 'TEXT';
+import { defaultType } from '../../constants'
+import { DEFAULTMODULE } from '../../constants/field.constants'
 
 function defaultSetting() {
 	let setting = {};
 	
-	for(let s in TEXT) {
-		setting[s] = TEXT[s].value
+	for(let s in DEFAULTMODULE) {
+		setting[s] = DEFAULTMODULE[s].value
 	}
 	
 	return setting
@@ -18,6 +17,7 @@ const addTrial = (state, action) => {
 	if(state.currentTrial) {
 		return {
 			...state,
+			currentTrial: newCounterT,
 			counter: newCounterT,
 			structure: insertNodeAfter(
 				state.structure, 
@@ -41,6 +41,7 @@ const addTrial = (state, action) => {
 	} else {
 		return {
 			...state,
+			currentTrial: newCounterT,
 			counter: newCounterT,
 			structure: [
 				...state.structure,

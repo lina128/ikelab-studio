@@ -3,6 +3,7 @@ import {
 	addCondition,
 	addRun,
 	addTrial,
+	changeSetting,
 	clickTrial,
 	moveInside,
 	moveNode,
@@ -10,16 +11,28 @@ import {
 	renameCondition,
 	selectTrial,
 	toggleSelectMode,
+	updateStructure,
 	default as designReducer
 } from 'routes/Design/modules/design'
 
-import { defaultSetting } from 'routes/Design/modules/constants'
+import { defaultType } from 'routes/Design/constants'
+import { DEFAULTMODULE } from 'routes/Design/constants/field.constants'
+
+function defaultSetting() {
+	let setting = {};
+	
+	for(let s in DEFAULTMODULE) {
+		setting[s] = DEFAULTMODULE[s].value
+	}
+	
+	return setting
+}
 
 describe('(Design/modules)', () => {
 	let _initialState
 	
-	const defaultTrialSetting = defaultSetting
-	const defaultTrialType = 'TEXT'
+	const defaultTrialSetting = defaultSetting()
+	const defaultTrialType = defaultType
 	
 	beforeEach(() => {
 		_initialState = {
@@ -225,7 +238,8 @@ describe('(Design/modules)', () => {
 						id: 1,
 						level: 'trial',
 						selected: false,
-						condition: []
+						condition: [],
+						screenshot: null
 					}
 				],
 				entities: [
@@ -255,7 +269,8 @@ describe('(Design/modules)', () => {
 						id: 1,
 						level: 'trial',
 						selected: false,
-						condition: []
+						condition: [],
+						screenshot: null
 					}
 				],
 				entities: [
@@ -292,7 +307,8 @@ describe('(Design/modules)', () => {
 								id: 1,
 								level: 'trial',
 								selected: false,
-								condition: []
+								condition: [],
+								screenshot: null
 							}
 						]
 					}
@@ -332,7 +348,8 @@ describe('(Design/modules)', () => {
 										id: 1,
 										level: 'trial',
 										selected: false,
-										condition: []
+										condition: [],
+										screenshot: null
 									}
 								]
 							}
@@ -368,13 +385,15 @@ describe('(Design/modules)', () => {
 					id: 1,
 					level: 'trial',
 					selected: false,
-					condition: []
+					condition: [],
+					screenshot: null
 				},
 				{
 					id: 2,
 					level: 'trial',
 					selected: false,
-					condition: []
+					condition: [],
+					screenshot: null
 				}
 			],
 			entities: [
@@ -406,13 +425,15 @@ describe('(Design/modules)', () => {
 					id: 2,
 					level: 'trial',
 					selected: false,
-					condition: []
+					condition: [],
+					screenshot: null
 				},
 				{
 					id: 1,
 					level: 'trial',
 					selected: false,
-					condition: []
+					condition: [],
+					screenshot: null
 				}
 			],
 			entities: [
@@ -444,13 +465,15 @@ describe('(Design/modules)', () => {
 					id: 1,
 					level: 'trial',
 					selected: false,
-					condition: []
+					condition: [],
+					screenshot: null
 				},
 				{
 					id: 2,
 					level: 'trial',
 					selected: false,
-					condition: []
+					condition: [],
+					screenshot: null
 				}
 			],
 			entities: [
@@ -662,7 +685,8 @@ describe('(Design/modules)', () => {
 							id: 1,
 							level: 'trial',
 							selected: false,
-							condition: []
+							condition: [],
+							screenshot: null
 						}
 					]
 				}
@@ -691,7 +715,8 @@ describe('(Design/modules)', () => {
 					id: 1,
 					level: 'trial',
 					selected: false,
-					condition: []
+					condition: [],
+					screenshot: null
 				},
 				{
 					id: 2,
@@ -817,7 +842,8 @@ describe('(Design/modules)', () => {
 					id: 1,
 					level: 'trial',
 					selected: true,
-					condition: []
+					condition: [],
+					screenshot: null
 				}
 			],
 			entities: [
@@ -844,7 +870,8 @@ describe('(Design/modules)', () => {
 					id: 1,
 					level: 'trial',
 					selected: false,
-					condition: []
+					condition: [],
+					screenshot: null
 				}
 			],
 			entities: [
@@ -870,7 +897,8 @@ describe('(Design/modules)', () => {
 					id: 1,
 					level: 'trial',
 					selected: true,
-					condition: []
+					condition: [],
+					screenshot: null
 				}
 			],
 			entities: [

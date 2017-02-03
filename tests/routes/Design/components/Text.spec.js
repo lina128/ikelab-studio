@@ -1,18 +1,33 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import Text from 'routes/Design/components/frames/Text'
-import { defaultSetting } from 'routes/Design/modules/constants'
+
+import { TEXT } from 'routes/Design/constants/field.constants'
+
+function defaultSetting() {
+	let setting = {};
+	
+	for(let s in TEXT) {
+		setting[s] = TEXT[s].value
+	}
+	
+	return setting
+}
+
 
 describe('(Design/components/frames) Text', () => {
-	let _wrapper, _props
+	let _wrapper, _props;
+	let setting = defaultSetting()
 	
 	beforeEach(() => {
 		_props = {
 			trial: {
 				id: 1,
 				type: 'TEXT',
-				setting: defaultSetting
-			}
+				setting: setting,
+				screenshot: ''
+			},
+			onChange: el => el
 		}
 		
 		_wrapper = shallow(<Text { ..._props } />)
@@ -31,7 +46,7 @@ describe('(Design/components/frames) Text', () => {
 	})
 	
 	it('Should render with font Arial.', () => {
-		expect(_wrapper).to.have.style('font', 'Arial')
+		expect(_wrapper).to.have.style('font-family', 'Arial')
 	})
 	
 	it('Should render with font-size 16.', () => {
@@ -52,27 +67,19 @@ describe('(Design/components/frames) Text', () => {
 	})
 	
 	it('Should start the text on the top left with justify-content and align-items being flex-start.', () => {
+		
 		_props = {
 			trial: {
 				id: 1,
 				type: 'TEXT',
 				setting: { 
-					...defaultSetting, 
-					alignH: {
-						type: 'List',
-						value: 'left',
-						display: true,
-						hints: ''
-					},
-					alignV: {
-						type: 'List',
-						value: 'top',
-						display: true,
-						hints: ''
-					}
+					...setting, 
+					alignH: 'left',
+					alignV: 'top'
 				}
 			}
 		}
+
 		_wrapper.setProps(_props)
 		
 		expect(_wrapper).to.have.style('justify-content', 'flex-start')

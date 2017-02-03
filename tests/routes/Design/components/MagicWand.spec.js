@@ -15,7 +15,7 @@ describe('(Component) MagicWand', () => {
 				onWandClick: (_spies.onWandClick = sinon.spy())
 			}, _spies.dispatch = sinon.spy())
 		}
-		_wrapper = shallow(<MagicWand { ..._props }/>)
+		_wrapper = shallow(<MagicWand { ..._props } />)
 	})
 	
 	it('Should render as a div.', () => {

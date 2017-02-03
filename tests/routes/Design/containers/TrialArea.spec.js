@@ -1,18 +1,14 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { TrialArea } from 'routes/Design/containers/TrialArea'
-import { defaultSetting } from 'routes/Design/modules/constants'
 
 describe('(Design/contianers) TrialArea', () => {
 	let _wrapper, _props
 	
 	beforeEach(() => {
 		_props = {
-			currentTrial: {
-				id: 1,
-				type: 'TEXT',
-				setting: defaultSetting
-			}
+			currentTrialObject: {},
+			handleChange: el => el
 		}
 		_wrapper = shallow(<TrialArea {..._props} />)
 	})

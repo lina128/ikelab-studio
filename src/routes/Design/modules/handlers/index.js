@@ -10,5 +10,5 @@ export moveOutside from './moveOutside'
 export renameCondition from './renameCondition'
 export selectTrial from './selectTrial'
 export toggleSelectMode from './toggleSelectMode'
-export updateStructureChange from './updateStructureChange'
+export updateStructure from './updateStructure'
 

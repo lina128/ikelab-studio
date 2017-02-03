@@ -3,17 +3,17 @@ import { shallow } from 'enzyme'
 import TrialWrapper from 'routes/Design/components/TrialWrapper'
 
 describe('(Design/component) TrialWrapper', () => {
-	let _wrapper
+	let _wrapper, _props;
 	
 	beforeEach(() => {
-		_wrapper = shallow(<TrialWrapper />)
+		_props = {
+			trial: {},
+			onChange: el => el
+		}
+		_wrapper = shallow(<TrialWrapper {..._props} />)
 	})
-	
-	it('Should render as a div.', () => {
-		expect(_wrapper.is('div')).to.equal(true)
-	})
-	
-	it('Should has class design_trialWrapper_default.', () => {
-		expect(_wrapper.hasClass('design_trialWrapper_default')).to.equal(true)
+
+	it('Should have class design_trialWrapper_default.', () => {
+		expect(_wrapper.find('.design_trialWrapper_default')).to.exist
 	})
 })

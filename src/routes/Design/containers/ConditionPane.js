@@ -11,7 +11,7 @@ import './ConditionPane.scss'
 
 const mapStateToProps = (state) => {
 	return {
-		condition: state.design.condition
+		condition: state.design.present.condition
 	}
 }
 

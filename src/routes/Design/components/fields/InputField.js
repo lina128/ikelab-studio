@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Textfield from 'react-mdl/lib/Textfield'
 import { inputStyle } from '../../constants'
 
-export default class InputCard extends Component {
+export default class InputField extends Component {
 	constructor(props) {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);

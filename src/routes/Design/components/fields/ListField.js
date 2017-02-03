@@ -4,7 +4,7 @@ import MenuItem from 'react-mdl-portal-menu/lib/MenuItem'
 import Button from 'react-mdl/lib/Button'
 import { btnStyle } from '../../constants'
 
-export default class ListCard extends Component {
+export default class ListField extends Component {
 	constructor(props) {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);

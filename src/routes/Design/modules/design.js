@@ -15,7 +15,7 @@ export const MOVE_OUTSIDE = 'MOVE_OUTSIDE'
 export const RENAME_CONDITION = 'RENAME_CONDITION'
 export const SELECT_TRIAL = 'SELECT_TRIAL'
 export const TOGGLE_SELECT_MODE = 'TOGGLE_SELECT_MODE'
-export const UPDATE_STRUCTURE_CHANGE = 'UPDATE_STRUCTURE_CHANGE'
+export const UPDATE_STRUCTURE = 'UPDATE_STRUCTURE'
 
 // ------------------------------------
 // Actions
@@ -100,9 +100,9 @@ export const toggleSelectMode = (id, setting, op) => {
 	}
 }
 
-export const updateStructureChange = (id, change) => {
+export const updateStructure = (id, change) => {
 	return {
-		type: UPDATE_STRUCTURE_CHANGE,
+		type: UPDATE_STRUCTURE,
 		payload: { id, change }
 	}
 }
@@ -141,7 +141,7 @@ export const actions = {
 	renameCondition,
 	selectTrial,
 	toggleSelectMode,
-	updateStructureChange
+	updateStructure
 }
 
 // ------------------------------------
@@ -160,7 +160,7 @@ const ACTION_HANDLERS = {
 	[RENAME_CONDITION] : handle.renameCondition,
 	[SELECT_TRIAL] : handle.selectTrial,
 	[TOGGLE_SELECT_MODE] : handle.toggleSelectMode,
-	[UPDATE_STRUCTURE_CHANGE] : handle.updateStructureChange
+	[UPDATE_STRUCTURE] : handle.updateStructure
 }
 
 // ------------------------------------

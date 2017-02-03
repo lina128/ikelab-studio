@@ -1,20 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import html2canvas from 'html2canvas'
-import FileSaver from 'file-saver'
 import { createSelector } from 'reselect'
 import flow from 'lodash/flow'
 import { DropTarget } from 'react-dnd'
 import { connect } from 'react-redux'
 import { findIndexById } from '../utils/findIndex'
 import { changeSetting } from '../modules/design'
-import { updateStructureChange } from '../modules/design'
+import { updateStructure } from '../modules/design'
 import TrialWrapper from '../components/TrialWrapper'
 import SettingPane from '../components/SettingPane'
 import './TrialArea.scss'
 
-const getEntities = (state) => state.design.entities
-const getCurrentTrial = (state) => state.design.currentTrial
+const getEntities = (state) => state.design.present.entities
+const getCurrentTrial = (state) => state.design.present.currentTrial
 
 const getTrialMemoized = createSelector(
 	[ getEntities, getCurrentTrial ],
@@ -39,7 +38,7 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(changeSetting(id, change))
 		},
 		didChangeStructure: (id, screenshot) => {
-			dispatch(updateStructureChange(id, {screenshot: screenshot}))
+			dispatch(updateStructure(id, {screenshot: screenshot}))
 		}
 	}
 }
@@ -51,16 +50,15 @@ function collect(connect, monitor) {
 }
 
 export class TrialArea extends Component {
-	static propTypes = {
-		currentTrialObject: PropTypes.object
-	}
-	
 	componentDidUpdate(prevProps) {
-		let mapNode = ReactDOM.findDOMNode(this.refs.trialWrapper)
-		let that = this
-		html2canvas(mapNode).then(function(canvas) {
-			that.props.didChangeStructure(that.props.currentTrialObject.id, canvas.toDataURL())
-		})
+		if(this.props.currentTrialObject) {
+			let mapNode = ReactDOM.findDOMNode(this.refs.trialWrapper);
+			let trialId = this.props.currentTrialObject.id;
+			let didChange = this.props.didChangeStructure;
+			html2canvas(mapNode).then(function(canvas) {
+				didChange(trialId, canvas.toDataURL())
+			})
+		}
 	}
 	
 	render() {

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Editor, EditorState, ContentState } from 'draft-js'
-import './Text.scss'
+import './TEXT.scss'
 
 export default class Text extends Component {
 	constructor(props) {

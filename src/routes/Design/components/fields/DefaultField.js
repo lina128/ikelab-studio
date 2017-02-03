@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 
-export default class DefaultCard extends Component {
+export default class DefaultField extends Component {
 	static propTypes = {
+		trialId: PropTypes.number.isRequired,
+		fieldConstantKey: PropTypes.string.isRequired,
 		fieldConstant: PropTypes.object.isRequired,
-		fieldSetting: PropTypes.any.isRequired,
+	  fieldSetting: PropTypes.any.isRequired,
 		onChange: PropTypes.func.isRequired
 	}
 	

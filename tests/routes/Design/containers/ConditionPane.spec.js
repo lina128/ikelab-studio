@@ -1,5 +1,4 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { shallow } from 'enzyme'
 import { ConditionPane } from 'routes/Design/containers/ConditionPane'
 
@@ -16,10 +15,8 @@ describe('(Container) ConditionPane', () => {
 					color: "#3498db"
 				}
 			],
-			...bindActionCreators({
-				onRenameCondition: (_spies.onRenameCondition = sinon.spy()),
-				onSelectMode: (_spies.onSelectMode = sinon.spy())
-			}, _spies.dispatch = sinon.spy())
+			onRenameCondition: el => el,
+			onSelectMode: el => el
 		}
 		_wrapper = shallow(<ConditionPane {..._props} />)
 	})

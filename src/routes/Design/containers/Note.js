@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
 	return {
-		message: state.design.message
+		message: state.design.present.message
 	}
 }
 
