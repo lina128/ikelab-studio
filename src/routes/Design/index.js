@@ -13,6 +13,7 @@ export default (store) => ({
           dependencies for bundling   */
       const Design = require('./components/Design').default
       const reducer = undoable(require('./modules/design').default, {
+				limit: 10,
       	filter: excludeAction(UPDATE_STRUCTURE)
       })
 			

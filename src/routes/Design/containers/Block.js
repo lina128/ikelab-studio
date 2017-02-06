@@ -84,15 +84,15 @@ export class Block extends Component {
 			} else {
 				if(i === 0) {
 					blockTrials.push(
-						<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'design_trial_branch_top'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
+						<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} screenshot={children[i].screenshot} selected={children[i].selected} branchStyle={'design_trial_branch_top'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
 					);
 				} else if(i === children.length-1) {
 					blockTrials.push(
-						<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'design_trial_branch_bottom'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
+						<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} screenshot={children[i].screenshot} selected={children[i].selected} branchStyle={'design_trial_branch_bottom'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
 					);
 				} else {
 					blockTrials.push(
-						<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'design_trial_branch_middle'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
+						<Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} screenshot={children[i].screenshot} selected={children[i].selected} branchStyle={'design_trial_branch_middle'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
 					);
 				}
 			}
