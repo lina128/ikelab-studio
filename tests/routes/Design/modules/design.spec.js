@@ -232,7 +232,7 @@ describe('(Design/modules)', () => {
 			expect(state2).to.deep.equal({
 				counter: 1,
 				condition: [],
-				currentTrial: null,
+				currentTrial: 1,
 				structure: [
 					{
 						id: 1,
@@ -296,7 +296,7 @@ describe('(Design/modules)', () => {
 			expect(state4).to.deep.equal({
 				counter: 2,
 				condition: [],
-				currentTrial: null,
+				currentTrial: 1,
 				structure: [
 					{
 						id: 2,
@@ -332,7 +332,7 @@ describe('(Design/modules)', () => {
 			expect(state6).to.deep.equal({
 				counter: 3,
 				condition: [],
-				currentTrial: null,
+				currentTrial: 1,
 				structure: [
 					{
 						id: 3,
@@ -375,11 +375,11 @@ describe('(Design/modules)', () => {
 		const state1 = designReducer(undefined, {})
 		const state2 = designReducer(state1, addTrial())
 		const state3 = designReducer(state2, addTrial())
-		
+
 		expect(state3).to.deep.equal({
 			counter: 2,
 			condition: [],
-			currentTrial: null,
+			currentTrial: 2,
 			structure: [
 				{
 					id: 1,
@@ -419,7 +419,7 @@ describe('(Design/modules)', () => {
 		expect(state4).to.deep.equal({
 			counter: 2,
 			condition: [],
-			currentTrial: null,
+			currentTrial: 2,
 			structure: [
 				{
 					id: 2,
@@ -459,7 +459,7 @@ describe('(Design/modules)', () => {
 		expect(state5).to.deep.equal({
 			counter: 2,
 			condition: [],
-			currentTrial: null,
+			currentTrial: 2,
 			structure: [
 				{
 					id: 1,
@@ -674,7 +674,7 @@ describe('(Design/modules)', () => {
 		expect(state4).to.deep.equal({
 			counter: 2,
 			condition: [],
-			currentTrial: null,
+			currentTrial: 1,
 			structure: [
 				{
 					id: 2,
@@ -709,7 +709,7 @@ describe('(Design/modules)', () => {
 		expect(state5).to.deep.equal({
 			counter: 2,
 			condition: [],
-			currentTrial: null,
+			currentTrial: 1,
 			structure: [
 				{
 					id: 1,
@@ -836,7 +836,7 @@ describe('(Design/modules)', () => {
 		expect(state4).to.deep.equal({
 			counter: 1,
 			condition: [],
-			currentTrial: null,
+			currentTrial: 1,
 			structure: [
 				{
 					id: 1,
@@ -864,7 +864,7 @@ describe('(Design/modules)', () => {
 		expect(state5).to.deep.equal({
 			counter: 1,
 			condition: [],
-			currentTrial: null,
+			currentTrial: 1,
 			structure: [
 				{
 					id: 1,
@@ -891,7 +891,7 @@ describe('(Design/modules)', () => {
 		expect(state6).to.deep.equal({
 			counter: 1,
 			condition: [],
-			currentTrial: null,
+			currentTrial: 1,
 			structure: [
 				{
 					id: 1,

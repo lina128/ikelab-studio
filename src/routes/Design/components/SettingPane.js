@@ -27,9 +27,18 @@ export const Fields = {
 }
 
 export default class SettingPane extends Component {
+	constructor(props) {
+		super(props)
+		this.handleClick = this.handleClick.bind(this)
+	}
+	
 	static propTypes = {
 		trial: PropTypes.object,
 		onChange: PropTypes.func.isRequired
+	}
+	
+	handleClick() {
+		window.open('http://google.com')
 	}
 
 	render() {
@@ -53,7 +62,7 @@ export default class SettingPane extends Component {
 				<div className={'design_settingPane_default'}>
 					<Card shadow={1}>
 						<CardTitle>
-							{trial.id}
+							{trial.id} <Button raised accent ripple onClick={this.handleClick}>Preview</Button>
 						</CardTitle>
 						<CardActions border>
 							{fieldList}
