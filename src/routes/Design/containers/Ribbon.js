@@ -16,62 +16,62 @@ const getFutureSteps = (state) => state.design.future.length
 
 const getPastMemoized = createSelector(
 	[ getPastSteps ],
-	(pastSteps) => pastSteps > 0 ? true : false
+	(pastSteps) => pastSteps > 0
 )
 
 const getFutureMemoized = createSelector(
 	[ getFutureSteps ],
-	(futureSteps) => futureSteps > 0 ? true : false
+	(futureSteps) => futureSteps > 0
 )
 
 const mapStateToProps = (state) => {
-	return {
-		pastSteps: getPastMemoized(state),
-		futureSteps: getFutureMemoized(state)
-	}
+  return {
+    pastSteps: getPastMemoized(state),
+    futureSteps: getFutureMemoized(state)
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		addTrial: () => {
-			dispatch(addTrial())
-		},
-		addBlock: () => {
-			dispatch(addBlock())
-		},
-		addRun: () => {
-			dispatch(addRun())
-		},
-		addCondition: () => {
-			dispatch(addCondition())
-		},
-		undo: () => {
-			dispatch(ActionCreators.undo())
-		},
-		redo: () => {
-			dispatch(ActionCreators.redo())
-		}
-	}
+  return {
+    addTrial: () => {
+      dispatch(addTrial())
+    },
+    addBlock: () => {
+      dispatch(addBlock())
+    },
+    addRun: () => {
+      dispatch(addRun())
+    },
+    addCondition: () => {
+      dispatch(addCondition())
+    },
+    undo: () => {
+      dispatch(ActionCreators.undo())
+    },
+    redo: () => {
+      dispatch(ActionCreators.redo())
+    }
+  }
 }
 
 export class Ribbon extends Component {
-	render() {
-		const { addTrial, addBlock, addRun, addCondition, undo, redo, pastSteps, futureSteps } = this.props;
-		
-		return (
-			<div className={'design_ribbon_default'}>
-				<div>
-					<AddButton clickHandler={addTrial} text={"Add Trial"} />
-					<AddButton clickHandler={addBlock} text={"Add Block"} />
-					<AddButton clickHandler={addRun} text={"Add Run"}/>
-					<AddButton clickHandler={addCondition} text={"Add Condition"} />
-					<Trash />
-					{pastSteps ? <Button raised accent ripple onClick={undo}>Undo</Button> : <Button raised>Undo</Button>}
-					{futureSteps ? <Button raised accent ripple onClick={redo}>Redo</Button> : <Button raised>Redo</Button>}
-				</div>
-			</div>
-		)
-	}
+  render () {
+    const { addTrial, addBlock, addRun, addCondition, undo, redo, pastSteps, futureSteps } = this.props
+
+    return (
+      <div className={'design_ribbon_default'}>
+        <div>
+          <AddButton clickHandler={addTrial} text={'Add Trial'} />
+          <AddButton clickHandler={addBlock} text={'Add Block'} />
+          <AddButton clickHandler={addRun} text={'Add Run'} />
+          <AddButton clickHandler={addCondition} text={'Add Condition'} />
+          <Trash />
+          {pastSteps ? <Button raised accent ripple onClick={undo}>Undo</Button> : <Button raised>Undo</Button>}
+          {futureSteps ? <Button raised accent ripple onClick={redo}>Redo</Button> : <Button raised>Redo</Button>}
+        </div>
+      </div>
+    )
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Ribbon)

@@ -21,90 +21,90 @@ export const UPDATE_STRUCTURE = 'UPDATE_STRUCTURE'
 // Actions
 // ------------------------------------
 export const addTrial = () => {
-	return {
-		type: ADD_TRIAL
-	}
+  return {
+    type: ADD_TRIAL
+  }
 }
 
 export const addBlock = () => {
-	return {
-		type: ADD_BLOCK
-	}
+  return {
+    type: ADD_BLOCK
+  }
 }
 
 export const addRun = () => {
-	return {
-		type: ADD_RUN
-	}
+  return {
+    type: ADD_RUN
+  }
 }
 
 export const addCondition = () => {
-	return {
-		type: ADD_CONDITION
-	}
+  return {
+    type: ADD_CONDITION
+  }
 }
 
 export const changeSetting = (id, setting) => {
-	return {
-		type: CHANGE_SETTING,
-		payload: { id, setting }
-	}
+  return {
+    type: CHANGE_SETTING,
+    payload: { id, setting }
+  }
 }
 
 export const clickTrial = (id) => {
-	return {
-		type: CLICK_TRIAL,
-		payload: { id }
-	}
+  return {
+    type: CLICK_TRIAL,
+    payload: { id }
+  }
 }
 
 export const moveInside = (id, parentId) => {
-	return {
-		type: MOVE_INSIDE,
-		payload: { id, parentId }
-	}
+  return {
+    type: MOVE_INSIDE,
+    payload: { id, parentId }
+  }
 }
 
 export const moveNode = (id, afterId, direction) => {
-	return {
-		type: MOVE_NODE,
-		payload: { id, afterId, direction }
-	}
+  return {
+    type: MOVE_NODE,
+    payload: { id, afterId, direction }
+  }
 }
 
 export const moveOutside = (id) => {
-	return {
-		type: MOVE_OUTSIDE,
-		payload: { id }
-	}
+  return {
+    type: MOVE_OUTSIDE,
+    payload: { id }
+  }
 }
 
 export const renameCondition = (id, value) => {
-	return {
-		type: RENAME_CONDITION,
-		payload: { id, value }
-	}
+  return {
+    type: RENAME_CONDITION,
+    payload: { id, value }
+  }
 }
 
 export const selectTrial = (id) => {
-	return {
-		type: SELECT_TRIAL,
-		payload: { id }
-	}
+  return {
+    type: SELECT_TRIAL,
+    payload: { id }
+  }
 }
 
 export const toggleSelectMode = (id, setting, op) => {
-	return {
-		type: TOGGLE_SELECT_MODE,
-		payload: { id, setting, op }
-	}
+  return {
+    type: TOGGLE_SELECT_MODE,
+    payload: { id, setting, op }
+  }
 }
 
 export const updateStructure = (id, change) => {
-	return {
-		type: UPDATE_STRUCTURE,
-		payload: { id, change }
-	}
+  return {
+    type: UPDATE_STRUCTURE,
+    payload: { id, change }
+  }
 }
 
 /*  This is a thunk, meaning it is a function that immediately
@@ -131,17 +131,17 @@ export const doubleAsync = () => {
 export const actions = {
   addTrial,
   addBlock,
-	addRun,
-	addCondition,
-	clickTrial,
-	changeSetting,
-	moveInside,
-	moveNode,
-	moveOutside,
-	renameCondition,
-	selectTrial,
-	toggleSelectMode,
-	updateStructure
+  addRun,
+  addCondition,
+  clickTrial,
+  changeSetting,
+  moveInside,
+  moveNode,
+  moveOutside,
+  renameCondition,
+  selectTrial,
+  toggleSelectMode,
+  updateStructure
 }
 
 // ------------------------------------
@@ -149,33 +149,33 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [ADD_TRIAL] : handle.addTrial,
-	[ADD_BLOCK] : handle.addBlock,
-	[ADD_RUN] : handle.addRun,
-	[ADD_CONDITION] : handle.addCondition,
-	[CHANGE_SETTING] : handle.changeSetting,
-	[CLICK_TRIAL] : handle.clickTrial,
-	[MOVE_INSIDE] : handle.moveInside,
-	[MOVE_NODE] : handle.moveNode,
-	[MOVE_OUTSIDE] : handle.moveOutside,
-	[RENAME_CONDITION] : handle.renameCondition,
-	[SELECT_TRIAL] : handle.selectTrial,
-	[TOGGLE_SELECT_MODE] : handle.toggleSelectMode,
-	[UPDATE_STRUCTURE] : handle.updateStructure
+  [ADD_BLOCK] : handle.addBlock,
+  [ADD_RUN] : handle.addRun,
+  [ADD_CONDITION] : handle.addCondition,
+  [CHANGE_SETTING] : handle.changeSetting,
+  [CLICK_TRIAL] : handle.clickTrial,
+  [MOVE_INSIDE] : handle.moveInside,
+  [MOVE_NODE] : handle.moveNode,
+  [MOVE_OUTSIDE] : handle.moveOutside,
+  [RENAME_CONDITION] : handle.renameCondition,
+  [SELECT_TRIAL] : handle.selectTrial,
+  [TOGGLE_SELECT_MODE] : handle.toggleSelectMode,
+  [UPDATE_STRUCTURE] : handle.updateStructure
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = {
-	counter: 0,
-	condition: [],
-	currentTrial: null,
-	structure: [],
-	entities: [],
-	message: '',
-	selected: [],
-	selectId: null,
-	selectMode: false
+  counter: 0,
+  condition: [],
+  currentTrial: null,
+  structure: [],
+  entities: [],
+  message: '',
+  selected: [],
+  selectId: null,
+  selectMode: false
 }
 export default function designReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

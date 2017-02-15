@@ -18,59 +18,59 @@ const getCurrentTrial = (state) => state.design.present.currentTrial
 const getTrialMemoized = createSelector(
 	[ getEntities, getCurrentTrial ],
 	(entities, currentTrial) => {
-		if(!currentTrial) {
-			return null
-		} else {
-			return entities[findIndexById(entities, currentTrial)]
-		}
-	}
+  if (!currentTrial) {
+    return null
+  } else {
+    return entities[findIndexById(entities, currentTrial)]
+  }
+}
 )
 
 const mapStateToProps = (state) => {
-	return {
-		currentTrialObject: getTrialMemoized(state)
-	}
+  return {
+    currentTrialObject: getTrialMemoized(state)
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		handleChange: (id, change) => {
-			dispatch(changeSetting(id, change))
-		},
-		didChangeStructure: (id, screenshot) => {
-			dispatch(updateStructure(id, {screenshot: screenshot}))
-		}
-	}
+  return {
+    handleChange: (id, change) => {
+      dispatch(changeSetting(id, change))
+    },
+    didChangeStructure: (id, screenshot) => {
+      dispatch(updateStructure(id, { screenshot: screenshot }))
+    }
+  }
 }
 
-function collect(connect, monitor) {
-	return {
-		connectDropTarget: connect.dropTarget()
-	}
+function collect (connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget()
+  }
 }
 
 export class TrialArea extends Component {
-	componentDidUpdate(prevProps) {
-		if(this.props.currentTrialObject) {
-			let mapNode = ReactDOM.findDOMNode(this.refs.trialWrapper);
-			let trialId = this.props.currentTrialObject.id;
-			let didChange = this.props.didChangeStructure;
-			html2canvas(mapNode).then(function(canvas) {
-				didChange(trialId, canvas.toDataURL())
-			})
-		}
-	}
-	
-	render() {
-		const { currentTrialObject, handleChange } = this.props;
+  componentDidUpdate (prevProps) {
+    if (this.props.currentTrialObject) {
+      let mapNode = ReactDOM.findDOMNode(this.refs.trialWrapper)
+      let trialId = this.props.currentTrialObject.id
+      let didChange = this.props.didChangeStructure
+      html2canvas(mapNode).then(function (canvas) {
+        didChange(trialId, canvas.toDataURL())
+      })
+    }
+  }
 
-		return (
-			<div className={'design_trialArea_default'}>
-				<TrialWrapper ref="trialWrapper" trial={currentTrialObject} onChange={handleChange} />
-				<SettingPane trial={currentTrialObject} onChange={handleChange} />
-			</div>
-		)
-	}
+  render () {
+    const { currentTrialObject, handleChange } = this.props
+
+    return (
+      <div className={'design_trialArea_default'}>
+        <TrialWrapper ref='trialWrapper' trial={currentTrialObject} onChange={handleChange} />
+        <SettingPane trial={currentTrialObject} onChange={handleChange} />
+      </div>
+    )
+  }
 }
 
 export default flow(

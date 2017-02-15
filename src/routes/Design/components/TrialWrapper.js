@@ -13,31 +13,31 @@ export const TEXT = 'TEXT'
 // Component Handlers
 // ------------------------------------
 export const Components = {
-	[DEFAULT]: DefaultDisplay,
-	[TEXT]: Text
+  [DEFAULT]: DefaultDisplay,
+  [TEXT]: Text
 }
 
 export default class TrialWrapper extends Component {
-	static propTypes = {
-		trial: PropTypes.object,
-		onChange: PropTypes.func.isRequired
-	}
-	
-	render() {
-		const { trial, onChange } = this.props
+  static propTypes = {
+    trial: PropTypes.object,
+    onChange: PropTypes.func.isRequired
+  }
 
-		if(trial) {
-			const MyComponent = Components[trial.type] || Components[DEFAULT]
+  render () {
+    const { trial, onChange } = this.props
 
-			return (
-				<div id="design_trialWrapper" className="design_trialWrapper_default">
-					<MyComponent style={{width: '100%', height: '100%'}} trial={trial} onChange={onChange} />
-				</div>
-			)
-		} else {
-			return (
-				<div className="design_trialWrapper_default" />
-			)
-		}
-	}
+    if (trial) {
+      const MyComponent = Components[trial.type] || Components[DEFAULT]
+
+      return (
+        <div id='design_trialWrapper' className='design_trialWrapper_default'>
+          <MyComponent style={{ width: '100%', height: '100%' }} trial={trial} onChange={onChange} />
+        </div>
+      )
+    } else {
+      return (
+        <div className='design_trialWrapper_default' />
+      )
+    }
+  }
 }

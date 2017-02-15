@@ -10,127 +10,127 @@ import HorizontalBar from '../components/HorizontalBar'
 import './Trial.scss'
 
 const trialSource = {
-	beginDrag(props) {
-		return { id: props.id, level: 'trial' };
-	},
-	
-	endDrag(props, monitor) {
-		if(!monitor.didDrop()) {
-			props.moveOutside(props.id);
-		}
-	}
-};
+  beginDrag (props) {
+    return { id: props.id, level: 'trial' }
+  },
+
+  endDrag (props, monitor) {
+    if (!monitor.didDrop()) {
+      props.moveOutside(props.id)
+    }
+  }
+}
 
 const trialTarget = {
-	hover(props, monitor, component) {
-		const draggedId = monitor.getItem().id;
-		const droppedComponentPosition = ReactDOM.findDOMNode(component).getBoundingClientRect();
-		const draggedComponentPosition = monitor.getClientOffset();
-		var direction;
+  hover (props, monitor, component) {
+    const draggedId = monitor.getItem().id
+    const droppedComponentPosition = ReactDOM.findDOMNode(component).getBoundingClientRect()
+    const draggedComponentPosition = monitor.getClientOffset()
+    var direction
 
-		if(draggedComponentPosition.y<droppedComponentPosition.bottom && draggedComponentPosition.y>droppedComponentPosition.top) {
-			direction = 'UP';
-		} else if(draggedComponentPosition.y+Dimensions.TRIALHEIGHT<droppedComponentPosition.bottom && draggedComponentPosition.y+Dimensions.TRIALHEIGHT>droppedComponentPosition.top) {
-			direction = 'DOWN';
-		}
+    if (draggedComponentPosition.y < droppedComponentPosition.bottom && draggedComponentPosition.y > droppedComponentPosition.top) {
+      direction = 'UP'
+    } else if (draggedComponentPosition.y + Dimensions.TRIALHEIGHT < droppedComponentPosition.bottom && draggedComponentPosition.y + Dimensions.TRIALHEIGHT > droppedComponentPosition.top) {
+      direction = 'DOWN'
+    }
 
-		if(draggedId !== props.id && direction) {
-			props.moveNode(draggedId, props.id, direction);
-		}
-	}
+    if (draggedId !== props.id && direction) {
+      props.moveNode(draggedId, props.id, direction)
+    }
+  }
 }
 
-function collectTarget(connect, monitor) {
-	return {
-		connectDropTarget: connect.dropTarget()
-	}
+function collectTarget (connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget()
+  }
 }
 
-function collectSource(connect, monitor) {
-	return {
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging()
-	}
+function collectSource (connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
 }
 
 export class Trial extends Component {
-	constructor(props) {
-		super(props);
-		this.handleThumbnailClick = this.handleThumbnailClick.bind(this);
-	}
-	
-	static propTypes = {
-		moveNode: PropTypes.func,
-		moveOutside: PropTypes.func,
-		selectMode: PropTypes.bool.isRequired,
-		condition: PropTypes.array.isRequired,
-		id: PropTypes.number.isRequired,
-		screenshot: PropTypes.string,
-		selected: PropTypes.bool.isRequired,
-		branchStyle: PropTypes.string,
-		clickTrial: PropTypes.func.isRequired,
-	}
-	
-	handleThumbnailClick() {
-		this.props.clickTrial(this.props.id);
-	}
-	
-	renderOverlay() {
-		return (
-			<div className={'design_trial_overlay'} />
-		)
-	}
-	
-	render() {
-		const { connectDragSource, connectDropTarget, isDragging, selectMode, condition, id, screenshot, selected, branchStyle, clickTrial } = this.props;
+  constructor (props) {
+    super(props)
+    this.handleThumbnailClick = this.handleThumbnailClick.bind(this)
+  }
 
-		const conditionList = [];
-		
-		for(let i=0; i<condition.length; i++) {
-			conditionList.push(
-				<HorizontalBar key={condition[i]} backgroundColor={condition[i]} />
-			)
-		}
-		
-		const classnames = classNames('design_trial_branch', branchStyle);
+  static propTypes = {
+    moveNode: PropTypes.func,
+    moveOutside: PropTypes.func,
+    selectMode: PropTypes.bool.isRequired,
+    condition: PropTypes.array.isRequired,
+    id: PropTypes.number.isRequired,
+    screenshot: PropTypes.string,
+    selected: PropTypes.bool.isRequired,
+    branchStyle: PropTypes.string,
+    clickTrial: PropTypes.func.isRequired
+  }
 
-		if(selectMode) {
-			return (
-				<div className='design_trial_default'>
-					<Thumbnail id={id} screenshot={screenshot} condition={condition} onThumbnailClick={this.handleThumbnailClick} />
-					<Sidebar>
-						{conditionList}
-					</Sidebar>
-					<div className={classnames} />
-					{selected && this.renderOverlay()}
-				</div>
+  handleThumbnailClick () {
+    this.props.clickTrial(this.props.id)
+  }
+
+  renderOverlay () {
+    return (
+      <div className={'design_trial_overlay'} />
+    )
+  }
+
+  render () {
+    const { connectDragSource, connectDropTarget, isDragging, selectMode, condition, id, screenshot, selected, branchStyle, clickTrial } = this.props
+
+    const conditionList = []
+
+    for (let i = 0; i < condition.length; i++) {
+      conditionList.push(
+        <HorizontalBar key={condition[i]} backgroundColor={condition[i]} />
 			)
-		} else {
-			const opacity = isDragging ? 0 : 1;
-			
-			const conditionList = [];
-			
-			for(let i=0; i<condition.length; i++) {
-				conditionList.push(
-					<HorizontalBar key={condition[i]} backgroundColor={condition[i]} />
+    }
+
+    const classnames = classNames('design_trial_branch', branchStyle)
+
+    if (selectMode) {
+      return (
+        <div className='design_trial_default'>
+          <Thumbnail id={id} screenshot={screenshot} condition={condition} onThumbnailClick={this.handleThumbnailClick} />
+          <Sidebar>
+            {conditionList}
+          </Sidebar>
+          <div className={classnames} />
+          {selected && this.renderOverlay()}
+        </div>
+      )
+    } else {
+      const opacity = isDragging ? 0 : 1
+
+      const conditionList = []
+
+      for (let i = 0; i < condition.length; i++) {
+        conditionList.push(
+          <HorizontalBar key={condition[i]} backgroundColor={condition[i]} />
 				)
-			}
+      }
 
-			return connectDropTarget(
-				<div className='design_trial_default'>
-					{connectDragSource(
-						<div>
-							<Thumbnail id={id} screenshot={screenshot} condition={condition} onThumbnailClick={this.handleThumbnailClick} />
-							<Sidebar>
-								{conditionList}
-							</Sidebar>
-						</div>
+      return connectDropTarget(
+        <div className='design_trial_default'>
+          {connectDragSource(
+            <div>
+              <Thumbnail id={id} screenshot={screenshot} condition={condition} onThumbnailClick={this.handleThumbnailClick} />
+              <Sidebar>
+                {conditionList}
+              </Sidebar>
+            </div>
 					)}
-					<div className={classnames} />
-				</div>
-			);
-		}
-	}
+          <div className={classnames} />
+        </div>
+			)
+    }
+  }
 }
 
 export default flow(

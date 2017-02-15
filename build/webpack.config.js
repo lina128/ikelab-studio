@@ -122,13 +122,13 @@ webpackConfig.module.loaders.push({
 })
 
 webpackConfig.module.loaders.push({
-	test: /\.css$/,
-	exclude: null,
-	loaders: [
-		'style',
-		BASE_CSS_LOADER,
-		'postcss'
-	]
+  test: /\.css$/,
+  exclude: null,
+  loaders: [
+    'style',
+    BASE_CSS_LOADER,
+    'postcss'
+  ]
 })
 
 webpackConfig.sassLoader = {

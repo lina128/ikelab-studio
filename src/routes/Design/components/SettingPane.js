@@ -20,63 +20,62 @@ export const COLORPICKER = 'ColorPicker'
 // Field Handlers
 // ------------------------------------
 export const Fields = {
-	[DEFAULT]: DefaultField,
-	[LIST]: ListField,
-	[INPUT]: InputField,
-	[COLORPICKER]: ColorPickerField
+  [DEFAULT]: DefaultField,
+  [LIST]: ListField,
+  [INPUT]: InputField,
+  [COLORPICKER]: ColorPickerField
 }
 
 export default class SettingPane extends Component {
-	constructor(props) {
-		super(props)
-		this.handleClick = this.handleClick.bind(this)
-	}
-	
-	static propTypes = {
-		trial: PropTypes.object,
-		onChange: PropTypes.func.isRequired
-	}
-	
-	handleClick() {
-		window.open('http://google.com')
-	}
+  constructor (props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-	render() {
-		const { trial, onChange } = this.props;
-		
-		
-		if(trial) {
-			const fieldConstant = fieldConstantHandler[trial.type];
-			const fieldSetting = trial.setting;
-			
-			let Field, fieldList = [];
+  static propTypes = {
+    trial: PropTypes.object,
+    onChange: PropTypes.func.isRequired
+  }
 
-			for(let s in fieldConstant) {
-				if(fieldConstant[s].display) {
-					Field = Fields[fieldConstant[s].type] || Fields[DEFAULT];
-					fieldList.push(<Field key={s} trialId={trial.id} fieldConstantKey={s} fieldConstant={fieldConstant[s]} fieldSetting={fieldSetting[s]} onChange={onChange} />);
-				}
-			}
+  handleClick () {
+    window.open('http://google.com')
+  }
 
-			return (
-				<div className={'design_settingPane_default'}>
-					<Card shadow={1}>
-						<CardTitle>
-							{trial.id} <Button raised accent ripple onClick={this.handleClick}>Preview</Button>
-						</CardTitle>
-						<CardActions border>
-							{fieldList}
-						</CardActions>
-						<CardActions border>
-							<Button raised accent ripple>Done</Button>
-						</CardActions>
-					</Card>
-				</div>
-			)
-		} else {
-			return (
-				<div className={'design_settingPane_default'} />
-			)
-		}
-	}
+  render () {
+    const { trial, onChange } = this.props
+
+    if (trial) {
+      const fieldConstant = fieldConstantHandler[trial.type]
+      const fieldSetting = trial.setting
+
+      let Field, fieldList = []
+
+      for (let s in fieldConstant) {
+        if (fieldConstant[s].display) {
+          Field = Fields[fieldConstant[s].type] || Fields[DEFAULT]
+          fieldList.push(<Field key={s} trialId={trial.id} fieldConstantKey={s} fieldConstant={fieldConstant[s]} fieldSetting={fieldSetting[s]} onChange={onChange} />)
+        }
+      }
+
+      return (
+        <div className={'design_settingPane_default'}>
+          <Card shadow={1}>
+            <CardTitle>
+              {trial.id} <Button raised accent ripple onClick={this.handleClick}>Preview</Button>
+            </CardTitle>
+            <CardActions border>
+              {fieldList}
+            </CardActions>
+            <CardActions border>
+              <Button raised accent ripple>Done</Button>
+            </CardActions>
+          </Card>
+        </div>
+      )
+    } else {
+      return (
+        <div className={'design_settingPane_default'} />
+      )
+    }
+  }
 }

@@ -8,18 +8,18 @@ import Note from '../containers/Note'
 import './Design.scss'
 
 export class App extends Component {
-	render() {
-		return (
-			<div className='design_container1'>
-				<Ribbon />
-				<div className='design_container2'>
-					<NavBar />
-					<TrialArea />
-				</div>
-				<Note />
-			</div>
-		)
-	}
+  render () {
+    return (
+      <div className='design_container1'>
+        <Ribbon />
+        <div className='design_container2'>
+          <NavBar />
+          <TrialArea />
+        </div>
+        <Note />
+      </div>
+    )
+  }
 }
 
 export default DragDropContext(HTML5Backend)(App)
