@@ -1,12 +1,11 @@
 import { insertNodeAfter } from '../utils/node'
-import { defaultType } from '../../constants'
-import { DEFAULTMODULE } from '../../constants/field.constants'
+import * as handler from '../../elements/settings'
 
-function defaultSetting () {
+function getSetting (type) {
   let setting = {}
-
-  for (let s in DEFAULTMODULE) {
-    setting[s] = DEFAULTMODULE[s].value
+  let settingDefault = handler[type]
+  for (let s in settingDefault) {
+    setting[s] = settingDefault[s].value
   }
 
   return setting
@@ -20,8 +19,8 @@ const addTrial = (state, action) => {
       currentTrial: newCounterT,
       counter: newCounterT,
       structure: insertNodeAfter(
-				state.structure,
-				state.currentTrial,
+        state.structure,
+        state.currentTrial,
         {
           id: newCounterT,
           level: 'trial',
@@ -33,8 +32,8 @@ const addTrial = (state, action) => {
         ...state.entities,
         {
           id: newCounterT,
-          type: defaultType,
-          setting: defaultSetting()
+          type: action.payload.type,
+          setting: getSetting(action.payload.type)
         }
       ]
     }
@@ -57,8 +56,8 @@ const addTrial = (state, action) => {
         ...state.entities,
         {
           id: newCounterT,
-          type: defaultType,
-          setting: defaultSetting()
+          type: action.payload.type,
+          setting: getSetting(action.payload.type)
         }
       ]
     }

@@ -2,14 +2,13 @@ import { addBlock, addCondition, addRun, addTrial,
 clickTrial, moveInside, moveNode, moveOutside,
 renameCondition, selectTrial, toggleSelectMode,
 default as designReducer } from 'routes/Design/modules/design'
-import { defaultType } from 'routes/Design/constants'
-import { DEFAULTMODULE } from 'routes/Design/constants/field.constants'
+import text from 'routes/Design/elements/settings/text'
 
-function defaultSetting () {
+function getSetting () {
   let setting = {}
 
-  for (let s in DEFAULTMODULE) {
-    setting[s] = DEFAULTMODULE[s].value
+  for (let s in text) {
+    setting[s] = text[s].value
   }
 
   return setting
@@ -18,8 +17,8 @@ function defaultSetting () {
 describe('(Design/modules)', () => {
   let _initialState
 
-  const defaultTrialSetting = defaultSetting()
-  const defaultTrialType = defaultType
+  const trialSetting = getSetting()
+  const trialType = 'TEXT'
 
   beforeEach(() => {
     _initialState = {
@@ -214,7 +213,7 @@ describe('(Design/modules)', () => {
 
     it('Should handle ADD_TRIAL', () => {
       const state1 = designReducer(undefined, {})
-      const state2 = designReducer(state1, addTrial())
+      const state2 = designReducer(state1, addTrial(trialType))
 
       expect(state2).to.deep.equal({
         counter: 1,
@@ -232,8 +231,8 @@ describe('(Design/modules)', () => {
         entities: [
           {
             id: 1,
-            type: defaultTrialType,
-            setting: defaultTrialSetting
+            type: trialType,
+            setting: trialSetting
           }
         ],
         message: '',
@@ -245,7 +244,7 @@ describe('(Design/modules)', () => {
 
     it('Should handle CLICK_TRIAL', () => {
       const state1 = designReducer(undefined, {})
-      const state2 = designReducer(state1, addTrial())
+      const state2 = designReducer(state1, addTrial(trialType))
       const state3 = designReducer(state2, clickTrial(1))
       expect(state3).to.deep.equal({
         counter: 1,
@@ -263,8 +262,8 @@ describe('(Design/modules)', () => {
         entities: [
           {
             id: 1,
-            type: defaultTrialType,
-            setting: defaultTrialSetting
+            type: trialType,
+            setting: trialSetting
           }
         ],
         message: '',
@@ -276,7 +275,7 @@ describe('(Design/modules)', () => {
 
     it('Should handle MOVE_INSIDE', () => {
       const state1 = designReducer(undefined, {})
-      const state2 = designReducer(state1, addTrial())
+      const state2 = designReducer(state1, addTrial(trialType))
       const state3 = designReducer(state2, addBlock())
       const state4 = designReducer(state3, moveInside(1, 2))
 
@@ -303,8 +302,8 @@ describe('(Design/modules)', () => {
         entities: [
           {
             id: 1,
-            type: defaultTrialType,
-            setting: defaultTrialSetting
+            type: trialType,
+            setting: trialSetting
           }
         ],
         message: '',
@@ -346,8 +345,8 @@ describe('(Design/modules)', () => {
         entities: [
           {
             id: 1,
-            type: defaultTrialType,
-            setting: defaultTrialSetting
+            type: trialType,
+            setting: trialSetting
           }
         ],
         message: '',
@@ -360,8 +359,8 @@ describe('(Design/modules)', () => {
 
   it('Should handle MOVE_NODE (trial)', () => {
     const state1 = designReducer(undefined, {})
-    const state2 = designReducer(state1, addTrial())
-    const state3 = designReducer(state2, addTrial())
+    const state2 = designReducer(state1, addTrial(trialType))
+    const state3 = designReducer(state2, addTrial(trialType))
 
     expect(state3).to.deep.equal({
       counter: 2,
@@ -386,13 +385,13 @@ describe('(Design/modules)', () => {
       entities: [
         {
           id: 1,
-          type: defaultTrialType,
-          setting: defaultTrialSetting
+          type: trialType,
+          setting: trialSetting
         },
         {
           id: 2,
-          type: defaultTrialType,
-          setting: defaultTrialSetting
+          type: trialType,
+          setting: trialSetting
         }
       ],
       message: '',
@@ -426,13 +425,13 @@ describe('(Design/modules)', () => {
       entities: [
         {
           id: 1,
-          type: defaultTrialType,
-          setting: defaultTrialSetting
+          type: trialType,
+          setting: trialSetting
         },
         {
           id: 2,
-          type: defaultTrialType,
-          setting: defaultTrialSetting
+          type: trialType,
+          setting: trialSetting
         }
       ],
       message: '',
@@ -466,13 +465,13 @@ describe('(Design/modules)', () => {
       entities: [
         {
           id: 1,
-          type: defaultTrialType,
-          setting: defaultTrialSetting
+          type: trialType,
+          setting: trialSetting
         },
         {
           id: 2,
-          type: defaultTrialType,
-          setting: defaultTrialSetting
+          type: trialType,
+          setting: trialSetting
         }
       ],
       message: '',
@@ -654,7 +653,7 @@ describe('(Design/modules)', () => {
 
   it('Should handle MOVE_OUTSIDE', () => {
     const state1 = designReducer(undefined, {})
-    const state2 = designReducer(state1, addTrial())
+    const state2 = designReducer(state1, addTrial(trialType))
     const state3 = designReducer(state2, addBlock())
     const state4 = designReducer(state3, moveInside(1, 2))
 
@@ -681,8 +680,8 @@ describe('(Design/modules)', () => {
       entities: [
         {
           id: 1,
-          type: defaultTrialType,
-          setting: defaultTrialSetting
+          type: trialType,
+          setting: trialSetting
         }
       ],
       message: '',
@@ -715,8 +714,8 @@ describe('(Design/modules)', () => {
       entities: [
         {
           id: 1,
-          type: defaultTrialType,
-          setting: defaultTrialSetting
+          type: trialType,
+          setting: trialSetting
         }
       ],
       message: '',
@@ -817,7 +816,7 @@ describe('(Design/modules)', () => {
   it('Should handle SELECT_TRIAL', () => {
     const state1 = designReducer(undefined, {})
     const state2 = designReducer(state1, toggleSelectMode('testId', { condition: ['#3498db'] }, 'extend'))
-    const state3 = designReducer(state2, addTrial())
+    const state3 = designReducer(state2, addTrial(trialType))
     const state4 = designReducer(state3, selectTrial(1))
 
     expect(state4).to.deep.equal({
@@ -836,8 +835,8 @@ describe('(Design/modules)', () => {
       entities: [
         {
           id: 1,
-          type: defaultTrialType,
-          setting: defaultTrialSetting
+          type: trialType,
+          setting: trialSetting
         }
       ],
       message: 'Selecting trials...',
@@ -864,8 +863,8 @@ describe('(Design/modules)', () => {
       entities: [
         {
           id: 1,
-          type: defaultTrialType,
-          setting: defaultTrialSetting
+          type: trialType,
+          setting: trialSetting
         }
       ],
       message: 'Selecting trials...',
@@ -891,8 +890,8 @@ describe('(Design/modules)', () => {
       entities: [
         {
           id: 1,
-          type: defaultTrialType,
-          setting: defaultTrialSetting
+          type: trialType,
+          setting: trialSetting
         }
       ],
       message: 'Selecting trials...',

@@ -1,7 +1,8 @@
-import { ColorPalette } from '../../constants'
+import { COLORPALETTE } from '../../constants'
 
 const addCondition = (state, action) => {
-  let color, inc = 0
+  let color
+  let inc = 0
   while (inc < ColorPalette.length) {
     color = ColorPalette[inc]
 

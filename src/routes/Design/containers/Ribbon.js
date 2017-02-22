@@ -2,12 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import { ActionCreators } from 'redux-undo'
-import { addTrial } from '../modules/design'
-import { addBlock } from '../modules/design'
-import { addRun } from '../modules/design'
-import { addCondition } from '../modules/design'
+import { addTrial, addBlock, addRun, addCondition } from '../modules/design'
 import AddButton from '../components/AddButton'
 import Trash from './Trash'
+import ModuleLoader from './ModuleLoader'
 import Button from 'react-mdl/lib/Button'
 import './Ribbon.scss'
 
@@ -15,13 +13,13 @@ const getPastSteps = (state) => state.design.past.length
 const getFutureSteps = (state) => state.design.future.length
 
 const getPastMemoized = createSelector(
-	[ getPastSteps ],
-	(pastSteps) => pastSteps > 0
+  [ getPastSteps ],
+  (pastSteps) => pastSteps > 0
 )
 
 const getFutureMemoized = createSelector(
-	[ getFutureSteps ],
-	(futureSteps) => futureSteps > 0
+  [ getFutureSteps ],
+  (futureSteps) => futureSteps > 0
 )
 
 const mapStateToProps = (state) => {
@@ -55,14 +53,22 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export class Ribbon extends Component {
+  static propTypes = {
+    addRun: PropTypes.func.isRequired,
+    addCondition: PropTypes.func.isRequired,
+    undo: PropTypes.func,
+    redo: PropTypes.func,
+    pastSteps: PropTypes.bool,
+    futureSteps: PropTypes.bool
+  }
+
   render () {
-    const { addTrial, addBlock, addRun, addCondition, undo, redo, pastSteps, futureSteps } = this.props
+    const { addRun, addCondition, undo, redo, pastSteps, futureSteps } = this.props
 
     return (
       <div className={'design_ribbon_default'}>
         <div>
-          <AddButton clickHandler={addTrial} text={'Add Trial'} />
-          <AddButton clickHandler={addBlock} text={'Add Block'} />
+          <ModuleLoader />
           <AddButton clickHandler={addRun} text={'Add Run'} />
           <AddButton clickHandler={addCondition} text={'Add Condition'} />
           <Trash />

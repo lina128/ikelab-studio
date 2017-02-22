@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import './DefaultDisplay.scss'
 
 export default class DefaultDisplay extends Component {
   static propTypes = {
@@ -7,9 +8,7 @@ export default class DefaultDisplay extends Component {
 
   render () {
     return (
-      <div>
-				TEST
-			</div>
+      <div className='design_frames_default' />
     )
   }
 }

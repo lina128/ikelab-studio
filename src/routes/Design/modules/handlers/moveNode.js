@@ -1,7 +1,4 @@
-import { findNode } from '../utils/node'
-import { removeNode } from '../utils/node'
-import { insertNodeBefore } from '../utils/node'
-import { insertNodeAfter } from '../utils/node'
+import { findNode, removeNode, insertNodeBefore, insertNodeAfter } from '../utils/node'
 
 const moveNode = (state, action) => {
   const id = action.payload.id
@@ -21,15 +18,13 @@ const moveNode = (state, action) => {
       structure: newState2
     }
   } else {
-		// direction is DOWN
+    // direction is DOWN
     const newState2 = insertNodeAfter(newState1, afterId, trial)
     return {
       ...state,
       structure: newState2
     }
   }
-
-  return state
 }
 
 export default moveNode

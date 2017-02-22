@@ -1,10 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { moveNode } from '../modules/design'
-import { moveOutside } from '../modules/design'
-import { moveInside } from '../modules/design'
-import { clickTrial } from '../modules/design'
-import { selectTrial } from '../modules/design'
+import { moveNode, moveOutside, moveInside, clickTrial, selectTrial } from '../modules/design'
 import Trial from './Trial'
 import Block from './Block'
 import Run from './Run'
@@ -55,36 +51,84 @@ export class DesignPane extends Component {
       return (
         <div className={'design_designPane_default'}>
           {
-					structure.map(x => {
-  if (x.level === 'trial') {
-    return <Trial key={x.id} selectMode={selectMode} id={x.id} screenshot={x.screenshot} selected={x.selected} condition={x.condition} clickTrial={onSelectTrial} />
-  }
-  if (x.level === 'block') {
-    return <Block key={x.id} selectMode={selectMode} id={x.id} color={x.color} name={x.name} children={x.children} clickTrial={onSelectTrial} />
-  }
-  if (x.level === 'run') {
-    return <Run key={x.id} selectMode={selectMode} id={x.id} color={x.color} name={x.name} children={x.children} clickTrial={onSelectTrial} />
-  }
-})
-				}
+          structure.map(x => {
+            if (x.level === 'trial') {
+              return <Trial
+                key={x.id}
+                selectMode={selectMode}
+                id={x.id}
+                screenshot={x.screenshot}
+                selected={x.selected}
+                condition={x.condition}
+                clickTrial={onSelectTrial} />
+            }
+            if (x.level === 'block') {
+              return <Block
+                key={x.id}
+                selectMode={selectMode}
+                id={x.id} color={x.color}
+                name={x.name}
+                children={x.children}
+                clickTrial={onSelectTrial} />
+            }
+            if (x.level === 'run') {
+              return <Run
+                key={x.id}
+                selectMode={selectMode}
+                id={x.id} color={x.color}
+                name={x.name}
+                children={x.children}
+                clickTrial={onSelectTrial} />
+            }
+          })
+        }
         </div>
       )
     } else {
       return (
         <div className={'design_designPane_default'}>
           {
-					structure.map(x => {
-  if (x.level === 'trial') {
-    return <Trial key={x.id} selectMode={selectMode} id={x.id} screenshot={x.screenshot} selected={x.selected} condition={x.condition} moveNode={onNodeMove} moveOutside={onMoveOutside} clickTrial={onClickTrial} />
-  }
-  if (x.level === 'block') {
-    return <Block key={x.id} selectMode={selectMode} id={x.id} color={x.color} name={x.name} children={x.children} moveNode={onNodeMove} moveOutside={onMoveOutside} moveInside={onMoveInside} clickTrial={onClickTrial} />
-  }
-  if (x.level === 'run') {
-    return <Run key={x.id} selectMode={selectMode} id={x.id} color={x.color} name={x.name} children={x.children} moveNode={onNodeMove} moveOutside={onMoveOutside} moveInside={onMoveInside} clickTrial={onClickTrial} />
-  }
-})
-				}
+          structure.map(x => {
+            if (x.level === 'trial') {
+              return <Trial
+                key={x.id}
+                selectMode={selectMode}
+                id={x.id}
+                screenshot={x.screenshot}
+                selected={x.selected}
+                condition={x.condition}
+                moveNode={onNodeMove}
+                moveOutside={onMoveOutside}
+                clickTrial={onClickTrial} />
+            }
+            if (x.level === 'block') {
+              return <Block
+                key={x.id}
+                selectMode={selectMode}
+                id={x.id}
+                color={x.color}
+                name={x.name}
+                children={x.children}
+                moveNode={onNodeMove}
+                moveOutside={onMoveOutside}
+                moveInside={onMoveInside}
+                clickTrial={onClickTrial} />
+            }
+            if (x.level === 'run') {
+              return <Run
+                key={x.id}
+                selectMode={selectMode}
+                id={x.id}
+                color={x.color}
+                name={x.name}
+                children={x.children}
+                moveNode={onNodeMove}
+                moveOutside={onMoveOutside}
+                moveInside={onMoveInside}
+                clickTrial={onClickTrial} />
+            }
+          })
+        }
         </div>
       )
     }

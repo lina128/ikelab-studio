@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import MagicWandImage from '../assets/auto-fix.png'
+import classNames from 'classnames'
 import './MagicWand.scss'
 
 export default class MagicWand extends Component {
   constructor (props) {
     super(props)
     this._onClick = this._onClick.bind(this)
+    this.state = { active: false }
   }
 
   static propTypes = {
@@ -15,12 +16,16 @@ export default class MagicWand extends Component {
   }
 
   _onClick () {
+    this.setState({ active: !this.state.active })
     this.props.onWandClick(this.props.id, this.props.content)
   }
 
   render () {
+    const isActive = this.state.active ? 'active' : 'inactive'
+    const classnames = classNames('design_magicWand_default', isActive)
+
     return (
-      <div className='design_magicWand_default' onClick={this._onClick} />
+      <div className={classnames} onClick={this._onClick} />
     )
   }
 }

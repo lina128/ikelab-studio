@@ -13,14 +13,17 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export class Trash extends Component {
+  static propTypes = {
+    onSelectMode: PropTypes.func
+  }
   render () {
     const { onSelectMode } = this.props
 
     return (
       <div className={'design_trash_default'} id={'trash_sele_1'} onClick={onSelectMode}>
         <img alt={'Trash'} style={{ display:'block' }} src={TrashcanImage} />
-				Trash
-			</div>
+        Trash
+      </div>
     )
   }
 }

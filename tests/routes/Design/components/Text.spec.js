@@ -1,14 +1,14 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import Text from 'routes/Design/components/frames/Text'
+import Text from 'routes/Design/elements/frames/Text'
 
-import { TEXT } from 'routes/Design/constants/field.constants'
+import text from 'routes/Design/elements/settings/text'
 
 function defaultSetting () {
   let setting = {}
 
-  for (let s in TEXT) {
-    setting[s] = TEXT[s].value
+  for (let s in text) {
+    setting[s] = text[s].value
   }
 
   return setting
@@ -58,29 +58,5 @@ describe('(Design/components/frames) Text', () => {
 
   it('Should render with color #000000.', () => {
     expect(_wrapper).to.have.style('color', '#000000')
-  })
-
-  it('Should render with center alignment.', () => {
-    expect(_wrapper).to.have.style('justify-content', 'center')
-    expect(_wrapper).to.have.style('align-items', 'center')
-  })
-
-  it('Should start the text on the top left with justify-content and align-items being flex-start.', () => {
-    _props = {
-      trial: {
-        id: 1,
-        type: 'TEXT',
-        setting: {
-          ...setting,
-          alignH: 'left',
-          alignV: 'top'
-        }
-      }
-    }
-
-    _wrapper.setProps(_props)
-
-    expect(_wrapper).to.have.style('justify-content', 'flex-start')
-    expect(_wrapper).to.have.style('align-items', 'flex-start')
   })
 })

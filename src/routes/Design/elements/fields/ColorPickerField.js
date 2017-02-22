@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import Textfield from 'react-mdl/lib/Textfield'
-import { inputStyle } from '../../constants'
+import { BlockPicker } from 'react-color'
 
-export default class InputField extends Component {
+export default class ColorPickerField extends Component {
   constructor (props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
@@ -12,13 +11,13 @@ export default class InputField extends Component {
     trialId: PropTypes.number.isRequired,
     fieldConstantKey: PropTypes.string.isRequired,
     fieldConstant: PropTypes.object.isRequired,
-	  fieldSetting: PropTypes.any.isRequired,
+    fieldSetting: PropTypes.any.isRequired,
     onChange: PropTypes.func.isRequired
   }
 
-  handleChange (event) {
+  handleChange (color) {
     const { onChange, trialId, fieldConstantKey } = this.props
-    onChange(trialId, { [fieldConstantKey]: event.target.value })
+    onChange(trialId, { [fieldConstantKey]: color.hex })
   }
 
   render () {
@@ -27,8 +26,7 @@ export default class InputField extends Component {
     return (
       <div>
         {fieldConstant.name}:
-				<Textfield style={{ width: inputStyle.sm }} value={fieldSetting} label='Text...' onChange={this.handleChange} />
-        {fieldConstant.hints}
+        <BlockPicker color={fieldSetting} onChange={this.handleChange} />
       </div>
     )
   }

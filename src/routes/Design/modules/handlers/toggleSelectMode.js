@@ -1,5 +1,4 @@
-import { removeNode } from '../utils/node'
-import { extend } from '../utils/node'
+import { removeNode, extend } from '../utils/node'
 
 const toggleSelectMode = (state, action) => {
   const selectMode = !state.selectMode

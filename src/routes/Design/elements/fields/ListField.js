@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import Menu from 'react-mdl-portal-menu/lib/Menu'
 import MenuItem from 'react-mdl-portal-menu/lib/MenuItem'
 import Button from 'react-mdl/lib/Button'
-import { btnStyle } from '../../constants'
 
 export default class ListField extends Component {
   constructor (props) {
@@ -15,7 +14,7 @@ export default class ListField extends Component {
     trialId: PropTypes.number.isRequired,
     fieldConstantKey: PropTypes.string.isRequired,
     fieldConstant: PropTypes.object.isRequired,
-	  fieldSetting: PropTypes.any.isRequired,
+    fieldSetting: PropTypes.any.isRequired,
     onChange: PropTypes.func.isRequired
   }
 
@@ -39,16 +38,16 @@ export default class ListField extends Component {
       menuItems.push()
     }
 
-    const btn = (<Button style={{ width: btnStyle.sm }} raised colored ripple>
+    const btn = (<Button style={{ width: '124px' }} raised colored ripple>
       {fieldSetting}
     </Button>)
 
     return (
       <div>
         {fieldConstant.name}:
-				<Menu target={btn} valign={'bottom'} align={'left'}>
-  {fieldConstant.options.map(this.renderOption)}
-				</Menu>
+        <Menu target={btn} valign={'bottom'} align={'left'}>
+          {fieldConstant.options.map(this.renderOption)}
+        </Menu>
       </div>
     )
   }

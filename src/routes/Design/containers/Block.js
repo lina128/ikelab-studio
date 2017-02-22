@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import flow from 'lodash/flow'
 import classNames from 'classnames'
-import { ItemTypes, Dimensions } from '../constants'
+import { ITEMTYPES, DIMENSIONS } from '../constants'
 import { DragSource, DropTarget } from 'react-dnd'
 import Trial from './Trial'
 import './Block.scss'
@@ -22,17 +22,23 @@ const blockSource = {
 const blockTarget = {
   hover (props, monitor, component) {
     if (monitor.getItem().level === 'trial' && props.children.length === 0) {
-			// drop trial into block
+      // drop trial into block
       props.moveInside(monitor.getItem().id, props.id)
     } else if (monitor.getItem().level === 'block') {
-			// drop block onto block
+      // drop block onto block
       const draggedId = monitor.getItem().id
       const droppedComponentPosition = ReactDOM.findDOMNode(component).getBoundingClientRect()
       const draggedComponentPosition = monitor.getSourceClientOffset()
       var direction
-      if (draggedComponentPosition.y < droppedComponentPosition.bottom && draggedComponentPosition.y > droppedComponentPosition.top) {
+      if (draggedComponentPosition.y <
+          droppedComponentPosition.bottom && draggedComponentPosition.y > droppedComponentPosition.top) {
         direction = 'UP'
-      } else if (draggedComponentPosition.y + Dimensions.TRIALHEIGHT < droppedComponentPosition.bottom && draggedComponentPosition.y + Dimensions.TRIALHEIGHT > droppedComponentPosition.top) {
+      } else if ((draggedComponentPosition.y +
+                  DIMENSIONS.TRIALHEIGHT) <
+                 droppedComponentPosition.bottom &&
+                 (draggedComponentPosition.y +
+                  DIMENSIONS.TRIALHEIGHT) >
+                 droppedComponentPosition.top) {
         direction = 'DOWN'
       }
       if (draggedId !== props.id && direction) {
@@ -51,7 +57,6 @@ function collectTarget (connect, monitor) {
 function collectSource (connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   }
 }
@@ -65,11 +70,24 @@ export class Block extends Component {
     branchStyle: PropTypes.string,
     children: PropTypes.array.isRequired,
     moveNode: PropTypes.func,
-    moveOutside: PropTypes.func
+    moveOutside: PropTypes.func,
+    connectDragSource: PropTypes.func.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
+    clickTrial: PropTypes.func.isRequired
   }
 
   render () {
-    const { connectDragSource, connectDragPreview, isDragging, connectDropTarget, selectMode, id, name, branchStyle, children, moveNode, moveOutside, moveInside, clickTrial } = this.props
+    const {
+      connectDragSource,
+      isDragging,
+      connectDropTarget,
+      selectMode,
+      name,
+      branchStyle,
+      children,
+      moveNode,
+      moveOutside,
+      clickTrial } = this.props
 
     const classnames = classNames('design_block_branch', branchStyle)
 
@@ -78,21 +96,60 @@ export class Block extends Component {
     for (let i = 0; i < children.length; i++) {
       if (children.length === 1) {
         blockTrials.push(
-          <Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} selected={children[i].selected} branchStyle={'design_trial_branch_single'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
-				)
+          <Trial
+            key={children[i].id}
+            selectMode={selectMode}
+            condition={children[i].condition}
+            id={children[i].id}
+            selected={children[i].selected}
+            branchStyle={'design_trial_branch_single'}
+            moveNode={moveNode}
+            moveOutside={moveOutside}
+            clickTrial={clickTrial} />
+        )
       } else {
         if (i === 0) {
           blockTrials.push(
-            <Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} screenshot={children[i].screenshot} selected={children[i].selected} branchStyle={'design_trial_branch_top'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
-					)
+            <Trial
+              key={children[i].id}
+              selectMode={selectMode}
+              condition={children[i].condition}
+              id={children[i].id}
+              screenshot={children[i].screenshot}
+              selected={children[i].selected}
+              branchStyle={'design_trial_branch_top'}
+              moveNode={moveNode}
+              moveOutside={moveOutside}
+              clickTrial={clickTrial} />
+          )
         } else if (i === children.length - 1) {
           blockTrials.push(
-            <Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} screenshot={children[i].screenshot} selected={children[i].selected} branchStyle={'design_trial_branch_bottom'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
-					)
+            <Trial
+              key={children[i].id}
+              selectMode={selectMode}
+              condition={children[i].condition}
+              id={children[i].id}
+              screenshot={children[i].screenshot}
+              selected={children[i].selected}
+              branchStyle={'design_trial_branch_bottom'}
+              moveNode={moveNode}
+              moveOutside={moveOutside}
+              clickTrial={clickTrial} />
+          )
         } else {
           blockTrials.push(
-            <Trial key={children[i].id} selectMode={selectMode} condition={children[i].condition} id={children[i].id} screenshot={children[i].screenshot} selected={children[i].selected} branchStyle={'design_trial_branch_middle'} moveNode={moveNode} moveOutside={moveOutside} clickTrial={clickTrial} />
-					)
+            <Trial
+              key={children[i].id}
+              selectMode={selectMode}
+              condition={children[i].condition}
+              id={children[i].id}
+              screenshot={children[i].screenshot}
+              selected={children[i].selected}
+              branchStyle={'design_trial_branch_middle'}
+              moveNode={moveNode}
+              moveOutside={moveOutside}
+              clickTrial={clickTrial} />
+          )
         }
       }
     }
@@ -133,15 +190,15 @@ export class Block extends Component {
                 {name}
               </div>
             </div>
-					)}
+          )}
           <div className={classnames} />
         </div>
-			)
+      )
     }
   }
 }
 
 export default flow(
-	DragSource(ItemTypes.BLOCK, blockSource, collectSource),
-	DropTarget([ItemTypes.BLOCK, ItemTypes.TRIAL], blockTarget, collectTarget)
+  DragSource(ITEMTYPES.BLOCK, blockSource, collectSource),
+  DropTarget([ITEMTYPES.BLOCK, ITEMTYPES.TRIAL], blockTarget, collectTarget)
 )(Block)

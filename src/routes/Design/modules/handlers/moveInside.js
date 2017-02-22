@@ -1,6 +1,4 @@
-import { findNode } from '../utils/node'
-import { removeNode } from '../utils/node'
-import { insertNodeIn } from '../utils/node'
+import { findNode, removeNode, insertNodeIn } from '../utils/node'
 
 const moveInside = (state, action) => {
   const id = action.payload.id

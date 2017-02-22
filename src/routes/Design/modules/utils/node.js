@@ -33,7 +33,7 @@ export const removeNode = (arr, id) => {
       if (newArr) {
         return [
           ...arr.slice(0, i),
-					{ ...arr[i], children: newArr },
+          { ...arr[i], children: newArr },
           ...arr.slice(i + 1)
         ]
       }
@@ -74,8 +74,8 @@ export const insertNodeBefore = (arr, id, node) => {
     if (arr[i].id === id) {
       return [
         ...arr.slice(0, i),
-				{ ...node },
-				{ ...arr[i] },
+        { ...node },
+        { ...arr[i] },
         ...arr.slice(i + 1)
       ]
     }
@@ -84,7 +84,7 @@ export const insertNodeBefore = (arr, id, node) => {
       if (newArr) {
         return [
           ...arr.slice(0, i),
-					{ ...arr[i], children: newArr },
+          { ...arr[i], children: newArr },
           ...arr.slice(i + 1)
         ]
       }
@@ -103,8 +103,8 @@ export const insertNodeAfter = (arr, id, node) => {
     if (arr[i].id === id) {
       return [
         ...arr.slice(0, i),
-				{ ...arr[i] },
-				{ ...node },
+        { ...arr[i] },
+        { ...node },
         ...arr.slice(i + 1)
       ]
     }
@@ -113,7 +113,7 @@ export const insertNodeAfter = (arr, id, node) => {
       if (newArr) {
         return [
           ...arr.slice(0, i),
-					{ ...arr[i], children: newArr },
+          { ...arr[i], children: newArr },
           ...arr.slice(i + 1)
         ]
       }
@@ -128,7 +128,7 @@ export const insertNodeIn = (arr, id, node) => {
     if (arr[i].id === id) {
       return [
         ...arr.slice(0, i),
-				{ ...arr[i], children: [node] },
+        { ...arr[i], children: [node] },
         ...arr.slice(i + 1)
       ]
     }
@@ -137,7 +137,7 @@ export const insertNodeIn = (arr, id, node) => {
       if (newArr) {
         return [
           ...arr.slice(0, i),
-					{ ...arr[i], children: newArr },
+          { ...arr[i], children: newArr },
           ...arr.slice(i + 1)
         ]
       }
@@ -173,7 +173,7 @@ export const extend = (arr, id, c) => {
 
             return [
               ...arr.slice(0, i),
-							{ ...arr[i], ...e },
+              { ...arr[i], ...e },
               ...arr.slice(i + 1)
             ]
           } else {
@@ -182,7 +182,7 @@ export const extend = (arr, id, c) => {
         } else {
           return [
             ...arr.slice(0, i),
-						{ ...arr[i], ...c },
+            { ...arr[i], ...c },
             ...arr.slice(i + 1)
           ]
         }
@@ -195,7 +195,7 @@ export const extend = (arr, id, c) => {
       if (newArr) {
         return [
           ...arr.slice(0, i),
-					{ ...arr[i], children: newArr },
+          { ...arr[i], children: newArr },
           ...arr.slice(i + 1)
         ]
       }

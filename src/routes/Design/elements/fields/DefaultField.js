@@ -5,7 +5,7 @@ export default class DefaultField extends Component {
     trialId: PropTypes.number.isRequired,
     fieldConstantKey: PropTypes.string.isRequired,
     fieldConstant: PropTypes.object.isRequired,
-	  fieldSetting: PropTypes.any.isRequired,
+    fieldSetting: PropTypes.any.isRequired,
     onChange: PropTypes.func.isRequired
   }
 
@@ -15,7 +15,7 @@ export default class DefaultField extends Component {
     return (
       <div>
         {fieldConstant.name}:
-				{fieldSetting}
+        {fieldSetting}
       </div>
     )
   }

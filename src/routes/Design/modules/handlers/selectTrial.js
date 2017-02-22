@@ -1,5 +1,4 @@
-import { findNode } from '../utils/node'
-import { extend } from '../utils/node'
+import { findNode, extend } from '../utils/node'
 
 const selectTrial = (state, action) => {
   const id = action.payload.id
@@ -29,8 +28,6 @@ const selectTrial = (state, action) => {
       ]
     }
   }
-
-  return state
 }
 
 export default selectTrial

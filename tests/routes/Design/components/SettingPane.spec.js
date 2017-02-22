@@ -3,13 +3,13 @@ import { shallow } from 'enzyme'
 import SettingPane from 'routes/Design/components/SettingPane'
 
 import { defaultType } from 'routes/Design/constants'
-import { DEFAULTMODULE } from 'routes/Design/constants/field.constants'
+import text from 'routes/Design/elements/settings/text'
 
 function defaultSetting () {
   let setting = {}
 
-  for (let s in DEFAULTMODULE) {
-    setting[s] = DEFAULTMODULE[s].value
+  for (let s in text) {
+    setting[s] = text[s].value
   }
 
   return setting

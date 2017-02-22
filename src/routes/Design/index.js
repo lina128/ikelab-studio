@@ -1,6 +1,6 @@
 import { injectReducer } from '../../store/reducers'
 import { UPDATE_STRUCTURE } from './modules/design'
-import undoable, { includeAction, excludeAction } from 'redux-undo'
+import undoable, { excludeAction } from 'redux-undo'
 
 export default (store) => ({
   path : 'design',
@@ -14,7 +14,7 @@ export default (store) => ({
       const Design = require('./components/Design').default
       const reducer = undoable(require('./modules/design').default, {
         limit: 10,
-      	filter: excludeAction(UPDATE_STRUCTURE)
+        filter: excludeAction(UPDATE_STRUCTURE)
       })
 
       /*  Add the reducer to the store on key 'design'  */

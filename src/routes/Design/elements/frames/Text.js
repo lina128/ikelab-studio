@@ -1,11 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import { Editor, EditorState, ContentState } from 'draft-js'
+import classnames from 'classnames'
 import './TEXT.scss'
 
 export default class Text extends Component {
   constructor (props) {
     super(props)
-    this.state = { editorState: EditorState.createWithContent(ContentState.createFromText(this.props.trial.setting.content)) }
+    this.state = {
+      editorState: EditorState.createWithContent(
+        ContentState.createFromText(
+          this.props.trial.setting.content)) }
     this.focus = () => this.refs.editor.focus()
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
@@ -24,7 +28,7 @@ export default class Text extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props != nextProps) {
+    if (this.props !== nextProps) {
       const newContentState = ContentState.createFromText(nextProps.trial.setting.content)
       const editorState = EditorState.push(this.state.editorState, newContentState)
       this.setState({ editorState })
@@ -34,40 +38,26 @@ export default class Text extends Component {
   render () {
     const { trial } = this.props
 
+    const classNames = classnames('design_frames_default', 'design_frames_Text_editor')
+
     const customStyle = {
       fontFamily: trial.setting.font,
       fontSize: trial.setting.fontSize + 'pt',
       fontWeight: trial.setting.fontWeight,
       color: trial.setting.fontColor,
-      justifyContent: 'center',
-      alignItems: 'center'
-    }
-
-    switch (trial.setting.alignH) {
-      case 'left':
-        customStyle.justifyContent = 'flex-start'
-        break
-      case 'right':
-        customStyle.justifyContent = 'flex-end'
-        break
-      default:
-        break
-    }
-
-    switch (trial.setting.alignV) {
-      case 'top':
-        customStyle.alignItems = 'flex-start'
-        break
-      case 'bottom':
-        customStyle.alignItems = 'flex-end'
-        break
-      default:
-        break
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+      lineHeight: 1.5
     }
 
     return (
-      <div className='design_Text_editor' style={customStyle} onClick={this.focus}>
-        <Editor editorState={this.state.editorState} onChange={this.handleChange} onBlur={this.handleBlur} placeholder='Enter some text...' ref='editor' />
+      <div className={classNames} style={customStyle} onClick={this.focus}>
+        <Editor
+          editorState={this.state.editorState}
+          onChange={this.handleChange}
+          onBlur={this.handleBlur}
+          placeholder='Enter some text...'
+          ref='editor' />
       </div>
     )
   }

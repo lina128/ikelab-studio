@@ -20,9 +20,10 @@ export const UPDATE_STRUCTURE = 'UPDATE_STRUCTURE'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const addTrial = () => {
+export const addTrial = (type) => {
   return {
-    type: ADD_TRIAL
+    type: ADD_TRIAL,
+    payload: { type }
   }
 }
 

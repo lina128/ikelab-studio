@@ -1,7 +1,15 @@
 .design_magicWand_default {
-	display: inline-block;
-	background-repeat: no-repeat;
-	width: 24px;
-	height: 24px;
-	background-image: url('../assets/auto-fix.png');
+  display: inline-block;
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-image: url('../assets/auto-fix.png');
+}
+
+.design_magicWand_default.active {
+  border: 1px solid grey;
+}
+
+.design_magicWand_default.inactive {
+  border: none;
 }
