@@ -1,8 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import InputField from 'routes/Design/components/fields/InputField'
+import InputField from 'routes/Design/elements/fields/InputField'
 
-describe('(Design/components/fields) InputField', () => {
+describe('(Design/elements/fields) InputField', () => {
   let _wrapper, _props
 
   beforeEach(() => {

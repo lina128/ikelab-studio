@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-class TrialWrapper extends Component {
+export class TrialWrapper extends Component {
   static propTypes = {
     trial: PropTypes.object,
     onChange: PropTypes.func.isRequired

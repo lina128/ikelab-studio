@@ -1,8 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import ColorPickerField from 'routes/Design/components/fields/ColorPickerField'
+import ColorPickerField from 'routes/Design/elements/fields/ColorPickerField'
 
-describe('(Design/components/fields) ColorPickerField', () => {
+describe('(Design/elements/fields) ColorPickerField', () => {
   let _wrapper, _props
 
   beforeEach(() => {

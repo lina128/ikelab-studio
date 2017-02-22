@@ -8,7 +8,7 @@ export const DIMENSIONS = {
   TRIALWIDTH: 60
 }
 
-export const COLORPALETTE = [
+export const COLOR_PALETTE = [
   '#3498db',
   '#e74c3c',
   '#1abc9c',

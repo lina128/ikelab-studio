@@ -19,7 +19,7 @@ describe('(Component) Header', () => {
   describe('Navigation links...', () => {
     it('Should render a Link to Home route', () => {
       expect(_wrapper.contains(
-        <IndexLink activeClassName='route--active' to='/'>
+        <IndexLink to='/' activeClassName='route--active' >
           Home
         </IndexLink>
       )).to.be.true
@@ -27,7 +27,7 @@ describe('(Component) Header', () => {
 
     it('Should render a Link to Design route', () => {
       expect(_wrapper.contains(
-        <Link activeClassName='route--active' to='/design'>
+        <Link to='/design' activeClassName='route--active' >
           Design
         </Link>
       )).to.be.true

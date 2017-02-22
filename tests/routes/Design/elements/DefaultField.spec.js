@@ -1,8 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import DefaultField from 'routes/Design/components/fields/DefaultField'
+import DefaultField from 'routes/Design/elements/fields/DefaultField'
 
-describe('(Design/components/fields) DefaultField', () => {
+describe('(Design/elements/fields) DefaultField', () => {
   let _wrapper, _props
 
   beforeEach(() => {

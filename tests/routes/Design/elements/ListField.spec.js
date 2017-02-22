@@ -1,8 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import ListField from 'routes/Design/components/fields/ListField'
+import ListField from 'routes/Design/elements/fields/ListField'
 
-describe('(Design/components/fields) ListField', () => {
+describe('(Design/elements/fields) ListField', () => {
   let _wrapper, _props
 
   beforeEach(() => {

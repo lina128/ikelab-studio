@@ -1,8 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import SettingPane from 'routes/Design/components/SettingPane'
-
-import { defaultType } from 'routes/Design/constants'
+import DefaultDisplay from 'routes/Design/elements/frames/DefaultDisplay'
 import text from 'routes/Design/elements/settings/text'
 
 function defaultSetting () {
@@ -15,7 +13,7 @@ function defaultSetting () {
   return setting
 }
 
-describe('(Design/components) SettingPane', () => {
+describe('(Design/elements/frames) DefaultDisplay', () => {
   let _wrapper, _props
   let setting = defaultSetting()
 
@@ -23,14 +21,12 @@ describe('(Design/components) SettingPane', () => {
     _props = {
       trial: {
         id: 1,
-        type: defaultType,
-        setting: setting,
-        screenshot: ''
-      },
-      onChange: () => {}
+        type: 'TEXT',
+        setting: setting
+      }
     }
 
-    _wrapper = shallow(<SettingPane {..._props} />)
+    _wrapper = shallow(<DefaultDisplay {..._props} />)
   })
 
   it('Should render as a div.', () => {

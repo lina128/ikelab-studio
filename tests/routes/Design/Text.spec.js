@@ -37,7 +37,7 @@ describe('(Design/components/frames) Text', () => {
   })
 
   it('Should have a class design_Text_editor.', () => {
-    expect(_wrapper.hasClass('design_Text_editor')).to.equal(true)
+    expect(_wrapper.hasClass('design_frames_Text_editor')).to.equal(true)
   })
 
   it('Should have an Editor.', () => {
