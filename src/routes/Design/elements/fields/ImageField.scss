@@ -10,10 +10,10 @@
   flex-grow: 0;
   justify-content: center;
   align-content: center;
+  position: relative;
   height: 200px;
   width: 300px;
   border: dashed 3px #9932cc;
-  background-image: url('../../assets/imageuploader-1.jpg')
 }
 
 .design_imageField_default img {
@@ -22,4 +22,18 @@
   max-height: 180px;
   width: auto;
   height: auto;
+}
+
+.design_imageField_label {
+  position: absolute;
+  left: 35px;
+  top: 65px;
+}
+
+.design_imageField_label p {
+  text-align: center;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(0,0,0,.26);
 }

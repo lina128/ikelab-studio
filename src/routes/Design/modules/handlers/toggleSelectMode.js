@@ -12,8 +12,7 @@ const toggleSelectMode = (state, action) => {
         ...state,
         selectMode: selectMode,
         selected: [],
-        selectId: action.payload.id,
-        message: 'Selecting trials...'
+        selectId: action.payload.id
       }
     }
   } else {
@@ -39,8 +38,7 @@ const toggleSelectMode = (state, action) => {
             selected: [],
             selectId: null,
             structure: newStructure,
-            entities: newEntities,
-            message: ''
+            entities: newEntities
           }
         } else if (action.payload.op === 'remove') {
           var newCurrentTrial = state.currentTrial
@@ -66,8 +64,7 @@ const toggleSelectMode = (state, action) => {
             selected: [],
             selectId: null,
             structure: newStructure,
-            entities: newEntities,
-            message: ''
+            entities: newEntities
           }
         }
       } else {
@@ -75,8 +72,7 @@ const toggleSelectMode = (state, action) => {
           ...state,
           selectMode: selectMode,
           selected: [],
-          selectId: null,
-          message: ''
+          selectId: null
         }
       }
     } else {

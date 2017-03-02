@@ -2,9 +2,15 @@ import React, { Component } from 'react'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Ribbon from '../containers/Ribbon'
-import NavBar from './NavBar'
-import TrialArea from '../containers/TrialArea'
-import Note from '../containers/Note'
+import FirstColumn from './FirstColumn'
+import SecondColumn from './SecondColumn'
+import ThirdColumn from './ThirdColumn'
+import ConditionPane from '../containers/ConditionPane'
+import DesignPane from '../containers/DesignPane'
+import TrialBar from '../containers/TrialBar'
+import TrialPane from '../containers/TrialPane'
+import SettingPane from '../containers/SettingPane'
+import Note from './Note'
 import './Design.scss'
 
 export class App extends Component {
@@ -13,8 +19,17 @@ export class App extends Component {
       <div className='design_container1'>
         <Ribbon />
         <div className='design_container2'>
-          <NavBar />
-          <TrialArea />
+          <FirstColumn>
+            <ConditionPane />
+            <DesignPane />
+          </FirstColumn>
+          <ThirdColumn>
+            <SettingPane />
+          </ThirdColumn>
+          <SecondColumn>
+            <TrialBar />
+            <TrialPane />
+          </SecondColumn>
         </div>
         <Note />
       </div>

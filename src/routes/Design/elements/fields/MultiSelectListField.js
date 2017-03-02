@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import Menu from 'react-mdl-extra/lib/Menu'
-import MenuItem from 'react-mdl-extra/lib/MenuItem'
-import Button from 'react-mdl/lib/Button'
+import MultiSelectField from 'react-mdl-extra/lib/MultiSelectField'
+import Option from 'react-mdl-extra/lib/Option'
 
-export default class ListField extends Component {
+export default class MultiSelectListField extends Component {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
@@ -19,29 +18,31 @@ export default class ListField extends Component {
   }
 
   handleClick (option) {
-    const { onChange, trialId, fieldConstantKey } = this.props
-    onChange(trialId, { [fieldConstantKey]: option })
+    if (option[option.length - 1]) {
+      const { onChange, trialId, fieldConstantKey } = this.props
+      onChange(trialId, { [fieldConstantKey]: option })
+    }
   }
 
   renderOption (option, ind, arr) {
     return (
-      <MenuItem key={ind} onClick={() => this.handleClick(option)}>{option}</MenuItem>
+      <Option key={ind} value={option}>{option}</Option>
     )
   }
 
   render () {
     const { fieldConstant, fieldSetting } = this.props
 
-    const btn = (<Button style={{ width: '124px' }} raised colored ripple>
-      {fieldSetting}
-    </Button>)
-
     return (
       <div>
         {fieldConstant.name}:
-        <Menu target={btn} align={'tl bl'}>
+        <MultiSelectField
+          label=''
+          editable
+          value={fieldSetting}
+          onChange={this.handleClick}>
           {fieldConstant.options.map(this.renderOption)}
-        </Menu>
+        </MultiSelectField>
         {fieldConstant.hints}
       </div>
     )

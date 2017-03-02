@@ -38,6 +38,14 @@ const IMAGE = {
     options: null,
     display: true,
     hints: 'px'
+  },
+  fadeIn: {
+    name: 'Fade In',
+    type: 'InputField',
+    value: '',
+    options: null,
+    display: true,
+    hints: 'ms'
   }
 }
 

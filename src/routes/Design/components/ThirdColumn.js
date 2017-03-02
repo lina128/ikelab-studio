@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import './CenterFrame.scss'
+import './ThirdColumn.scss'
 
-export default class CenterFrame extends Component {
+export default class ThirdColumn extends Component {
   static propTypes = {
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
@@ -11,7 +11,7 @@ export default class CenterFrame extends Component {
 
   render () {
     return (
-      <div className='design_centerFrame_default'>
+      <div className='design_thirdColumn_default'>
         {this.props.children}
       </div>)
   }

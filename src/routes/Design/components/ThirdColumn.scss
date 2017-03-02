@@ -1,0 +1,9 @@
+@import 'base';
+
+.design_thirdColumn_default {
+  float: right;
+  width: $thirdCol + px;
+  overflow: auto;
+  border: 1px solid grey;
+}
+

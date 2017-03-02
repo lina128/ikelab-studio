@@ -20,19 +20,19 @@ export default class Text extends Component {
     onChange: PropTypes.func.isRequired
   }
 
-  handleChange = (editorState) => this.setState({ editorState })
-
-  handleBlur () {
-    const { trial, onChange } = this.props
-    onChange(trial.id, { content: this.state.editorState.getCurrentContent().getPlainText() })
-  }
-
   componentWillReceiveProps (nextProps) {
     if (this.props !== nextProps) {
       const newContentState = ContentState.createFromText(nextProps.trial.setting.content)
       const editorState = EditorState.push(this.state.editorState, newContentState)
       this.setState({ editorState })
     }
+  }
+
+  handleChange = (editorState) => this.setState({ editorState })
+
+  handleBlur () {
+    const { trial, onChange } = this.props
+    onChange(trial.id, { content: this.state.editorState.getCurrentContent().getPlainText() })
   }
 
   render () {

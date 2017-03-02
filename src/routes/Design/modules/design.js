@@ -9,6 +9,9 @@ export const ADD_RUN = 'ADD_RUN'
 export const ADD_CONDITION = 'ADD_CONDITION'
 export const CHANGE_SETTING = 'CHANGE_SETTING'
 export const CLICK_TRIAL = 'CLICK_TRIAL'
+export const COPY_CURRENT_TRIAL = 'COPY_CURRENT_TRIAL'
+export const DELETE_CURRENT_TRIAL = 'DELETE_CURRENT_TRIAL'
+export const DELETE_TRIAL_CONDITION = 'DELETE_TRIAL_CONDITION'
 export const MOVE_INSIDE = 'MOVE_INSIDE'
 export const MOVE_NODE = 'MOVE_NODE'
 export const MOVE_OUTSIDE = 'MOVE_OUTSIDE'
@@ -56,6 +59,25 @@ export const clickTrial = (id) => {
   return {
     type: CLICK_TRIAL,
     payload: { id }
+  }
+}
+
+export const copyCurrentTrial = () => {
+  return {
+    type: COPY_CURRENT_TRIAL
+  }
+}
+
+export const deleteCurrentTrial = () => {
+  return {
+    type: DELETE_CURRENT_TRIAL
+  }
+}
+
+export const deleteTrialCondition = (id, condition) => {
+  return {
+    type: DELETE_TRIAL_CONDITION,
+    payload: { id, condition }
   }
 }
 
@@ -136,6 +158,9 @@ export const actions = {
   addCondition,
   clickTrial,
   changeSetting,
+  copyCurrentTrial,
+  deleteCurrentTrial,
+  deleteTrialCondition,
   moveInside,
   moveNode,
   moveOutside,
@@ -155,6 +180,9 @@ const ACTION_HANDLERS = {
   [ADD_CONDITION] : handle.addCondition,
   [CHANGE_SETTING] : handle.changeSetting,
   [CLICK_TRIAL] : handle.clickTrial,
+  [COPY_CURRENT_TRIAL] : handle.copyCurrentTrial,
+  [DELETE_CURRENT_TRIAL] : handle.deleteCurrentTrial,
+  [DELETE_TRIAL_CONDITION] : handle.deleteTrialCondition,
   [MOVE_INSIDE] : handle.moveInside,
   [MOVE_NODE] : handle.moveNode,
   [MOVE_OUTSIDE] : handle.moveOutside,
@@ -173,7 +201,6 @@ const initialState = {
   currentTrial: null,
   structure: [],
   entities: [],
-  message: '',
   selected: [],
   selectId: null,
   selectMode: false

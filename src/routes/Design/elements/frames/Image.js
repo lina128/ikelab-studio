@@ -37,6 +37,14 @@ export default class Image extends Component {
         break
     }
 
+    if (trial.setting.width) {
+      itemStyle.width = trial.setting.width + 'px'
+    }
+
+    if (trial.setting.height) {
+      itemStyle.height = trial.setting.height + 'px'
+    }
+
     return (
       <div className='design_frames_default' style={style} >
         <img src={trial.setting.image} style={itemStyle} />

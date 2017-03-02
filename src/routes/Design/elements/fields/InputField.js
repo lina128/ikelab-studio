@@ -4,7 +4,9 @@ import Textfield from 'react-mdl/lib/Textfield'
 export default class InputField extends Component {
   constructor (props) {
     super(props)
+    this.state = { value: this.props.fieldSetting }
     this.handleChange = this.handleChange.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
   }
 
   static propTypes = {
@@ -12,7 +14,14 @@ export default class InputField extends Component {
     fieldConstantKey: PropTypes.string.isRequired,
     fieldConstant: PropTypes.object.isRequired,
     fieldSetting: PropTypes.any.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    customStyle: PropTypes.object
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps !== this.props) {
+      this.setState({ value: nextProps.fieldSetting })
+    }
   }
 
   handleChange (event) {
@@ -20,13 +29,22 @@ export default class InputField extends Component {
     onChange(trialId, { [fieldConstantKey]: event.target.value })
   }
 
+  handleInputChange (event) {
+    this.setState({ value: event.target.value })
+  }
+
   render () {
-    const { fieldConstant, fieldSetting } = this.props
+    const { fieldConstant, customStyle } = this.props
 
     return (
       <div>
         {fieldConstant.name}:
-        <Textfield style={{ width: '80px' }} value={fieldSetting} label='' onChange={this.handleChange} />
+        <Textfield
+          style={customStyle || { width: '80px' }}
+          value={this.state.value}
+          label=''
+          onChange={this.handleInputChange}
+          onBlur={this.handleChange} />
         {fieldConstant.hints}
       </div>
     )

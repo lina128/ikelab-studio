@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { BlockPicker } from 'react-color'
+import Switch from 'react-mdl/lib/Switch'
 
-export default class ColorPickerField extends Component {
+export default class InputField extends Component {
   constructor (props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
@@ -15,9 +15,9 @@ export default class ColorPickerField extends Component {
     onChange: PropTypes.func.isRequired
   }
 
-  handleChange (color) {
+  handleChange (event) {
     const { onChange, trialId, fieldConstantKey } = this.props
-    onChange(trialId, { [fieldConstantKey]: color.hex })
+    onChange(trialId, { [fieldConstantKey]: event.target.checked })
   }
 
   render () {
@@ -26,7 +26,10 @@ export default class ColorPickerField extends Component {
     return (
       <div>
         {fieldConstant.name}:
-        <BlockPicker color={fieldSetting} onChange={this.handleChange} />
+        <Switch
+          ripple
+          checked={fieldSetting}
+          onChange={this.handleChange} />
         {fieldConstant.hints}
       </div>
     )

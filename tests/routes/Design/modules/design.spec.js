@@ -1,5 +1,6 @@
 import { addBlock, addCondition, addRun, addTrial,
-clickTrial, moveInside, moveNode, moveOutside,
+clickTrial, copyCurrentTrial, deleteCurrentTrial,
+moveInside, moveNode, moveOutside,
 renameCondition, selectTrial, toggleSelectMode,
 default as designReducer } from 'routes/Design/modules/design'
 import text from 'routes/Design/elements/settings/text'
@@ -27,7 +28,6 @@ describe('(Design/modules)', () => {
       currentTrial: null,
       structure: [],
       entities: [],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -64,7 +64,6 @@ describe('(Design/modules)', () => {
           }
         ],
         entities: [],
-        message: '',
         selected: [],
         selectId: null,
         selectMode: false
@@ -87,7 +86,6 @@ describe('(Design/modules)', () => {
         currentTrial: null,
         structure: [],
         entities: [],
-        message: '',
         selected: [],
         selectId: null,
         selectMode: false
@@ -110,7 +108,6 @@ describe('(Design/modules)', () => {
         currentTrial: null,
         structure: [],
         entities: [],
-        message: '',
         selected: [],
         selectId: null,
         selectMode: false
@@ -181,7 +178,6 @@ describe('(Design/modules)', () => {
         currentTrial: null,
         structure: [],
         entities: [],
-        message: '',
         selected: [],
         selectId: null,
         selectMode: false
@@ -204,7 +200,6 @@ describe('(Design/modules)', () => {
           }
         ],
         entities: [],
-        message: '',
         selected: [],
         selectId: null,
         selectMode: false
@@ -235,7 +230,6 @@ describe('(Design/modules)', () => {
             setting: trialSetting
           }
         ],
-        message: '',
         selected: [],
         selectId: null,
         selectMode: false
@@ -266,7 +260,89 @@ describe('(Design/modules)', () => {
             setting: trialSetting
           }
         ],
-        message: '',
+        selected: [],
+        selectId: null,
+        selectMode: false
+      })
+    })
+
+    it('Should handle COPY_CURRENT_TRIAL', () => {
+      const state1 = designReducer(undefined, {})
+      const state2 = designReducer(state1, addTrial(trialType))
+      const state3 = designReducer(state2, copyCurrentTrial())
+      expect(state3).to.deep.equal({
+        counter: 2,
+        condition: [],
+        currentTrial: 2,
+        structure: [
+          {
+            id: 1,
+            level: 'trial',
+            selected: false,
+            condition: [],
+            screenshot: null
+          },
+          {
+            id: 2,
+            level: 'trial',
+            selected: false,
+            condition: [],
+            screenshot: null
+          }
+        ],
+        entities: [
+          {
+            id: 1,
+            type: trialType,
+            setting: trialSetting
+          },
+          {
+            id: 2,
+            type: trialType,
+            setting: trialSetting
+          }
+        ],
+        selected: [],
+        selectId: null,
+        selectMode: false
+      })
+    })
+
+    it('Should handle DELETE_CURRENT_TRIAL', () => {
+      const state1 = designReducer(undefined, {})
+      const state2 = designReducer(state1, addTrial(trialType))
+      expect(state2).to.deep.equal({
+        counter: 1,
+        condition: [],
+        currentTrial: 1,
+        structure: [
+          {
+            id: 1,
+            level: 'trial',
+            selected: false,
+            condition: [],
+            screenshot: null
+          }
+        ],
+        entities: [
+          {
+            id: 1,
+            type: trialType,
+            setting: trialSetting
+          }
+        ],
+        selected: [],
+        selectId: null,
+        selectMode: false
+      })
+
+      const state3 = designReducer(state2, deleteCurrentTrial())
+      expect(state3).to.deep.equal({
+        counter: 1,
+        condition: [],
+        currentTrial: null,
+        structure: [],
+        entities: [],
         selected: [],
         selectId: null,
         selectMode: false
@@ -306,7 +382,6 @@ describe('(Design/modules)', () => {
             setting: trialSetting
           }
         ],
-        message: '',
         selected: [],
         selectId: null,
         selectMode: false
@@ -349,7 +424,6 @@ describe('(Design/modules)', () => {
             setting: trialSetting
           }
         ],
-        message: '',
         selected: [],
         selectId: null,
         selectMode: false
@@ -394,7 +468,6 @@ describe('(Design/modules)', () => {
           setting: trialSetting
         }
       ],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -434,7 +507,6 @@ describe('(Design/modules)', () => {
           setting: trialSetting
         }
       ],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -474,7 +546,6 @@ describe('(Design/modules)', () => {
           setting: trialSetting
         }
       ],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -505,7 +576,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entities: [],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -532,7 +602,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entities: [],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -559,7 +628,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entities: [],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -590,7 +658,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entities: [],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -617,7 +684,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entities: [],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -644,7 +710,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entities: [],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -684,7 +749,6 @@ describe('(Design/modules)', () => {
           setting: trialSetting
         }
       ],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -718,7 +782,6 @@ describe('(Design/modules)', () => {
           setting: trialSetting
         }
       ],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -741,7 +804,6 @@ describe('(Design/modules)', () => {
       currentTrial: null,
       structure: [],
       entities: [],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -761,7 +823,6 @@ describe('(Design/modules)', () => {
       currentTrial: null,
       structure: [],
       entities: [],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -778,7 +839,6 @@ describe('(Design/modules)', () => {
       currentTrial: null,
       structure: [],
       entities: [],
-      message: 'Selecting trials...',
       selected: [],
       selectId: 'testId',
       selectMode: true
@@ -792,7 +852,6 @@ describe('(Design/modules)', () => {
       currentTrial: null,
       structure: [],
       entities: [],
-      message: 'Selecting trials...',
       selected: [],
       selectId: 'testId',
       selectMode: true
@@ -806,7 +865,6 @@ describe('(Design/modules)', () => {
       currentTrial: null,
       structure: [],
       entities: [],
-      message: '',
       selected: [],
       selectId: null,
       selectMode: false
@@ -839,7 +897,6 @@ describe('(Design/modules)', () => {
           setting: trialSetting
         }
       ],
-      message: 'Selecting trials...',
       selected: [1],
       selectId: 'testId',
       selectMode: true
@@ -867,7 +924,6 @@ describe('(Design/modules)', () => {
           setting: trialSetting
         }
       ],
-      message: 'Selecting trials...',
       selected: [],
       selectId: 'testId',
       selectMode: true
@@ -894,7 +950,6 @@ describe('(Design/modules)', () => {
           setting: trialSetting
         }
       ],
-      message: 'Selecting trials...',
       selected: [1],
       selectId: 'testId',
       selectMode: true

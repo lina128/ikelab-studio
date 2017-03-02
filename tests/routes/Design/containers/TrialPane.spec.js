@@ -1,26 +1,26 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { TrialWrapper } from 'routes/Design/containers/TrialWrapper'
+import { TrialPane } from 'routes/Design/containers/TrialPane'
 
-describe('(Design/component) TrialWrapper', () => {
+describe('(Design/component) TrialPane', () => {
   let _wrapper, _props, _spy
 
   before(() => {
-    _spy = sinon.spy(TrialWrapper.prototype, 'componentDidUpdate')
+    _spy = sinon.spy(TrialPane.prototype, 'componentDidUpdate')
 
     _props = {
       trial: {},
-      onChange: el => el
+      handleChange: el => el
     }
-    _wrapper = mount(<TrialWrapper {..._props} />)
+    _wrapper = mount(<TrialPane {..._props} />)
   })
 
   after(() => {
     _spy.restore()
   })
 
-  it('Should render a CenterFrame.', () => {
-    expect(_wrapper.find('CenterFrame')).to.have.length(1)
+  it('Should render a Card.', () => {
+    expect(_wrapper.find('Card')).to.have.length(1)
   })
 
   it('Should call componentDidUpdate when _props has changed.', () => {
@@ -28,7 +28,7 @@ describe('(Design/component) TrialWrapper', () => {
 
     _wrapper.setProps({
       trial: { id: 1 },
-      onChange: el => el
+      handleChange: el => el
     })
 
     expect(_spy.calledOnce).to.be.true
