@@ -39,6 +39,11 @@ export const MENU_CONTENT = [
         name: 'Block',
         type: 'BLOCK',
         onClick: 'addBlock'
+      },
+      {
+        name: 'Run',
+        type: 'RUN',
+        onClick: 'addRun'
       }
     ]
   },

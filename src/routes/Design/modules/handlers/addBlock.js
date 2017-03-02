@@ -9,6 +9,12 @@ const addBlock = (state, action) => {
         id: newCounterB,
         level: 'block',
         name: 'Block' + newCounterB,
+        setting: {
+          randomized: false,
+          repeat: 0,
+          lockTop: false,
+          lockBottom: false
+        },
         children: []
       }
     ]

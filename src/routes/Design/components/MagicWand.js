@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import IconButton from 'react-mdl/lib/IconButton'
 import classNames from 'classnames'
 import './MagicWand.scss'
 
@@ -25,7 +26,7 @@ export default class MagicWand extends Component {
     const classnames = classNames('design_magicWand_default', isActive)
 
     return (
-      <div className={classnames} onClick={this._onClick} />
+      <IconButton className={classnames} name='format_paint' colored onClick={this._onClick} />
     )
   }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Button from 'react-mdl/lib/Button'
 import Menu from 'react-mdl-portal-menu/lib/Menu'
 import MenuItem from 'react-mdl-portal-menu/lib/MenuItem'
-import { addTrial, addBlock } from '../modules/design'
+import { addTrial, addBlock, addRun } from '../modules/design'
 import { MENU_CONTENT } from '../constants'
 import './ModuleLoader.scss'
 
@@ -14,6 +14,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     addBlock: () => {
       dispatch(addBlock())
+    },
+    addRun: () => {
+      dispatch(addRun())
     }
   }
 }

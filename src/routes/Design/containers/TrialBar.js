@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { createSelector } from 'reselect'
 import { connect } from 'react-redux'
 import { findNode } from '../modules/utils/node'
-import { deleteTrialCondition } from '../modules/design'
+import { removeTrialCondition } from '../modules/design'
 import { Chip } from 'react-mdl/lib/Chip'
 import './TrialBar.scss'
 
@@ -28,8 +28,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteTrialCondition: (id, condition) => {
-      dispatch(deleteTrialCondition(id, condition))
+    removeTrialCondition: (id, condition) => {
+      dispatch(removeTrialCondition(id, condition))
     }
   }
 }
@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch) => {
 export class TrialBar extends Component {
   static propTypes = {
     trial: PropTypes.object,
-    deleteTrialCondition: PropTypes.func.isRequired
+    removeTrialCondition: PropTypes.func.isRequired
   }
 
   render () {
@@ -47,7 +47,7 @@ export class TrialBar extends Component {
       <div className='design_trialBar_default'>
         {trial ? trial.condition.map((c, idx) => {
           return (<Chip key={idx} style={{ backgroundColor: c }} onClose={() => {
-            this.props.deleteTrialCondition(trial.id, { condition: [c] })
+            this.props.removeTrialCondition(trial.id, c)
           }} />)
         }) : ''}
       </div>

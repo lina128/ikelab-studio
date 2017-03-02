@@ -18,8 +18,8 @@ describe('(Component) MagicWand', () => {
     _wrapper = shallow(<MagicWand {..._props} />)
   })
 
-  it('Should render as a div.', () => {
-    expect(_wrapper.is('div')).to.equal(true)
+  it('Should contains a IconButton.', () => {
+    expect(_wrapper.find('IconButton')).to.exist
   })
 
   it('Should has class design_magicWand_default.', () => {
@@ -29,7 +29,7 @@ describe('(Component) MagicWand', () => {
   it('Should dispatch an action on click.', () => {
     _spies.dispatch.should.have.not.been.called
 
-    _wrapper.find('div').simulate('click')
+    _wrapper.find('IconButton').simulate('click')
     _spies.dispatch.should.have.been.called
     _spies.onWandClick.should.have.been.called
   })

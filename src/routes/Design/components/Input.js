@@ -13,7 +13,8 @@ export default class Input extends Component {
       PropTypes.number
     ]).isRequired,
     customStyle: PropTypes.object,
-    onBlur: PropTypes.func.isRequired
+    onBlur: PropTypes.func.isRequired,
+    disabled: PropTypes.bool
   }
 
   componentWillReceiveProps (nextProps) {
@@ -27,10 +28,16 @@ export default class Input extends Component {
   }
 
   render () {
-    const { customStyle, onBlur } = this.props
+    const { customStyle, onBlur, disabled } = this.props
 
     return (
-      <input style={customStyle} type='text' value={this.state.value} onChange={this.handleChange} onBlur={onBlur} />
+      <input
+        style={customStyle}
+        type='text'
+        value={this.state.value}
+        onChange={this.handleChange}
+        onBlur={onBlur}
+        disabled={disabled} />
     )
   }
 }

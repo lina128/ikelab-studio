@@ -23,15 +23,12 @@ const addCondition = (state, action) => {
   }
 
   if (color) {
-    let newCounterC = state.counter + 1
     return {
       ...state,
-      counter: newCounterC,
       condition: [
         ...state.condition,
         {
-          id: newCounterC,
-          name: 'Condition' + newCounterC,
+          name: 'NewCondition',
           color: color
         }
       ]

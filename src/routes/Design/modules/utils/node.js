@@ -207,24 +207,19 @@ export const extend = (arr, id, c) => {
 
 // only one key-value pair in c is allowed
 export const remove = (arr, id, c) => {
-  console.log(id)
-  console.log(c)
   if (!c) return arr
 
   const keys = Object.keys(c)
   if (keys.length === 0 || keys.length > 1) return arr
 
   const toBeDeleted = {}
-  console.log('node')
-console.log(c)
+
   if (Array.isArray(c[keys[0]])) {
     for (let j = 0; j < c[keys[0]].length; j++) {
-     // console.log(c[keys[0]])
-   //   console.log(c[keys[0]][j])
       toBeDeleted[c[keys[0]][j]] = true
     }
   }
-console.log(toBeDeleted)
+
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].id === id) {
       const oldC = arr[i][keys[0]]
@@ -263,7 +258,7 @@ console.log(toBeDeleted)
       }
     }
     if (arr[i].children) {
-      const newArr = extend(arr[i].children, id, c)
+      const newArr = remove(arr[i].children, id, c)
       if (newArr) {
         return [
           ...arr.slice(0, i),
@@ -275,4 +270,61 @@ console.log(toBeDeleted)
   }
 
   return null
+}
+
+export const removeAll = (arr, c) => {
+  if (!c) return arr
+
+  const keys = Object.keys(c)
+  if (keys.length === 0 || keys.length > 1) return arr
+
+  const toBeDeleted = {}
+
+  if (Array.isArray(c[keys[0]])) {
+    for (let j = 0; j < c[keys[0]].length; j++) {
+      toBeDeleted[c[keys[0]][j]] = true
+    }
+  }
+
+  let oldC, newC
+  let newArr = []
+
+  for (let i = 0; i < arr.length; i++) {
+    oldC = arr[i][keys[0]]
+
+    if (oldC) {
+      if (Array.isArray(oldC)) {
+        newC = []
+        for (let j = 0; j < oldC.length; j++) {
+          if (!toBeDeleted[oldC[j]]) {
+            newC.push(oldC[j])
+          }
+        }
+        if (oldC.length !== newC.length) {
+          const e = {
+            [keys[0]]: newC
+          }
+
+          newArr.push({ ...arr[i], ...e })
+        } else {
+          newArr.push({ ...arr[i] })
+        }
+      } else {
+        delete arr[i][keys[0]]
+
+        newArr.push({ ...arr[i] })
+      }
+    }
+
+    if (arr[i].children) {
+      const childArr = removeAll(arr[i].children, c)
+      if (newArr[i]) {
+        newArr[i].children = childArr
+      } else {
+        newArr.push({ ...arr[i], children: childArr })
+      }
+    }
+  }
+
+  return newArr
 }

@@ -13,7 +13,8 @@ describe('(Design/component) TrialBar', () => {
         selected: false,
         condition: ['#3498db'],
         screenshot: null
-      }
+      },
+      removeTrialCondition: el => el
     }
     _wrapper = shallow(<TrialBar {..._props} />)
   })

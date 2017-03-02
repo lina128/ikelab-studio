@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { moveNode, moveOutside, moveInside, clickTrial, selectTrial } from '../modules/design'
+import { moveNode, moveOutside, moveInside, clickTrial, selectTrial, toggleBlockRandomization } from '../modules/design'
 import Trial from './Trial'
 import Block from './Block'
 import Run from './Run'
@@ -29,6 +29,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onSelectTrial: (id) => {
       dispatch(selectTrial(id))
+    },
+    onToggleBlockRandomization: (id) => {
+      dispatch(toggleBlockRandomization(id))
     }
   }
 }
@@ -41,11 +44,13 @@ export class DesignPane extends Component {
     onMoveOutside: PropTypes.func.isRequired,
     onMoveInside: PropTypes.func.isRequired,
     onClickTrial: PropTypes.func.isRequired,
-    onSelectTrial: PropTypes.func.isRequired
+    onSelectTrial: PropTypes.func.isRequired,
+    onToggleBlockRandomization: PropTypes.func.isRequired
   }
 
   render () {
-    const { selectMode, structure, onNodeMove, onMoveOutside, onMoveInside, onClickTrial, onSelectTrial } = this.props
+    const { selectMode, structure, onNodeMove, onMoveOutside,
+           onMoveInside, onClickTrial, onSelectTrial, onToggleBlockRandomization } = this.props
 
     if (selectMode) {
       return (
@@ -68,6 +73,7 @@ export class DesignPane extends Component {
                 selectMode={selectMode}
                 id={x.id} color={x.color}
                 name={x.name}
+                setting={x.setting}
                 children={x.children}
                 clickTrial={onSelectTrial} />
             }
@@ -75,8 +81,9 @@ export class DesignPane extends Component {
               return <Run
                 key={x.id}
                 selectMode={selectMode}
-                id={x.id} color={x.color}
+                id={x.id}
                 name={x.name}
+                setting={x.setting}
                 children={x.children}
                 clickTrial={onSelectTrial} />
             }
@@ -108,10 +115,12 @@ export class DesignPane extends Component {
                 id={x.id}
                 color={x.color}
                 name={x.name}
+                setting={x.setting}
                 children={x.children}
                 moveNode={onNodeMove}
                 moveOutside={onMoveOutside}
                 moveInside={onMoveInside}
+                toggleBlockRandomization={onToggleBlockRandomization}
                 clickTrial={onClickTrial} />
             }
             if (x.level === 'run') {
@@ -119,12 +128,13 @@ export class DesignPane extends Component {
                 key={x.id}
                 selectMode={selectMode}
                 id={x.id}
-                color={x.color}
                 name={x.name}
+                setting={x.setting}
                 children={x.children}
                 moveNode={onNodeMove}
                 moveOutside={onMoveOutside}
                 moveInside={onMoveInside}
+                toggleBlockRandomization={onToggleBlockRandomization}
                 clickTrial={onClickTrial} />
             }
           })

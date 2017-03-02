@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import { ActionCreators } from 'redux-undo'
-import { addTrial, addBlock, addRun, addCondition } from '../modules/design'
+import { addCondition } from '../modules/design'
 import AddButton from '../components/AddButton'
 import Trash from './Trash'
 import ModuleLoader from './ModuleLoader'
@@ -31,15 +31,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTrial: () => {
-      dispatch(addTrial())
-    },
-    addBlock: () => {
-      dispatch(addBlock())
-    },
-    addRun: () => {
-      dispatch(addRun())
-    },
     addCondition: () => {
       dispatch(addCondition())
     },
@@ -54,7 +45,6 @@ const mapDispatchToProps = (dispatch) => {
 
 export class Ribbon extends Component {
   static propTypes = {
-    addRun: PropTypes.func.isRequired,
     addCondition: PropTypes.func.isRequired,
     undo: PropTypes.func,
     redo: PropTypes.func,
@@ -63,13 +53,12 @@ export class Ribbon extends Component {
   }
 
   render () {
-    const { addRun, addCondition, undo, redo, pastSteps, futureSteps } = this.props
+    const { addCondition, undo, redo, pastSteps, futureSteps } = this.props
 
     return (
       <div className={'design_ribbon_default'}>
         <div>
           <ModuleLoader />
-          <AddButton clickHandler={addRun} text={'Add Run'} />
           <AddButton clickHandler={addCondition} text={'Add Condition'} />
           <Trash />
           {pastSteps ? <Button raised accent ripple onClick={undo}>Undo</Button> : <Button raised>Undo</Button>}

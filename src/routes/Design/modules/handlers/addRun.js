@@ -9,6 +9,10 @@ const addRun = (state, action) => {
         id: newCounterR,
         level: 'run',
         name: 'Run' + newCounterR,
+        setting: {
+          randomized: false,
+          counterbalanced: false
+        },
         children: []
       }
     ]
