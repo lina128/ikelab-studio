@@ -1,7 +1,8 @@
 import { addBlock, addCondition, addRun, addTrial,
-clickTrial, copyCurrentTrial, deleteCurrentTrial,
-moveInside, moveNode, moveOutside, removeCondition,
-removeTrialCondition, renameCondition, selectTrial, toggleSelectMode,
+changeTrialSetting, changeBlockSetting, clickTrial, copyCurrentTrial,
+deleteCurrentTrial, moveInside, moveNode, moveOutside,
+removeCondition, removeTrialCondition, renameCondition,
+selectTrial, toggleSelectMode,
 default as designReducer } from 'routes/Design/modules/design'
 import text from 'routes/Design/elements/settings/text'
 
@@ -60,6 +61,12 @@ describe('(Design/modules)', () => {
             id: 1,
             level: 'block',
             name: 'Block1',
+            blockSetting: {
+              randomized: false,
+              repeat: 0,
+              lockTop: false,
+              lockBottom: false
+            },
             children: []
           }
         ],
@@ -110,66 +117,6 @@ describe('(Design/modules)', () => {
         selectId: null,
         selectMode: false
       })
-      const state4 = designReducer(state3, addCondition())
-      const state5 = designReducer(state4, addCondition())
-      const state6 = designReducer(state5, addCondition())
-      const state7 = designReducer(state6, addCondition())
-      const state8 = designReducer(state7, addCondition())
-      const state9 = designReducer(state8, addCondition())
-      const state10 = designReducer(state9, addCondition())
-      const state11 = designReducer(state10, addCondition())
-      const state12 = designReducer(state11, addCondition())
-      expect(state12).to.deep.equal({
-        counter: 0,
-        condition: [
-          {
-            name: 'NewCondition',
-            color: '#3498db'
-          },
-          {
-            name: 'NewCondition',
-            color: '#e74c3c'
-          },
-          {
-            name: 'NewCondition',
-            color: '#1abc9c'
-          },
-          {
-            name: 'NewCondition',
-            color: '#f39c12'
-          },
-          {
-            name: 'NewCondition',
-            color: '#446cb3'
-          },
-          {
-            name: 'NewCondition',
-            color: '#e08283'
-          },
-          {
-            name: 'NewCondition',
-            color: '#674172'
-          },
-          {
-            name: 'NewCondition',
-            color: '#1e824c'
-          },
-          {
-            name: 'NewCondition',
-            color: '#2c3e50'
-          },
-          {
-            name: 'NewCondition',
-            color: '#d2527f'
-          }
-        ],
-        currentTrial: null,
-        structure: [],
-        entities: [],
-        selected: [],
-        selectId: null,
-        selectMode: false
-      })
     })
 
     it('Should handle ADD_RUN', () => {
@@ -184,6 +131,10 @@ describe('(Design/modules)', () => {
             id: 1,
             level: 'run',
             name: 'Run1',
+            runSetting: {
+              randomized: false,
+              counterbalanced: false
+            },
             children: []
           }
         ],
@@ -215,7 +166,7 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           }
         ],
         selected: [],
@@ -249,12 +200,12 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           },
           {
             id: 2,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           }
         ],
         selected: [],
@@ -287,12 +238,12 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           },
           {
             id: 2,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           }
         ],
         selected: [],
@@ -319,7 +270,7 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           }
         ],
         selected: [],
@@ -353,12 +304,12 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           },
           {
             id: 2,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           }
         ],
         selected: [],
@@ -385,7 +336,7 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           }
         ],
         selected: [],
@@ -430,7 +381,7 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           }
         ],
         selected: [],
@@ -464,7 +415,7 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           }
         ],
         selected: [],
@@ -502,7 +453,7 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           }
         ],
         selected: [],
@@ -543,7 +494,7 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             type: trialType,
-            setting: trialSetting
+            trialSetting: trialSetting
           }
         ],
         selected: [],
@@ -578,12 +529,12 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         },
         {
           id: 2,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         }
       ],
       selected: [],
@@ -617,12 +568,12 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         },
         {
           id: 2,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         }
       ],
       selected: [],
@@ -656,12 +607,12 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         },
         {
           id: 2,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         }
       ],
       selected: [],
@@ -851,7 +802,7 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         }
       ],
       selected: [],
@@ -884,7 +835,7 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         }
       ],
       selected: [],
@@ -923,7 +874,7 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         }
       ],
       selected: [],
@@ -957,7 +908,7 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         }
       ],
       selected: [],
@@ -989,7 +940,7 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         }
       ],
       selected: [],
@@ -1021,7 +972,7 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         }
       ],
       selected: [],
@@ -1060,6 +1011,113 @@ describe('(Design/modules)', () => {
       currentTrial: null,
       structure: [],
       entities: [],
+      selected: [],
+      selectId: null,
+      selectMode: false
+    })
+  })
+
+  it('Should handle CHANGE_BLOCK_SETTING', () => {
+    const state1 = {
+      counter: 1,
+      condition: [],
+      currentTrial: null,
+      structure: [
+        {
+          id: 1,
+          level: 'block',
+          name: 'Block1',
+          blockSetting: {
+            randomized: false,
+            repeat: 0,
+            lockTop: false,
+            lockBottom: false
+          },
+          children: []
+        }
+      ],
+      entities: [],
+      selected: [],
+      selectId: null,
+      selectMode: false
+    }
+    const state2 = designReducer(state1, changeBlockSetting(1, { randomized: true }))
+
+    expect(state2).to.deep.equal({
+      counter: 1,
+      condition: [],
+      currentTrial: null,
+      structure: [
+        {
+          id: 1,
+          level: 'block',
+          name: 'Block1',
+          blockSetting: {
+            randomized: true,
+            repeat: 0,
+            lockTop: false,
+            lockBottom: false
+          },
+          children: []
+        }
+      ],
+      entities: [],
+      selected: [],
+      selectId: null,
+      selectMode: false
+    })
+  })
+
+  it('Should handle CHANGE_TRIAL_SETTING', () => {
+    const state1 = {
+      counter: 1,
+      condition: [],
+      currentTrial: 1,
+      structure: [
+        {
+          id: 1,
+          level: 'trial',
+          selected: false,
+          condition: [],
+          screenshot: null
+        }
+      ],
+      entities: [
+        {
+          id: 1,
+          type: trialType,
+          trialSetting: trialSetting
+        }
+      ],
+      selected: [],
+      selectId: null,
+      selectMode: false
+    }
+
+    const state2 = designReducer(state1, changeTrialSetting(1, { fontSize: '66' }))
+    expect(state2).to.deep.equal({
+      counter: 1,
+      condition: [],
+      currentTrial: 1,
+      structure: [
+        {
+          id: 1,
+          level: 'trial',
+          selected: false,
+          condition: [],
+          screenshot: null
+        }
+      ],
+      entities: [
+        {
+          id: 1,
+          type: trialType,
+          trialSetting: {
+            ...trialSetting,
+            fontSize: '66'
+          }
+        }
+      ],
       selected: [],
       selectId: null,
       selectMode: false
@@ -1113,7 +1171,8 @@ describe('(Design/modules)', () => {
     const state2 = designReducer(state1, toggleSelectMode('testId', { condition: ['#3498db'] }, 'extend'))
     const state3 = designReducer(state2, addTrial(trialType))
     const state4 = designReducer(state3, selectTrial(1))
-
+console.log(state4.entities[0].trialSetting)
+console.log(trialSetting)
     expect(state4).to.deep.equal({
       counter: 1,
       condition: [],
@@ -1131,14 +1190,14 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         }
       ],
       selected: [1],
       selectId: 'testId',
       selectMode: true
     })
-
+/*
     const state5 = designReducer(state4, selectTrial(1))
 
     expect(state5).to.deep.equal({
@@ -1158,7 +1217,7 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         }
       ],
       selected: [],
@@ -1184,12 +1243,12 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
-          setting: trialSetting
+          trialSetting: trialSetting
         }
       ],
       selected: [1],
       selectId: 'testId',
       selectMode: true
-    })
+    })*/
   })
 })

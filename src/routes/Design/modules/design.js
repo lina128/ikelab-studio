@@ -7,10 +7,13 @@ export const ADD_TRIAL = 'ADD_TRIAL'
 export const ADD_BLOCK = 'ADD_BLOCK'
 export const ADD_RUN = 'ADD_RUN'
 export const ADD_CONDITION = 'ADD_CONDITION'
-export const CHANGE_SETTING = 'CHANGE_SETTING'
+export const CHANGE_BLOCK_SETTING = 'CHANGE_BLOCK_SETTING'
+export const CHANGE_RUN_SETTING = 'CHANGE_RUN_SETTING'
+export const CHANGE_TRIAL_SETTING = 'CHANGE_TRIAL_SETTING'
 export const CLICK_TRIAL = 'CLICK_TRIAL'
 export const COPY_CURRENT_TRIAL = 'COPY_CURRENT_TRIAL'
 export const DELETE_CURRENT_TRIAL = 'DELETE_CURRENT_TRIAL'
+export const DELETE_NODE = 'DELETE_NODE'
 export const MOVE_INSIDE = 'MOVE_INSIDE'
 export const MOVE_NODE = 'MOVE_NODE'
 export const MOVE_OUTSIDE = 'MOVE_OUTSIDE'
@@ -18,7 +21,6 @@ export const REMOVE_CONDITION = 'REMOVE_CONDITION'
 export const REMOVE_TRIAL_CONDITION = 'DELETE_TRIAL_CONDITION'
 export const RENAME_CONDITION = 'RENAME_CONDITION'
 export const SELECT_TRIAL = 'SELECT_TRIAL'
-export const TOGGLE_BLOCK_RANDOMIZATION = 'TOGGLE_BLOCK_RANDOMIZATION'
 export const TOGGLE_SELECT_MODE = 'TOGGLE_SELECT_MODE'
 export const UPDATE_STRUCTURE = 'UPDATE_STRUCTURE'
 
@@ -50,9 +52,23 @@ export const addCondition = () => {
   }
 }
 
-export const changeSetting = (id, setting) => {
+export const changeBlockSetting = (id, setting) => {
   return {
-    type: CHANGE_SETTING,
+    type: CHANGE_BLOCK_SETTING,
+    payload: { id, setting }
+  }
+}
+
+export const changeRunSetting = (id, setting) => {
+  return {
+    type: CHANGE_RUN_SETTING,
+    payload: { id, setting }
+  }
+}
+
+export const changeTrialSetting = (id, setting) => {
+  return {
+    type: CHANGE_TRIAL_SETTING,
     payload: { id, setting }
   }
 }
@@ -73,6 +89,13 @@ export const copyCurrentTrial = () => {
 export const deleteCurrentTrial = () => {
   return {
     type: DELETE_CURRENT_TRIAL
+  }
+}
+
+export const deleteNode = (id) => {
+  return {
+    type: DELETE_NODE,
+    payload: { id }
   }
 }
 
@@ -125,13 +148,6 @@ export const selectTrial = (id) => {
   }
 }
 
-export const toggleBlockRandomization = (id) => {
-  return {
-    type: TOGGLE_BLOCK_RANDOMIZATION,
-    payload: { id }
-  }
-}
-
 export const toggleSelectMode = (id, setting, op) => {
   return {
     type: TOGGLE_SELECT_MODE,
@@ -173,9 +189,12 @@ export const actions = {
   addRun,
   addCondition,
   clickTrial,
-  changeSetting,
+  changeBlockSetting,
+  changeRunSetting,
+  changeTrialSetting,
   copyCurrentTrial,
   deleteCurrentTrial,
+  deleteNode,
   moveInside,
   moveNode,
   moveOutside,
@@ -183,7 +202,6 @@ export const actions = {
   removeTrialCondition,
   renameCondition,
   selectTrial,
-  toggleBlockRandomization,
   toggleSelectMode,
   updateStructure
 }
@@ -196,10 +214,13 @@ const ACTION_HANDLERS = {
   [ADD_BLOCK] : handle.addBlock,
   [ADD_RUN] : handle.addRun,
   [ADD_CONDITION] : handle.addCondition,
-  [CHANGE_SETTING] : handle.changeSetting,
+  [CHANGE_BLOCK_SETTING]: handle.changeBlockSetting,
+  [CHANGE_RUN_SETTING]: handle.changeRunSetting,
+  [CHANGE_TRIAL_SETTING] : handle.changeTrialSetting,
   [CLICK_TRIAL] : handle.clickTrial,
   [COPY_CURRENT_TRIAL] : handle.copyCurrentTrial,
   [DELETE_CURRENT_TRIAL] : handle.deleteCurrentTrial,
+  [DELETE_NODE]: handle.deleteNode,
   [MOVE_INSIDE] : handle.moveInside,
   [MOVE_NODE] : handle.moveNode,
   [MOVE_OUTSIDE] : handle.moveOutside,
@@ -207,7 +228,6 @@ const ACTION_HANDLERS = {
   [REMOVE_TRIAL_CONDITION] : handle.removeTrialCondition,
   [RENAME_CONDITION] : handle.renameCondition,
   [SELECT_TRIAL] : handle.selectTrial,
-  [TOGGLE_BLOCK_RANDOMIZATION]: handle.toggleBlockRandomization,
   [TOGGLE_SELECT_MODE] : handle.toggleSelectMode,
   [UPDATE_STRUCTURE] : handle.updateStructure
 }

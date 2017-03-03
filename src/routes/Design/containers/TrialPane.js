@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { createSelector } from 'reselect'
 import { findIndexById } from '../utils/findIndex'
-import { changeSetting, updateStructure } from '../modules/design'
+import { changeTrialSetting, updateStructure } from '../modules/design'
 import flow from 'lodash/flow'
 import { DropTarget } from 'react-dnd'
 import { connect } from 'react-redux'
@@ -34,7 +34,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleChange: (id, change) => {
-      dispatch(changeSetting(id, change))
+      dispatch(changeTrialSetting(id, change))
     },
     didChangeStructure: (id, screenshot) => {
       dispatch(updateStructure(id, { screenshot: screenshot }))

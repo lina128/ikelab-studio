@@ -6,6 +6,8 @@ import ListItem from '../components/ListItem'
 import Input from '../components/Input'
 import MagicWand from '../components/MagicWand'
 import IconButton from 'react-mdl/lib/IconButton'
+import Button from 'react-mdl/lib/Button'
+import { Dialog, DialogTitle, DialogContent, DialogActions } from 'react-mdl/lib/Dialog'
 import './ConditionPane.scss'
 
 const mapStateToProps = (state) => {
@@ -31,7 +33,11 @@ const mapDispatchToProps = (dispatch) => {
 export class ConditionPane extends Component {
   constructor (props) {
     super(props)
+    this.state = { dialogOpen: false }
     this.handleWandClick = this.handleWandClick.bind(this)
+    this.handleDialogOpen = this.handleDialogOpen.bind(this)
+    this.handleDialogClose = this.handleDialogClose.bind(this)
+    this.handleRemoveCondition = this.handleRemoveCondition.bind(this)
   }
 
   static propTypes = {
@@ -45,8 +51,21 @@ export class ConditionPane extends Component {
     this.props.onSelectMode(key, content, 'extend')
   }
 
+  handleDialogOpen (color) {
+    this.setState({ dialogOpen: true, color: color })
+  }
+
+  handleDialogClose () {
+    this.setState({ dialogOpen: false })
+  }
+
+  handleRemoveCondition () {
+    this.props.onRemoveCondition(this.state.color)
+    this.handleDialogClose()
+  }
+
   render () {
-    const { condition, onRenameCondition, onRemoveCondition } = this.props
+    const { condition, onRenameCondition } = this.props
     const conditionList = []
 
     for (let i = 0; i < condition.length; i++) {
@@ -61,7 +80,7 @@ export class ConditionPane extends Component {
             content={{ condition: [condition[i].color] }}
             onWandClick={this.handleWandClick}>Select trials</MagicWand>
           <IconButton name='delete' colored onClick={() => {
-            onRemoveCondition(condition[i].color)
+            this.handleDialogOpen(condition[i].color)
           }} />
         </ListItem>
       )
@@ -72,6 +91,16 @@ export class ConditionPane extends Component {
         <List customStyle={{ listStyle: 'none' }}>
           {conditionList}
         </List>
+        <Dialog open={this.state.dialogOpen}>
+          <DialogTitle>Delete condition</DialogTitle>
+          <DialogContent>
+            Are you sure?
+          </DialogContent>
+          <DialogActions>
+            <Button type='button' onClick={this.handleRemoveCondition}>Delete</Button>
+            <Button type='button' onClick={this.handleDialogClose}>Cancel</Button>
+          </DialogActions>
+        </Dialog>
       </div>
     )
   }

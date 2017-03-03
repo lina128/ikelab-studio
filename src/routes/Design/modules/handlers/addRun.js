@@ -9,7 +9,7 @@ const addRun = (state, action) => {
         id: newCounterR,
         level: 'run',
         name: 'Run' + newCounterR,
-        setting: {
+        runSetting: {
           randomized: false,
           counterbalanced: false
         },

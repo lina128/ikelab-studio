@@ -16,9 +16,7 @@ export const COLOR_PALETTE = [
   '#446cb3',
   '#e08283',
   '#674172',
-  '#1e824c',
-  '#2c3e50',
-  '#d2527f'
+  '#1e824c'
 ]
 
 export const MENU_CONTENT = [

@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { ITEMTYPES } from '../constants'
 import { DropTarget } from 'react-dnd'
 import Block from './Block'
+import IconButton from 'react-mdl/lib/IconButton'
 import IconToggle from 'react-mdl/lib/IconToggle'
 import './Run.scss'
 
@@ -20,17 +21,38 @@ function collectTarget (connect, monitor) {
 }
 
 export class Run extends Component {
+  constructor (props) {
+    super(props)
+    this.handleChangeRunRandomization = this.handleChangeRunRandomization.bind(this)
+    this.handleChangeRunCounterbalance = this.handleChangeRunCounterbalance.bind(this)
+    this.handleDeleteNode = this.handleDeleteNode.bind(this)
+  }
+
   static propTypes = {
     selectMode: PropTypes.bool.isRequired,
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    setting: PropTypes.object.isRequired,
+    runSetting: PropTypes.object.isRequired,
     children: PropTypes.array.isRequired,
     moveNode: PropTypes.func,
     moveOutside: PropTypes.func,
     moveInside: PropTypes.func,
+    changeRunSetting: PropTypes.func,
+    deleteNode: PropTypes.func,
     connectDropTarget: PropTypes.func.isRequired,
     clickTrial: PropTypes.func.isRequired
+  }
+
+  handleChangeRunRandomization () {
+    this.props.changeRunSetting(this.props.id, { randomized: !this.props.runSetting.randomized })
+  }
+
+  handleChangeRunCounterbalance () {
+    this.props.changeRunSetting(this.props.id, { counterbalanced: !this.props.runSetting.counterbalanced })
+  }
+
+  handleDeleteNode () {
+    this.props.deleteNode(this.props.id)
   }
 
   render () {
@@ -38,11 +60,12 @@ export class Run extends Component {
       connectDropTarget,
       selectMode,
       name,
-      setting,
+      runSetting,
       children,
       moveNode,
       moveOutside,
       moveInside,
+      deleteNode,
       clickTrial } = this.props
 
     const runBlocks = []
@@ -55,12 +78,13 @@ export class Run extends Component {
             selectMode={selectMode}
             id={children[i].id}
             name={children[i].name}
-            setting={children[i].setting}
+            blockSetting={children[i].blockSetting}
             branchStyle={'design_block_branch_single'}
             children={children[i].children}
             moveNode={moveNode}
             moveOutside={moveOutside}
             moveInside={moveInside}
+            deleteNode={deleteNode}
             clickTrial={clickTrial} />
         )
       } else {
@@ -71,12 +95,13 @@ export class Run extends Component {
               selectMode={selectMode}
               id={children[i].id}
               name={children[i].name}
-              setting={children[i].setting}
+              blockSetting={children[i].blockSetting}
               branchStyle={'design_block_branch_top'}
               children={children[i].children}
               moveNode={moveNode}
               moveOutside={moveOutside}
               moveInside={moveInside}
+              deleteNode={deleteNode}
               clickTrial={clickTrial} />
           )
         } else if (i === children.length - 1) {
@@ -86,12 +111,13 @@ export class Run extends Component {
               selectMode={selectMode}
               id={children[i].id}
               name={children[i].name}
-              setting={children[i].setting}
+              blockSetting={children[i].blockSetting}
               branchStyle={'design_block_branch_bottom'}
               children={children[i].children}
               moveNode={moveNode}
               moveOutside={moveOutside}
               moveInside={moveInside}
+              deleteNode={deleteNode}
               clickTrial={clickTrial} />
           )
         } else {
@@ -101,12 +127,13 @@ export class Run extends Component {
               selectMode={selectMode}
               id={children[i].id}
               name={children[i].name}
-              setting={children[i].setting}
+              blockSetting={children[i].blockSetting}
               branchStyle={'design_block_branch_middle'}
               children={children[i].children}
               moveNode={moveNode}
               moveOutside={moveOutside}
               moveInside={moveInside}
+              deleteNode={deleteNode}
               clickTrial={clickTrial} />
           )
         }
@@ -120,8 +147,8 @@ export class Run extends Component {
           <div className={'design_run_decorate'}>
             {name}
             <div className={'design_run_verticalDecoration'}>
-              <IconToggle name='autorenew' ripple checked={setting.randomized} disabled />
-              <IconToggle name='A/B' ripple checked={setting.counterbalanced} disabled />
+              <IconToggle name='autorenew' ripple checked={runSetting.randomized} disabled />
+              <IconToggle name='A/B' ripple checked={runSetting.counterbalanced} disabled />
               <IconToggle name='delete' ripple />
             </div>
           </div>
@@ -134,9 +161,14 @@ export class Run extends Component {
           <div className={'design_run_decorate'}>
             {name}
             <div className={'design_run_verticalDecoration'}>
-              <IconToggle name='autorenew' ripple checked={setting.randomized} />
-              <IconToggle name='A/B' ripple checked={setting.counterbalanced} />
-              <IconToggle name='delete' ripple />
+              <IconToggle
+                name='autorenew'
+                ripple
+                checked={runSetting.randomized}
+                onChange={this.handleChangeRunRandomization} />
+              <IconToggle name='A/B' ripple checked={runSetting.counterbalanced}
+                onChange={this.handleChangeRunCounterbalance} />
+              <IconButton name='delete' accent ripple onClick={this.handleDeleteNode} />
             </div>
           </div>
         </div>

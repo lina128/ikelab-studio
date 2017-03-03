@@ -5,7 +5,7 @@ import React, {
 import { createSelector } from 'reselect'
 import { connect } from 'react-redux'
 import { findIndexById } from '../utils/findIndex'
-import { changeSetting, copyCurrentTrial, deleteCurrentTrial } from '../modules/design'
+import { changeTrialSetting, copyCurrentTrial, deleteCurrentTrial } from '../modules/design'
 import * as Modules from '../elements/settings'
 import * as fields from '../elements/fields'
 import {
@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleChange: (id, change) => {
-      dispatch(changeSetting(id, change))
+      dispatch(changeTrialSetting(id, change))
     },
     handleCopy: () => {
       dispatch(copyCurrentTrial())
@@ -80,7 +80,7 @@ export class SettingPane extends Component {
 
     if (trial) {
       const fieldConstant = Modules[trial.type]
-      const fieldSetting = trial.setting
+      const fieldSetting = trial.trialSetting
 
       let Field
       let fieldList = []
@@ -221,14 +221,14 @@ export class SettingPane extends Component {
                 trialId={trial.id}
                 fieldConstantKey='note'
                 fieldConstant={noteConstant}
-                fieldSetting={trial.setting.note || ''}
+                fieldSetting={trial.trialSetting.note || ''}
                 onChange={handleChange}
                 customStyle={{ width: '180px' }} />
               <fields.InputField
                 trialId={trial.id}
                 fieldConstantKey='reminder'
                 fieldConstant={reminderConstant}
-                fieldSetting={trial.setting.reminder || ''}
+                fieldSetting={trial.trialSetting.reminder || ''}
                 onChange={handleChange}
                 customStyle={{ width: '250px' }} />
             </CardActions>
@@ -237,31 +237,31 @@ export class SettingPane extends Component {
                 trialId={trial.id}
                 fieldConstantKey='inputAutoTimedAdvance'
                 fieldConstant={inputConstant0}
-                fieldSetting={trial.setting.inputAutoTimedAdvance || ''}
+                fieldSetting={trial.trialSetting.inputAutoTimedAdvance || ''}
                 onChange={handleChange} />
               <fields.MultiSelectListField
                 trialId={trial.id}
                 fieldConstantKey='inputKeyAdvance'
                 fieldConstant={inputConstant1}
-                fieldSetting={trial.setting.inputKeyAdvance || []}
+                fieldSetting={trial.trialSetting.inputKeyAdvance || []}
                 onChange={handleChange} />
               <fields.MultiSelectListField
                 trialId={trial.id}
                 fieldConstantKey='inputErrorFeedbackKeyAdvance'
                 fieldConstant={inputConstant2}
-                fieldSetting={trial.setting.inputErrorFeedbackKeyAdvance || []}
+                fieldSetting={trial.trialSetting.inputErrorFeedbackKeyAdvance || []}
                 onChange={handleChange} />
               <fields.MultiSelectListField
                 trialId={trial.id}
                 fieldConstantKey='inputErrorFeedbackErrorKey'
                 fieldConstant={inputConstant3}
-                fieldSetting={trial.setting.inputErrorFeedbackErrorKey || []}
+                fieldSetting={trial.trialSetting.inputErrorFeedbackErrorKey || []}
                 onChange={handleChange} />
               <fields.InputField
                 trialId={trial.id}
                 fieldConstantKey='inputErrorFeedbackMessage'
                 fieldConstant={inputConstant4}
-                fieldSetting={trial.setting.inputErrorFeedbackMessage || ''}
+                fieldSetting={trial.trialSetting.inputErrorFeedbackMessage || ''}
                 onChange={handleChange}
                 customStyle={{ width: '250px' }} />
               <fields.SwitchField
@@ -269,30 +269,30 @@ export class SettingPane extends Component {
                 fieldConstantKey='inputErrorFeedbackAllowCorrection'
                 fieldConstant={inputConstant5}
                 fieldSetting={
-                         typeof trial.setting.inputErrorFeedbackAllowCorrection === 'undefined'
-                         ? false : trial.setting.inputErrorFeedbackAllowCorrection}
+                         typeof trial.trialSetting.inputErrorFeedbackAllowCorrection === 'undefined'
+                         ? false : trial.trialSetting.inputErrorFeedbackAllowCorrection}
                 onChange={handleChange} />
               <fields.SwitchField
                 trialId={trial.id}
                 fieldConstantKey='inputNextButton'
                 fieldConstant={inputConstant6}
                 fieldSetting={
-                         typeof trial.setting.inputNextButton === 'undefined'
-                         ? false : trial.setting.inputNextButton}
+                         typeof trial.trialSetting.inputNextButton === 'undefined'
+                         ? false : trial.trialSetting.inputNextButton}
                 onChange={handleChange} />
               <fields.SwitchField
                 trialId={trial.id}
                 fieldConstantKey='inputTextResponse'
                 fieldConstant={inputConstant7}
                 fieldSetting={
-                         typeof trial.setting.inputTextResponse === 'undefined'
-                         ? false : trial.setting.inputTextResponse}
+                         typeof trial.trialSetting.inputTextResponse === 'undefined'
+                         ? false : trial.trialSetting.inputTextResponse}
                 onChange={handleChange} />
               <fields.InputField
                 trialId={trial.id}
                 fieldConstantKey='inputSurveyResponse'
                 fieldConstant={inputConstant8}
-                fieldSetting={trial.setting.inputSurveyResponse ? trial.setting.inputSurveyResponse : ''}
+                fieldSetting={trial.trialSetting.inputSurveyResponse ? trial.trialSetting.inputSurveyResponse : ''}
                 onChange={handleChange}
                 customStyle={{ width: '300px' }} />
             </CardActions>

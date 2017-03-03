@@ -147,38 +147,39 @@ export const insertNodeIn = (arr, id, node) => {
   return null
 }
 
-// only one key-value pair in c is allowed
+// only one key-value pair in c is allowed,
+// the value in c can be a primitive type, array of size 1, or object
 export const extend = (arr, id, c) => {
   if (!c) return arr
 
   const keys = Object.keys(c)
   if (keys.length === 0 || keys.length > 1) return arr
 
+  const key = keys[0]
+  const isArray = Array.isArray(c[key])
+  const isObject = (typeof c[key] === 'object') && (c[key] !== null)
+
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].id === id) {
-      if (Object.keys(arr[i]).indexOf(keys[0]) > -1) {
-        if (Array.isArray(arr[i][keys[0]])) {
-          const reduced = []
-          for (let j = 0; j < c[keys[0]].length; j++) {
-            if (arr[i][keys[0]].indexOf(c[keys[0]][j]) === -1) {
-              reduced.push(c[keys[0]][j])
-            }
-          }
-          if (reduced.length > 0) {
-            const e = {
-              [keys[0]]: [
-                ...arr[i][keys[0]],
-                ...c[keys[0]] ]
-            }
+      if (Object.keys(arr[i]).indexOf(key) > -1) {
+        if (isArray) {
+          const oldC = arr[i][key]
 
+          if (oldC.indexOf(c[key][0]) < 0) {
             return [
               ...arr.slice(0, i),
-              { ...arr[i], ...e },
+              { ...arr[i], [key]: [ ...oldC, c[key][0] ] },
               ...arr.slice(i + 1)
             ]
           } else {
             return arr
           }
+        } else if (isObject) {
+          return [
+            ...arr.slice(0, i),
+            { ...arr[i], [key]: { ...arr[i][key], ...c[key] } },
+            ...arr.slice(i + 1)
+          ]
         } else {
           return [
             ...arr.slice(0, i),
@@ -206,46 +207,43 @@ export const extend = (arr, id, c) => {
 }
 
 // only one key-value pair in c is allowed
+// the value in c can be a primitive type, array of size 1, or object
 export const remove = (arr, id, c) => {
   if (!c) return arr
 
   const keys = Object.keys(c)
   if (keys.length === 0 || keys.length > 1) return arr
 
-  const toBeDeleted = {}
-
-  if (Array.isArray(c[keys[0]])) {
-    for (let j = 0; j < c[keys[0]].length; j++) {
-      toBeDeleted[c[keys[0]][j]] = true
-    }
-  }
+  const key = keys[0]
+  const isArray = Array.isArray(c[key])
+  const isObject = (typeof c[key] === 'object') && (c[key] !== null)
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].id === id) {
-      const oldC = arr[i][keys[0]]
-      if (Object.keys(arr[i]).indexOf(keys[0]) > -1) {
-        if (Array.isArray(oldC)) {
-          const newC = []
-          for (let j = 0; j < oldC.length; j++) {
-            if (!toBeDeleted[oldC[j]]) {
-              newC.push(oldC[j])
-            }
-          }
-          if (oldC.length !== newC.length) {
-            const e = {
-              [keys[0]]: newC
-            }
+      if (Object.keys(arr[i]).indexOf(key) > -1) {
+        if (isArray) {
+          const oldC = arr[i][key]
+          let idx = arr[i][key].indexOf(c[key][0])
 
+          if (idx > -1) {
             return [
               ...arr.slice(0, i),
-              { ...arr[i], ...e },
+              { ...arr[i], [key]: [ ...oldC.slice(0, idx), ...oldC.slice(idx + 1) ] },
               ...arr.slice(i + 1)
             ]
           } else {
             return arr
           }
+        } else if (isObject) {
+          delete arr[i][key][Object.keys(c[key])[0]]
+
+          return [
+            ...arr.slice(0, i),
+            { ...arr[i] },
+            ...arr.slice(i + 1)
+          ]
         } else {
-          delete arr[i][keys[0]]
+          delete arr[i][key]
 
           return [
             ...arr.slice(0, i),
@@ -272,57 +270,51 @@ export const remove = (arr, id, c) => {
   return null
 }
 
+// only one key-value pair in c is allowed
+// the value in c can be a primitive type, array of size 1, or object
 export const removeAll = (arr, c) => {
   if (!c) return arr
 
   const keys = Object.keys(c)
   if (keys.length === 0 || keys.length > 1) return arr
 
-  const toBeDeleted = {}
+  const key = keys[0]
+  const isArray = Array.isArray(c[key])
+  const isObject = (typeof c[key] === 'object') && (c[key] !== null)
 
-  if (Array.isArray(c[keys[0]])) {
-    for (let j = 0; j < c[keys[0]].length; j++) {
-      toBeDeleted[c[keys[0]][j]] = true
-    }
-  }
-
-  let oldC, newC
+  let oldC
   let newArr = []
 
   for (let i = 0; i < arr.length; i++) {
-    oldC = arr[i][keys[0]]
+    if (Object.keys(arr[i]).indexOf(key) > -1) {
+      if (isArray) {
+        oldC = arr[i][key]
+        let idx = arr[i][key].indexOf(c[key][0])
 
-    if (oldC) {
-      if (Array.isArray(oldC)) {
-        newC = []
-        for (let j = 0; j < oldC.length; j++) {
-          if (!toBeDeleted[oldC[j]]) {
-            newC.push(oldC[j])
-          }
-        }
-        if (oldC.length !== newC.length) {
-          const e = {
-            [keys[0]]: newC
-          }
-
-          newArr.push({ ...arr[i], ...e })
+        if (idx > -1) {
+          newArr.push({
+            ...arr[i],
+            [key]: [ ...oldC.slice(0, idx), ...oldC.slice(idx + 1) ]
+          })
         } else {
-          newArr.push({ ...arr[i] })
+          newArr.push(arr[i])
         }
+      } else if (isObject) {
+        delete arr[i][key][Object.keys(c[key])[0]]
+
+        newArr.push({ ...arr[i] })
       } else {
         delete arr[i][keys[0]]
 
         newArr.push({ ...arr[i] })
       }
+    } else {
+      newArr.push(arr[i])
     }
 
     if (arr[i].children) {
       const childArr = removeAll(arr[i].children, c)
-      if (newArr[i]) {
-        newArr[i].children = childArr
-      } else {
-        newArr.push({ ...arr[i], children: childArr })
-      }
+      newArr[i].children = childArr
     }
   }
 

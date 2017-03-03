@@ -33,7 +33,7 @@ const addTrial = (state, action) => {
         {
           id: newCounterT,
           type: action.payload.type,
-          setting: getSetting(action.payload.type)
+          trialSetting: getSetting(action.payload.type)
         }
       ]
     }
@@ -57,7 +57,7 @@ const addTrial = (state, action) => {
         {
           id: newCounterT,
           type: action.payload.type,
-          setting: getSetting(action.payload.type)
+          trialSetting: getSetting(action.payload.type)
         }
       ]
     }

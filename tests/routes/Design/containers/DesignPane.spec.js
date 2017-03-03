@@ -13,7 +13,8 @@ describe('(Design/container) DesignPane', () => {
       onMoveOutside: () => {},
       onMoveInside: () => {},
       onClickTrial: () => {},
-      onSelectTrial: () => {}
+      onSelectTrial: () => {},
+      onChangeBlockSetting: () => {}
     }
     _wrapper = shallow(<DesignPane {..._props} />)
   })

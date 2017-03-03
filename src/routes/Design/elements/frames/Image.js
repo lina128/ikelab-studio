@@ -11,7 +11,7 @@ export default class Image extends Component {
 
     let style = {}
 
-    switch (trial.setting.alignH) {
+    switch (trial.trialSetting.alignH) {
       case 'left':
         style.justifyContent = 'flex-start'
         break
@@ -25,7 +25,7 @@ export default class Image extends Component {
 
     let itemStyle = {}
 
-    switch (trial.setting.alignV) {
+    switch (trial.trialSetting.alignV) {
       case 'top':
         itemStyle.alignSelf = 'flex-start'
         break
@@ -37,17 +37,17 @@ export default class Image extends Component {
         break
     }
 
-    if (trial.setting.width) {
-      itemStyle.width = trial.setting.width + 'px'
+    if (trial.trialSetting.width) {
+      itemStyle.width = trial.trialSetting.width + 'px'
     }
 
-    if (trial.setting.height) {
-      itemStyle.height = trial.setting.height + 'px'
+    if (trial.trialSetting.height) {
+      itemStyle.height = trial.trialSetting.height + 'px'
     }
 
     return (
       <div className='design_frames_default' style={style} >
-        <img src={trial.setting.image} style={itemStyle} />
+        <img src={trial.trialSetting.image} style={itemStyle} />
       </div>
     )
   }

@@ -2,8 +2,6 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { shallow } from 'enzyme'
 import { SettingPane } from 'routes/Design/containers/SettingPane'
-
-import { defaultType } from 'routes/Design/constants'
 import text from 'routes/Design/elements/settings/text'
 
 function defaultSetting () {
@@ -26,8 +24,8 @@ describe('(Design/components) SettingPane', () => {
     _props = {
       trial: {
         id: 1,
-        type: defaultType,
-        setting: setting,
+        type: 'TEXT',
+        trialSetting: setting,
         screenshot: ''
       },
       ...bindActionCreators({
