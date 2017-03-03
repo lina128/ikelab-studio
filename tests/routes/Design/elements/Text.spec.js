@@ -23,7 +23,7 @@ describe('(Design/components/frames) Text', () => {
       trial: {
         id: 1,
         type: 'TEXT',
-        setting: setting,
+        trialSetting: setting,
         screenshot: ''
       },
       onChange: el => el

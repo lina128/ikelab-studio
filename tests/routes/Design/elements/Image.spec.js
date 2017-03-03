@@ -22,7 +22,7 @@ describe('(Design/elements/frames) Image', () => {
       trial: {
         id: 1,
         type: 'IMAGE',
-        setting: setting
+        trialSetting: setting
       }
     }
 
