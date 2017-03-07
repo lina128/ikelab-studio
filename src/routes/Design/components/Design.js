@@ -5,7 +5,6 @@ import Ribbon from '../containers/Ribbon'
 import FirstColumn from './FirstColumn'
 import SecondColumn from './SecondColumn'
 import ThirdColumn from './ThirdColumn'
-import ConditionPane from '../containers/ConditionPane'
 import DesignPane from '../containers/DesignPane'
 import TrialBar from '../containers/TrialBar'
 import TrialPane from '../containers/TrialPane'
@@ -20,7 +19,6 @@ export class App extends Component {
         <Ribbon />
         <div className='design_container2'>
           <FirstColumn>
-            <ConditionPane />
             <DesignPane />
           </FirstColumn>
           <ThirdColumn>

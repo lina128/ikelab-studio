@@ -6,6 +6,7 @@ import { addCondition } from '../modules/design'
 import AddButton from '../components/AddButton'
 import Trash from './Trash'
 import ModuleLoader from './ModuleLoader'
+import ConditionLoader from './ConditionLoader'
 import Button from 'react-mdl/lib/Button'
 import './Ribbon.scss'
 
@@ -44,6 +45,11 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export class Ribbon extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { cardOpen: 'none' }
+  }
+
   static propTypes = {
     addCondition: PropTypes.func.isRequired,
     undo: PropTypes.func,
@@ -59,6 +65,7 @@ export class Ribbon extends Component {
       <div className={'design_ribbon_default'}>
         <div>
           <ModuleLoader />
+          <ConditionLoader />
           <AddButton clickHandler={addCondition} text={'Add Condition'} />
           <Trash />
           {pastSteps ? <Button raised accent ripple onClick={undo}>Undo</Button> : <Button raised>Undo</Button>}

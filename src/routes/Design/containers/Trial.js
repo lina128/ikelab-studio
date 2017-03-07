@@ -4,6 +4,7 @@ import flow from 'lodash/flow'
 import classNames from 'classnames'
 import { ITEMTYPES, DIMENSIONS } from '../constants'
 import { DragSource, DropTarget } from 'react-dnd'
+import Badge from 'react-mdl/lib/Badge'
 import Thumbnail from '../components/Thumbnail'
 import Sidebar from '../components/Sidebar'
 import HorizontalBar from '../components/HorizontalBar'
@@ -115,11 +116,15 @@ export class Trial extends Component {
     if (selectMode) {
       return (
         <div className='design_trial_default'>
-          <Thumbnail
-            id={id}
-            screenshot={screenshot}
-            condition={condition}
-            onThumbnailClick={this.handleThumbnailClick} />
+          <Badge text={id}>
+            <div>
+              <Thumbnail
+                id={id}
+                screenshot={screenshot}
+                condition={condition}
+                onThumbnailClick={this.handleThumbnailClick} />
+            </div>
+          </Badge>
           <Sidebar>
             {conditionList}
           </Sidebar>
@@ -140,11 +145,15 @@ export class Trial extends Component {
         <div className='design_trial_default'>
           {connectDragSource(
             <div>
-              <Thumbnail
-                id={id}
-                screenshot={screenshot}
-                condition={condition}
-                onThumbnailClick={this.handleThumbnailClick} />
+              <Badge text={id}>
+                <div>
+                  <Thumbnail
+                    id={id}
+                    screenshot={screenshot}
+                    condition={condition}
+                    onThumbnailClick={this.handleThumbnailClick} />
+                </div>
+              </Badge>
               <Sidebar>
                 {conditionList}
               </Sidebar>

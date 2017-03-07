@@ -16,6 +16,7 @@ export class Trash extends Component {
   static propTypes = {
     onSelectMode: PropTypes.func
   }
+
   render () {
     const { onSelectMode } = this.props
 

@@ -1,10 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Button from 'react-mdl/lib/Button'
-import Menu from 'react-mdl-portal-menu/lib/Menu'
-import MenuItem from 'react-mdl-portal-menu/lib/MenuItem'
-import { addTrial, addBlock, addRun } from '../modules/design'
+import { Dialog, DialogTitle, DialogContent, DialogActions } from 'react-mdl/lib/Dialog'
+import Menu from 'react-mdl-extra/lib/Menu'
+import MenuItem from 'react-mdl-extra/lib/MenuItem'
+import { addTrial, addBlock, addRun, addBlockTrials, addWizard } from '../modules/design'
 import { MENU_CONTENT } from '../constants'
+import BlockBuild from './BlockBuild'
+import * as wizards from '../elements/wizards'
 import './ModuleLoader.scss'
 
 const mapDispatchToProps = (dispatch) => {
@@ -17,6 +20,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     addRun: () => {
       dispatch(addRun())
+    },
+    addBlockTrials: (block, trials) => {
+      dispatch(addBlockTrials(block, trials))
+    },
+    addWizard: (type, wizard) => {
+      dispatch(addWizard(type, wizard))
     }
   }
 }
@@ -24,23 +33,96 @@ const mapDispatchToProps = (dispatch) => {
 export class ModuleLoader extends Component {
   constructor (props) {
     super(props)
-
+    this.state = { dialogOpen: false }
     this.renderOptions = this.renderOptions.bind(this)
+    this.openWizard = this.openWizard.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleBuild = this.handleBuild.bind(this)
+    this.handleDialogClose = this.handleDialogClose.bind(this)
+  }
+
+  static propTypes = {
+    addTrial: PropTypes.func.isRequired,
+    addBlock: PropTypes.func.isRequired,
+    addRun: PropTypes.func.isRequired,
+    addBlockTrials: PropTypes.func.isRequired,
+    addWizard: PropTypes.func.isRequired
+  }
+
+  handleDialogClose () {
+    this.setState({ dialogOpen: false })
+  }
+
+  openWizard (type, name) {
+    this.setState({ dialogOpen: true, type: type, name: name, setting: {} })
+  }
+
+  handleChange (id, setting) {
+    this.setState({
+      ...this.state,
+      setting: {
+        ...this.state.setting,
+        ...setting
+      }
+    })
+  }
+
+  handleBuild () {
+    const wizard = wizards[this.state.type](this.state.setting)
+    if (wizard.error) {
+      this.setState({
+        ...this.state,
+        error: wizard.error
+      })
+    } else {
+      this.props.addBlockTrials(wizard.block, wizard.trials)
+      this.props.addWizard(this.state.type, this.state.setting)
+      this.handleDialogClose()
+    }
   }
 
   renderOptions (arr, options, lvl) {
     if (!options) return
 
     for (let i = 0; i < options.length; i++) {
-      arr.push(<MenuItem
-        key={options[i].name}
-        onClick={() => {
-          this.props[options[i].onClick](options[i].type)
-        }}><span
-          className={'design_moduleLoader_option_lvl' + lvl}>
-          {options[i].name}</span></MenuItem>)
-      if (options[i].children) {
-        this.renderOptions(arr, options[i].children, (lvl + 1))
+      if (options[i].onClick) {
+        if (typeof this.props[options[i].onClick] === 'function') {
+          // use functions from mapDispatchToProps
+          arr.push(<MenuItem key={options[i].name} onClick={() => { this.props[options[i].onClick](options[i].type) }}>
+            <span className={'design_moduleLoader_option_lvl' + lvl}>
+              {options[i].name}
+            </span></MenuItem>)
+          if (options[i].children) {
+            this.renderOptions(arr, options[i].children, (lvl + 1))
+          }
+        } else if (typeof this[options[i].onClick] === 'function') {
+          // use functions from ModuleLoader
+          arr.push(<MenuItem
+            key={options[i].name}
+            onClick={() => { this[options[i].onClick](options[i].type, options[i].name) }}>
+            <span className={'design_moduleLoader_option_lvl' + lvl}>
+              {options[i].name}
+            </span></MenuItem>)
+          if (options[i].children) {
+            this.renderOptions(arr, options[i].children, (lvl + 1))
+          }
+        } else {
+          arr.push(<MenuItem key={options[i].name} onClick={() => {}}>
+            <span className={'design_moduleLoader_option_lvl' + lvl}>
+              {options[i].name}
+            </span></MenuItem>)
+          if (options[i].children) {
+            this.renderOptions(arr, options[i].children, (lvl + 1))
+          }
+        }
+      } else {
+        arr.push(<MenuItem key={options[i].name}>
+          <span className={'design_moduleLoader_option_lvl' + lvl}>
+            {options[i].name}
+          </span></MenuItem>)
+        if (options[i].children) {
+          this.renderOptions(arr, options[i].children, (lvl + 1))
+        }
       }
     }
   }
@@ -54,9 +136,25 @@ export class ModuleLoader extends Component {
     </Button>)
 
     return (
-      <Menu target={btn} valign={'bottom'} align={'left'}>
-        {menuItems}
-      </Menu>)
+      <div className='design_moduleLoader_default'>
+        <Menu target={btn} align={'tl bl'}>
+          {menuItems}
+        </Menu>
+        <Dialog style={{ width: '800px', maxHeight: window.innerHeight - 50 + 'px' }} open={this.state.dialogOpen}>
+          <DialogTitle>
+            Block Build - {this.state.name}
+          </DialogTitle>
+          <DialogContent>
+            <BlockBuild type={this.state.type} onChange={this.handleChange} dialogOpen={this.state.dialogOpen} />
+          </DialogContent>
+          <DialogActions>
+            <Button type='button' onClick={this.handleBuild}>Build</Button>
+            <Button type='button' onClick={this.handleDialogClose}>Cancel</Button>
+            {this.state.error ? <Button accent>{this.state.error}</Button> : null}
+          </DialogActions>
+        </Dialog>
+      </div>
+    )
   }
 }
 

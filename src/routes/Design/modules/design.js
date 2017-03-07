@@ -5,8 +5,10 @@ import * as handle from './handlers'
 // ------------------------------------
 export const ADD_TRIAL = 'ADD_TRIAL'
 export const ADD_BLOCK = 'ADD_BLOCK'
+export const ADD_BLOCK_TRIALS = 'ADD_BLOCK_TRIALS'
 export const ADD_RUN = 'ADD_RUN'
 export const ADD_CONDITION = 'ADD_CONDITION'
+export const ADD_WIZARD = 'ADD_WIZARD'
 export const CHANGE_BLOCK_SETTING = 'CHANGE_BLOCK_SETTING'
 export const CHANGE_RUN_SETTING = 'CHANGE_RUN_SETTING'
 export const CHANGE_TRIAL_SETTING = 'CHANGE_TRIAL_SETTING'
@@ -40,6 +42,13 @@ export const addBlock = () => {
   }
 }
 
+export const addBlockTrials = (block, trials) => {
+  return {
+    type: ADD_BLOCK_TRIALS,
+    payload: { block, trials }
+  }
+}
+
 export const addRun = () => {
   return {
     type: ADD_RUN
@@ -49,6 +58,13 @@ export const addRun = () => {
 export const addCondition = () => {
   return {
     type: ADD_CONDITION
+  }
+}
+
+export const addWizard = (type, wizard) => {
+  return {
+    type: ADD_WIZARD,
+    payload: { type, wizard }
   }
 }
 
@@ -186,8 +202,10 @@ export const doubleAsync = () => {
 export const actions = {
   addTrial,
   addBlock,
+  addBlockTrials,
   addRun,
   addCondition,
+  addWizard,
   clickTrial,
   changeBlockSetting,
   changeRunSetting,
@@ -212,8 +230,10 @@ export const actions = {
 const ACTION_HANDLERS = {
   [ADD_TRIAL] : handle.addTrial,
   [ADD_BLOCK] : handle.addBlock,
+  [ADD_BLOCK_TRIALS] : handle.addBlockTrials,
   [ADD_RUN] : handle.addRun,
   [ADD_CONDITION] : handle.addCondition,
+  [ADD_WIZARD] : handle.addWizard,
   [CHANGE_BLOCK_SETTING]: handle.changeBlockSetting,
   [CHANGE_RUN_SETTING]: handle.changeRunSetting,
   [CHANGE_TRIAL_SETTING] : handle.changeTrialSetting,
@@ -243,7 +263,8 @@ const initialState = {
   entities: [],
   selected: [],
   selectId: null,
-  selectMode: false
+  selectMode: false,
+  wizard: []
 }
 export default function designReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

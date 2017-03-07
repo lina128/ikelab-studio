@@ -1,6 +1,11 @@
 .design_horizontalBar_default {
-	width: 12px;
-	height: 8px;
-	margin: 2px;
-	backgroundColor: black;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: 2px;
+  backgroundColor: black;
+}
+
+.design_horizontalBar_default:first-child {
+  margin-top: 15px;
 }

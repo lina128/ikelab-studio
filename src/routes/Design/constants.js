@@ -64,6 +64,11 @@ export const MENU_CONTENT = [
     name: 'Complex Module (Multiple Frames & Blocks)',
     children: [
       {
+        name: 'Image Block',
+        type: 'IMAGE_BLOCK',
+        onClick: 'openWizard'
+      },
+      {
         name: 'IAT',
         type: 'IAT',
         onClick: 'addTrial'
@@ -76,3 +81,6 @@ export const MENU_CONTENT = [
     ]
   }
 ]
+
+export const UPLOAD_PRESET = 'xcdgygdr'
+export const UPLOAD_URL = 'https://api.cloudinary.com/v1_1/ikelabrepo/image/upload'

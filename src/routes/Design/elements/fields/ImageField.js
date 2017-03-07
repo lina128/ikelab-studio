@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Dropzone from 'react-dropzone'
 import Textfield from 'react-mdl/lib/Textfield'
 import Button from 'react-mdl/lib/Button'
-import ImageLibrary from '../../containers/ImageLibrary'
+import { showMessage, hideMessage } from '../../utils/message'
 import superagent from 'superagent'
 import './ImageField.scss'
 
@@ -12,7 +12,7 @@ const UPLOAD_URL = 'https://api.cloudinary.com/v1_1/ikelabrepo/image/upload'
 export default class ImageField extends Component {
   constructor (props) {
     super(props)
-    this.state = { value: '', openDialog: false }
+    this.state = { value: '' }
     this.handleImageUpload = this.handleImageUpload.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -27,25 +27,13 @@ export default class ImageField extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps !== this.props) {
-      this.setState({
-        ...this.state,
-        value: '' })
+    if (nextProps !== this.props || nextProps.dialogOpen === false) {
+      this.setState({ value: '' })
     }
   }
 
-  showMessage (message) {
-    document.getElementById('messageBox').innerHTML = message
-  }
-
-  hideMessage () {
-    document.getElementById('messageBox').innerHTML = ''
-  }
-
   handleImageUpload (acceptedFiles) {
-    this.setState({
-      ...this.state,
-      value: '' })
+    this.setState({ value: '' })
     superagent.post(UPLOAD_URL)
       .field('upload_preset', UPLOAD_PRESET)
       .field('file', acceptedFiles[0])
@@ -53,8 +41,8 @@ export default class ImageField extends Component {
       .end((err, response) => {
         if (err || response.body.error) {
           let message = response.body.error ? response.body.error.message : 'Image upload failed. Please try again.'
-          this.showMessage(message)
-          setTimeout(this.hideMessage, 2000)
+          showMessage(message)
+          setTimeout(hideMessage, 2000)
         } else {
           if (response.body.secure_url) {
             this.handleChange(response.body.secure_url)
@@ -113,7 +101,6 @@ export default class ImageField extends Component {
           value={this.state.value}
         />
         <Button raised ripple>Or pick one from your library</Button>
-        <ImageLibrary />
         {fieldConstant.hints}
       </div>
     )

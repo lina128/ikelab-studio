@@ -1,4 +1,4 @@
-import { addBlock, addCondition, addRun, addTrial,
+import { addBlock, addBlockTrials, addCondition, addRun, addTrial,
 changeTrialSetting, changeBlockSetting, clickTrial, copyCurrentTrial,
 deleteCurrentTrial, moveInside, moveNode, moveOutside,
 removeCondition, removeTrialCondition, renameCondition,
@@ -71,6 +71,70 @@ describe('(Design/modules)', () => {
           }
         ],
         entities: [],
+        selected: [],
+        selectId: null,
+        selectMode: false
+      })
+    })
+
+    it('Should handle ADD_BLOCK_TRIALS', () => {
+      const state1 = designReducer(undefined, {})
+      const state2 = designReducer(state1, addBlockTrials({ setting: [] }, [
+        {
+          type: 'TEXT',
+          setting: trialSetting
+        },
+        {
+          type: 'TEXT',
+          setting: { font: 66 }
+        }
+      ]))
+
+      expect(state2).to.deep.equal({
+        counter: 3,
+        condition: [],
+        currentTrial: null,
+        structure: [
+          {
+            id: 1,
+            level: 'block',
+            name: 'Block1',
+            blockSetting: {
+              randomized: false,
+              repeat: 0,
+              lockTop: false,
+              lockBottom: false
+            },
+            children: [
+              {
+                id: 2,
+                level: 'trial',
+                selected: false,
+                condition: [],
+                screenshot: null
+              },
+              {
+                id: 3,
+                level: 'trial',
+                selected: false,
+                condition: [],
+                screenshot: null
+              }
+            ]
+          }
+        ],
+        entities: [
+          {
+            id: 2,
+            type: 'TEXT',
+            trialSetting: trialSetting
+          },
+          {
+            id: 3,
+            type: 'TEXT',
+            trialSetting: { ...trialSetting, font: 66 }
+          }
+        ],
         selected: [],
         selectId: null,
         selectMode: false
@@ -1171,8 +1235,7 @@ describe('(Design/modules)', () => {
     const state2 = designReducer(state1, toggleSelectMode('testId', { condition: ['#3498db'] }, 'extend'))
     const state3 = designReducer(state2, addTrial(trialType))
     const state4 = designReducer(state3, selectTrial(1))
-console.log(state4.entities[0].trialSetting)
-console.log(trialSetting)
+
     expect(state4).to.deep.equal({
       counter: 1,
       condition: [],
@@ -1197,7 +1260,7 @@ console.log(trialSetting)
       selectId: 'testId',
       selectMode: true
     })
-/*
+
     const state5 = designReducer(state4, selectTrial(1))
 
     expect(state5).to.deep.equal({
@@ -1249,6 +1312,6 @@ console.log(trialSetting)
       selected: [1],
       selectId: 'testId',
       selectMode: true
-    })*/
+    })
   })
 })

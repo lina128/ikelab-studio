@@ -1,17 +1,10 @@
 @import 'base';
 
 .design_trialPane_default {
-  margin: auto;
-  top: 0;
-  display: flex; /*NEW, Spec - Opera 12.1, Firefox 20+ */
-  display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
-  display: -moz-box; /*OLD - Firefox 19- */
-  display: -ms-flexbox; /* TWEENER - IE 10 */
-  display: -webkit-flex; /*NEW -Chrome */
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
-  -webkit-flex-grow: 0;
-  flex-grow: 0;
+  position: fixed;
+  top: 200px;
+  left: 50%;
+  margin-left: -376px;
   width: $trialPaneWidth + px;
   height: $trialPaneHeight + px;
   overflow: hidden;
