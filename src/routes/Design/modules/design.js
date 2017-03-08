@@ -61,10 +61,10 @@ export const addCondition = () => {
   }
 }
 
-export const addWizard = (type, wizard) => {
+export const addWizard = (type, name, setting) => {
   return {
     type: ADD_WIZARD,
-    payload: { type, wizard }
+    payload: { type, name, setting }
   }
 }
 
@@ -264,7 +264,8 @@ const initialState = {
   selected: [],
   selectId: null,
   selectMode: false,
-  wizard: []
+  wizards: [],
+  tags: []
 }
 export default function designReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

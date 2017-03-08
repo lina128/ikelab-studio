@@ -22,8 +22,4 @@ describe('(Design/containers) Ribbon', () => {
   it('Should have class design_ribbon_default.', () => {
     expect(_wrapper.hasClass('design_ribbon_default')).to.equal(true)
   })
-
-  it('Should have 1 AddButton components.', () => {
-    expect(_wrapper.find('AddButton')).to.have.length(1)
-  })
 })

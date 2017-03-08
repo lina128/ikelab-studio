@@ -7,7 +7,8 @@ export default class BlockBuild extends Component {
   static propTypes = {
     type: PropTypes.string,
     onChange: PropTypes.func,
-    dialogOpen: PropTypes.bool
+    dialogOpen: PropTypes.bool,
+    setting: PropTypes.object
   }
 
   render () {
@@ -16,6 +17,7 @@ export default class BlockBuild extends Component {
 
     let Field
     let fieldList = []
+    let fieldSetting = this.props.setting ? this.props.setting : {}
 
     for (let s in fieldConstant) {
       if (fieldConstant[s].display) {
@@ -23,7 +25,7 @@ export default class BlockBuild extends Component {
         fieldList.push(<Field
           key={s}
           trialId={0}
-          fieldSetting=''
+          fieldSetting={fieldSetting[s] || fieldConstant[s].value}
           fieldConstantKey={s}
           fieldConstant={fieldConstant[s]}
           onChange={onChange}
@@ -32,7 +34,7 @@ export default class BlockBuild extends Component {
     }
 
     return (
-      <Card style={{ width: '100%', maxHeight: window.innerHeight - 250 + 'px', overflow: 'auto' }}>
+      <Card style={{ width: '100%', maxHeight: window.innerHeight - 250 + 'px', overflow: 'scroll' }}>
         {fieldList}
       </Card>
     )

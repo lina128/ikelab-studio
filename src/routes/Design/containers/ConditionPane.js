@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { renameCondition, toggleSelectMode, removeCondition } from '../modules/design'
+import { addCondition, renameCondition, toggleSelectMode, removeCondition } from '../modules/design'
 import List from '../components/List'
 import ListItem from '../components/ListItem'
 import Input from '../components/Input'
@@ -18,6 +18,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    addCondition: () => {
+      dispatch(addCondition())
+    },
     onRenameCondition: (color, value) => {
       dispatch(renameCondition(color, value))
     },
@@ -41,6 +44,7 @@ export class ConditionPane extends Component {
   }
 
   static propTypes = {
+    addCondition: PropTypes.func.isRequired,
     condition: PropTypes.array.isRequired,
     onSelectMode: PropTypes.func.isRequired,
     onRenameCondition: PropTypes.func.isRequired,
@@ -87,7 +91,7 @@ export class ConditionPane extends Component {
     }
     return (
       <div className={'design_conditionPane_default'}>
-        <h1>Condition</h1>
+        <Button raised colored ripple onClick={this.props.addCondition}>Add condition</Button>
         <List customStyle={{ listStyle: 'none' }}>
           {conditionList}
         </List>

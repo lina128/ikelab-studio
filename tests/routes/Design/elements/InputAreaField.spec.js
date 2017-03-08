@@ -1,31 +1,27 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import ImageField from 'routes/Design/elements/fields/ImageField'
+import InputAreaField from 'routes/Design/elements/fields/InputAreaField'
 
-describe('(Design/elements/fields) ImageField', () => {
+describe('(Design/elements/fields) InputAreaField', () => {
   let _wrapper, _props
 
   beforeEach(() => {
     _props = {
       trialId: 1,
-      fieldConstantKey: 'image',
+      fieldConstantKey: 'fontSize',
       fieldConstant: {
-        name: 'Image',
-        hints: ''
+        name: 'Font Size',
+        hints: 'pt'
       },
-      fieldSetting: '',
+      fieldSetting: 16,
       onChange: el => el
     }
 
-    _wrapper = shallow(<ImageField {..._props} />)
+    _wrapper = shallow(<InputAreaField {..._props} />)
   })
 
   it('Should render as a div.', () => {
     expect(_wrapper.is('div')).to.equal(true)
-  })
-
-  it('Should have a Dropzone component.', () => {
-    expect(_wrapper.find('Dropzone')).to.have.length(1)
   })
 
   it('Should have a Textfield component.', () => {

@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import { ActionCreators } from 'redux-undo'
-import { addCondition } from '../modules/design'
-import AddButton from '../components/AddButton'
 import Trash from './Trash'
 import ModuleLoader from './ModuleLoader'
-import ConditionLoader from './ConditionLoader'
+import RibonCardLoader from '../components/RibonCardLoader'
+import ConditionPane from './ConditionPane'
+import HistoryPane from './HistoryPane'
 import Button from 'react-mdl/lib/Button'
 import './Ribbon.scss'
 
@@ -32,9 +32,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCondition: () => {
-      dispatch(addCondition())
-    },
     undo: () => {
       dispatch(ActionCreators.undo())
     },
@@ -51,7 +48,6 @@ export class Ribbon extends Component {
   }
 
   static propTypes = {
-    addCondition: PropTypes.func.isRequired,
     undo: PropTypes.func,
     redo: PropTypes.func,
     pastSteps: PropTypes.bool,
@@ -59,18 +55,20 @@ export class Ribbon extends Component {
   }
 
   render () {
-    const { addCondition, undo, redo, pastSteps, futureSteps } = this.props
+    const { undo, redo, pastSteps, futureSteps } = this.props
 
     return (
       <div className={'design_ribbon_default'}>
-        <div>
-          <ModuleLoader />
-          <ConditionLoader />
-          <AddButton clickHandler={addCondition} text={'Add Condition'} />
-          <Trash />
-          {pastSteps ? <Button raised accent ripple onClick={undo}>Undo</Button> : <Button raised>Undo</Button>}
-          {futureSteps ? <Button raised accent ripple onClick={redo}>Redo</Button> : <Button raised>Redo</Button>}
-        </div>
+        <ModuleLoader />
+        <RibonCardLoader name='Condition'>
+          <ConditionPane />
+        </RibonCardLoader>
+        <RibonCardLoader name='History'>
+          <HistoryPane />
+        </RibonCardLoader>
+        <Trash />
+        {pastSteps ? <Button raised accent ripple onClick={undo}>Undo</Button> : <Button raised>Undo</Button>}
+        {futureSteps ? <Button raised accent ripple onClick={redo}>Redo</Button> : <Button raised>Redo</Button>}
       </div>
     )
   }

@@ -1,8 +1,4 @@
 .design_ribbon_default {
-  position: fixed;
-  top: 50px;
-  background: white;
-  z-index: 1999;
   display: flex; /*NEW, Spec - Opera 12.1, Firefox 20+ */
   display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
   display: -moz-box; /*OLD - Firefox 19- */

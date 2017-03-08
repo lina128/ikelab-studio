@@ -29,10 +29,6 @@ describe('(Container) ConditionPane', () => {
     expect(_wrapper.hasClass('design_conditionPane_default')).to.equal(true)
   })
 
-  it('Should render a h1 titled Condition.', () => {
-    expect(_wrapper.find('h1').text()).to.match(/Condition/)
-  })
-
   it('Should render a List component.', () => {
     expect(_wrapper.find('List')).to.exist
   })

@@ -1,7 +1,7 @@
 const addWizard = (state, action) => {
   return {
     ...state,
-    wizard: [ ...state.wizard, action.payload ]
+    wizards: [ ...state.wizards, action.payload ]
   }
 }
 

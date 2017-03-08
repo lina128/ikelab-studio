@@ -1,23 +1,23 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import ImageField from 'routes/Design/elements/fields/ImageField'
+import ImagesField from 'routes/Design/elements/fields/ImagesField'
 
-describe('(Design/elements/fields) ImageField', () => {
+describe('(Design/elements/fields) ImagesField', () => {
   let _wrapper, _props
 
   beforeEach(() => {
     _props = {
       trialId: 1,
-      fieldConstantKey: 'image',
+      fieldConstantKey: 'images',
       fieldConstant: {
-        name: 'Image',
+        name: 'Images',
         hints: ''
       },
-      fieldSetting: '',
+      fieldSetting: [],
       onChange: el => el
     }
 
-    _wrapper = shallow(<ImageField {..._props} />)
+    _wrapper = shallow(<ImagesField {..._props} />)
   })
 
   it('Should render as a div.', () => {

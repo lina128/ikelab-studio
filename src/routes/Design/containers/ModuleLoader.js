@@ -24,8 +24,8 @@ const mapDispatchToProps = (dispatch) => {
     addBlockTrials: (block, trials) => {
       dispatch(addBlockTrials(block, trials))
     },
-    addWizard: (type, wizard) => {
-      dispatch(addWizard(type, wizard))
+    addWizard: (type, name, setting) => {
+      dispatch(addWizard(type, name, setting))
     }
   }
 }
@@ -75,8 +75,9 @@ export class ModuleLoader extends Component {
         error: wizard.error
       })
     } else {
+      console.log(wizard)
       this.props.addBlockTrials(wizard.block, wizard.trials)
-      this.props.addWizard(this.state.type, this.state.setting)
+      this.props.addWizard(this.state.type, this.state.name, this.state.setting)
       this.handleDialogClose()
     }
   }
@@ -88,7 +89,7 @@ export class ModuleLoader extends Component {
       if (options[i].onClick) {
         if (typeof this.props[options[i].onClick] === 'function') {
           // use functions from mapDispatchToProps
-          arr.push(<MenuItem key={options[i].name} onClick={() => { this.props[options[i].onClick](options[i].type) }}>
+          arr.push(<MenuItem key={options[i].type} onClick={() => { this.props[options[i].onClick](options[i].type) }}>
             <span className={'design_moduleLoader_option_lvl' + lvl}>
               {options[i].name}
             </span></MenuItem>)
@@ -98,7 +99,7 @@ export class ModuleLoader extends Component {
         } else if (typeof this[options[i].onClick] === 'function') {
           // use functions from ModuleLoader
           arr.push(<MenuItem
-            key={options[i].name}
+            key={options[i].type}
             onClick={() => { this[options[i].onClick](options[i].type, options[i].name) }}>
             <span className={'design_moduleLoader_option_lvl' + lvl}>
               {options[i].name}
@@ -107,7 +108,7 @@ export class ModuleLoader extends Component {
             this.renderOptions(arr, options[i].children, (lvl + 1))
           }
         } else {
-          arr.push(<MenuItem key={options[i].name} onClick={() => {}}>
+          arr.push(<MenuItem key={options[i].type} onClick={() => {}}>
             <span className={'design_moduleLoader_option_lvl' + lvl}>
               {options[i].name}
             </span></MenuItem>)

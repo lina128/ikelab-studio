@@ -1,4 +1,4 @@
-import { addBlock, addBlockTrials, addCondition, addRun, addTrial,
+import { addBlock, addBlockTrials, addCondition, addRun, addTrial, addWizard,
 changeTrialSetting, changeBlockSetting, clickTrial, copyCurrentTrial,
 deleteCurrentTrial, moveInside, moveNode, moveOutside,
 removeCondition, removeTrialCondition, renameCondition,
@@ -31,7 +31,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     }
   })
 
@@ -73,7 +75,9 @@ describe('(Design/modules)', () => {
         entities: [],
         selected: [],
         selectId: null,
-        selectMode: false
+        selectMode: false,
+        wizards: [],
+        tags: []
       })
     })
 
@@ -137,7 +141,9 @@ describe('(Design/modules)', () => {
         ],
         selected: [],
         selectId: null,
-        selectMode: false
+        selectMode: false,
+        wizards: [],
+        tags: []
       })
     })
 
@@ -158,28 +164,9 @@ describe('(Design/modules)', () => {
         entities: [],
         selected: [],
         selectId: null,
-        selectMode: false
-      })
-
-      const state3 = designReducer(state2, addCondition())
-      expect(state3).to.deep.equal({
-        counter: 0,
-        condition: [
-          {
-            name: 'NewCondition',
-            color: '#3498db'
-          },
-          {
-            name: 'NewCondition',
-            color: '#e74c3c'
-          }
-        ],
-        currentTrial: null,
-        structure: [],
-        entities: [],
-        selected: [],
-        selectId: null,
-        selectMode: false
+        selectMode: false,
+        wizards: [],
+        tags: []
       })
     })
 
@@ -205,7 +192,9 @@ describe('(Design/modules)', () => {
         entities: [],
         selected: [],
         selectId: null,
-        selectMode: false
+        selectMode: false,
+        wizards: [],
+        tags: []
       })
     })
 
@@ -235,7 +224,47 @@ describe('(Design/modules)', () => {
         ],
         selected: [],
         selectId: null,
-        selectMode: false
+        selectMode: false,
+        wizards: [],
+        tags: []
+      })
+    })
+
+    it('Should handle ADD_WIZARD', () => {
+      const state1 = {
+        counter: 0,
+        condition: [],
+        currentTrial: null,
+        structure: [],
+        entities: [],
+        selected: [],
+        selectId: null,
+        selectMode: false,
+        wizards: [],
+        tags: []
+      }
+
+      const state2 = designReducer(state1, addWizard('IMAGE_BLOCK', 'Image Block', { images: [] }))
+
+      expect(state2).to.deep.equal({
+        counter: 0,
+        condition: [],
+        currentTrial: null,
+        structure: [],
+        entities: [],
+        selected: [],
+        selectId: null,
+        selectMode: false,
+        wizards: [
+          {
+            type: 'IMAGE_BLOCK',
+            name: 'Image Block',
+            setting: {
+              images: []
+            }
+          }
+        ],
+        tags: []
       })
     })
 
@@ -603,7 +632,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     }
 
     const state2 = designReducer(state1, moveNode(1, 2, 'DOWN'))
@@ -642,7 +673,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
 
     const state3 = designReducer(state2, moveNode(1, 2, 'UP'))
@@ -681,7 +714,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
   })
 
@@ -707,7 +742,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     }
 
     const state2 = designReducer(state1, moveNode(1, 2, 'DOWN'))
@@ -733,7 +770,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
 
     const state3 = designReducer(state2, moveNode(1, 2, 'UP'))
@@ -759,7 +798,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
   })
 
@@ -785,7 +826,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     }
 
     const state2 = designReducer(state1, moveNode(1, 2, 'DOWN'))
@@ -811,7 +854,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
 
     const state3 = designReducer(state2, moveNode(1, 2, 'UP'))
@@ -837,7 +882,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
   })
 
@@ -871,7 +918,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     }
 
     const state2 = designReducer(state1, moveOutside(1))
@@ -904,7 +953,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
   })
 
@@ -943,7 +994,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     }
 
     const state2 = designReducer(state1, removeCondition('#3498db'))
@@ -977,7 +1030,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
   })
 
@@ -1009,7 +1064,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     }
 
     const state2 = designReducer(state1, removeTrialCondition(1, '#3498db'))
@@ -1041,7 +1098,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
   })
 
@@ -1059,7 +1118,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     }
 
     const state2 = designReducer(state1, renameCondition('#3498db', 'Congruent'))
@@ -1077,7 +1138,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
   })
 
@@ -1103,7 +1166,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     }
     const state2 = designReducer(state1, changeBlockSetting(1, { randomized: true }))
 
@@ -1128,7 +1193,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
   })
 
@@ -1155,7 +1222,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     }
 
     const state2 = designReducer(state1, changeTrialSetting(1, { fontSize: '66' }))
@@ -1184,7 +1253,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
   })
 
@@ -1200,7 +1271,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: 'testId',
-      selectMode: true
+      selectMode: true,
+      wizards: [],
+      tags: []
     })
 
     const state3 = designReducer(state2, toggleSelectMode('anotherId', { condition: ['#000000'] }, 'extend'))
@@ -1213,7 +1286,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: 'testId',
-      selectMode: true
+      selectMode: true,
+      wizards: [],
+      tags: []
     })
 
     const state4 = designReducer(state3, toggleSelectMode('testId', { condition: ['#3498db'] }, 'extend'))
@@ -1226,7 +1301,9 @@ describe('(Design/modules)', () => {
       entities: [],
       selected: [],
       selectId: null,
-      selectMode: false
+      selectMode: false,
+      wizards: [],
+      tags: []
     })
   })
 
@@ -1258,7 +1335,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [1],
       selectId: 'testId',
-      selectMode: true
+      selectMode: true,
+      wizards: [],
+      tags: []
     })
 
     const state5 = designReducer(state4, selectTrial(1))
@@ -1285,7 +1364,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [],
       selectId: 'testId',
-      selectMode: true
+      selectMode: true,
+      wizards: [],
+      tags: []
     })
 
     const state6 = designReducer(state5, selectTrial(1))
@@ -1311,7 +1392,9 @@ describe('(Design/modules)', () => {
       ],
       selected: [1],
       selectId: 'testId',
-      selectMode: true
+      selectMode: true,
+      wizards: [],
+      tags: []
     })
   })
 })
