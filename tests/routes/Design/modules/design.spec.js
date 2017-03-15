@@ -200,7 +200,7 @@ describe('(Design/modules)', () => {
 
     it('Should handle ADD_TRIAL', () => {
       const state1 = designReducer(undefined, {})
-      const state2 = designReducer(state1, addTrial(trialType))
+      const state2 = designReducer(state1, addTrial(trialType, 'Text'))
 
       expect(state2).to.deep.equal({
         counter: 1,

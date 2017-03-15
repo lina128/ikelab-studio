@@ -1,18 +1,17 @@
 @import 'base';
 
-.design_block_default {
+.design_blockRenderer_default {
   position: relative;
   float: right;
   clear: both;
   padding: 0;
   cursor: move;
-  width: $trialWidth + 85px;
+  width: $trialWidth + 580px;
   min-height: 200px;
-  margin-right: 5px;
   margin-top: 15px;
 }
 
-.design_block_decorate {
+.design_blockRenderer_decorate {
   position: absolute;
   top: 0px;
   left: -15px;
@@ -20,18 +19,18 @@
   font-family: Helvetica;
 }
 
-.design_block_verticalDecoration {
+.design_blockRenderer_verticalDecoration {
   margin-top: 10px;
   width: 25px;
 }
 
-.design_block_branch {
+.design_blockRenderer_branch {
   position: absolute;
   left: -90px;
   width: 70px;
 }
 
-.design_block_branch.design_block_branch_single {
+.design_blockRenderer_branch.design_blockRenderer_branch_single {
   top: 50%;
   height: 2px;
   border-top: 1px solid grey;
@@ -39,22 +38,28 @@
   border-bottom: 1px solid grey;
 }
 
-.design_block_branch.design_block_branch_top {
+.design_blockRenderer_branch.design_blockRenderer_branch_top {
   top: 46px;
   bottom: 0px;
   border-top: 1px solid grey;
   border-left: 1px solid grey;
 }
 
-.design_block_branch.design_block_branch_middle {
+.design_blockRenderer_branch.design_blockRenderer_branch_middle {
   top: 0px;
   bottom: 0px;
   border-left: 1px solid grey;
 }
 
-.design_block_branch.design_block_branch_bottom {
+.design_blockRenderer_branch.design_blockRenderer_branch_bottom {
   top: 0px;
   bottom: 55px;
   border-left: 1px solid grey;
   border-bottom: 1px solid grey;
+}
+
+.design_blockRenderer_divBox {
+  margin-top: 6px;
+  margin-left: 10px;
+  width: 20px;
 }

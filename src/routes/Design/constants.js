@@ -1,6 +1,7 @@
 export const ITEMTYPES = {
   TRIAL: 'trial',
-  BLOCK: 'block'
+  BLOCK: 'block',
+  REDBOX: 'redbox'
 }
 
 export const DIMENSIONS = {
@@ -49,34 +50,29 @@ export const MENU_CONTENT = [
     name: 'Special Module',
     children: [
       {
-        name: 'MOT',
-        type: 'MOT',
+        name: 'Change Detection',
+        type: 'CHANGE_DETECTION',
         onClick: 'addTrial'
       },
       {
         name: 'Visual Search',
         type: 'VISUAL_SEARCH',
         onClick: 'addTrial'
+      },
+      {
+        name: 'Multiple Object Tracking',
+        type: 'MOT',
+        onClick: 'addTrial'
       }
     ]
   },
   {
-    name: 'Complex Module (Multiple Frames & Blocks)',
+    name: 'Complex Module (Multiple Frames)',
     children: [
       {
         name: 'Image Block',
         type: 'IMAGE_BLOCK',
         onClick: 'openWizard'
-      },
-      {
-        name: 'IAT',
-        type: 'IAT',
-        onClick: 'addTrial'
-      },
-      {
-        name: 'Memory',
-        type: 'MEMORY',
-        onClick: 'addTrial'
       }
     ]
   }

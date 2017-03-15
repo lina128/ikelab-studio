@@ -13,7 +13,7 @@ import {
   CardTitle,
   CardActions
 } from 'react-mdl/lib/Card'
-import OpenExperimentButton from '../components/OpenExperimentButton'
+import OpenExperimentButton from './OpenExperimentButton'
 import IconButton from 'react-mdl/lib/IconButton'
 import Button from 'react-mdl/lib/Button'
 
@@ -66,7 +66,17 @@ export class SettingPane extends Component {
 
   postMessage (target, event) {
     if (event.origin === 'http://localhost:3000' && event.data === 'loaded') {
-      target.postMessage(this.props.trial, 'http://localhost:3000')
+      let { trial } = this.props
+      target.postMessage({
+        structure: [
+          {
+            id: trial.id
+          }
+        ],
+        entities: [
+          trial
+        ]
+      }, 'http://localhost:3000')
     }
   }
 

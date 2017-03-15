@@ -2,11 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import { ActionCreators } from 'redux-undo'
+import { Link } from 'react-router'
 import Trash from './Trash'
+import PrintView from './PrintView'
 import ModuleLoader from './ModuleLoader'
 import RibonCardLoader from '../components/RibonCardLoader'
 import ConditionPane from './ConditionPane'
-import HistoryPane from './HistoryPane'
 import Button from 'react-mdl/lib/Button'
 import './Ribbon.scss'
 
@@ -59,12 +60,11 @@ export class Ribbon extends Component {
 
     return (
       <div className={'design_ribbon_default'}>
+        <PrintView />
+        <Link to='/blueprint' state={{ foo: 'bar' }} />
         <ModuleLoader />
         <RibonCardLoader name='Condition'>
           <ConditionPane />
-        </RibonCardLoader>
-        <RibonCardLoader name='History'>
-          <HistoryPane />
         </RibonCardLoader>
         <Trash />
         {pastSteps ? <Button raised accent ripple onClick={undo}>Undo</Button> : <Button raised>Undo</Button>}

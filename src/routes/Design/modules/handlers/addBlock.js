@@ -11,7 +11,7 @@ const addBlock = (state, action) => {
         name: 'Block' + newCounterB,
         blockSetting: {
           randomized: false,
-          repeat: 0,
+          repeat: 1,
           lockTop: false,
           lockBottom: false
         },

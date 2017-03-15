@@ -29,10 +29,10 @@ export const UPDATE_STRUCTURE = 'UPDATE_STRUCTURE'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const addTrial = (type) => {
+export const addTrial = (type, name) => {
   return {
     type: ADD_TRIAL,
-    payload: { type }
+    payload: { type, name }
   }
 }
 
@@ -265,7 +265,8 @@ const initialState = {
   selectId: null,
   selectMode: false,
   wizards: [],
-  tags: []
+  tags: [],
+  didChange: false
 }
 export default function designReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

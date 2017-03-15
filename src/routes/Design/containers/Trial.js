@@ -133,14 +133,6 @@ export class Trial extends Component {
         </div>
       )
     } else {
-      const conditionList = []
-
-      for (let i = 0; i < condition.length; i++) {
-        conditionList.push(
-          <HorizontalBar key={condition[i]} backgroundColor={condition[i]} />
-        )
-      }
-
       return connectDropTarget(
         <div className='design_trial_default'>
           {connectDragSource(

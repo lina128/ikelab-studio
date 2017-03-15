@@ -8,7 +8,10 @@ export default (store) => ({
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
         and embed an async module loader (jsonp) when bundling   */
-    require.ensure([], (require) => {
+    require.ensure([
+      './components/Design',
+      './modules/design'
+    ], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
       const Design = require('./components/Design').default
@@ -25,5 +28,12 @@ export default (store) => ({
 
     /* Webpack named bundle   */
     }, 'design')
+  },
+  getChildRoutes (partialNextState, callback) {
+    require.ensure([], (require) => {
+      callback(null, [
+        require('./routes/Print').default(store)
+      ])
+    })
   }
 })

@@ -18,10 +18,8 @@ export default class MultiSelectListField extends Component {
   }
 
   handleClick (option) {
-    if (option[option.length - 1]) {
-      const { onChange, trialId, fieldConstantKey } = this.props
-      onChange(trialId, { [fieldConstantKey]: option })
-    }
+    const { onChange, trialId, fieldConstantKey } = this.props
+    onChange(trialId, { [fieldConstantKey]: option })
   }
 
   renderOption (option, ind, arr) {

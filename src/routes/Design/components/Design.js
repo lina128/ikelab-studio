@@ -16,6 +16,7 @@ export class App extends Component {
   render () {
     return (
       <div className='design_container1'>
+        {this.props.children}
         <Ribbon />
         <div className='design_container2'>
           <FirstColumn>

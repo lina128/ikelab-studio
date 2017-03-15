@@ -13,6 +13,12 @@ function getSetting (type) {
 
 const addTrial = (state, action) => {
   let newCounterT = state.counter + 1
+
+  let tags = state.tags
+  if (state.tags.indexOf(action.payload.name) < 0) {
+    tags = [ ...tags, action.payload.name ]
+  }
+
   if (state.currentTrial) {
     return {
       ...state,
@@ -33,9 +39,11 @@ const addTrial = (state, action) => {
         {
           id: newCounterT,
           type: action.payload.type,
+          name: action.payload.name,
           trialSetting: getSetting(action.payload.type)
         }
-      ]
+      ],
+      tags: tags
     }
   } else {
     return {
@@ -57,9 +65,11 @@ const addTrial = (state, action) => {
         {
           id: newCounterT,
           type: action.payload.type,
+          name: action.payload.name,
           trialSetting: getSetting(action.payload.type)
         }
-      ]
+      ],
+      tags: tags
     }
   }
 }

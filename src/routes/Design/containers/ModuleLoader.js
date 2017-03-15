@@ -12,8 +12,8 @@ import './ModuleLoader.scss'
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTrial: (type) => {
-      dispatch(addTrial(type))
+    addTrial: (type, name) => {
+      dispatch(addTrial(type, name))
     },
     addBlock: () => {
       dispatch(addBlock())
@@ -89,7 +89,8 @@ export class ModuleLoader extends Component {
       if (options[i].onClick) {
         if (typeof this.props[options[i].onClick] === 'function') {
           // use functions from mapDispatchToProps
-          arr.push(<MenuItem key={options[i].type} onClick={() => { this.props[options[i].onClick](options[i].type) }}>
+          arr.push(<MenuItem key={options[i].type}
+            onClick={() => { this.props[options[i].onClick](options[i].type, options[i].name) }}>
             <span className={'design_moduleLoader_option_lvl' + lvl}>
               {options[i].name}
             </span></MenuItem>)

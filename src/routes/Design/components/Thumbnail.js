@@ -10,7 +10,7 @@ export default class Thumbnail extends Component {
 
   static propTypes = {
     screenshot: PropTypes.string,
-    onThumbnailClick: PropTypes.func.isRequired
+    onThumbnailClick: PropTypes.func
   }
 
   _onClick () {
