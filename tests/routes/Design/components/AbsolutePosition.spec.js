@@ -9,7 +9,8 @@ describe('(Design/components) AbsolutePosition', () => {
     _props = {
       left: '0px',
       top: '0px',
-      width: '300px'
+      width: '300px',
+      isOpen: false
     }
     _wrapper = shallow(<AbsolutePosition {..._props} />)
   })

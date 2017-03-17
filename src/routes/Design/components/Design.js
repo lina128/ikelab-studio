@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Ribbon from '../containers/Ribbon'
@@ -13,6 +13,13 @@ import Note from './Note'
 import './Design.scss'
 
 export class App extends Component {
+  static propTypes = {
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node
+    ])
+  }
+
   render () {
     return (
       <div className='design_container1'>

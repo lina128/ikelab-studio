@@ -75,7 +75,6 @@ export class ModuleLoader extends Component {
         error: wizard.error
       })
     } else {
-      console.log(wizard)
       this.props.addBlockTrials(wizard.block, wizard.trials)
       this.props.addWizard(this.state.type, this.state.name, this.state.setting)
       this.handleDialogClose()

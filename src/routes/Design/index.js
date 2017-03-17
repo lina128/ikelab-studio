@@ -28,12 +28,5 @@ export default (store) => ({
 
     /* Webpack named bundle   */
     }, 'design')
-  },
-  getChildRoutes (partialNextState, callback) {
-    require.ensure([], (require) => {
-      callback(null, [
-        require('./routes/Print').default(store)
-      ])
-    })
   }
 })

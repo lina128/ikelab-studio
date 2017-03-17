@@ -32,8 +32,4 @@ describe('(Design/elements/frames) Image', () => {
   it('Should render as a div.', () => {
     expect(_wrapper.is('div')).to.equal(true)
   })
-
-  it('Should contains an img.', () => {
-    expect(_wrapper.find('img')).to.exist
-  })
 })

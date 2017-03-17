@@ -16,7 +16,8 @@ describe('(Container) ConditionPane', () => {
       ],
       onRenameCondition: el => el,
       onSelectMode: el => el,
-      onRemoveCondition: el => el
+      onRemoveCondition: el => el,
+      addCondition: el => el
     }
     _wrapper = shallow(<ConditionPane {..._props} />)
   })

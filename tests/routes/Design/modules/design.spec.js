@@ -65,7 +65,7 @@ describe('(Design/modules)', () => {
             name: 'Block1',
             blockSetting: {
               randomized: false,
-              repeat: 0,
+              repeat: 1,
               lockTop: false,
               lockBottom: false
             },
@@ -219,6 +219,7 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             type: trialType,
+            name: 'Text',
             trialSetting: trialSetting
           }
         ],
@@ -226,7 +227,7 @@ describe('(Design/modules)', () => {
         selectId: null,
         selectMode: false,
         wizards: [],
-        tags: []
+        tags: ['Text']
       })
     })
 
@@ -1310,7 +1311,7 @@ describe('(Design/modules)', () => {
   it('Should handle SELECT_TRIAL', () => {
     const state1 = designReducer(undefined, {})
     const state2 = designReducer(state1, toggleSelectMode('testId', { condition: ['#3498db'] }, 'extend'))
-    const state3 = designReducer(state2, addTrial(trialType))
+    const state3 = designReducer(state2, addTrial(trialType, 'Text'))
     const state4 = designReducer(state3, selectTrial(1))
 
     expect(state4).to.deep.equal({
@@ -1330,6 +1331,7 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
+          name: 'Text',
           trialSetting: trialSetting
         }
       ],
@@ -1337,7 +1339,7 @@ describe('(Design/modules)', () => {
       selectId: 'testId',
       selectMode: true,
       wizards: [],
-      tags: []
+      tags: ['Text']
     })
 
     const state5 = designReducer(state4, selectTrial(1))
@@ -1359,6 +1361,7 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
+          name: 'Text',
           trialSetting: trialSetting
         }
       ],
@@ -1366,7 +1369,7 @@ describe('(Design/modules)', () => {
       selectId: 'testId',
       selectMode: true,
       wizards: [],
-      tags: []
+      tags: ['Text']
     })
 
     const state6 = designReducer(state5, selectTrial(1))
@@ -1387,6 +1390,7 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           type: trialType,
+          name: 'Text',
           trialSetting: trialSetting
         }
       ],
@@ -1394,7 +1398,7 @@ describe('(Design/modules)', () => {
       selectId: 'testId',
       selectMode: true,
       wizards: [],
-      tags: []
+      tags: ['Text']
     })
   })
 })

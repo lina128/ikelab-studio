@@ -265,8 +265,7 @@ const initialState = {
   selectId: null,
   selectMode: false,
   wizards: [],
-  tags: [],
-  didChange: false
+  tags: []
 }
 export default function designReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

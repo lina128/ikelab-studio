@@ -47,7 +47,7 @@ export default class Image extends Component {
 
     return (
       <div className='design_frames_default' style={style} >
-        <img src={trial.trialSetting.image} style={itemStyle} />
+        {trial.trialSetting.image ? <img src={trial.trialSetting.image} style={itemStyle} /> : null}
       </div>
     )
   }
