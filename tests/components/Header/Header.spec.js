@@ -13,7 +13,6 @@ describe('(Component) Header', () => {
   it('Renders a welcome message', () => {
     const welcome = _wrapper.find('h1')
     expect(welcome).to.exist
-    expect(welcome.text()).to.match(/IkeLab Design Studio/)
   })
 
   describe('Navigation links...', () => {

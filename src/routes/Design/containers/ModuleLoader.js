@@ -4,7 +4,7 @@ import Button from 'react-mdl/lib/Button'
 import { Dialog, DialogTitle, DialogContent, DialogActions } from 'react-mdl/lib/Dialog'
 import Menu from 'react-mdl-extra/lib/Menu'
 import MenuItem from 'react-mdl-extra/lib/MenuItem'
-import { addTrial, addBlock, addRun, addBlockTrials, addWizard } from '../modules/design'
+import { addTrial, addBlock, addRun, addBlockTrials } from '../modules/design'
 import { MENU_CONTENT } from '../constants'
 import BlockBuild from './BlockBuild'
 import * as wizards from '../elements/wizards'
@@ -23,9 +23,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     addBlockTrials: (block, trials) => {
       dispatch(addBlockTrials(block, trials))
-    },
-    addWizard: (type, name, setting) => {
-      dispatch(addWizard(type, name, setting))
     }
   }
 }
@@ -45,8 +42,7 @@ export class ModuleLoader extends Component {
     addTrial: PropTypes.func.isRequired,
     addBlock: PropTypes.func.isRequired,
     addRun: PropTypes.func.isRequired,
-    addBlockTrials: PropTypes.func.isRequired,
-    addWizard: PropTypes.func.isRequired
+    addBlockTrials: PropTypes.func.isRequired
   }
 
   handleDialogClose () {
@@ -76,7 +72,6 @@ export class ModuleLoader extends Component {
       })
     } else {
       this.props.addBlockTrials(wizard.block, wizard.trials)
-      this.props.addWizard(this.state.type, this.state.name, this.state.setting)
       this.handleDialogClose()
     }
   }

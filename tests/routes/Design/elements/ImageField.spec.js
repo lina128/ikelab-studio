@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import ImageField from 'routes/Design/elements/fields/ImageField'
+import { ImageField } from 'routes/Design/elements/fields/ImageField'
 
 describe('(Design/elements/fields) ImageField', () => {
   let _wrapper, _props
@@ -14,7 +14,8 @@ describe('(Design/elements/fields) ImageField', () => {
         hints: ''
       },
       fieldSetting: '',
-      onChange: el => el
+      onChange: el => el,
+      addMessage: el => el
     }
 
     _wrapper = shallow(<ImageField {..._props} />)

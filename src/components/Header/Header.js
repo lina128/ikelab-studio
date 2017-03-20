@@ -7,7 +7,7 @@ import './Header.scss'
 
 export const Header = () => (
   <div>
-    <h1> TEST TEST </h1>
+    <h1> IKELAB </h1>
     <IndexLink to='/' activeClassName='route--active' >
       Home
     </IndexLink>

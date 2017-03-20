@@ -46,10 +46,34 @@ const config = {
     colors : true
   },
   compiler_vendors : [
+    'babel-plugin-transform-runtime',
+    'babel-preset-es2015',
+    'babel-preset-react',
+    'babel-preset-react',
+    'babel-preset-stage-0',
+    'classnames',
+    'debug',
+    'draft-js',
+    'html2canvas',
+    'immutability-helper',
+    'ip',
+    'normalize.css',
     'react',
+    'react-dom',
     'react-redux',
     'react-router',
-    'redux'
+    'react-addons-css-transition-group',
+    'react-color',
+    'react-dnd',
+    'react-dnd-html5-backend',
+    'react-dropzone',
+    'react-mdl',
+    'react-mdl-extra',
+    'redux',
+    'redux-thunk',
+    'redux-undo',
+    'reselect',
+    'superagent'
   ],
 
   // ----------------------------------

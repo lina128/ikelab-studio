@@ -30,14 +30,6 @@ export default class ImagesField extends Component {
     }
   }
 
-  showMessage (message) {
-    document.getElementById('messageBox').innerHTML = message
-  }
-
-  hideMessage () {
-    document.getElementById('messageBox').innerHTML = ''
-  }
-
   handleImageUpload (acceptedFiles) {
     this.setState({ uploaded: 0, files: [], value: '' })
     acceptedFiles.map((file) => {

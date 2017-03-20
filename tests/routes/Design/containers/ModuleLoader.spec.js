@@ -10,8 +10,7 @@ describe('(Design/containers) ModuleLoader', () => {
       addTrial: el => el,
       addBlock: el => el,
       addRun: el => el,
-      addBlockTrials: el => el,
-      addWizard: el => el
+      addBlockTrials: el => el
     }
     _wrapper = shallow(<ModuleLoader {..._props} />)
   })

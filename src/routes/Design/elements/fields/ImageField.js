@@ -1,15 +1,24 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import Dropzone from 'react-dropzone'
 import Textfield from 'react-mdl/lib/Textfield'
 import Button from 'react-mdl/lib/Button'
-import { showMessage, hideMessage } from '../../utils/message'
+import { addMessage } from '../../modules/design'
 import superagent from 'superagent'
 import './ImageField.scss'
 
 const UPLOAD_PRESET = 'xcdgygdr'
 const UPLOAD_URL = 'https://api.cloudinary.com/v1_1/ikelabrepo/image/upload'
 
-export default class ImageField extends Component {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMessage: (txt) => {
+      dispatch(addMessage(txt))
+    }
+  }
+}
+
+export class ImageField extends Component {
   constructor (props) {
     super(props)
     this.state = { value: '' }
@@ -23,7 +32,8 @@ export default class ImageField extends Component {
     fieldConstant: PropTypes.object.isRequired,
     fieldConstantKey: PropTypes.string.isRequired,
     fieldSetting: PropTypes.any.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    addMessage: PropTypes.func.isRequired
   }
 
   componentWillReceiveProps (nextProps) {
@@ -40,9 +50,7 @@ export default class ImageField extends Component {
       .field('tags', 'private,stimulus')
       .end((err, response) => {
         if (err || response.body.error) {
-          let message = response.body.error ? response.body.error.message : 'Image upload failed. Please try again.'
-          showMessage(message)
-          setTimeout(hideMessage, 2000)
+          this.props.addMessage('Image upload failed. Please try again.')
         } else {
           if (response.body.secure_url) {
             this.handleChange(response.body.secure_url)
@@ -57,16 +65,7 @@ export default class ImageField extends Component {
       onChange(trialId, { [fieldConstantKey]: url })
     } else {
       if (url.target.value !== '') {
-        let img = new Image()
-        img.src = url.target.value
-        img.onload = () => {
-          onChange(trialId, { [fieldConstantKey]: img.src })
-        }
-        img.onerror = () => {
-          let message = 'Image does not exist.'
-          this.showMessage(message)
-          setTimeout(this.hideMessage, 2000)
-        }
+        onChange(trialId, { [fieldConstantKey]: url.target.value })
       }
     }
   }
@@ -106,3 +105,5 @@ export default class ImageField extends Component {
     )
   }
 }
+
+export default connect(null, mapDispatchToProps)(ImageField)

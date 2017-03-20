@@ -1,0 +1,12 @@
+.design_messageBar_default {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+}
+
+.design_messageBar_message {
+  with: 100px;
+  overflow-wrap: break-word;
+  background-color: darkmagenta;
+  color: white;
+}

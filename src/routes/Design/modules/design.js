@@ -8,7 +8,6 @@ export const ADD_BLOCK = 'ADD_BLOCK'
 export const ADD_BLOCK_TRIALS = 'ADD_BLOCK_TRIALS'
 export const ADD_RUN = 'ADD_RUN'
 export const ADD_CONDITION = 'ADD_CONDITION'
-export const ADD_WIZARD = 'ADD_WIZARD'
 export const CHANGE_BLOCK_SETTING = 'CHANGE_BLOCK_SETTING'
 export const CHANGE_RUN_SETTING = 'CHANGE_RUN_SETTING'
 export const CHANGE_TRIAL_SETTING = 'CHANGE_TRIAL_SETTING'
@@ -58,13 +57,6 @@ export const addRun = () => {
 export const addCondition = () => {
   return {
     type: ADD_CONDITION
-  }
-}
-
-export const addWizard = (type, name, setting) => {
-  return {
-    type: ADD_WIZARD,
-    payload: { type, name, setting }
   }
 }
 
@@ -205,7 +197,6 @@ export const actions = {
   addBlockTrials,
   addRun,
   addCondition,
-  addWizard,
   clickTrial,
   changeBlockSetting,
   changeRunSetting,
@@ -233,7 +224,6 @@ const ACTION_HANDLERS = {
   [ADD_BLOCK_TRIALS] : handle.addBlockTrials,
   [ADD_RUN] : handle.addRun,
   [ADD_CONDITION] : handle.addCondition,
-  [ADD_WIZARD] : handle.addWizard,
   [CHANGE_BLOCK_SETTING]: handle.changeBlockSetting,
   [CHANGE_RUN_SETTING]: handle.changeRunSetting,
   [CHANGE_TRIAL_SETTING] : handle.changeTrialSetting,
@@ -264,7 +254,7 @@ const initialState = {
   selected: [],
   selectId: null,
   selectMode: false,
-  wizards: [],
+  messages: [],
   tags: []
 }
 export default function designReducer (state = initialState, action) {

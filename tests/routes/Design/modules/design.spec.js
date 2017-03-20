@@ -1,4 +1,4 @@
-import { addBlock, addBlockTrials, addCondition, addRun, addTrial, addWizard,
+import { addBlock, addBlockTrials, addCondition, addRun, addTrial,
 changeTrialSetting, changeBlockSetting, clickTrial, copyCurrentTrial,
 deleteCurrentTrial, moveInside, moveNode, moveOutside,
 removeCondition, removeTrialCondition, renameCondition,
@@ -32,7 +32,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     }
   })
@@ -76,7 +76,7 @@ describe('(Design/modules)', () => {
         selected: [],
         selectId: null,
         selectMode: false,
-        wizards: [],
+        messages: [],
         tags: []
       })
     })
@@ -142,7 +142,7 @@ describe('(Design/modules)', () => {
         selected: [],
         selectId: null,
         selectMode: false,
-        wizards: [],
+        messages: [],
         tags: []
       })
     })
@@ -165,7 +165,7 @@ describe('(Design/modules)', () => {
         selected: [],
         selectId: null,
         selectMode: false,
-        wizards: [],
+        messages: [],
         tags: []
       })
     })
@@ -193,7 +193,7 @@ describe('(Design/modules)', () => {
         selected: [],
         selectId: null,
         selectMode: false,
-        wizards: [],
+        messages: [],
         tags: []
       })
     })
@@ -226,46 +226,8 @@ describe('(Design/modules)', () => {
         selected: [],
         selectId: null,
         selectMode: false,
-        wizards: [],
+        messages: [],
         tags: ['Text']
-      })
-    })
-
-    it('Should handle ADD_WIZARD', () => {
-      const state1 = {
-        counter: 0,
-        condition: [],
-        currentTrial: null,
-        structure: [],
-        entities: [],
-        selected: [],
-        selectId: null,
-        selectMode: false,
-        wizards: [],
-        tags: []
-      }
-
-      const state2 = designReducer(state1, addWizard('IMAGE_BLOCK', 'Image Block', { images: [] }))
-
-      expect(state2).to.deep.equal({
-        counter: 0,
-        condition: [],
-        currentTrial: null,
-        structure: [],
-        entities: [],
-        selected: [],
-        selectId: null,
-        selectMode: false,
-        wizards: [
-          {
-            type: 'IMAGE_BLOCK',
-            name: 'Image Block',
-            setting: {
-              images: []
-            }
-          }
-        ],
-        tags: []
       })
     })
 
@@ -634,7 +596,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     }
 
@@ -675,7 +637,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
 
@@ -716,7 +678,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
   })
@@ -744,7 +706,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     }
 
@@ -772,7 +734,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
 
@@ -800,7 +762,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
   })
@@ -828,7 +790,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     }
 
@@ -856,7 +818,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
 
@@ -884,7 +846,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
   })
@@ -920,7 +882,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     }
 
@@ -955,7 +917,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
   })
@@ -996,7 +958,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     }
 
@@ -1032,7 +994,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
   })
@@ -1066,7 +1028,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     }
 
@@ -1100,7 +1062,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
   })
@@ -1120,7 +1082,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     }
 
@@ -1140,7 +1102,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
   })
@@ -1168,7 +1130,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     }
     const state2 = designReducer(state1, changeBlockSetting(1, { randomized: true }))
@@ -1195,7 +1157,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
   })
@@ -1224,7 +1186,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     }
 
@@ -1255,7 +1217,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
   })
@@ -1273,7 +1235,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: 'testId',
       selectMode: true,
-      wizards: [],
+      messages: [],
       tags: []
     })
 
@@ -1288,7 +1250,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: 'testId',
       selectMode: true,
-      wizards: [],
+      messages: [],
       tags: []
     })
 
@@ -1303,7 +1265,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: null,
       selectMode: false,
-      wizards: [],
+      messages: [],
       tags: []
     })
   })
@@ -1338,7 +1300,7 @@ describe('(Design/modules)', () => {
       selected: [1],
       selectId: 'testId',
       selectMode: true,
-      wizards: [],
+      messages: [],
       tags: ['Text']
     })
 
@@ -1368,7 +1330,7 @@ describe('(Design/modules)', () => {
       selected: [],
       selectId: 'testId',
       selectMode: true,
-      wizards: [],
+      messages: [],
       tags: ['Text']
     })
 
@@ -1397,7 +1359,7 @@ describe('(Design/modules)', () => {
       selected: [1],
       selectId: 'testId',
       selectMode: true,
-      wizards: [],
+      messages: [],
       tags: ['Text']
     })
   })

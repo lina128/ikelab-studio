@@ -9,7 +9,7 @@ import DesignPane from '../containers/DesignPane'
 import TrialBar from '../containers/TrialBar'
 import TrialPane from '../containers/TrialPane'
 import SettingPane from '../containers/SettingPane'
-import Note from './Note'
+import MessageBar from '../containers/MessageBar'
 import './Design.scss'
 
 export class App extends Component {
@@ -37,7 +37,7 @@ export class App extends Component {
             <TrialPane />
           </SecondColumn>
         </div>
-        <Note />
+        <MessageBar />
       </div>
     )
   }
