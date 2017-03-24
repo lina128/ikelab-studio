@@ -3,6 +3,7 @@ import './DefaultDisplay.scss'
 
 export default class Image extends Component {
   static propTypes = {
+    id: PropTypes.number.isRequired,
     trial: PropTypes.object.isRequired
   }
 

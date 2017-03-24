@@ -7,8 +7,11 @@ describe('(Design/component) MessageBar', () => {
 
   beforeEach(() => {
     _props = {
-      messages: ['Loading']
+      messages: [{ id:1, html:'Loading' }],
+      addMessage: el => el,
+      deleteMessage: el => el
     }
+
     _wrapper = shallow(<MessageBar {..._props} />)
   })
 
@@ -22,6 +25,6 @@ describe('(Design/component) MessageBar', () => {
 
   it('Should render one message.', () => {
     expect(_wrapper.children()).to.have.length(1)
-    expect(_wrapper.childAt(0).text()).to.match(/Loading/)
+    expect(_wrapper.find('Message')).to.exist
   })
 })

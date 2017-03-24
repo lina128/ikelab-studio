@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
-import { createSelector } from 'reselect'
-import { findIndexById } from '../utils/findIndex'
 import { changeTrialSetting, updateStructure } from '../modules/design'
 import flow from 'lodash/flow'
 import { DropTarget } from 'react-dnd'
@@ -11,23 +9,10 @@ import { Card } from 'react-mdl/lib/Card'
 import * as frames from '../elements/frames'
 import './TrialPane.scss'
 
-const getEntities = (state) => state.design.present.entities
-const getCurrentTrial = (state) => state.design.present.currentTrial
-
-const getTrialMemoized = createSelector(
-  [ getEntities, getCurrentTrial ],
-  (entities, currentTrial) => {
-    if (!currentTrial) {
-      return null
-    } else {
-      return entities[findIndexById(entities, currentTrial)]
-    }
-  }
-)
-
 const mapStateToProps = (state) => {
   return {
-    trial: getTrialMemoized(state)
+    id: state.design.present.currentTrial,
+    trial: state.design.present.entities[state.design.present.currentTrial]
   }
 }
 
@@ -50,6 +35,7 @@ function collect (connect, monitor) {
 
 export class TrialPane extends Component {
   static propTypes = {
+    id: PropTypes.number,
     trial: PropTypes.object,
     handleChange: PropTypes.func.isRequired
   }
@@ -62,7 +48,7 @@ export class TrialPane extends Component {
         useCORS: true
       }).then(
         function (canvas) {
-          that.props.didChangeStructure(that.props.trial.id, canvas.toDataURL('image/webp'))
+          that.props.didChangeStructure(that.props.id, canvas.toDataURL('image/webp'))
         },
         function (error) {
           console.log(error)
@@ -72,7 +58,7 @@ export class TrialPane extends Component {
   }
 
   render () {
-    const { trial, handleChange } = this.props
+    const { id, trial, handleChange } = this.props
 
     if (trial) {
       const MyComponent = frames[trial.type] || frames['DEFAULTDISPLAY']
@@ -82,6 +68,7 @@ export class TrialPane extends Component {
           <MyComponent
             ref='trialWrapper'
             style={{ width: '100%', height: '100%' }}
+            id={id}
             trial={trial}
             onChange={handleChange} />
         </Card>

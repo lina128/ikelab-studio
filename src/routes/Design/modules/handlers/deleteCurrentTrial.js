@@ -1,14 +1,14 @@
 import { removeNode } from '../utils/node'
 
 const deleteCurrentTrial = (state, action) => {
-  const newStructure = removeNode(state.structure, state.currentTrial)
-  const newEntity = removeNode(state.entities, state.currentTrial)
+  const result = {}
+  removeNode(state.structure, state.entities, state.currentTrial, result)
 
   return {
     ...state,
     currentTrial: null,
-    structure: newStructure,
-    entities: newEntity
+    structure: result.arr,
+    entities: result.s
   }
 }
 

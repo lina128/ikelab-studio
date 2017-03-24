@@ -6,7 +6,6 @@ import FirstColumn from './FirstColumn'
 import SecondColumn from './SecondColumn'
 import ThirdColumn from './ThirdColumn'
 import DesignPane from '../containers/DesignPane'
-import TrialBar from '../containers/TrialBar'
 import TrialPane from '../containers/TrialPane'
 import SettingPane from '../containers/SettingPane'
 import MessageBar from '../containers/MessageBar'
@@ -33,7 +32,6 @@ export class App extends Component {
             <SettingPane />
           </ThirdColumn>
           <SecondColumn>
-            <TrialBar />
             <TrialPane />
           </SecondColumn>
         </div>

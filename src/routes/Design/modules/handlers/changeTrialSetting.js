@@ -1,13 +1,16 @@
-import { findNode, extend } from '../utils/node'
-
 const changeTrialSetting = (state, action) => {
-  const node = findNode(state.entities, action.payload.id)
-  const newSetting = { ...node.setting, ...action.payload.setting }
-  const newEntities = extend(state.entities, action.payload.id, { trialSetting: newSetting })
+  const node = state.entities[action.payload.id]
+  const newSetting = { ...node.trialSetting, ...action.payload.setting }
 
   return {
     ...state,
-    entities: newEntities
+    entities: {
+      ...state.entities,
+      [action.payload.id]: {
+        ...node,
+        trialSetting: newSetting
+      }
+    }
   }
 }
 

@@ -17,30 +17,52 @@ export const findNode = (arr, id) => {
   return null
 }
 
-// return the new array after the node is removed, if node not found, return null
-export const removeNode = (arr, id) => {
-  if (!Array.isArray(arr)) return null
+const dfs = (node, result) => {
+  if (!node) return
+
+  result.push(node.id)
+  if (node.children) {
+    for (let i = 0; i < node.children.length; i++) {
+      dfs(node.children[i], result)
+    }
+  }
+}
+
+// return the new arr and set after the node and its children are both removed from the arr and set,
+// if node not found, return null
+export const removeNode = (arr, s, id, result) => {
+  if (!arr) return
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].id === id) {
-      return [
+      let toBeDeleted = []
+      dfs(arr[i], toBeDeleted)
+
+      let newS = { ...s }
+      for (let j = 0; j < toBeDeleted.length; j++) {
+        delete newS[toBeDeleted[j]]
+      }
+
+      result.arr = [
         ...arr.slice(0, i),
         ...arr.slice(i + 1)
       ]
+
+      result.s = newS
+
+      break
     }
-    if (arr[i].children) {
-      const newArr = removeNode(arr[i].children, id)
-      if (newArr) {
-        return [
-          ...arr.slice(0, i),
-          { ...arr[i], children: newArr },
-          ...arr.slice(i + 1)
-        ]
-      }
+    removeNode(arr[i].children, s, id, result)
+    if (result.arr) {
+      result.arr = [
+        ...arr.slice(0, i),
+        { ...arr[i], children: [ ...result.arr ] },
+        ...arr.slice(i + 1)
+      ]
+
+      break
     }
   }
-
-  return null
 }
 
 // return the top parent
@@ -183,7 +205,7 @@ export const extend = (arr, id, c) => {
         } else {
           return [
             ...arr.slice(0, i),
-            { ...arr[i], ...c },
+            { ...arr[i], [key]: c[key] },
             ...arr.slice(i + 1)
           ]
         }
@@ -270,9 +292,8 @@ export const remove = (arr, id, c) => {
   return null
 }
 
-// only one key-value pair in c is allowed
-// the value in c can be a primitive type, array of size 1, or object
-export const removeAll = (arr, c) => {
+/*
+  export const removeAll = (arr, c) => {
   if (!c) return arr
 
   const keys = Object.keys(c)
@@ -319,4 +340,56 @@ export const removeAll = (arr, c) => {
   }
 
   return newArr
+}
+*/
+
+// only one key-value pair in c is allowed,
+// the value in c can be a primitive type, array of size 1, or object
+export const extendSet = (s, id, c) => {
+  if (!c) return s
+
+  const keys = Object.keys(c)
+  if (keys.length === 0 || keys.length > 1) return s
+
+  const key = keys[0]
+  const isArray = Array.isArray(c[key])
+  const isObject = (typeof c[key] === 'object') && (c[key] !== null)
+
+  if (isArray) {
+    const oldC = s[id][key]
+
+    if (oldC.indexOf(c[key][0]) < 0) {
+      return {
+        ...s,
+        [id]: {
+          ...s[id],
+          [key]: [
+            ...oldC,
+            c[key][0]
+          ]
+        }
+      }
+    } else {
+      return s
+    }
+  } else if (isObject) {
+    return {
+      ...s,
+      [id]: {
+        ...s[id],
+        [key]: {
+          ...s[id][key],
+          ...c[key]
+        }
+      }
+    }
+  } else {
+    return {
+      ...s,
+      [id]: {
+        ...s[id],
+        [key]: c[key]
+      }
+    }
+  }
 }

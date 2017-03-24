@@ -6,8 +6,6 @@ import { ITEMTYPES, DIMENSIONS } from '../constants'
 import { DragSource, DropTarget } from 'react-dnd'
 import Badge from 'react-mdl/lib/Badge'
 import Thumbnail from '../components/Thumbnail'
-import Sidebar from '../components/Sidebar'
-import HorizontalBar from '../components/HorizontalBar'
 import './Trial.scss'
 
 const trialSource = {
@@ -72,7 +70,6 @@ export class Trial extends Component {
     moveNode: PropTypes.func,
     moveOutside: PropTypes.func,
     selectMode: PropTypes.bool.isRequired,
-    condition: PropTypes.array.isRequired,
     id: PropTypes.number.isRequired,
     screenshot: PropTypes.string,
     selected: PropTypes.bool.isRequired,
@@ -97,19 +94,10 @@ export class Trial extends Component {
       connectDragSource,
       connectDropTarget,
       selectMode,
-      condition,
       id,
       screenshot,
       selected,
       branchStyle } = this.props
-
-    const conditionList = []
-
-    for (let i = 0; i < condition.length; i++) {
-      conditionList.push(
-        <HorizontalBar key={condition[i]} backgroundColor={condition[i]} />
-      )
-    }
 
     const classnames = classNames('design_trial_branch', branchStyle)
 
@@ -121,13 +109,9 @@ export class Trial extends Component {
               <Thumbnail
                 id={id}
                 screenshot={screenshot}
-                condition={condition}
                 onThumbnailClick={this.handleThumbnailClick} />
             </div>
           </Badge>
-          <Sidebar>
-            {conditionList}
-          </Sidebar>
           <div className={classnames} />
           {selected && this.renderOverlay()}
         </div>
@@ -142,13 +126,9 @@ export class Trial extends Component {
                   <Thumbnail
                     id={id}
                     screenshot={screenshot}
-                    condition={condition}
                     onThumbnailClick={this.handleThumbnailClick} />
                 </div>
               </Badge>
-              <Sidebar>
-                {conditionList}
-              </Sidebar>
             </div>
           )}
           <div className={classnames} />

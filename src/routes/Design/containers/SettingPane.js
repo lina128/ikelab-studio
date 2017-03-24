@@ -2,9 +2,7 @@ import React, {
   Component,
   PropTypes
 } from 'react'
-import { createSelector } from 'reselect'
 import { connect } from 'react-redux'
-import { findIndexById } from '../utils/findIndex'
 import { changeTrialSetting, copyCurrentTrial, deleteCurrentTrial } from '../modules/design'
 import * as Modules from '../elements/settings'
 import * as fields from '../elements/fields'
@@ -17,23 +15,10 @@ import OpenExperimentButton from './OpenExperimentButton'
 import IconButton from 'react-mdl/lib/IconButton'
 import Button from 'react-mdl/lib/Button'
 
-const getEntities = (state) => state.design.present.entities
-const getCurrentTrial = (state) => state.design.present.currentTrial
-
-const getTrialMemoized = createSelector(
-  [ getEntities, getCurrentTrial ],
-  (entities, currentTrial) => {
-    if (!currentTrial) {
-      return null
-    } else {
-      return entities[findIndexById(entities, currentTrial)]
-    }
-  }
-)
-
 const mapStateToProps = (state) => {
   return {
-    trial: getTrialMemoized(state)
+    trial: state.design.present.entities[state.design.present.currentTrial],
+    id: state.design.present.currentTrial
   }
 }
 
@@ -58,6 +43,7 @@ export class SettingPane extends Component {
   }
 
   static propTypes = {
+    id: PropTypes.number,
     trial: PropTypes.object,
     handleChange: PropTypes.func.isRequired,
     handleCopy: PropTypes.func.isRequired,
@@ -66,11 +52,11 @@ export class SettingPane extends Component {
 
   postMessage (target, event) {
     if (event.origin === 'http://localhost:3000' && event.data === 'loaded') {
-      let { trial } = this.props
+      let { trial, id } = this.props
       target.postMessage({
         structure: [
           {
-            id: trial.id
+            id: id
           }
         ],
         entities: [
@@ -82,6 +68,7 @@ export class SettingPane extends Component {
 
   render () {
     const {
+      id,
       trial,
       handleChange,
       handleCopy,
@@ -100,7 +87,7 @@ export class SettingPane extends Component {
           Field = fields[fieldConstant[s].type] || fields['DefaultField']
           fieldList.push(<Field
             key={s}
-            trialId={trial.id}
+            trialId={id}
             fieldConstantKey={s}
             fieldConstant={fieldConstant[s]}
             fieldSetting={fieldSetting[s]}
@@ -217,7 +204,7 @@ export class SettingPane extends Component {
         <div>
           <Card shadow={1} >
             <CardTitle >
-              {trial.id}
+              {id}
               <OpenExperimentButton
                 url='http://localhost:3000'
                 onExperimentWindowReady={this.postMessage} />
@@ -228,14 +215,14 @@ export class SettingPane extends Component {
             </CardActions>
             <CardActions border>
               <fields.InputField
-                trialId={trial.id}
+                trialId={id}
                 fieldConstantKey='note'
                 fieldConstant={noteConstant}
                 fieldSetting={trial.trialSetting.note || ''}
                 onChange={handleChange}
                 customStyle={{ width: '180px' }} />
               <fields.InputField
-                trialId={trial.id}
+                trialId={id}
                 fieldConstantKey='reminder'
                 fieldConstant={reminderConstant}
                 fieldSetting={trial.trialSetting.reminder || ''}
@@ -244,38 +231,38 @@ export class SettingPane extends Component {
             </CardActions>
             <CardActions border>
               <fields.InputField
-                trialId={trial.id}
+                trialId={id}
                 fieldConstantKey='inputAutoTimedAdvance'
                 fieldConstant={inputConstant0}
                 fieldSetting={trial.trialSetting.inputAutoTimedAdvance || ''}
                 onChange={handleChange} />
               <fields.MultiSelectListField
-                trialId={trial.id}
+                trialId={id}
                 fieldConstantKey='inputKeyAdvance'
                 fieldConstant={inputConstant1}
                 fieldSetting={trial.trialSetting.inputKeyAdvance || []}
                 onChange={handleChange} />
               <fields.MultiSelectListField
-                trialId={trial.id}
+                trialId={id}
                 fieldConstantKey='inputErrorFeedbackKeyAdvance'
                 fieldConstant={inputConstant2}
                 fieldSetting={trial.trialSetting.inputErrorFeedbackKeyAdvance || []}
                 onChange={handleChange} />
               <fields.MultiSelectListField
-                trialId={trial.id}
+                trialId={id}
                 fieldConstantKey='inputErrorFeedbackErrorKey'
                 fieldConstant={inputConstant3}
                 fieldSetting={trial.trialSetting.inputErrorFeedbackErrorKey || []}
                 onChange={handleChange} />
               <fields.InputField
-                trialId={trial.id}
+                trialId={id}
                 fieldConstantKey='inputErrorFeedbackMessage'
                 fieldConstant={inputConstant4}
                 fieldSetting={trial.trialSetting.inputErrorFeedbackMessage || ''}
                 onChange={handleChange}
                 customStyle={{ width: '250px' }} />
               <fields.SwitchField
-                trialId={trial.id}
+                trialId={id}
                 fieldConstantKey='inputErrorFeedbackAllowCorrection'
                 fieldConstant={inputConstant5}
                 fieldSetting={
@@ -283,7 +270,7 @@ export class SettingPane extends Component {
                          ? false : trial.trialSetting.inputErrorFeedbackAllowCorrection}
                 onChange={handleChange} />
               <fields.SwitchField
-                trialId={trial.id}
+                trialId={id}
                 fieldConstantKey='inputNextButton'
                 fieldConstant={inputConstant6}
                 fieldSetting={
@@ -291,7 +278,7 @@ export class SettingPane extends Component {
                          ? false : trial.trialSetting.inputNextButton}
                 onChange={handleChange} />
               <fields.SwitchField
-                trialId={trial.id}
+                trialId={id}
                 fieldConstantKey='inputTextResponse'
                 fieldConstant={inputConstant7}
                 fieldSetting={
@@ -299,7 +286,7 @@ export class SettingPane extends Component {
                          ? false : trial.trialSetting.inputTextResponse}
                 onChange={handleChange} />
               <fields.InputField
-                trialId={trial.id}
+                trialId={id}
                 fieldConstantKey='inputSurveyResponse'
                 fieldConstant={inputConstant8}
                 fieldSetting={trial.trialSetting.inputSurveyResponse ? trial.trialSetting.inputSurveyResponse : ''}

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { findNode } from '../utils/findNode'
 import { Chip } from 'react-mdl/lib/Chip'
 import TrialRenderer from './TrialRenderer'
 import BlockRenderer from './BlockRenderer'
@@ -20,13 +19,17 @@ export default class ExperimentRenderer extends Component {
   renderCondition () {
     const { experiment } = this.props
 
-    return (
-      experiment.condition.map(c => {
-        return (
-          <Chip style={{ backgroundColor: c.color }}>{c.name}</Chip>
-        )
-      })
-    )
+    const conditionList = []
+    for (let id in experiment.condition) {
+      conditionList.push(
+        <Chip
+          key={id}
+          style={{ backgroundColor: experiment.condition[id].color }}>
+          {experiment.condition[id].name}
+        </Chip>)
+    }
+
+    return conditionList
   }
 
   renderExperiment () {
@@ -34,13 +37,13 @@ export default class ExperimentRenderer extends Component {
 
     return (
       experiment.structure.map(x => {
-        const node = findNode(experiment.entities, x.id)
         if (x.level === 'trial') {
+          let node = experiment.entities[x.id]
           return <TrialRenderer
             key={x.id}
             id={x.id}
             screenshot={x.screenshot}
-            condition={x.condition}
+            condition={node.condition}
             name={node.name}
             setting={node.trialSetting} />
         }

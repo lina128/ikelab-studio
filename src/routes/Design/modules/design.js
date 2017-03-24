@@ -8,6 +8,8 @@ export const ADD_BLOCK = 'ADD_BLOCK'
 export const ADD_BLOCK_TRIALS = 'ADD_BLOCK_TRIALS'
 export const ADD_RUN = 'ADD_RUN'
 export const ADD_CONDITION = 'ADD_CONDITION'
+export const ADD_MESSAGE = 'ADD_MESSAGE'
+export const DELETE_MESSAGE = 'DELETE_MESSAGE'
 export const CHANGE_BLOCK_SETTING = 'CHANGE_BLOCK_SETTING'
 export const CHANGE_RUN_SETTING = 'CHANGE_RUN_SETTING'
 export const CHANGE_TRIAL_SETTING = 'CHANGE_TRIAL_SETTING'
@@ -57,6 +59,20 @@ export const addRun = () => {
 export const addCondition = () => {
   return {
     type: ADD_CONDITION
+  }
+}
+
+export const addMessage = (messageObject) => {
+  return {
+    type: ADD_MESSAGE,
+    payload: { ...messageObject }
+  }
+}
+
+export const deleteMessage = (id) => {
+  return {
+    type: DELETE_MESSAGE,
+    payload: { id }
   }
 }
 
@@ -128,24 +144,24 @@ export const moveOutside = (id) => {
   }
 }
 
-export const removeCondition = (color) => {
+export const removeCondition = (id) => {
   return {
     type: REMOVE_CONDITION,
-    payload: { color }
+    payload: { id }
   }
 }
 
-export const removeTrialCondition = (id, condition) => {
+export const removeTrialCondition = (id, cid) => {
   return {
     type: REMOVE_TRIAL_CONDITION,
-    payload: { id, condition }
+    payload: { id, cid }
   }
 }
 
-export const renameCondition = (color, value) => {
+export const renameCondition = (id, value) => {
   return {
     type: RENAME_CONDITION,
-    payload: { color, value }
+    payload: { id, value }
   }
 }
 
@@ -197,6 +213,8 @@ export const actions = {
   addBlockTrials,
   addRun,
   addCondition,
+  addMessage,
+  deleteMessage,
   clickTrial,
   changeBlockSetting,
   changeRunSetting,
@@ -224,6 +242,8 @@ const ACTION_HANDLERS = {
   [ADD_BLOCK_TRIALS] : handle.addBlockTrials,
   [ADD_RUN] : handle.addRun,
   [ADD_CONDITION] : handle.addCondition,
+  [ADD_MESSAGE] : handle.addMessage,
+  [DELETE_MESSAGE] : handle.deleteMessage,
   [CHANGE_BLOCK_SETTING]: handle.changeBlockSetting,
   [CHANGE_RUN_SETTING]: handle.changeRunSetting,
   [CHANGE_TRIAL_SETTING] : handle.changeTrialSetting,
@@ -247,16 +267,17 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = {
   counter: 0,
-  condition: [],
+  condition: {},
   currentTrial: null,
   structure: [],
-  entities: [],
+  entities: {},
   selected: [],
   selectId: null,
   selectMode: false,
   messages: [],
   tags: []
 }
+
 export default function designReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

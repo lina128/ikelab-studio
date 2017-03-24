@@ -7,8 +7,6 @@ import {
 import Trial from './Trial'
 import Block from './Block'
 import Run from './Run'
-import { Dialog, DialogTitle, DialogContent, DialogActions } from 'react-mdl/lib/Dialog'
-import Button from 'react-mdl/lib/Button'
 import './DesignPane.scss'
 
 const mapStateToProps = (state) => {
@@ -48,14 +46,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export class DesignPane extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { dialogOpen: false }
-    this.handleDeleteNode = this.handleDeleteNode.bind(this)
-    this.handleDialogOpen = this.handleDialogOpen.bind(this)
-    this.handleDialogClose = this.handleDialogClose.bind(this)
-  }
-
   static propTypes = {
     selectMode: PropTypes.bool.isRequired,
     structure: PropTypes.array.isRequired,
@@ -69,11 +59,6 @@ export class DesignPane extends Component {
     onDeleteNode: PropTypes.func.isRequired
   }
 
-  handleDeleteNode () {
-    this.props.onDeleteNode(this.state.id)
-    this.handleDialogClose()
-  }
-
   handleDialogOpen (id) {
     this.setState({ dialogOpen: true, id: id })
   }
@@ -85,7 +70,8 @@ export class DesignPane extends Component {
   render () {
     const { selectMode, structure, onNodeMove, onMoveOutside,
            onMoveInside, onClickTrial, onSelectTrial,
-           onChangeBlockSetting, onChangeRunSetting } = this.props
+           onChangeBlockSetting, onChangeRunSetting,
+           onDeleteNode } = this.props
 
     if (selectMode) {
       return (
@@ -156,7 +142,7 @@ export class DesignPane extends Component {
                 moveOutside={onMoveOutside}
                 moveInside={onMoveInside}
                 changeBlockSetting={onChangeBlockSetting}
-                deleteNode={this.handleDialogOpen}
+                deleteNode={onDeleteNode}
                 clickTrial={onClickTrial} />
             }
             if (x.level === 'run') {
@@ -172,22 +158,11 @@ export class DesignPane extends Component {
                 moveInside={onMoveInside}
                 changeBlockSetting={onChangeBlockSetting}
                 changeRunSetting={onChangeRunSetting}
-                deleteNode={this.handleDialogOpen}
+                deleteNode={onDeleteNode}
                 clickTrial={onClickTrial} />
             }
           })
         }
-          <Dialog open={this.state.dialogOpen}>
-            <DialogTitle>Delete a block or run</DialogTitle>
-            <DialogContent>
-              All the trials in the block and all the blocks in the run will be deleted, too.
-              To avoid this, drag them outside to the center of the screen and then release.
-            </DialogContent>
-            <DialogActions>
-              <Button type='button' onClick={this.handleDeleteNode}>Delete</Button>
-              <Button type='button' onClick={this.handleDialogClose}>Cancel</Button>
-            </DialogActions>
-          </Dialog>
         </div>
       )
     }

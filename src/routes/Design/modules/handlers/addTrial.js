@@ -31,18 +31,17 @@ const addTrial = (state, action) => {
           id: newCounterT,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         }),
-      entities: [
+      entities: {
         ...state.entities,
-        {
-          id: newCounterT,
+        [newCounterT] : {
           type: action.payload.type,
           name: action.payload.name,
+          condition: {},
           trialSetting: getSetting(action.payload.type)
         }
-      ],
+      },
       tags: tags
     }
   } else {
@@ -56,19 +55,18 @@ const addTrial = (state, action) => {
           id: newCounterT,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         }
       ],
-      entities: [
+      entities: {
         ...state.entities,
-        {
-          id: newCounterT,
+        [newCounterT] : {
           type: action.payload.type,
           name: action.payload.name,
+          condition: {},
           trialSetting: getSetting(action.payload.type)
         }
-      ],
+      },
       tags: tags
     }
   }

@@ -8,12 +8,14 @@ const moveOutside = (state, action) => {
   const parent = findNodeParent(state.structure, id)
 
   if (parent && parent.id !== id) {
-    const newState1 = removeNode(state.structure, id)
-    const newState2 = insertNodeBefore(newState1, parent.id, trial)
+    const result = {}
+    removeNode(state.structure, state.entities, id, result)
+
+    const newStructure = insertNodeBefore(result.arr, parent.id, trial)
 
     return {
       ...state,
-      structure: newState2
+      structure: newStructure
     }
   } else {
     return state

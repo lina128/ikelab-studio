@@ -135,7 +135,6 @@ export class Block extends Component {
           <Trial
             key={children[i].id}
             selectMode={selectMode}
-            condition={children[i].condition}
             id={children[i].id}
             screenshot={children[i].screenshot}
             selected={children[i].selected}
@@ -150,7 +149,6 @@ export class Block extends Component {
             <Trial
               key={children[i].id}
               selectMode={selectMode}
-              condition={children[i].condition}
               id={children[i].id}
               screenshot={children[i].screenshot}
               selected={children[i].selected}
@@ -164,7 +162,6 @@ export class Block extends Component {
             <Trial
               key={children[i].id}
               selectMode={selectMode}
-              condition={children[i].condition}
               id={children[i].id}
               screenshot={children[i].screenshot}
               selected={children[i].selected}
@@ -178,7 +175,6 @@ export class Block extends Component {
             <Trial
               key={children[i].id}
               selectMode={selectMode}
-              condition={children[i].condition}
               id={children[i].id}
               screenshot={children[i].screenshot}
               selected={children[i].selected}

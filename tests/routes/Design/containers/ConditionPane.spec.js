@@ -7,13 +7,9 @@ describe('(Container) ConditionPane', () => {
 
   beforeEach(() => {
     _props = {
-      condition: [
-        {
-          id: 1,
-          name: 'Condition1',
-          color: '#3498db'
-        }
-      ],
+      condition: {
+        c3498db: 'Condition1'
+      },
       onRenameCondition: el => el,
       onSelectMode: el => el,
       onRemoveCondition: el => el,

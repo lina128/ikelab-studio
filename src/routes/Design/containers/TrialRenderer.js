@@ -9,7 +9,7 @@ import './TrialRenderer.scss'
 
 export default class TrialRenderer extends Component {
   static propTypes = {
-    condition: PropTypes.array.isRequired,
+    condition: PropTypes.object.isRequired,
     id: PropTypes.number.isRequired,
     screenshot: PropTypes.string,
     branchStyle: PropTypes.string,
@@ -26,9 +26,9 @@ export default class TrialRenderer extends Component {
 
     const conditionList = []
 
-    for (let i = 0; i < condition.length; i++) {
+    for (let id in condition) {
       conditionList.push(
-        <HorizontalBar key={condition[i]} backgroundColor={condition[i]} />
+        <HorizontalBar key={id} backgroundColor={condition[id].color} />
       )
     }
 
@@ -67,8 +67,7 @@ export default class TrialRenderer extends Component {
             <div>
               <Thumbnail
                 id={id}
-                screenshot={screenshot}
-                condition={condition} />
+                screenshot={screenshot} />
             </div>
           </Badge>
           <Sidebar>

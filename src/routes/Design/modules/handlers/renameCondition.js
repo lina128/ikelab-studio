@@ -1,21 +1,11 @@
-const renameCondition = (state, action) => {
-  for (let i = 0; i < state.condition.length; i++) {
-    if (state.condition[i].color === action.payload.color) {
-      return {
-        ...state,
-        condition: [
-          ...state.condition.slice(0, i),
-          {
-            ...state.condition[i],
-            name: action.payload.value
-          },
-          ...state.condition.slice(i + 1)
-        ]
-      }
-    }
-  }
+import { extendSet } from '../utils/node'
 
-  return state
+const renameCondition = (state, action) => {
+  const newCondition = extendSet(state.condition, action.payload.id, { name: action.payload.value })
+  return {
+    ...state,
+    condition: newCondition
+  }
 }
 
 export default renameCondition

@@ -16,6 +16,7 @@ export default class Text extends Component {
   }
 
   static propTypes = {
+    id: PropTypes.number.isRequired,
     trial: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired
   }
@@ -31,8 +32,8 @@ export default class Text extends Component {
   handleChange = (editorState) => this.setState({ editorState })
 
   handleBlur () {
-    const { trial, onChange } = this.props
-    onChange(trial.id, { content: this.state.editorState.getCurrentContent().getPlainText() })
+    const { id, onChange } = this.props
+    onChange(id, { content: this.state.editorState.getCurrentContent().getPlainText() })
   }
 
   render () {

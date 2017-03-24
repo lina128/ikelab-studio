@@ -1,11 +1,10 @@
-import { remove } from '../utils/node'
-
 const removeTrialCondition = (state, action) => {
-  const newStructure = remove(state.structure, action.payload.id, { condition: [ action.payload.condition ] })
+  const newEntities = { ...state.entities }
+  delete newEntities[action.payload.id].condition[action.payload.cid]
 
   return {
     ...state,
-    structure: newStructure
+    entities: newEntities
   }
 }
 

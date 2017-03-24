@@ -1,40 +1,29 @@
 import { COLOR_PALETTE } from '../../constants'
+import addMessage from './addMessage'
 
 const addCondition = (state, action) => {
-  let color
-  let inc = 0
-  while (inc < COLOR_PALETTE.length) {
-    color = COLOR_PALETTE[inc]
-
-    let idx = -1
-    for (let i = 0; i < state.condition.length; i++) {
-      if (state.condition[i].color === color) {
-        idx = i
-        break
+  if (Object.keys(state.condition).length === COLOR_PALETTE.length) {
+    return addMessage(state, {
+      type: 'ADD_MESSAGE',
+      payload: {
+        html: 'You can add at most ' + COLOR_PALETTE.length + ' conditions.'
       }
-    }
-
-    if (idx === -1) {
-      break
-    } else {
-      color = null
-      inc++
-    }
+    })
   }
 
-  if (color) {
-    return {
-      ...state,
-      condition: [
-        ...state.condition,
-        {
-          name: 'NewCondition',
-          color: color
+  for (let i = 0; i < COLOR_PALETTE.length; i++) {
+    if (!state.condition[i]) {
+      return {
+        ...state,
+        condition: {
+          ...state.condition,
+          [i]: {
+            name: 'NewCondition',
+            color: COLOR_PALETTE[i]
+          }
         }
-      ]
+      }
     }
-  } else {
-    return state
   }
 }
 

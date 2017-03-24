@@ -1,22 +1,17 @@
-import { removeAll } from '../utils/node'
-
 const removeCondition = (state, action) => {
-  for (let i = 0; i < state.condition.length; i++) {
-    if (state.condition[i].color === action.payload.color) {
-      const newStructure = removeAll(state.structure, { condition: [ action.payload.color ] })
+  const newCondition = { ...state.condition }
+  delete newCondition[action.payload.id]
 
-      return {
-        ...state,
-        structure: newStructure,
-        condition: [
-          ...state.condition.slice(0, i),
-          ...state.condition.slice(i + 1)
-        ]
-      }
-    }
+  const newEntities = { ...state.entities }
+  for (let id in newEntities) {
+    delete newEntities[id].condition[action.payload.id]
   }
 
-  return state
+  return {
+    ...state,
+    condition: newCondition,
+    entities: newEntities
+  }
 }
 
 export default removeCondition

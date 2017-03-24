@@ -17,6 +17,8 @@ const imageBlock = (setting) => {
   for (let i = 0; i < images.length; i++) {
     newTrials.push({
       type: 'IMAGE',
+      name: 'Image',
+      condition: [],
       setting: { image: images[i] }
     })
   }

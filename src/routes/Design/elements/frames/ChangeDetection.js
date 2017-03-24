@@ -32,24 +32,25 @@ export class ChangeDetection extends Component {
   }
 
   static propTypes = {
+    id: PropTypes.number.isRequired,
     trial: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired
   }
 
   addRedbox () {
-    const { trial, onChange } = this.props
+    const { id, trial, onChange } = this.props
 
     let isA = trial.trialSetting.onScreen === 'Image A'
     if (isA) {
-      onChange(trial.id,
+      onChange(id,
         { changeA:
         {
           ...trial.trialSetting.changeA,
           [ (Object.keys(trial.trialSetting.changeA) + 1).toString() ] :
           { top: 0, left: 0, width: 100, height: 100 } } })
     } else {
-      onChange(trial.id,
+      onChange(id,
         { changeB:
         {
           ...trial.trialSetting.changeB,
@@ -58,82 +59,82 @@ export class ChangeDetection extends Component {
     }
   }
 
-  moveRedbox (id, left, top) {
-    const { trial, onChange } = this.props
+  moveRedbox (bid, left, top) {
+    const { id, trial, onChange } = this.props
 
     let isA = trial.trialSetting.onScreen === 'Image A'
 
     if (isA) {
-      onChange(trial.id,
+      onChange(id,
         { changeA:
         {
           ...trial.trialSetting.changeA,
-          [id] : { top: top, left: left, width: 100, height: 100 } } })
+          [bid] : { top: top, left: left, width: 100, height: 100 } } })
     } else {
-      onChange(trial.id,
+      onChange(id,
         { changeB:
         {
           ...trial.trialSetting.changeB,
-          [id] : { top: top, left: left, width: 100, height: 100 } } })
+          [bid] : { top: top, left: left, width: 100, height: 100 } } })
     }
   }
 
-  grow (id) {
-    const { trial, onChange } = this.props
+  grow (bid) {
+    const { id, trial, onChange } = this.props
 
     let isA = trial.trialSetting.onScreen === 'Image A'
     let box
 
     if (isA) {
-      box = trial.trialSetting.changeA[id]
+      box = trial.trialSetting.changeA[bid]
 
-      onChange(trial.id,
+      onChange(id,
         { changeA:
         {
           ...trial.trialSetting.changeA,
-          [id] : {
+          [bid] : {
             ...box,
             width: box.width + 20,
             height: box.height + 20 } } })
     } else {
-      trial.trialSetting.changeB[id]
+      box = trial.trialSetting.changeB[bid]
 
-      onChange(trial.id,
+      onChange(id,
         { changeB:
         {
           ...trial.trialSetting.changeB,
-          [id] : {
+          [bid] : {
             ...box,
             width: box.width + 20,
             height: box.height + 20 } } })
     }
   }
 
-  shrink (id) {
-    const { trial, onChange } = this.props
+  shrink (bid) {
+    const { id, trial, onChange } = this.props
 
     let isA = trial.trialSetting.onScreen === 'Image A'
     let box
 
     if (isA) {
-      box = trial.trialSetting.changeA[id]
+      box = trial.trialSetting.changeA[bid]
 
-      onChange(trial.id,
+      onChange(id,
         { changeA:
         {
           ...trial.trialSetting.changeA,
-          [id] : {
+          [bid] : {
             ...box,
             width: box.width - 20,
             height: box.height - 20 } } })
     } else {
-      trial.trialSetting.changeB[id]
+      box = trial.trialSetting.changeB[bid]
 
-      onChange(trial.id,
+      onChange(id,
         { changeB:
         {
           ...trial.trialSetting.changeB,
-          [id] : {
+          [bid] : {
             ...box,
             width: box.width - 20,
             height: box.height - 20 } } })

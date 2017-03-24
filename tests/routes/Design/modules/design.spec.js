@@ -1,4 +1,5 @@
 import { addBlock, addBlockTrials, addCondition, addRun, addTrial,
+addMessage, deleteMessage,
 changeTrialSetting, changeBlockSetting, clickTrial, copyCurrentTrial,
 deleteCurrentTrial, moveInside, moveNode, moveOutside,
 removeCondition, removeTrialCondition, renameCondition,
@@ -25,10 +26,10 @@ describe('(Design/modules)', () => {
   beforeEach(() => {
     _initialState = {
       counter: 0,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -56,7 +57,7 @@ describe('(Design/modules)', () => {
       const state2 = designReducer(state1, addBlock())
       expect(state2).to.deep.equal({
         counter: 1,
-        condition: [],
+        condition: {},
         currentTrial: null,
         structure: [
           {
@@ -72,7 +73,7 @@ describe('(Design/modules)', () => {
             children: []
           }
         ],
-        entities: [],
+        entities: {},
         selected: [],
         selectId: null,
         selectMode: false,
@@ -86,17 +87,21 @@ describe('(Design/modules)', () => {
       const state2 = designReducer(state1, addBlockTrials({ setting: [] }, [
         {
           type: 'TEXT',
+          name: 'Text',
+          condition: {},
           setting: trialSetting
         },
         {
           type: 'TEXT',
+          name: 'Text',
+          condition: {},
           setting: { font: 66 }
         }
       ]))
 
       expect(state2).to.deep.equal({
         counter: 3,
-        condition: [],
+        condition: {},
         currentTrial: null,
         structure: [
           {
@@ -114,31 +119,31 @@ describe('(Design/modules)', () => {
                 id: 2,
                 level: 'trial',
                 selected: false,
-                condition: [],
                 screenshot: null
               },
               {
                 id: 3,
                 level: 'trial',
                 selected: false,
-                condition: [],
                 screenshot: null
               }
             ]
           }
         ],
-        entities: [
-          {
-            id: 2,
+        entities: {
+          2: {
             type: 'TEXT',
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           },
-          {
-            id: 3,
+          3: {
             type: 'TEXT',
+            name: 'Text',
+            condition: {},
             trialSetting: { ...trialSetting, font: 66 }
           }
-        ],
+        },
         selected: [],
         selectId: null,
         selectMode: false,
@@ -153,15 +158,15 @@ describe('(Design/modules)', () => {
       const state2 = designReducer(state1, addCondition())
       expect(state2).to.deep.equal({
         counter: 0,
-        condition: [
-          {
+        condition: {
+          0: {
             name: 'NewCondition',
             color: '#3498db'
           }
-        ],
+        },
         currentTrial: null,
         structure: [],
-        entities: [],
+        entities: {},
         selected: [],
         selectId: null,
         selectMode: false,
@@ -175,7 +180,7 @@ describe('(Design/modules)', () => {
       const state2 = designReducer(state1, addRun())
       expect(state2).to.deep.equal({
         counter: 1,
-        condition: [],
+        condition: {},
         currentTrial: null,
         structure: [
           {
@@ -189,7 +194,65 @@ describe('(Design/modules)', () => {
             children: []
           }
         ],
-        entities: [],
+        entities: {},
+        selected: [],
+        selectId: null,
+        selectMode: false,
+        messages: [],
+        tags: []
+      })
+    })
+
+    it('Should handle ADD_MESSAGE', () => {
+      const state1 = designReducer(undefined, {})
+      const state2 = designReducer(state1, addMessage({ html:'Loading' }))
+
+      expect(state2).to.deep.equal({
+        counter: 0,
+        condition: {},
+        currentTrial: null,
+        structure: [],
+        entities: {},
+        selected: [],
+        selectId: null,
+        selectMode: false,
+        messages: [
+          {
+            id: 1,
+            html: 'Loading'
+          }
+        ],
+        tags: []
+      })
+    })
+
+    it('Should handle DELETE_MESSAGE', () => {
+      const state1 = {
+        counter: 0,
+        condition: {},
+        currentTrial: null,
+        structure: [],
+        entities: {},
+        selected: [],
+        selectId: null,
+        selectMode: false,
+        messages: [
+          {
+            id: 1,
+            html: 'Loading'
+          }
+        ],
+        tags: []
+      }
+
+      const state2 = designReducer(state1, deleteMessage(1))
+
+      expect(state2).to.deep.equal({
+        counter: 0,
+        condition: {},
+        currentTrial: null,
+        structure: [],
+        entities: {},
         selected: [],
         selectId: null,
         selectMode: false,
@@ -204,25 +267,24 @@ describe('(Design/modules)', () => {
 
       expect(state2).to.deep.equal({
         counter: 1,
-        condition: [],
+        condition: {},
         currentTrial: 1,
         structure: [
           {
             id: 1,
             level: 'trial',
             selected: false,
-            condition: [],
             screenshot: null
           }
         ],
-        entities: [
-          {
-            id: 1,
+        entities: {
+          1: {
             type: trialType,
             name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           }
-        ],
+        },
         selected: [],
         selectId: null,
         selectMode: false,
@@ -234,36 +296,36 @@ describe('(Design/modules)', () => {
     it('Should handle CLICK_TRIAL', () => {
       const state1 = {
         counter: 1,
-        condition: [],
+        condition: {},
         currentTrial: 1,
         structure: [
           {
             id: 1,
             level: 'trial',
             selected: false,
-            condition: [],
             screenshot: null
           },
           {
             id: 2,
             level: 'trial',
             selected: false,
-            condition: [],
             screenshot: null
           }
         ],
-        entities: [
-          {
-            id: 1,
+        entities: {
+          1: {
             type: trialType,
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           },
-          {
-            id: 2,
+          2: {
             type: trialType,
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           }
-        ],
+        },
         selected: [],
         selectId: null,
         selectMode: false
@@ -272,36 +334,36 @@ describe('(Design/modules)', () => {
       const state2 = designReducer(state1, clickTrial(2))
       expect(state2).to.deep.equal({
         counter: 1,
-        condition: [],
+        condition: {},
         currentTrial: 2,
         structure: [
           {
             id: 1,
             level: 'trial',
             selected: false,
-            condition: [],
             screenshot: null
           },
           {
             id: 2,
             level: 'trial',
             selected: false,
-            condition: [],
             screenshot: null
           }
         ],
-        entities: [
-          {
-            id: 1,
+        entities: {
+          1: {
             type: trialType,
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           },
-          {
-            id: 2,
+          2: {
             type: trialType,
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           }
-        ],
+        },
         selected: [],
         selectId: null,
         selectMode: false
@@ -311,24 +373,24 @@ describe('(Design/modules)', () => {
     it('Should handle COPY_CURRENT_TRIAL', () => {
       const state1 = {
         counter: 1,
-        condition: [],
+        condition: {},
         currentTrial: 1,
         structure: [
           {
             id: 1,
             level: 'trial',
             selected: false,
-            condition: [],
             screenshot: null
           }
         ],
-        entities: [
-          {
-            id: 1,
+        entities: {
+          1: {
             type: trialType,
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           }
-        ],
+        },
         selected: [],
         selectId: null,
         selectMode: false
@@ -338,36 +400,36 @@ describe('(Design/modules)', () => {
 
       expect(state2).to.deep.equal({
         counter: 2,
-        condition: [],
+        condition: {},
         currentTrial: 2,
         structure: [
           {
             id: 1,
             level: 'trial',
             selected: false,
-            condition: [],
             screenshot: null
           },
           {
             id: 2,
             level: 'trial',
             selected: false,
-            condition: [],
             screenshot: null
           }
         ],
-        entities: [
-          {
-            id: 1,
+        entities: {
+          1: {
             type: trialType,
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           },
-          {
-            id: 2,
+          2: {
             type: trialType,
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           }
-        ],
+        },
         selected: [],
         selectId: null,
         selectMode: false
@@ -377,24 +439,24 @@ describe('(Design/modules)', () => {
     it('Should handle DELETE_CURRENT_TRIAL', () => {
       const state1 = {
         counter: 1,
-        condition: [],
+        condition: {},
         currentTrial: 1,
         structure: [
           {
             id: 1,
             level: 'trial',
             selected: false,
-            condition: [],
             screenshot: null
           }
         ],
-        entities: [
-          {
-            id: 1,
+        entities: {
+          1: {
             type: trialType,
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           }
-        ],
+        },
         selected: [],
         selectId: null,
         selectMode: false
@@ -403,10 +465,10 @@ describe('(Design/modules)', () => {
       const state2 = designReducer(state1, deleteCurrentTrial())
       expect(state2).to.deep.equal({
         counter: 1,
-        condition: [],
+        condition: {},
         currentTrial: null,
         structure: [],
-        entities: [],
+        entities: {},
         selected: [],
         selectId: null,
         selectMode: false
@@ -416,14 +478,13 @@ describe('(Design/modules)', () => {
     it('Should handle MOVE_INSIDE', () => {
       const state1 = {
         counter: 2,
-        condition: [],
+        condition: {},
         currentTrial: 1,
         structure: [
           {
             id: 1,
             level: 'trial',
             selected: false,
-            condition: [],
             screenshot: null
           },
           {
@@ -433,13 +494,14 @@ describe('(Design/modules)', () => {
             children: []
           }
         ],
-        entities: [
-          {
-            id: 1,
+        entities: {
+          1: {
             type: trialType,
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           }
-        ],
+        },
         selected: [],
         selectId: null,
         selectMode: false
@@ -449,7 +511,7 @@ describe('(Design/modules)', () => {
 
       expect(state2).to.deep.equal({
         counter: 2,
-        condition: [],
+        condition: {},
         currentTrial: 1,
         structure: [
           {
@@ -461,19 +523,19 @@ describe('(Design/modules)', () => {
                 id: 1,
                 level: 'trial',
                 selected: false,
-                condition: [],
                 screenshot: null
               }
             ]
           }
         ],
-        entities: [
-          {
-            id: 1,
+        entities: {
+          1: {
             type: trialType,
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           }
-        ],
+        },
         selected: [],
         selectId: null,
         selectMode: false
@@ -481,7 +543,7 @@ describe('(Design/modules)', () => {
 
       const state3 = {
         counter: 3,
-        condition: [],
+        condition: {},
         currentTrial: 1,
         structure: [
           {
@@ -493,7 +555,6 @@ describe('(Design/modules)', () => {
                 id: 1,
                 level: 'trial',
                 selected: false,
-                condition: [],
                 screenshot: null
               }
             ]
@@ -505,13 +566,14 @@ describe('(Design/modules)', () => {
             children: []
           }
         ],
-        entities: [
-          {
-            id: 1,
+        entities: {
+          1: {
             type: trialType,
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           }
-        ],
+        },
         selected: [],
         selectId: null,
         selectMode: false
@@ -521,7 +583,7 @@ describe('(Design/modules)', () => {
 
       expect(state4).to.deep.equal({
         counter: 3,
-        condition: [],
+        condition: {},
         currentTrial: 1,
         structure: [
           {
@@ -538,7 +600,6 @@ describe('(Design/modules)', () => {
                     id: 1,
                     level: 'trial',
                     selected: false,
-                    condition: [],
                     screenshot: null
                   }
                 ]
@@ -546,13 +607,14 @@ describe('(Design/modules)', () => {
             ]
           }
         ],
-        entities: [
-          {
-            id: 1,
+        entities: {
+          1: {
             type: trialType,
+            name: 'Text',
+            condition: {},
             trialSetting: trialSetting
           }
-        ],
+        },
         selected: [],
         selectId: null,
         selectMode: false
@@ -563,36 +625,36 @@ describe('(Design/modules)', () => {
   it('Should handle MOVE_NODE (trial)', () => {
     const state1 = {
       counter: 2,
-      condition: [],
+      condition: {},
       currentTrial: 2,
       structure: [
         {
           id: 1,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         },
         {
           id: 2,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
+          name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         },
-        {
-          id: 2,
+        2: {
           type: trialType,
+          name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         }
-      ],
+      },
       selected: [],
       selectId: null,
       selectMode: false,
@@ -604,36 +666,36 @@ describe('(Design/modules)', () => {
 
     expect(state2).to.deep.equal({
       counter: 2,
-      condition: [],
+      condition: {},
       currentTrial: 2,
       structure: [
         {
           id: 2,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         },
         {
           id: 1,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
+          name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         },
-        {
-          id: 2,
+        2: {
           type: trialType,
+          name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         }
-      ],
+      },
       selected: [],
       selectId: null,
       selectMode: false,
@@ -645,36 +707,36 @@ describe('(Design/modules)', () => {
 
     expect(state3).to.deep.equal({
       counter: 2,
-      condition: [],
+      condition: {},
       currentTrial: 2,
       structure: [
         {
           id: 1,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         },
         {
           id: 2,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
+          name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         },
-        {
-          id: 2,
+        2: {
           type: trialType,
+          name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         }
-      ],
+      },
       selected: [],
       selectId: null,
       selectMode: false,
@@ -686,7 +748,7 @@ describe('(Design/modules)', () => {
   it('Should handle MOVE_NODE (block)', () => {
     const state1 = {
       counter: 2,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [
         {
@@ -702,7 +764,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -714,7 +776,7 @@ describe('(Design/modules)', () => {
 
     expect(state2).to.deep.equal({
       counter: 2,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [
         {
@@ -730,7 +792,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -742,7 +804,7 @@ describe('(Design/modules)', () => {
 
     expect(state3).to.deep.equal({
       counter: 2,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [
         {
@@ -758,7 +820,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -770,7 +832,7 @@ describe('(Design/modules)', () => {
   it('Should handle MOVE_NODE (run)', () => {
     const state1 = {
       counter: 2,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [
         {
@@ -786,7 +848,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -798,7 +860,7 @@ describe('(Design/modules)', () => {
 
     expect(state2).to.deep.equal({
       counter: 2,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [
         {
@@ -814,7 +876,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -826,7 +888,7 @@ describe('(Design/modules)', () => {
 
     expect(state3).to.deep.equal({
       counter: 2,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [
         {
@@ -842,7 +904,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -854,7 +916,7 @@ describe('(Design/modules)', () => {
   it('Should handle MOVE_OUTSIDE', () => {
     const state1 = {
       counter: 2,
-      condition: [],
+      condition: {},
       currentTrial: 1,
       structure: [
         {
@@ -866,19 +928,19 @@ describe('(Design/modules)', () => {
               id: 1,
               level: 'trial',
               selected: false,
-              condition: [],
               screenshot: null
             }
           ]
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
+          name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         }
-      ],
+      },
       selected: [],
       selectId: null,
       selectMode: false,
@@ -890,14 +952,13 @@ describe('(Design/modules)', () => {
 
     expect(state2).to.deep.equal({
       counter: 2,
-      condition: [],
+      condition: {},
       currentTrial: 1,
       structure: [
         {
           id: 1,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         },
         {
@@ -907,13 +968,14 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
+          name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         }
-      ],
+      },
       selected: [],
       selectId: null,
       selectMode: false,
@@ -925,12 +987,12 @@ describe('(Design/modules)', () => {
   it('Should handle REMOVE_CONDITION', () => {
     const state1 = {
       counter: 2,
-      condition: [
-        {
+      condition: {
+        0: {
           name: 'Condition1',
           color: '#3498db'
         }
-      ],
+      },
       currentTrial: null,
       structure: [
         {
@@ -942,19 +1004,41 @@ describe('(Design/modules)', () => {
               id: 1,
               level: 'trial',
               selected: false,
-              condition: ['#3498db'],
               screenshot: null
             }
           ]
+        },
+        {
+          id: 3,
+          level: 'trial',
+          selected: false,
+          screenshot: null
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
+          name: 'Text',
+          condition: {
+            0: {
+              name: 'Condition1',
+              color: '#3498db'
+            }
+          },
+          trialSetting: trialSetting
+        },
+        3: {
+          type: trialType,
+          name: 'Text',
+          condition: {
+            0: {
+              name: 'Condition1',
+              color: '#3498db'
+            }
+          },
           trialSetting: trialSetting
         }
-      ],
+      },
       selected: [],
       selectId: null,
       selectMode: false,
@@ -962,11 +1046,11 @@ describe('(Design/modules)', () => {
       tags: []
     }
 
-    const state2 = designReducer(state1, removeCondition('#3498db'))
+    const state2 = designReducer(state1, removeCondition(0))
 
     expect(state2).to.deep.equal({
       counter: 2,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [
         {
@@ -978,19 +1062,31 @@ describe('(Design/modules)', () => {
               id: 1,
               level: 'trial',
               selected: false,
-              condition: [],
               screenshot: null
             }
           ]
+        },
+        {
+          id: 3,
+          level: 'trial',
+          selected: false,
+          screenshot: null
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
+          name: 'Text',
+          condition: {},
+          trialSetting: trialSetting
+        },
+        3: {
+          type: trialType,
+          name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         }
-      ],
+      },
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1002,29 +1098,34 @@ describe('(Design/modules)', () => {
   it('Should handle REMOVE_TRIAL_CONDITION', () => {
     const state1 = {
       counter: 1,
-      condition: [
-        {
+      condition: {
+        0: {
           name: 'Condition1',
           color: '#3498db'
         }
-      ],
+      },
       currentTrial: 1,
       structure: [
         {
           id: 1,
           level: 'trial',
           selected: false,
-          condition: ['#3498db'],
           screenshot: null
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
+          name: 'Text',
+          condition: {
+            0: {
+              name: 'Condition1',
+              color: '#3498db'
+            }
+          },
           trialSetting: trialSetting
         }
-      ],
+      },
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1032,33 +1133,33 @@ describe('(Design/modules)', () => {
       tags: []
     }
 
-    const state2 = designReducer(state1, removeTrialCondition(1, '#3498db'))
+    const state2 = designReducer(state1, removeTrialCondition(1, 0))
 
     expect(state2).to.deep.equal({
       counter: 1,
-      condition: [
-        {
+      condition: {
+        0: {
           name: 'Condition1',
           color: '#3498db'
         }
-      ],
+      },
       currentTrial: 1,
       structure: [
         {
           id: 1,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
+          name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         }
-      ],
+      },
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1070,15 +1171,15 @@ describe('(Design/modules)', () => {
   it('Should handle RENAME_CONDITION', () => {
     const state1 = {
       counter: 0,
-      condition: [
-        {
+      condition: {
+        0: {
           name: 'Condition1',
           color: '#3498db'
         }
-      ],
+      },
       currentTrial: null,
       structure: [],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1086,19 +1187,19 @@ describe('(Design/modules)', () => {
       tags: []
     }
 
-    const state2 = designReducer(state1, renameCondition('#3498db', 'Congruent'))
+    const state2 = designReducer(state1, renameCondition(0, 'Congruent'))
 
     expect(state2).to.deep.equal({
       counter: 0,
-      condition: [
-        {
+      condition: {
+        0: {
           name: 'Congruent',
           color: '#3498db'
         }
-      ],
+      },
       currentTrial: null,
       structure: [],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1110,7 +1211,7 @@ describe('(Design/modules)', () => {
   it('Should handle CHANGE_BLOCK_SETTING', () => {
     const state1 = {
       counter: 1,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [
         {
@@ -1126,7 +1227,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1137,7 +1238,7 @@ describe('(Design/modules)', () => {
 
     expect(state2).to.deep.equal({
       counter: 1,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [
         {
@@ -1153,7 +1254,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1165,24 +1266,24 @@ describe('(Design/modules)', () => {
   it('Should handle CHANGE_TRIAL_SETTING', () => {
     const state1 = {
       counter: 1,
-      condition: [],
+      condition: {},
       currentTrial: 1,
       structure: [
         {
           id: 1,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
+          name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         }
-      ],
+      },
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1191,29 +1292,31 @@ describe('(Design/modules)', () => {
     }
 
     const state2 = designReducer(state1, changeTrialSetting(1, { fontSize: '66' }))
-    expect(state2).to.deep.equal({
+    const state3 = designReducer(state2, changeTrialSetting(1, { fontWeight: 'bold' }))
+    expect(state3).to.deep.equal({
       counter: 1,
-      condition: [],
+      condition: {},
       currentTrial: 1,
       structure: [
         {
           id: 1,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
+          name: 'Text',
+          condition: {},
           trialSetting: {
             ...trialSetting,
-            fontSize: '66'
+            fontSize: '66',
+            fontWeight: 'bold'
           }
         }
-      ],
+      },
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1224,14 +1327,15 @@ describe('(Design/modules)', () => {
 
   it('Should handle TOGGLE_SELECT_MODE', () => {
     const state1 = designReducer(undefined, {})
-    const state2 = designReducer(state1, toggleSelectMode('testId', { condition: ['#3498db'] }, 'extend'))
+    const state2 = designReducer(state1,
+      toggleSelectMode('testId', { condition: { 0: { name: 'Condition1', color: '#3498db' } } }, 'extend'))
 
     expect(state2).to.deep.equal({
       counter: 0,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: 'testId',
       selectMode: true,
@@ -1239,14 +1343,15 @@ describe('(Design/modules)', () => {
       tags: []
     })
 
-    const state3 = designReducer(state2, toggleSelectMode('anotherId', { condition: ['#000000'] }, 'extend'))
+    const state3 = designReducer(state2,
+      toggleSelectMode('anotherId', { condition: { 1: { name: 'Condition2', color: '#000000' } } }, 'extend'))
 
     expect(state3).to.deep.equal({
       counter: 0,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: 'testId',
       selectMode: true,
@@ -1254,14 +1359,15 @@ describe('(Design/modules)', () => {
       tags: []
     })
 
-    const state4 = designReducer(state3, toggleSelectMode('testId', { condition: ['#3498db'] }, 'extend'))
+    const state4 = designReducer(state3,
+      toggleSelectMode('testId', { condition: { 0: { name: 'Condition1', color: '#3498db' } } }, 'extend'))
 
     expect(state4).to.deep.equal({
       counter: 0,
-      condition: [],
+      condition: {},
       currentTrial: null,
       structure: [],
-      entities: [],
+      entities: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1271,92 +1377,101 @@ describe('(Design/modules)', () => {
   })
 
   it('Should handle SELECT_TRIAL', () => {
-    const state1 = designReducer(undefined, {})
-    const state2 = designReducer(state1, toggleSelectMode('testId', { condition: ['#3498db'] }, 'extend'))
-    const state3 = designReducer(state2, addTrial(trialType, 'Text'))
-    const state4 = designReducer(state3, selectTrial(1))
-
-    expect(state4).to.deep.equal({
+    const state1 = {
       counter: 1,
-      condition: [],
-      currentTrial: 1,
-      structure: [
-        {
-          id: 1,
-          level: 'trial',
-          selected: true,
-          condition: [],
-          screenshot: null
+      condition: {
+        0: {
+          name: 'Condition1',
+          color: '#3498db'
         }
-      ],
-      entities: [
-        {
-          id: 1,
-          type: trialType,
-          name: 'Text',
-          trialSetting: trialSetting
-        }
-      ],
-      selected: [1],
-      selectId: 'testId',
-      selectMode: true,
-      messages: [],
-      tags: ['Text']
-    })
-
-    const state5 = designReducer(state4, selectTrial(1))
-
-    expect(state5).to.deep.equal({
-      counter: 1,
-      condition: [],
+      },
       currentTrial: 1,
       structure: [
         {
           id: 1,
           level: 'trial',
           selected: false,
-          condition: [],
           screenshot: null
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
           name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         }
-      ],
+      },
       selected: [],
-      selectId: 'testId',
-      selectMode: true,
+      selectId: null,
+      selectMode: false,
       messages: [],
       tags: ['Text']
-    })
+    }
+    const state2 = designReducer(state1,
+      toggleSelectMode('testId', { condition: { 0: { name: 'Condition1', color: '#3498db' } } }, 'extend'))
+    const state3 = designReducer(state2, selectTrial(1))
 
-    const state6 = designReducer(state5, selectTrial(1))
-    expect(state6).to.deep.equal({
+    expect(state3).to.deep.equal({
       counter: 1,
-      condition: [],
+      condition: {
+        0: {
+          name: 'Condition1',
+          color: '#3498db'
+        }
+      },
       currentTrial: 1,
       structure: [
         {
           id: 1,
           level: 'trial',
           selected: true,
-          condition: [],
           screenshot: null
         }
       ],
-      entities: [
-        {
-          id: 1,
+      entities: {
+        1: {
           type: trialType,
           name: 'Text',
+          condition: {},
           trialSetting: trialSetting
         }
-      ],
+      },
       selected: [1],
+      selectId: 'testId',
+      selectMode: true,
+      messages: [],
+      tags: ['Text']
+    })
+
+    const state4 = designReducer(state3, selectTrial(1))
+
+    expect(state4).to.deep.equal({
+      counter: 1,
+      condition: {
+        0: {
+          name: 'Condition1',
+          color: '#3498db'
+        }
+      },
+      currentTrial: 1,
+      structure: [
+        {
+          id: 1,
+          level: 'trial',
+          selected: false,
+          screenshot: null
+        }
+      ],
+      entities: {
+        1: {
+          type: trialType,
+          name: 'Text',
+          condition: {},
+          trialSetting: trialSetting
+        }
+      },
+      selected: [],
       selectId: 'testId',
       selectMode: true,
       messages: [],

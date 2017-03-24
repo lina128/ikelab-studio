@@ -5,12 +5,13 @@ const moveInside = (state, action) => {
   const parentId = action.payload.parentId
 
   const trial = findNode(state.structure, id)
-  const newState1 = removeNode(state.structure, id)
-  const newState2 = insertNodeIn(newState1, parentId, trial)
+  const result = {}
+  removeNode(state.structure, state.entities, id, result)
+  const newStructure = insertNodeIn(result.arr, parentId, trial)
 
   return {
     ...state,
-    structure: newState2
+    structure: newStructure
   }
 }
 
