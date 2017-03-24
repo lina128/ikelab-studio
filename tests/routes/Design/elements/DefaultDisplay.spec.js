@@ -19,8 +19,8 @@ describe('(Design/elements/frames) DefaultDisplay', () => {
 
   beforeEach(() => {
     _props = {
+      id: 1,
       trial: {
-        id: 1,
         type: 'TEXT',
         setting: setting
       }

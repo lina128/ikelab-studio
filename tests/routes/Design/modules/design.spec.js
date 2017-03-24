@@ -29,7 +29,7 @@ describe('(Design/modules)', () => {
       condition: {},
       currentTrial: null,
       structure: [],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -73,7 +73,7 @@ describe('(Design/modules)', () => {
             children: []
           }
         ],
-        entities: {},
+        entity: {},
         selected: [],
         selectId: null,
         selectMode: false,
@@ -130,7 +130,7 @@ describe('(Design/modules)', () => {
             ]
           }
         ],
-        entities: {
+        entity: {
           2: {
             type: 'TEXT',
             name: 'Text',
@@ -166,7 +166,7 @@ describe('(Design/modules)', () => {
         },
         currentTrial: null,
         structure: [],
-        entities: {},
+        entity: {},
         selected: [],
         selectId: null,
         selectMode: false,
@@ -194,7 +194,7 @@ describe('(Design/modules)', () => {
             children: []
           }
         ],
-        entities: {},
+        entity: {},
         selected: [],
         selectId: null,
         selectMode: false,
@@ -212,7 +212,7 @@ describe('(Design/modules)', () => {
         condition: {},
         currentTrial: null,
         structure: [],
-        entities: {},
+        entity: {},
         selected: [],
         selectId: null,
         selectMode: false,
@@ -232,7 +232,7 @@ describe('(Design/modules)', () => {
         condition: {},
         currentTrial: null,
         structure: [],
-        entities: {},
+        entity: {},
         selected: [],
         selectId: null,
         selectMode: false,
@@ -252,7 +252,7 @@ describe('(Design/modules)', () => {
         condition: {},
         currentTrial: null,
         structure: [],
-        entities: {},
+        entity: {},
         selected: [],
         selectId: null,
         selectMode: false,
@@ -277,7 +277,7 @@ describe('(Design/modules)', () => {
             screenshot: null
           }
         ],
-        entities: {
+        entity: {
           1: {
             type: trialType,
             name: 'Text',
@@ -312,7 +312,7 @@ describe('(Design/modules)', () => {
             screenshot: null
           }
         ],
-        entities: {
+        entity: {
           1: {
             type: trialType,
             name: 'Text',
@@ -350,7 +350,7 @@ describe('(Design/modules)', () => {
             screenshot: null
           }
         ],
-        entities: {
+        entity: {
           1: {
             type: trialType,
             name: 'Text',
@@ -383,7 +383,7 @@ describe('(Design/modules)', () => {
             screenshot: null
           }
         ],
-        entities: {
+        entity: {
           1: {
             type: trialType,
             name: 'Text',
@@ -416,7 +416,7 @@ describe('(Design/modules)', () => {
             screenshot: null
           }
         ],
-        entities: {
+        entity: {
           1: {
             type: trialType,
             name: 'Text',
@@ -449,7 +449,7 @@ describe('(Design/modules)', () => {
             screenshot: null
           }
         ],
-        entities: {
+        entity: {
           1: {
             type: trialType,
             name: 'Text',
@@ -468,7 +468,7 @@ describe('(Design/modules)', () => {
         condition: {},
         currentTrial: null,
         structure: [],
-        entities: {},
+        entity: {},
         selected: [],
         selectId: null,
         selectMode: false
@@ -494,7 +494,7 @@ describe('(Design/modules)', () => {
             children: []
           }
         ],
-        entities: {
+        entity: {
           1: {
             type: trialType,
             name: 'Text',
@@ -528,7 +528,7 @@ describe('(Design/modules)', () => {
             ]
           }
         ],
-        entities: {
+        entity: {
           1: {
             type: trialType,
             name: 'Text',
@@ -566,7 +566,7 @@ describe('(Design/modules)', () => {
             children: []
           }
         ],
-        entities: {
+        entity: {
           1: {
             type: trialType,
             name: 'Text',
@@ -607,7 +607,7 @@ describe('(Design/modules)', () => {
             ]
           }
         ],
-        entities: {
+        entity: {
           1: {
             type: trialType,
             name: 'Text',
@@ -641,7 +641,7 @@ describe('(Design/modules)', () => {
           screenshot: null
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -682,7 +682,7 @@ describe('(Design/modules)', () => {
           screenshot: null
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -723,7 +723,7 @@ describe('(Design/modules)', () => {
           screenshot: null
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -764,7 +764,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -792,7 +792,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -820,7 +820,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -848,7 +848,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -876,7 +876,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -904,7 +904,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -933,7 +933,7 @@ describe('(Design/modules)', () => {
           ]
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -968,7 +968,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -1015,7 +1015,7 @@ describe('(Design/modules)', () => {
           screenshot: null
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -1073,7 +1073,7 @@ describe('(Design/modules)', () => {
           screenshot: null
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -1113,7 +1113,7 @@ describe('(Design/modules)', () => {
           screenshot: null
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -1152,7 +1152,7 @@ describe('(Design/modules)', () => {
           screenshot: null
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -1179,7 +1179,7 @@ describe('(Design/modules)', () => {
       },
       currentTrial: null,
       structure: [],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1199,7 +1199,7 @@ describe('(Design/modules)', () => {
       },
       currentTrial: null,
       structure: [],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1227,7 +1227,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1254,7 +1254,7 @@ describe('(Design/modules)', () => {
           children: []
         }
       ],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1276,7 +1276,7 @@ describe('(Design/modules)', () => {
           screenshot: null
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -1305,7 +1305,7 @@ describe('(Design/modules)', () => {
           screenshot: null
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -1335,7 +1335,7 @@ describe('(Design/modules)', () => {
       condition: {},
       currentTrial: null,
       structure: [],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: 'testId',
       selectMode: true,
@@ -1351,7 +1351,7 @@ describe('(Design/modules)', () => {
       condition: {},
       currentTrial: null,
       structure: [],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: 'testId',
       selectMode: true,
@@ -1367,7 +1367,7 @@ describe('(Design/modules)', () => {
       condition: {},
       currentTrial: null,
       structure: [],
-      entities: {},
+      entity: {},
       selected: [],
       selectId: null,
       selectMode: false,
@@ -1394,7 +1394,7 @@ describe('(Design/modules)', () => {
           screenshot: null
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -1429,7 +1429,7 @@ describe('(Design/modules)', () => {
           screenshot: null
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',
@@ -1463,7 +1463,7 @@ describe('(Design/modules)', () => {
           screenshot: null
         }
       ],
-      entities: {
+      entity: {
         1: {
           type: trialType,
           name: 'Text',

@@ -19,8 +19,8 @@ describe('(Design/elements/frames) Image', () => {
 
   beforeEach(() => {
     _props = {
+      id: 1,
       trial: {
-        id: 1,
         type: 'IMAGE',
         trialSetting: setting
       }

@@ -12,7 +12,7 @@ export default class BlockRenderer extends Component {
     blockSetting: PropTypes.object.isRequired,
     branchStyle: PropTypes.string,
     children: PropTypes.array.isRequired,
-    entities: PropTypes.array.isRequired
+    entity: PropTypes.array.isRequired
   }
 
   render () {
@@ -21,14 +21,14 @@ export default class BlockRenderer extends Component {
       blockSetting,
       branchStyle,
       children,
-      entities } = this.props
+      entity } = this.props
 
     const classnames = classNames('design_blockRenderer_branch', branchStyle)
 
     const blockTrials = []
 
     for (let i = 0; i < children.length; i++) {
-      const node = findNode(entities, children[i].id)
+      const node = findNode(entity, children[i].id)
       if (children.length === 1) {
         blockTrials.push(
           <TrialRenderer

@@ -9,6 +9,7 @@ describe('(Design/component) TrialPane', () => {
     _spy = sinon.spy(TrialPane.prototype, 'componentDidUpdate')
 
     _props = {
+      id: 0,
       trial: {},
       handleChange: el => el
     }
@@ -27,7 +28,8 @@ describe('(Design/component) TrialPane', () => {
     expect(_spy.calledOnce).to.be.false
 
     _wrapper.setProps({
-      trial: { id: 1 },
+      id: 1,
+      trial: { condition: {} },
       handleChange: el => el
     })
 

@@ -33,8 +33,8 @@ const addTrial = (state, action) => {
           selected: false,
           screenshot: null
         }),
-      entities: {
-        ...state.entities,
+      entity: {
+        ...state.entity,
         [newCounterT] : {
           type: action.payload.type,
           name: action.payload.name,
@@ -58,8 +58,8 @@ const addTrial = (state, action) => {
           screenshot: null
         }
       ],
-      entities: {
-        ...state.entities,
+      entity: {
+        ...state.entity,
         [newCounterT] : {
           type: action.payload.type,
           name: action.payload.name,

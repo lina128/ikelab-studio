@@ -1,11 +1,11 @@
 const changeTrialSetting = (state, action) => {
-  const node = state.entities[action.payload.id]
+  const node = state.entity[action.payload.id]
   const newSetting = { ...node.trialSetting, ...action.payload.setting }
 
   return {
     ...state,
-    entities: {
-      ...state.entities,
+    entity: {
+      ...state.entity,
       [action.payload.id]: {
         ...node,
         trialSetting: newSetting

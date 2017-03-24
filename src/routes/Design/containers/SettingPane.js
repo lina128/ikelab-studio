@@ -17,7 +17,7 @@ import Button from 'react-mdl/lib/Button'
 
 const mapStateToProps = (state) => {
   return {
-    trial: state.design.present.entities[state.design.present.currentTrial],
+    trial: state.design.present.entity[state.design.present.currentTrial],
     id: state.design.present.currentTrial
   }
 }
@@ -59,7 +59,7 @@ export class SettingPane extends Component {
             id: id
           }
         ],
-        entities: [
+        entity: [
           trial
         ]
       }, 'http://localhost:3000')

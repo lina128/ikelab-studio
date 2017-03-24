@@ -11,8 +11,8 @@ import './TrialPane.scss'
 
 const mapStateToProps = (state) => {
   return {
-    id: state.design.present.currentTrial,
-    trial: state.design.present.entities[state.design.present.currentTrial]
+    id: state.design.present.currentTrial || 0,
+    trial: state.design.present.entity[state.design.present.currentTrial]
   }
 }
 

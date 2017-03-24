@@ -1,10 +1,10 @@
 const removeTrialCondition = (state, action) => {
-  const newEntities = { ...state.entities }
-  delete newEntities[action.payload.id].condition[action.payload.cid]
+  const newEntity = { ...state.entity }
+  delete newEntity[action.payload.id].condition[action.payload.cid]
 
   return {
     ...state,
-    entities: newEntities
+    entity: newEntity
   }
 }
 

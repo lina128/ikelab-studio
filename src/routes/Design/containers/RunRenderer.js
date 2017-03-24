@@ -9,7 +9,7 @@ export default class RunRenderer extends Component {
     name: PropTypes.string.isRequired,
     runSetting: PropTypes.object.isRequired,
     children: PropTypes.array.isRequired,
-    entities: PropTypes.array.isRequired
+    entity: PropTypes.array.isRequired
   }
 
   render () {
@@ -17,7 +17,7 @@ export default class RunRenderer extends Component {
       name,
       runSetting,
       children,
-      entities } = this.props
+      entity } = this.props
 
     const runBlocks = []
 
@@ -31,7 +31,7 @@ export default class RunRenderer extends Component {
             blockSetting={children[i].blockSetting}
             branchStyle={'design_blockRenderer_branch_single'}
             children={children[i].children}
-            entities={entities} />
+            entity={entity} />
         )
       } else {
         if (i === 0) {
@@ -43,7 +43,7 @@ export default class RunRenderer extends Component {
               blockSetting={children[i].blockSetting}
               branchStyle={'design_blockRenderer_branch_top'}
               children={children[i].children}
-              entities={entities} />
+              entity={entity} />
           )
         } else if (i === children.length - 1) {
           runBlocks.push(
@@ -54,7 +54,7 @@ export default class RunRenderer extends Component {
               blockSetting={children[i].blockSetting}
               branchStyle={'design_blockRenderer_branch_bottom'}
               children={children[i].children}
-              entities={entities} />
+              entity={entity} />
           )
         } else {
           runBlocks.push(

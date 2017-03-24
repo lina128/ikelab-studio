@@ -9,7 +9,7 @@ const moveOutside = (state, action) => {
 
   if (parent && parent.id !== id) {
     const result = {}
-    removeNode(state.structure, state.entities, id, result)
+    removeNode(state.structure, state.entity, id, result)
 
     const newStructure = insertNodeBefore(result.arr, parent.id, trial)
 

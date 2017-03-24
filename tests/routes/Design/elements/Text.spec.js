@@ -20,8 +20,8 @@ describe('(Design/components/frames) Text', () => {
 
   beforeEach(() => {
     _props = {
+      id: 1,
       trial: {
-        id: 1,
         type: 'TEXT',
         trialSetting: setting,
         screenshot: ''

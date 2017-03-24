@@ -40,7 +40,7 @@ const addBlockTrials = (state, action) => {
 
   let trials = action.payload.trials
   const children = []
-  const newEntities = {}
+  const newEntity = {}
   let newTrialSetting
   for (let i = 0; i < trials.length; i++) {
     newCounter++
@@ -54,7 +54,7 @@ const addBlockTrials = (state, action) => {
     )
 
     newTrialSetting = { ...getDefaultSetting(trials[i].type), ...trials[i].setting }
-    newEntities[newCounter] = {
+    newEntity[newCounter] = {
       type: trials[i].type,
       name: trials[i].name,
       condition: trials[i].condition,
@@ -76,9 +76,9 @@ const addBlockTrials = (state, action) => {
         children: children
       }
     ],
-    entities: {
-      ...state.entities,
-      ...newEntities
+    entity: {
+      ...state.entity,
+      ...newEntity
     }
   }
 }

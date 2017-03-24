@@ -270,7 +270,7 @@ const initialState = {
   condition: {},
   currentTrial: null,
   structure: [],
-  entities: {},
+  entity: {},
   selected: [],
   selectId: null,
   selectMode: false,

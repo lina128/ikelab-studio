@@ -2,7 +2,7 @@ import { removeNode, extend, extendSet } from '../utils/node'
 
 const toggleSelectMode = (state, action) => {
   const selectMode = !state.selectMode
-  let newStructure, newEntities
+  let newStructure, newEntity
 
   if (selectMode) {
     if (state.selectId) {
@@ -25,10 +25,10 @@ const toggleSelectMode = (state, action) => {
             newStructure = extend(newStructure, state.selected[i], { selected: false })
           }
 
-          newEntities = { ...state.entities }
+          newEntity = { ...state.entity }
 
           for (let i = 0; i < state.selected.length; i++) {
-            newEntities = extendSet(newEntities, state.selected[i], action.payload.setting)
+            newEntity = extendSet(newEntity, state.selected[i], action.payload.setting)
           }
 
           return {
@@ -37,12 +37,12 @@ const toggleSelectMode = (state, action) => {
             selected: [],
             selectId: null,
             structure: newStructure,
-            entities: newEntities
+            entity: newEntity
           }
         } else if (action.payload.op === 'remove') {
           var newCurrentTrial = state.currentTrial
           newStructure = [ ...state.structure ]
-          newEntities = { ...state.entities }
+          newEntity = { ...state.entity }
           let result = {}
 
           for (let i = 0; i < state.selected.length; i++) {
@@ -50,9 +50,9 @@ const toggleSelectMode = (state, action) => {
               newCurrentTrial = null
             }
 
-            removeNode(newStructure, newEntities, state.selected[i], result)
+            removeNode(newStructure, newEntity, state.selected[i], result)
             newStructure = [ ...result.arr ]
-            newEntities = { ...result.s }
+            newEntity = { ...result.s }
 
             result = {}
           }
@@ -64,7 +64,7 @@ const toggleSelectMode = (state, action) => {
             selected: [],
             selectId: null,
             structure: newStructure,
-            entities: newEntities
+            entity: newEntity
           }
         }
       } else {

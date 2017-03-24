@@ -3,7 +3,7 @@ import { insertNodeAfter, findNode } from '../utils/node'
 const copyCurrentTrial = (state, action) => {
   let newCounterT = state.counter + 1
   const nodeStructure = findNode(state.structure, state.currentTrial)
-  const nodeEntity = state.entities[state.currentTrial]
+  const nodeEntity = state.entity[state.currentTrial]
 
   return {
     ...state,
@@ -16,8 +16,8 @@ const copyCurrentTrial = (state, action) => {
         ...nodeStructure,
         id: newCounterT
       }),
-    entities: {
-      ...state.entities,
+    entity: {
+      ...state.entity,
       [newCounterT]: { ...nodeEntity }
     }
   }
