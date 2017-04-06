@@ -7,7 +7,7 @@ describe('(Design/component) MessageBar', () => {
 
   beforeEach(() => {
     _props = {
-      messages: [{ id:1, html:'Loading' }],
+      messages: [{ id:'1', html:'Loading' }],
       addMessage: el => el,
       deleteMessage: el => el
     }

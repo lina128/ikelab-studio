@@ -1,9 +1,11 @@
 import { injectReducer } from '../../store/reducers'
-import { UPDATE_STRUCTURE } from './modules/design'
+import { requireAuth } from '../../utils/AuthService'
+import { UPDATE_STRUCTURE, ADD_MESSAGE, DELETE_MESSAGE } from './modules/design'
 import undoable, { excludeAction } from 'redux-undo'
 
 export default (store) => ({
   path : 'design',
+  onEnter: requireAuth,
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -17,7 +19,7 @@ export default (store) => ({
       const Design = require('./components/Design').default
       const reducer = undoable(require('./modules/design').default, {
         limit: 10,
-        filter: excludeAction(UPDATE_STRUCTURE)
+        filter: excludeAction([UPDATE_STRUCTURE, ADD_MESSAGE, DELETE_MESSAGE])
       })
 
       /*  Add the reducer to the store on key 'design'  */

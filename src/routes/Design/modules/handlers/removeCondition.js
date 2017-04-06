@@ -10,7 +10,8 @@ const removeCondition = (state, action) => {
   return {
     ...state,
     condition: newCondition,
-    entity: newEntity
+    entity: newEntity,
+    didChange: true
   }
 }
 

@@ -10,7 +10,8 @@ const changeTrialSetting = (state, action) => {
         ...node,
         trialSetting: newSetting
       }
-    }
+    },
+    didChange: true
   }
 }
 

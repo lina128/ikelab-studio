@@ -37,7 +37,8 @@ const toggleSelectMode = (state, action) => {
             selected: [],
             selectId: null,
             structure: newStructure,
-            entity: newEntity
+            entity: newEntity,
+            didChange: true
           }
         } else if (action.payload.op === 'remove') {
           var newCurrentTrial = state.currentTrial
@@ -64,7 +65,8 @@ const toggleSelectMode = (state, action) => {
             selected: [],
             selectId: null,
             structure: newStructure,
-            entity: newEntity
+            entity: newEntity,
+            didChange: true
           }
         }
       } else {

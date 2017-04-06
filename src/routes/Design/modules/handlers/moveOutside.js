@@ -15,7 +15,8 @@ const moveOutside = (state, action) => {
 
     return {
       ...state,
-      structure: newStructure
+      structure: newStructure,
+      didChange: true
     }
   } else {
     return state

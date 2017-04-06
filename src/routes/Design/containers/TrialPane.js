@@ -9,19 +9,12 @@ import { Card } from 'react-mdl/lib/Card'
 import * as frames from '../elements/frames'
 import './TrialPane.scss'
 
-const mapStateToProps = (state) => {
-  return {
-    id: state.design.present.currentTrial || 0,
-    trial: state.design.present.entity[state.design.present.currentTrial]
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleChange: (id, change) => {
+    handleChange: (id = 0, change) => {
       dispatch(changeTrialSetting(id, change))
     },
-    didChangeStructure: (id, screenshot) => {
+    didChangeStructure: (id = 0, screenshot) => {
       dispatch(updateStructure(id, { screenshot: screenshot }))
     }
   }
@@ -83,5 +76,5 @@ export class TrialPane extends Component {
 
 export default flow(
   DropTarget('', {}, collect),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(null, mapDispatchToProps)
 )(TrialPane)

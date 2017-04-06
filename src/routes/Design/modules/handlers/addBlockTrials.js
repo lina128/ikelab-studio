@@ -79,7 +79,8 @@ const addBlockTrials = (state, action) => {
     entity: {
       ...state.entity,
       ...newEntity
-    }
+    },
+    didChange: true
   }
 }
 

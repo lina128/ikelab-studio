@@ -17,7 +17,8 @@ const addBlock = (state, action) => {
         },
         children: []
       }
-    ]
+    ],
+    didChange: true
   }
 }
 

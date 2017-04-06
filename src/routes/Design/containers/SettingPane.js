@@ -15,13 +15,6 @@ import OpenExperimentButton from './OpenExperimentButton'
 import IconButton from 'react-mdl/lib/IconButton'
 import Button from 'react-mdl/lib/Button'
 
-const mapStateToProps = (state) => {
-  return {
-    trial: state.design.present.entity[state.design.present.currentTrial],
-    id: state.design.present.currentTrial
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     handleChange: (id, change) => {
@@ -306,4 +299,4 @@ export class SettingPane extends Component {
   }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SettingPane)
+export default connect(null, mapDispatchToProps)(SettingPane)

@@ -1,11 +1,13 @@
 import { COLOR_PALETTE } from '../../constants'
 import addMessage from './addMessage'
+import uniqueId from 'lodash/flow'
 
 const addCondition = (state, action) => {
   if (Object.keys(state.condition).length === COLOR_PALETTE.length) {
     return addMessage(state, {
       type: 'ADD_MESSAGE',
       payload: {
+        id: uniqueId(),
         html: 'You can add at most ' + COLOR_PALETTE.length + ' conditions.'
       }
     })
@@ -21,7 +23,8 @@ const addCondition = (state, action) => {
             name: 'NewCondition',
             color: COLOR_PALETTE[i]
           }
-        }
+        },
+        didChange: true
       }
     }
   }

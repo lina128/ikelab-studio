@@ -10,7 +10,7 @@ export default class Message extends Component {
 
   static propTypes = {
     message: PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       html: PropTypes.string.isRequired
     }),
     deleteMessage: PropTypes.func.isRequired
@@ -26,7 +26,7 @@ export default class Message extends Component {
     return (
       <div className='design_message_default'>
         <div className='design_message_html' dangerouslySetInnerHTML={{ __html: message.html }} />
-        {message.isPromise ? null : <IconButton name='close' colored onClick={this.handleDelete} />}
+        <IconButton name='close' colored onClick={this.handleDelete} />
       </div>
     )
   }

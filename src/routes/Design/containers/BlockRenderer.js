@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { findNode } from '../utils/findNode'
 import classNames from 'classnames'
 import TrialRenderer from './TrialRenderer'
 import IconToggle from 'react-mdl/lib/IconToggle'
@@ -12,7 +11,7 @@ export default class BlockRenderer extends Component {
     blockSetting: PropTypes.object.isRequired,
     branchStyle: PropTypes.string,
     children: PropTypes.array.isRequired,
-    entity: PropTypes.array.isRequired
+    entity: PropTypes.object.isRequired
   }
 
   render () {
@@ -28,12 +27,13 @@ export default class BlockRenderer extends Component {
     const blockTrials = []
 
     for (let i = 0; i < children.length; i++) {
-      const node = findNode(entity, children[i].id)
+      let node = entity[children[i].id]
+
       if (children.length === 1) {
         blockTrials.push(
           <TrialRenderer
             key={children[i].id}
-            condition={children[i].condition}
+            condition={node.condition}
             id={children[i].id}
             screenshot={children[i].screenshot}
             branchStyle={'design_trialRenderer_branch_single'}
@@ -44,7 +44,7 @@ export default class BlockRenderer extends Component {
           blockTrials.push(
             <TrialRenderer
               key={children[i].id}
-              condition={children[i].condition}
+              condition={node.condition}
               id={children[i].id}
               screenshot={children[i].screenshot}
               branchStyle={'design_trialRenderer_branch_top'}
@@ -54,7 +54,7 @@ export default class BlockRenderer extends Component {
           blockTrials.push(
             <TrialRenderer
               key={children[i].id}
-              condition={children[i].condition}
+              condition={node.condition}
               id={children[i].id}
               screenshot={children[i].screenshot}
               branchStyle={'design_trialRenderer_branch_bottom'}
@@ -64,7 +64,7 @@ export default class BlockRenderer extends Component {
           blockTrials.push(
             <TrialRenderer
               key={children[i].id}
-              condition={children[i].condition}
+              condition={node.condition}
               id={children[i].id}
               screenshot={children[i].screenshot}
               branchStyle={'design_trialRenderer_branch_middle'}

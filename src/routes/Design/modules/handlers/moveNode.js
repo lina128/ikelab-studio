@@ -24,7 +24,8 @@ const moveNode = (state, action) => {
     newStructure = insertNodeAfter(result.arr, afterId, trial)
     return {
       ...state,
-      structure: newStructure
+      structure: newStructure,
+      didChange: true
     }
   }
 }

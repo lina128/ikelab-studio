@@ -11,8 +11,7 @@ import './DesignPane.scss'
 
 const mapStateToProps = (state) => {
   return {
-    selectMode: state.design.present.selectMode,
-    structure: state.design.present.structure
+    selectMode: state.design.present.selectMode
   }
 }
 

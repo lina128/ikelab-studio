@@ -8,7 +8,8 @@ const deleteCurrentTrial = (state, action) => {
     ...state,
     currentTrial: null,
     structure: result.arr,
-    entity: result.s
+    entity: result.s,
+    didChange: true
   }
 }
 

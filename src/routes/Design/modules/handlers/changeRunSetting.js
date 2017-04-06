@@ -5,7 +5,8 @@ const changeRunSetting = (state, action) => {
 
   return {
     ...state,
-    structure: newStructure
+    structure: newStructure,
+    didChange: true
   }
 }
 

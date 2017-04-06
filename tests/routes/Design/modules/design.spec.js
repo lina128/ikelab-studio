@@ -26,6 +26,7 @@ describe('(Design/modules)', () => {
   beforeEach(() => {
     _initialState = {
       counter: 0,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [],
@@ -34,7 +35,7 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: false
     }
   })
 
@@ -57,6 +58,7 @@ describe('(Design/modules)', () => {
       const state2 = designReducer(state1, addBlock())
       expect(state2).to.deep.equal({
         counter: 1,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: null,
         structure: [
@@ -78,7 +80,7 @@ describe('(Design/modules)', () => {
         selectId: null,
         selectMode: false,
         messages: [],
-        tags: []
+        didChange: true
       })
     })
 
@@ -101,6 +103,7 @@ describe('(Design/modules)', () => {
 
       expect(state2).to.deep.equal({
         counter: 3,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: null,
         structure: [
@@ -148,7 +151,7 @@ describe('(Design/modules)', () => {
         selectId: null,
         selectMode: false,
         messages: [],
-        tags: []
+        didChange: true
       })
     })
 
@@ -158,6 +161,7 @@ describe('(Design/modules)', () => {
       const state2 = designReducer(state1, addCondition())
       expect(state2).to.deep.equal({
         counter: 0,
+        name: 'Unnamed Experiment',
         condition: {
           0: {
             name: 'NewCondition',
@@ -171,7 +175,7 @@ describe('(Design/modules)', () => {
         selectId: null,
         selectMode: false,
         messages: [],
-        tags: []
+        didChange: true
       })
     })
 
@@ -180,6 +184,7 @@ describe('(Design/modules)', () => {
       const state2 = designReducer(state1, addRun())
       expect(state2).to.deep.equal({
         counter: 1,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: null,
         structure: [
@@ -199,16 +204,17 @@ describe('(Design/modules)', () => {
         selectId: null,
         selectMode: false,
         messages: [],
-        tags: []
+        didChange: true
       })
     })
 
     it('Should handle ADD_MESSAGE', () => {
       const state1 = designReducer(undefined, {})
-      const state2 = designReducer(state1, addMessage({ html:'Loading' }))
+      const state2 = designReducer(state1, addMessage('1', 'Loading'))
 
       expect(state2).to.deep.equal({
         counter: 0,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: null,
         structure: [],
@@ -218,17 +224,18 @@ describe('(Design/modules)', () => {
         selectMode: false,
         messages: [
           {
-            id: 1,
+            id: '1',
             html: 'Loading'
           }
         ],
-        tags: []
+        didChange: false
       })
     })
 
     it('Should handle DELETE_MESSAGE', () => {
       const state1 = {
         counter: 0,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: null,
         structure: [],
@@ -242,13 +249,14 @@ describe('(Design/modules)', () => {
             html: 'Loading'
           }
         ],
-        tags: []
+        didChange: false
       }
 
       const state2 = designReducer(state1, deleteMessage(1))
 
       expect(state2).to.deep.equal({
         counter: 0,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: null,
         structure: [],
@@ -257,7 +265,7 @@ describe('(Design/modules)', () => {
         selectId: null,
         selectMode: false,
         messages: [],
-        tags: []
+        didChange: false
       })
     })
 
@@ -267,6 +275,7 @@ describe('(Design/modules)', () => {
 
       expect(state2).to.deep.equal({
         counter: 1,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: 1,
         structure: [
@@ -289,7 +298,7 @@ describe('(Design/modules)', () => {
         selectId: null,
         selectMode: false,
         messages: [],
-        tags: ['Text']
+        didChange: true
       })
     })
 
@@ -373,6 +382,7 @@ describe('(Design/modules)', () => {
     it('Should handle COPY_CURRENT_TRIAL', () => {
       const state1 = {
         counter: 1,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: 1,
         structure: [
@@ -400,6 +410,7 @@ describe('(Design/modules)', () => {
 
       expect(state2).to.deep.equal({
         counter: 2,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: 2,
         structure: [
@@ -432,13 +443,15 @@ describe('(Design/modules)', () => {
         },
         selected: [],
         selectId: null,
-        selectMode: false
+        selectMode: false,
+        didChange: true
       })
     })
 
     it('Should handle DELETE_CURRENT_TRIAL', () => {
       const state1 = {
         counter: 1,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: 1,
         structure: [
@@ -459,25 +472,29 @@ describe('(Design/modules)', () => {
         },
         selected: [],
         selectId: null,
-        selectMode: false
+        selectMode: false,
+        didChange: false
       }
 
       const state2 = designReducer(state1, deleteCurrentTrial())
       expect(state2).to.deep.equal({
         counter: 1,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: null,
         structure: [],
         entity: {},
         selected: [],
         selectId: null,
-        selectMode: false
+        selectMode: false,
+        didChange: true
       })
     })
 
     it('Should handle MOVE_INSIDE', () => {
       const state1 = {
         counter: 2,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: 1,
         structure: [
@@ -504,13 +521,15 @@ describe('(Design/modules)', () => {
         },
         selected: [],
         selectId: null,
-        selectMode: false
+        selectMode: false,
+        didChange: false
       }
 
       const state2 = designReducer(state1, moveInside(1, 2))
 
       expect(state2).to.deep.equal({
         counter: 2,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: 1,
         structure: [
@@ -538,11 +557,13 @@ describe('(Design/modules)', () => {
         },
         selected: [],
         selectId: null,
-        selectMode: false
+        selectMode: false,
+        didChange: true
       })
 
       const state3 = {
         counter: 3,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: 1,
         structure: [
@@ -576,13 +597,15 @@ describe('(Design/modules)', () => {
         },
         selected: [],
         selectId: null,
-        selectMode: false
+        selectMode: false,
+        didChange: false
       }
 
       const state4 = designReducer(state3, moveInside(2, 3))
 
       expect(state4).to.deep.equal({
         counter: 3,
+        name: 'Unnamed Experiment',
         condition: {},
         currentTrial: 1,
         structure: [
@@ -617,7 +640,8 @@ describe('(Design/modules)', () => {
         },
         selected: [],
         selectId: null,
-        selectMode: false
+        selectMode: false,
+        didChange: true
       })
     })
   })
@@ -625,6 +649,7 @@ describe('(Design/modules)', () => {
   it('Should handle MOVE_NODE (trial)', () => {
     const state1 = {
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: 2,
       structure: [
@@ -659,13 +684,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: false
     }
 
     const state2 = designReducer(state1, moveNode(1, 2, 'DOWN'))
 
     expect(state2).to.deep.equal({
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: 2,
       structure: [
@@ -700,13 +726,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: true
     })
 
     const state3 = designReducer(state2, moveNode(1, 2, 'UP'))
 
     expect(state3).to.deep.equal({
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: 2,
       structure: [
@@ -741,13 +768,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: true
     })
   })
 
   it('Should handle MOVE_NODE (block)', () => {
     const state1 = {
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [
@@ -769,13 +797,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: false
     }
 
     const state2 = designReducer(state1, moveNode(1, 2, 'DOWN'))
 
     expect(state2).to.deep.equal({
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [
@@ -797,13 +826,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: true
     })
 
     const state3 = designReducer(state2, moveNode(1, 2, 'UP'))
 
     expect(state3).to.deep.equal({
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [
@@ -825,13 +855,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: true
     })
   })
 
   it('Should handle MOVE_NODE (run)', () => {
     const state1 = {
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [
@@ -853,13 +884,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: false
     }
 
     const state2 = designReducer(state1, moveNode(1, 2, 'DOWN'))
 
     expect(state2).to.deep.equal({
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [
@@ -881,13 +913,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: true
     })
 
     const state3 = designReducer(state2, moveNode(1, 2, 'UP'))
 
     expect(state3).to.deep.equal({
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [
@@ -909,13 +942,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: true
     })
   })
 
   it('Should handle MOVE_OUTSIDE', () => {
     const state1 = {
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: 1,
       structure: [
@@ -945,13 +979,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: false
     }
 
     const state2 = designReducer(state1, moveOutside(1))
 
     expect(state2).to.deep.equal({
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: 1,
       structure: [
@@ -980,13 +1015,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: true
     })
   })
 
   it('Should handle REMOVE_CONDITION', () => {
     const state1 = {
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {
         0: {
           name: 'Condition1',
@@ -1043,13 +1079,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: false
     }
 
     const state2 = designReducer(state1, removeCondition(0))
 
     expect(state2).to.deep.equal({
       counter: 2,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [
@@ -1091,13 +1128,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: true
     })
   })
 
   it('Should handle REMOVE_TRIAL_CONDITION', () => {
     const state1 = {
       counter: 1,
+      name: 'Unnamed Experiment',
       condition: {
         0: {
           name: 'Condition1',
@@ -1130,13 +1168,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: false
     }
 
     const state2 = designReducer(state1, removeTrialCondition(1, 0))
 
     expect(state2).to.deep.equal({
       counter: 1,
+      name: 'Unnamed Experiment',
       condition: {
         0: {
           name: 'Condition1',
@@ -1164,13 +1203,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: true
     })
   })
 
   it('Should handle RENAME_CONDITION', () => {
     const state1 = {
       counter: 0,
+      name: 'Unnamed Experiment',
       condition: {
         0: {
           name: 'Condition1',
@@ -1184,13 +1224,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: false
     }
 
     const state2 = designReducer(state1, renameCondition(0, 'Congruent'))
 
     expect(state2).to.deep.equal({
       counter: 0,
+      name: 'Unnamed Experiment',
       condition: {
         0: {
           name: 'Congruent',
@@ -1204,13 +1245,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: true
     })
   })
 
   it('Should handle CHANGE_BLOCK_SETTING', () => {
     const state1 = {
       counter: 1,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [
@@ -1232,12 +1274,13 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: false
     }
     const state2 = designReducer(state1, changeBlockSetting(1, { randomized: true }))
 
     expect(state2).to.deep.equal({
       counter: 1,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [
@@ -1259,13 +1302,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: true
     })
   })
 
   it('Should handle CHANGE_TRIAL_SETTING', () => {
     const state1 = {
       counter: 1,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: 1,
       structure: [
@@ -1288,13 +1332,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: false
     }
 
     const state2 = designReducer(state1, changeTrialSetting(1, { fontSize: '66' }))
     const state3 = designReducer(state2, changeTrialSetting(1, { fontWeight: 'bold' }))
     expect(state3).to.deep.equal({
       counter: 1,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: 1,
       structure: [
@@ -1321,7 +1366,7 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: true
     })
   })
 
@@ -1332,6 +1377,7 @@ describe('(Design/modules)', () => {
 
     expect(state2).to.deep.equal({
       counter: 0,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [],
@@ -1340,7 +1386,7 @@ describe('(Design/modules)', () => {
       selectId: 'testId',
       selectMode: true,
       messages: [],
-      tags: []
+      didChange: false
     })
 
     const state3 = designReducer(state2,
@@ -1348,6 +1394,7 @@ describe('(Design/modules)', () => {
 
     expect(state3).to.deep.equal({
       counter: 0,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [],
@@ -1356,7 +1403,7 @@ describe('(Design/modules)', () => {
       selectId: 'testId',
       selectMode: true,
       messages: [],
-      tags: []
+      didChange: false
     })
 
     const state4 = designReducer(state3,
@@ -1364,6 +1411,7 @@ describe('(Design/modules)', () => {
 
     expect(state4).to.deep.equal({
       counter: 0,
+      name: 'Unnamed Experiment',
       condition: {},
       currentTrial: null,
       structure: [],
@@ -1372,13 +1420,14 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: []
+      didChange: false
     })
   })
 
   it('Should handle SELECT_TRIAL', () => {
     const state1 = {
       counter: 1,
+      name: 'Unnamed Experiment',
       condition: {
         0: {
           name: 'Condition1',
@@ -1406,7 +1455,7 @@ describe('(Design/modules)', () => {
       selectId: null,
       selectMode: false,
       messages: [],
-      tags: ['Text']
+      didChange: false
     }
     const state2 = designReducer(state1,
       toggleSelectMode('testId', { condition: { 0: { name: 'Condition1', color: '#3498db' } } }, 'extend'))
@@ -1414,6 +1463,7 @@ describe('(Design/modules)', () => {
 
     expect(state3).to.deep.equal({
       counter: 1,
+      name: 'Unnamed Experiment',
       condition: {
         0: {
           name: 'Condition1',
@@ -1441,13 +1491,14 @@ describe('(Design/modules)', () => {
       selectId: 'testId',
       selectMode: true,
       messages: [],
-      tags: ['Text']
+      didChange: false
     })
 
     const state4 = designReducer(state3, selectTrial(1))
 
     expect(state4).to.deep.equal({
       counter: 1,
+      name: 'Unnamed Experiment',
       condition: {
         0: {
           name: 'Condition1',
@@ -1475,7 +1526,7 @@ describe('(Design/modules)', () => {
       selectId: 'testId',
       selectMode: true,
       messages: [],
-      tags: ['Text']
+      didChange: false
     })
   })
 })

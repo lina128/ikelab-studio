@@ -15,7 +15,8 @@ const addRun = (state, action) => {
         },
         children: []
       }
-    ]
+    ],
+    didChange: true
   }
 }
 

@@ -1,6 +1,7 @@
+import { requireAuth } from '../../utils/AuthService'
 import HomeView from './components/HomeView'
 
-// Sync route definition
 export default {
-  component : HomeView
+  onEnter: requireAuth,
+  component: HomeView
 }

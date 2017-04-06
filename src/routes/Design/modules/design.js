@@ -26,6 +26,7 @@ export const RENAME_CONDITION = 'RENAME_CONDITION'
 export const SELECT_TRIAL = 'SELECT_TRIAL'
 export const TOGGLE_SELECT_MODE = 'TOGGLE_SELECT_MODE'
 export const UPDATE_STRUCTURE = 'UPDATE_STRUCTURE'
+export const UPDATE_STORE = 'UPDATE_STORE'
 
 // ------------------------------------
 // Actions
@@ -62,10 +63,13 @@ export const addCondition = () => {
   }
 }
 
-export const addMessage = (messageObject) => {
+export const addMessage = (id, msg) => {
   return {
     type: ADD_MESSAGE,
-    payload: { ...messageObject }
+    payload: {
+      id: id,
+      html: msg
+    }
   }
 }
 
@@ -186,6 +190,13 @@ export const updateStructure = (id, change) => {
   }
 }
 
+export const updateStore = (data) => {
+  return {
+    type: UPDATE_STORE,
+    payload: { ...data }
+  }
+}
+
 /*  This is a thunk, meaning it is a function that immediately
     returns a function for lazy evaluation. It is incredibly useful for
     creating async actions, especially when combined with redux-thunk!
@@ -230,7 +241,8 @@ export const actions = {
   renameCondition,
   selectTrial,
   toggleSelectMode,
-  updateStructure
+  updateStructure,
+  updateStore
 }
 
 // ------------------------------------
@@ -259,7 +271,8 @@ const ACTION_HANDLERS = {
   [RENAME_CONDITION] : handle.renameCondition,
   [SELECT_TRIAL] : handle.selectTrial,
   [TOGGLE_SELECT_MODE] : handle.toggleSelectMode,
-  [UPDATE_STRUCTURE] : handle.updateStructure
+  [UPDATE_STRUCTURE] : handle.updateStructure,
+  [UPDATE_STORE]: handle.updateStore
 }
 
 // ------------------------------------
@@ -267,6 +280,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = {
   counter: 0,
+  name: 'Unnamed Experiment',
   condition: {},
   currentTrial: null,
   structure: [],
@@ -275,7 +289,7 @@ const initialState = {
   selectId: null,
   selectMode: false,
   messages: [],
-  tags: []
+  didChange: false
 }
 
 export default function designReducer (state = initialState, action) {

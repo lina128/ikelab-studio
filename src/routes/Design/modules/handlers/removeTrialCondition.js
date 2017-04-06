@@ -4,7 +4,8 @@ const removeTrialCondition = (state, action) => {
 
   return {
     ...state,
-    entity: newEntity
+    entity: newEntity,
+    didChange: true
   }
 }
 

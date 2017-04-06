@@ -4,7 +4,8 @@ const renameCondition = (state, action) => {
   const newCondition = extendSet(state.condition, action.payload.id, { name: action.payload.value })
   return {
     ...state,
-    condition: newCondition
+    condition: newCondition,
+    didChange: true
   }
 }
 

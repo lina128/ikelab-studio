@@ -22,6 +22,7 @@ describe('(Design/components) SettingPane', () => {
     _spies = {}
 
     _props = {
+      id: 1,
       trial: {
         id: 1,
         type: 'TEXT',

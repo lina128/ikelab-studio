@@ -11,7 +11,8 @@ const deleteNode = (state, action) => {
     ...state,
     currentTrial: currentTrial,
     structure: result.arr,
-    entity: result.s
+    entity: result.s,
+    didChange: true
   }
 }
 

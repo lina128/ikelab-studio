@@ -8,7 +8,10 @@ describe('(Container) ConditionPane', () => {
   beforeEach(() => {
     _props = {
       condition: {
-        c3498db: 'Condition1'
+        0: {
+          name: 'NewCondition',
+          color: '#c3498db'
+        }
       },
       onRenameCondition: el => el,
       onSelectMode: el => el,
