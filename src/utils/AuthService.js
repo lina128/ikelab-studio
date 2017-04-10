@@ -10,6 +10,7 @@ export default class AuthService extends EventEmitter {
 
     // Configure Auth0
     this.lock = new Auth0Lock(clientId, domain, {
+      container: 'ikelab-login',
       auth: {
         redirectUrl: `${window.location.origin}`,
         responseType: 'token'
@@ -22,13 +23,14 @@ export default class AuthService extends EventEmitter {
     this.lock.on('authorization_error', this._authorizationError.bind(this))
     // binds login functions to keep this context
     this.login = this.login.bind(this)
+    this.hide = this.hide.bind(this)
   }
 
   _doAuthentication (authResult) {
     // Saves the user token
     this.setToken(authResult.idToken)
     // navigate to the home route
-    browserHistory.replace('/counter')
+    browserHistory.replace('/')
     // Async loads the user profile data
     /*
     this.lock.getProfile(authResult.idToken, (error, profile) => {
@@ -49,6 +51,10 @@ export default class AuthService extends EventEmitter {
   login () {
     // Call the show method to display the widget.
     this.lock.show()
+  }
+
+  hide () {
+    this.lock.hide()
   }
 
   loggedIn () {
