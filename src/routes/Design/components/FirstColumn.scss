@@ -1,0 +1,8 @@
+@import 'base';
+
+.design_firstColumn_default {
+  float: left;
+  height: auto;
+  width: $firstCol+px;
+  overflow: hidden;
+}

@@ -1,0 +1,27 @@
+.design_popup_default {
+  position: absolute;
+  z-index: 1999;
+  top: 50px;
+  width: 800px;
+  min-height: 300px;
+  overflow: visible;
+  padding: 0px 15px;
+  background-color: white;
+  border: 1px solid rgba(214, 214, 213, 0.2);
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 6px -6px #777;
+  -moz-box-shadow: 0 5px 6px -6px #777;
+  box-shadow: 0 5px 6px -6px #777;
+}
+
+.design_popup_btn {
+  position: absolute;
+  top: 30px;
+  left: 700px;
+}
+
+.design_popup_cancel {
+  position: absolute;
+  top: 30px;
+  left: 600px;
+}

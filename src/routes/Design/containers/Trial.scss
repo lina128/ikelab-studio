@@ -1,0 +1,55 @@
+@import 'base';
+
+.design_trial_default {
+  position: relative;
+  float: right;
+  clear: both;
+  padding: 0;
+  margin-bottom: 15px;
+  background-color: white;
+  cursor: move;
+  width: $trialWidth + 15px;
+  height: $trialHeight + px;
+}
+
+.design_trial_overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: red;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.design_trial_branch {
+  position: absolute;
+  top: 23px;
+  left: -82px;
+  width: 80px;
+}
+
+.design_trial_branch.design_trial_branch_single {
+  border-top: 1px solid grey;
+  border-left: 1px solid grey;
+  border-bottom: 1px solid grey;
+  height: 2px;
+}
+
+.design_trial_branch.design_trial_branch_top {
+  border-top: 1px solid grey;
+  border-left: 1px solid grey;
+  height: 60px;
+}
+
+.design_trial_branch.design_trial_branch_middle {
+  border-left: 1px solid grey;
+  height: 60px;
+}
+
+.design_trial_branch.design_trial_branch_bottom {
+  border-top: 1px solid grey;
+  height: 1px;
+}

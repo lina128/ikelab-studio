@@ -1,0 +1,25 @@
+@import 'base';
+
+.design_run_default {
+  position: relative;
+  float: right;
+  clear: both;
+  padding: 0;
+  cursor: move;
+  width: $trialWidth + 179px;
+  min-height: 200px;
+  border: 1px dotted lightgrey;
+}
+
+.design_run_decorate {
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  font-size: 12pt;
+  font-family: Helvetica;
+}
+
+.design_run_verticalDecoration {
+  margin-top: 10px;
+  width: 25px;
+}
