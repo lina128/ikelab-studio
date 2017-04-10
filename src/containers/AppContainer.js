@@ -1,6 +1,27 @@
 import React, { Component, PropTypes } from 'react'
 import { browserHistory, Router } from 'react-router'
 import { Provider } from 'react-redux'
+import AuthService from '../utils/AuthService'
+
+export const auth0Lock = new AuthService('4HO12itCjqLZh25a2sghmjKs6E5iFUVc', 'ikelab.auth0.com')
+
+export const requireAuth = (nextState, replace) => {
+  if (!auth0Lock.loggedIn()) {
+    replace({ pathName: '/' })
+    /*
+    webAuth.renewAuth({
+      audience: ,
+      scope: ,
+      redirectUri: ,
+      usePostMessage: true
+    }, function (err, authResult) {
+      if (err) { console.log(err) }
+      console.log(authResult)
+
+    })
+    */
+  }
+}
 
 class AppContainer extends Component {
   static propTypes = {
@@ -18,7 +39,7 @@ class AppContainer extends Component {
     return (
       <Provider store={store}>
         <div style={{ height: '100%' }}>
-          <Router history={browserHistory} children={routes} />
+          <Router history={browserHistory} children={routes} auth={auth0Lock} />
         </div>
       </Provider>
     )

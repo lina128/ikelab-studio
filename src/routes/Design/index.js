@@ -1,11 +1,9 @@
 import { injectReducer } from '../../store/reducers'
-import { requireAuth } from '../../main'
 import { UPDATE_STRUCTURE, ADD_MESSAGE, DELETE_MESSAGE } from './modules/design'
 import undoable, { excludeAction } from 'redux-undo'
 
 export default (store) => ({
   path : 'design',
-  onEnter: requireAuth,
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point

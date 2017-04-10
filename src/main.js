@@ -3,38 +3,7 @@ import 'react-mdl/extra/material.js'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
-import auth0Js from 'auth0-js'
-import AuthService from './utils/AuthService'
 import AppContainer from './containers/AppContainer'
-
-// ========================================================
-// Authentication Instantiation
-// ========================================================
-
-export const webAuth = new auth0Js.WebAuth({
-  domain: 'ikelab.auth0.com',
-  clientID: '4HO12itCjqLZh25a2sghmjKs6E5iFUVc'
-})
-
-export const auth0Lock = new AuthService('4HO12itCjqLZh25a2sghmjKs6E5iFUVc', 'ikelab.auth0.com')
-
-export const requireAuth = (nextState, replace) => {
-  if (!auth0Lock.loggedIn()) {
-    replace({ pathName: '/' })
-    /*
-    webAuth.renewAuth({
-      audience: ,
-      scope: ,
-      redirectUri: ,
-      usePostMessage: true
-    }, function (err, authResult) {
-      if (err) { console.log(err) }
-      console.log(authResult)
-
-    })
-    */
-  }
-}
 
 // ========================================================
 // Store Instantiation
