@@ -76,6 +76,7 @@
   "author": "Na Li <linazhao128@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "auth0-js": "^8.5.0",
     "auth0-lock": "^10.14.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-runtime": "^6.15.0",
