@@ -4,7 +4,7 @@ import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import flow from 'lodash/flow'
 import uniqueId from 'lodash/uniqueId'
-import { auth0Lock } from '../../../main'
+// import { auth0Lock } from '../../../main'
 import { addMessage, deleteMessage, updateStore } from '../modules/design'
 import { AUTO_SAVE_DURATION } from '../config'
 import Ribbon from './Ribbon'
@@ -73,7 +73,6 @@ export class DesignView extends Component {
       mode: 'cors',
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${auth0Lock.getToken()}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -133,47 +132,46 @@ export class DesignView extends Component {
 
     var that = this
 
-      fetch('http://localhost:6060', {
-        mode: 'cors',
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${auth0Lock.getToken()}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          counter: counter,
-          name: name,
-          condition: condition,
-          structure: structure,
-          entity: entity
-        })
+    fetch('http://localhost:6060', {
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        counter: counter,
+        name: name,
+        condition: condition,
+        structure: structure,
+        entity: entity
       })
-      .then(response => {
-        return response.json().then(data => {
-          if (response.ok) {
-            if (that.errorId) {
-              deleteMessage(that.errorId)
-              that.errorId = null
-            }
-            return data
-          } else {
-            if (!that.errorId) {
-              that.errorId = uniqueId()
-              addMessage(that.errorId, 'Could not save changes.')
-            }
-
-            return Promise.reject({ status: response.status, data })
+    })
+    .then(response => {
+      return response.json().then(data => {
+        if (response.ok) {
+          if (that.errorId) {
+            deleteMessage(that.errorId)
+            that.errorId = null
           }
-        })
-      })
-      .catch(error => {
-        if (!that.errorId) {
-          that.errorId = uniqueId()
-          addMessage(that.errorId, 'Could not save changes.')
-        }
+          return data
+        } else {
+          if (!that.errorId) {
+            that.errorId = uniqueId()
+            addMessage(that.errorId, 'Could not save changes.')
+          }
 
-        console.log(error)
+          return Promise.reject({ status: response.status, data })
+        }
       })
+    })
+    .catch(error => {
+      if (!that.errorId) {
+        that.errorId = uniqueId()
+        addMessage(that.errorId, 'Could not save changes.')
+      }
+
+      console.log(error)
+    })
   }
 
   render () {
