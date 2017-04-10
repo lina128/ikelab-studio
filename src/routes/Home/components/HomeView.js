@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class FrontPageView extends Component {
+export default class HomeView extends Component {
   render () {
     return (
       <div>
