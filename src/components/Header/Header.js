@@ -13,8 +13,8 @@ export const Header = () => (
       Home
     </IndexLink>
     { ' · ' }
-    <Link to='/design' activeClassName='route--active' >
-      Design
+    <Link to='/studio' activeClassName='route--active' >
+      Studio
     </Link>
     { ' · ' }
     {auth0Lock.loggedIn() ? <a onClick={() => { auth0Lock.logout() }}>Log Out</a>

@@ -30,7 +30,7 @@ export default class AuthService extends EventEmitter {
     // Saves the user token
     this.setToken(authResult.idToken)
     // navigate to the home route
-    browserHistory.replace('/')
+    browserHistory.replace('/studio')
     // Async loads the user profile data
     /*
     this.lock.getProfile(authResult.idToken, (error, profile) => {
@@ -90,6 +90,6 @@ export default class AuthService extends EventEmitter {
     // Clear user token and profile data from localStorage
     localStorage.removeItem(ID_TOKEN_KEY)
     localStorage.removeItem('profile')
-    browserHistory.replace('/')
+    browserHistory.replace('/login')
   }
 }

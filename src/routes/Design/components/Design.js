@@ -3,6 +3,7 @@ import DesignView from '../containers/DesignView'
 
 export default class Design extends Component {
   static propTypes = {
+    params: PropTypes.objectOf(PropTypes.string),
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
@@ -13,7 +14,7 @@ export default class Design extends Component {
     return (
       <div>
         {this.props.children}
-        <DesignView />
+        <DesignView experimentId={this.props.params.experimentId} />
       </div>
     )
   }

@@ -4,7 +4,7 @@ import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import flow from 'lodash/flow'
 import uniqueId from 'lodash/uniqueId'
-// import { auth0Lock } from '../../../main'
+import { auth0Lock } from '../../../containers/AppContainer'
 import { addMessage, deleteMessage, updateStore } from '../modules/design'
 import { AUTO_SAVE_DURATION } from '../config'
 import Ribbon from './Ribbon'
@@ -55,6 +55,7 @@ export class DesignView extends Component {
   }
 
   static propTypes = {
+    experimentId: PropTypes.string.isRequired,
     counter: PropTypes.number.isRequired,
     name: PropTypes.string,
     condition: PropTypes.object.isRequired,
@@ -67,16 +68,17 @@ export class DesignView extends Component {
   }
 
   componentDidMount () {
-    const { addMessage, updateStore } = this.props
+    const { addMessage, updateStore, experimentId } = this.props
 
     fetch('http://localhost:7070', {
       mode: 'cors',
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${auth0Lock.getToken()}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        experimentId: 1
+        experimentId: experimentId
       })
     })
     .then(response => {
@@ -88,7 +90,7 @@ export class DesignView extends Component {
           window.addEventListener('keydown', this.handleSave, false)
         } else {
           this.errorId = uniqueId()
-          addMessage(this.errorId, 'Could not connect to the server.')
+          addMessage(this.errorId, 'Could not fetch the experiment.')
           return Promise.reject({ status: response.status, data })
         }
       })
@@ -136,6 +138,7 @@ export class DesignView extends Component {
       mode: 'cors',
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${auth0Lock.getToken()}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({

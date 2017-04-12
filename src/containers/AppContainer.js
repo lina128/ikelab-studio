@@ -7,19 +7,7 @@ export const auth0Lock = new AuthService('4HO12itCjqLZh25a2sghmjKs6E5iFUVc', 'ik
 
 export const requireAuth = (nextState, replace) => {
   if (!auth0Lock.loggedIn()) {
-    replace({ pathName: '/' })
-    /*
-    webAuth.renewAuth({
-      audience: ,
-      scope: ,
-      redirectUri: ,
-      usePostMessage: true
-    }, function (err, authResult) {
-      if (err) { console.log(err) }
-      console.log(authResult)
-
-    })
-    */
+    replace('/login')
   }
 }
 

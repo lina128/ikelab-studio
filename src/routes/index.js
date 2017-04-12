@@ -2,6 +2,7 @@
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import Home from './Home'
 import Login from './Login'
+import StudioRoute from './Studio'
 import DesignRoute from './Design'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -12,6 +13,7 @@ export const createRoutes = (store) => ({
   indexRoute  : Home,
   childRoutes : [
     Login,
+    StudioRoute(store),
     DesignRoute(store)
   ]
 })

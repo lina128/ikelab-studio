@@ -1,10 +1,8 @@
 import { injectReducer } from '../../store/reducers'
-import { UPDATE_STRUCTURE, ADD_MESSAGE, DELETE_MESSAGE } from './modules/design'
-import undoable, { excludeAction } from 'redux-undo'
 import { requireAuth } from '../../containers/AppContainer'
 
 export default (store) => ({
-  path : 'design/:experimentId',
+  path : 'studio',
   onEnter: requireAuth,
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
@@ -13,19 +11,15 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Design = require('./components/Design').default
-      const reducer = undoable(require('./modules/design').default, {
-        limit: 10,
-        filter: excludeAction([UPDATE_STRUCTURE, ADD_MESSAGE, DELETE_MESSAGE])
-      })
+      const Studio = require('./components/StudioView').default
+      const reducer = require('./modules/studio').default
 
-      /*  Add the reducer to the store on key 'design'  */
-      injectReducer(store, { key: 'design', reducer })
+      injectReducer(store, { key: 'studio', reducer })
 
       /*  Return getComponent   */
-      cb(null, Design)
+      cb(null, Studio)
 
     /* Webpack named bundle   */
-    }, 'design')
+    }, 'studio')
   }
 })
