@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import Sidebar from 'routes/Design/components/Sidebar'
 
-describe('(Component) Sidebar', () => {
+describe('(Design/components) Sidebar', () => {
   let _wrapper
 
   beforeEach(() => {

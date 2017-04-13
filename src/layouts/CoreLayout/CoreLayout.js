@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Header from '../../components/Header'
+import HeaderContainer from '../../containers/HeaderContainer'
 import './CoreLayout.scss'
 import '../../styles/core.scss'
 
@@ -14,7 +14,7 @@ export default class CoreLayout extends Component {
   render () {
     return (
       <div className='container-fluid text-left'>
-        <Header />
+        <HeaderContainer />
         <div className='core-layout__viewport'>
           {this.props.children}
         </div>

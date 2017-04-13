@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { ITEMTYPES } from '../constants'
 import { DropTarget } from 'react-dnd'
-import Block from './Block'
+import BlockContainer from './BlockContainer'
 import IconButton from 'react-mdl/lib/IconButton'
 import IconToggle from 'react-mdl/lib/IconToggle'
 import './Run.scss'
@@ -73,7 +73,7 @@ export class Run extends Component {
     for (let i = 0; i < children.length; i++) {
       if (children.length === 1) {
         runBlocks.push(
-          <Block
+          <BlockContainer
             key={children[i].id}
             selectMode={selectMode}
             id={children[i].id}
@@ -90,7 +90,7 @@ export class Run extends Component {
       } else {
         if (i === 0) {
           runBlocks.push(
-            <Block
+            <BlockContainer
               key={children[i].id}
               selectMode={selectMode}
               id={children[i].id}
@@ -106,7 +106,7 @@ export class Run extends Component {
           )
         } else if (i === children.length - 1) {
           runBlocks.push(
-            <Block
+            <BlockContainer
               key={children[i].id}
               selectMode={selectMode}
               id={children[i].id}
@@ -122,7 +122,7 @@ export class Run extends Component {
           )
         } else {
           runBlocks.push(
-            <Block
+            <BlockContainer
               key={children[i].id}
               selectMode={selectMode}
               id={children[i].id}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import StudioView from 'routes/Studio/components/StudioView'
+import { StudioView } from 'routes/Studio/components/StudioView'
 
 describe('(Studio/components) StudioView', () => {
   let _wrapper, _props

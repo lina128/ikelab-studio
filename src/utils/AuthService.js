@@ -29,6 +29,7 @@ export default class AuthService extends EventEmitter {
   _doAuthentication (authResult) {
     // Saves the user token
     this.setToken(authResult.idToken)
+
     // navigate to the home route
     browserHistory.replace('/studio')
     // Async loads the user profile data

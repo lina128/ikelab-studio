@@ -1,27 +1,37 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   IndexLink,
   Link
 } from 'react-router'
-import { auth0Lock } from '../../containers/AppContainer'
 import './Header.scss'
 
-export const Header = () => (
-  <div>
-    <h1> IKELAB </h1>
-    <IndexLink to='/' activeClassName='route--active' >
-      Home
-    </IndexLink>
-    { ' · ' }
-    <Link to='/studio' activeClassName='route--active' >
-      Studio
-    </Link>
-    { ' · ' }
-    {auth0Lock.loggedIn() ? <a onClick={() => { auth0Lock.logout() }}>Log Out</a>
-      : <Link to='/login' activeClassName='route--active' >
-      Log In
-    </Link>}
-  </div>
-)
+export default class Header extends Component {
+  static propTypes = {
+    logOut: PropTypes.func.isRequired
+  }
 
-export default Header
+  render () {
+    const { logOut } = this.props
+
+    return (
+      <div>
+        <h1> IKELAB </h1>
+        <IndexLink to='/' activeClassName='route--active' >
+          Home
+        </IndexLink>
+        { ' · ' }
+        <Link to='/studio' activeClassName='route--active' >
+          Studio
+        </Link>
+        { ' · ' }
+        <Link to='/login' activeClassName='route--active' >
+          Log In
+        </Link>
+        { ' · ' }
+        <a onClick={logOut}>
+          Log Out
+        </a>
+      </div>
+    )
+  }
+}

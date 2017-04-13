@@ -1,8 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import BlockBuild from 'routes/Design/containers/BlockBuild'
+import BlockBuild from 'routes/Design/components/BlockBuild'
 
-describe('(Design/containers) BlockBuild', () => {
+describe('(Design/components) BlockBuild', () => {
   let _wrapper
 
   beforeEach(() => {

@@ -1,16 +1,20 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import './HorizontalBar.scss'
 
-export default class HorizontalBar extends Component {
+const defaultStyle = {}
+
+export default class HorizontalBar extends PureComponent {
   static propTypes = {
     backgroundColor: PropTypes.string
   }
 
   render () {
-    let { backgroundColor } = this.props
+    const customStyle = this.props.backgroundColor ? { backgroundColor: this.props.backgroundColor } : defaultStyle
 
     return (
-      <div className={'design_horizontalBar_default'} style={{ backgroundColor: backgroundColor }} />
+      <div
+        className={'design_horizontalBar_default'}
+        style={customStyle} />
     )
   }
 }

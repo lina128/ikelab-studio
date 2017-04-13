@@ -1,13 +1,15 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import classNames from 'classnames'
 import Badge from 'react-mdl/lib/Badge'
-import Thumbnail from '../components/Thumbnail'
-import Sidebar from '../components/Sidebar'
-import Infobar from '../components/Infobar'
-import HorizontalBar from '../components/HorizontalBar'
+import Thumbnail from './Thumbnail'
+import Sidebar from './Sidebar'
+import Infobar from './Infobar'
+import HorizontalBar from './HorizontalBar'
 import './TrialRenderer.scss'
 
-export default class TrialRenderer extends Component {
+const defaultArr = []
+
+export default class TrialRenderer extends PureComponent {
   static propTypes = {
     condition: PropTypes.object.isRequired,
     id: PropTypes.number.isRequired,
@@ -24,7 +26,7 @@ export default class TrialRenderer extends Component {
       branchStyle,
       setting } = this.props
 
-    const conditionList = []
+    let conditionList = []
 
     for (let id in condition) {
       conditionList.push(
@@ -58,6 +60,10 @@ export default class TrialRenderer extends Component {
       input = 'Text Response'
     } else if (setting.inputSurveyResponse) {
       input = 'Survey Response: ' + setting.inputSurveyResponse
+    }
+
+    if (conditionList.length === 0) {
+      conditionList = defaultArr
     }
 
     return (

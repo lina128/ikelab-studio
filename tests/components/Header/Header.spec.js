@@ -24,10 +24,10 @@ describe('(Component) Header', () => {
       )).to.be.true
     })
 
-    it('Should render a Link to Design route', () => {
+    it('Should render a Link to Studio route', () => {
       expect(_wrapper.contains(
-        <Link to='/design' activeClassName='route--active' >
-          Design
+        <Link to='/studio' activeClassName='route--active' >
+          Studio
         </Link>
       )).to.be.true
     })

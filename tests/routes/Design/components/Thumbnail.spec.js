@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { shallow } from 'enzyme'
 import Thumbnail from 'routes/Design/components/Thumbnail'
 
-describe('(Design/component) Thumbnail', () => {
+describe('(Design/components) Thumbnail', () => {
   let _wrapper, _props, _spies
 
   beforeEach(() => {

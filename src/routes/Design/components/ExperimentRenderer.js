@@ -13,7 +13,16 @@ export default class ExperimentRenderer extends Component {
   }
 
   static propTypes = {
-    experiment: PropTypes.object
+    dialogOpen: PropTypes.bool.isRequired,
+    experiment: PropTypes.object.isRequired
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    if (nextProps.dialogOpen !== this.props.dialogOpen) {
+      return true
+    } else {
+      return false
+    }
   }
 
   renderCondition () {
@@ -70,8 +79,9 @@ export default class ExperimentRenderer extends Component {
   }
 
   render () {
-    const experimentView = this.props.experiment ? this.renderExperiment() : null
-    const conditionView = this.props.experiment ? this.renderCondition() : null
+    console.log('updating')
+    let experimentView = this.props.experiment ? this.renderExperiment() : null
+    let conditionView = this.props.experiment ? this.renderCondition() : null
 
     return (
       <div>

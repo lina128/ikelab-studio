@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { shallow } from 'enzyme'
 import Input from 'routes/Design/components/Input'
 
-describe('(Component) Input', () => {
+describe('(Design/components) Input', () => {
   let _wrapper, _props, _spies
 
   beforeEach(() => {

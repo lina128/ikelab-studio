@@ -1,10 +1,12 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import classNames from 'classnames'
 import TrialRenderer from './TrialRenderer'
 import IconToggle from 'react-mdl/lib/IconToggle'
 import './BlockRenderer.scss'
 
-export default class BlockRenderer extends Component {
+const defaultArr = []
+
+export default class BlockRenderer extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -24,7 +26,7 @@ export default class BlockRenderer extends Component {
 
     const classnames = classNames('design_blockRenderer_branch', branchStyle)
 
-    const blockTrials = []
+    let blockTrials = []
 
     for (let i = 0; i < children.length; i++) {
       let node = entity[children[i].id]
@@ -72,6 +74,10 @@ export default class BlockRenderer extends Component {
           )
         }
       }
+    }
+
+    if (blockTrials.length === 0) {
+      blockTrials = defaultArr
     }
 
     return (

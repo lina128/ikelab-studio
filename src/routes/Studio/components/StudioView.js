@@ -58,6 +58,7 @@ export class StudioView extends Component {
     .catch(error => {
       this.errorId = uniqueId()
       addMessage(this.errorId, 'Could not connect to the server.')
+      console.log('RRRRR')
       console.log(error)
     })
   }

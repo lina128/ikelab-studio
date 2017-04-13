@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Button from 'react-mdl/lib/Button'
-import Popup from '../components/Popup'
-import ExperimentRenderer from './ExperimentRenderer'
+import SummaryView from '../components/SummaryView'
 
 const mapStateToProps = (state) => {
   return {
@@ -14,7 +13,7 @@ export class PrintView extends Component {
   constructor (props) {
     super(props)
     this.state = { dialogOpen: false }
-    this.togglePrintView = this.togglePrintView.bind(this)
+    this.openSummaryView = this.openSummaryView.bind(this)
     this.handleDialogClose = this.handleDialogClose.bind(this)
   }
 
@@ -22,12 +21,8 @@ export class PrintView extends Component {
     experiment: PropTypes.object.isRequired
   }
 
-  togglePrintView () {
-    if (this.state.dialogOpen) {
-      this.setState({ dialogOpen: false })
-    } else {
-      this.setState({ dialogOpen: true, experiment: this.props.experiment })
-    }
+  openSummaryView () {
+    this.setState({ dialogOpen: true })
   }
 
   handleDialogClose () {
@@ -37,10 +32,11 @@ export class PrintView extends Component {
   render () {
     return (
       <div>
-        <Button raised colored ripple onClick={this.togglePrintView}>Print</Button>
-        <Popup dialogOpen={this.state.dialogOpen} handleClose={this.handleDialogClose} >
-          <ExperimentRenderer experiment={this.state.experiment} />
-        </Popup>
+        <Button raised colored ripple onClick={this.openSummaryView}>Print</Button>
+        <SummaryView
+          dialogOpen={this.state.dialogOpen}
+          handleClose={this.handleDialogClose}
+          experiment={this.props.experiment} />
       </div>
     )
   }

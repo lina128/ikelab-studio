@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import IconButton from 'react-mdl/lib/IconButton'
 import './Message.scss'
 
-export default class Message extends Component {
+export default class Message extends PureComponent {
   constructor (props) {
     super(props)
     this.handleDelete = this.handleDelete.bind(this)

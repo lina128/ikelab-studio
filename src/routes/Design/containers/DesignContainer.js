@@ -15,7 +15,7 @@ import DesignPane from './DesignPane'
 import TrialPane from './TrialPane'
 import SettingPane from './SettingPane'
 import MessageBar from './MessageBar'
-import './DesignView.scss'
+import './DesignContainer.scss'
 
 const mapStateToProps = (state) => {
   return {
@@ -42,7 +42,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export class DesignView extends Component {
+export class DesignContainer extends Component {
   constructor (props) {
     super(props)
     this.increaseTimer = this.increaseTimer.bind(this)
@@ -205,4 +205,4 @@ export class DesignView extends Component {
 export default flow(
   connect(mapStateToProps, mapDispatchToProps),
   DragDropContext(HTML5Backend)
-)(DesignView)
+)(DesignContainer)

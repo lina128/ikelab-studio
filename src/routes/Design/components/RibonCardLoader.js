@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Button from 'react-mdl/lib/Button'
-import AbsolutePosition from '../components/AbsolutePosition'
+import AbsolutePositionBox from '../components/AbsolutePositionBox'
 
 export default class RibonCardLoader extends Component {
   constructor (props) {
@@ -35,13 +35,13 @@ export default class RibonCardLoader extends Component {
     return (
       <div>
         {btn}
-        <AbsolutePosition
+        <AbsolutePositionBox
           isOpen={this.state.isOpen}
           left={this.state.left + 'px'}
           top={this.state.top + 'px'}
           width='300px'>
           {this.props.children}
-        </AbsolutePosition>
+        </AbsolutePositionBox>
       </div>
     )
   }

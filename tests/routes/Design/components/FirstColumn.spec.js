@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import FirstColumn from 'routes/Design/components/FirstColumn'
 
-describe('(Component) FirstColumn', () => {
+describe('(Design/components) FirstColumn', () => {
   let _wrapper
 
   beforeEach(() => {

@@ -5,7 +5,7 @@ import {
   deleteNode, selectTrial, changeBlockSetting, changeRunSetting
 } from '../modules/design'
 import Trial from './Trial'
-import Block from './Block'
+import BlockContainer from './BlockContainer'
 import Run from './Run'
 import './DesignPane.scss'
 
@@ -88,7 +88,7 @@ export class DesignPane extends Component {
                 clickTrial={onSelectTrial} />
             }
             if (x.level === 'block') {
-              return <Block
+              return <BlockContainer
                 key={x.id}
                 selectMode={selectMode}
                 id={x.id} color={x.color}
@@ -129,7 +129,7 @@ export class DesignPane extends Component {
                 clickTrial={onClickTrial} />
             }
             if (x.level === 'block') {
-              return <Block
+              return <BlockContainer
                 key={x.id}
                 selectMode={selectMode}
                 id={x.id}

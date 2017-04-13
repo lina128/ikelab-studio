@@ -1,8 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import AbsolutePosition from 'routes/Design/components/AbsolutePosition'
+import AbsolutePositionBox from 'routes/Design/components/AbsolutePositionBox'
 
-describe('(Design/components) AbsolutePosition', () => {
+describe('(Design/components) AbsolutePositionBox', () => {
   let _wrapper, _props
 
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe('(Design/components) AbsolutePosition', () => {
       width: '300px',
       isOpen: false
     }
-    _wrapper = shallow(<AbsolutePosition {..._props} />)
+    _wrapper = shallow(<AbsolutePositionBox {..._props} />)
   })
 
   it('Should render as a div.', () => {

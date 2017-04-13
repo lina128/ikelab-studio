@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import './AbsolutePosition.scss'
+import './AbsolutePositionBox.scss'
 
 export default class AbsolutePosition extends Component {
   static propTypes = {

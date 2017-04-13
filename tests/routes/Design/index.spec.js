@@ -12,6 +12,6 @@ describe('(Route) Design', () => {
   })
 
   it('Configuration should contain path `design`', () => {
-    expect(_route.path).to.equal('design')
+    expect(_route.path).to.contain('design')
   })
 })

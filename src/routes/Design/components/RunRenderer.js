@@ -1,9 +1,11 @@
-import React, { PropTypes, Component } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import BlockRenderer from './BlockRenderer'
 import IconToggle from 'react-mdl/lib/IconToggle'
 import './RunRenderer.scss'
 
-export default class RunRenderer extends Component {
+const defaultArr = []
+
+export default class RunRenderer extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -19,7 +21,7 @@ export default class RunRenderer extends Component {
       children,
       entity } = this.props
 
-    const runBlocks = []
+    let runBlocks = []
 
     for (let i = 0; i < children.length; i++) {
       if (children.length === 1) {
@@ -68,6 +70,10 @@ export default class RunRenderer extends Component {
           )
         }
       }
+    }
+
+    if (runBlocks.length === 0) {
+      runBlocks = defaultArr
     }
 
     return (

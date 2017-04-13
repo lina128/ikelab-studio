@@ -6,7 +6,7 @@ import Menu from 'react-mdl-extra/lib/Menu'
 import MenuItem from 'react-mdl-extra/lib/MenuItem'
 import { addTrial, addBlock, addRun, addBlockTrials } from '../modules/design'
 import { MENU_CONTENT } from '../constants'
-import BlockBuild from './BlockBuild'
+import BlockBuild from '../components/BlockBuild'
 import * as wizards from '../elements/wizards'
 import './ModuleLoader.scss'
 

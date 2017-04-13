@@ -1,22 +1,20 @@
 import React, { Component, PropTypes } from 'react'
+import DesignContainer from '../containers/DesignContainer'
 
-const style = {
-  width: '100%',
-  margin: '5px',
-  border: '1px solid grey'
-}
-
-export default class Card extends Component {
+export default class DesignView extends Component {
   static propTypes = {
+    params: PropTypes.objectOf(PropTypes.string),
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
     ])
   }
+
   render () {
     return (
-      <div style={style}>
+      <div>
         {this.props.children}
+        <DesignContainer experimentId={this.props.params.experimentId} />
       </div>
     )
   }

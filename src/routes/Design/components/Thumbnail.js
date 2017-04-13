@@ -1,11 +1,13 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { DIMENSIONS } from '../constants'
 import './Thumbnail.scss'
 
-export default class Thumbnail extends Component {
+const defaultFunc = () => {}
+
+export default class Thumbnail extends PureComponent {
   constructor (props) {
     super(props)
-    this._onClick = this._onClick.bind(this)
+    this.onClick = this.onClick.bind(this)
   }
 
   static propTypes = {
@@ -13,7 +15,7 @@ export default class Thumbnail extends Component {
     onThumbnailClick: PropTypes.func
   }
 
-  _onClick () {
+  onClick () {
     this.props.onThumbnailClick()
   }
 
@@ -21,8 +23,10 @@ export default class Thumbnail extends Component {
     const { screenshot } = this.props
 
     return (
-      <div className={'design_thumbnail_default'} onClick={this._onClick}>
-        <img src={screenshot} style={{ height:DIMENSIONS.TRIALHEIGHT + 'px', width:DIMENSIONS.TRIALWIDTH + 'px' }} />
+      <div className={'design_thumbnail_default'} onClick={this.onClick || defaultFunc}>
+        <img
+          src={screenshot}
+          style={{ height:DIMENSIONS.TRIALHEIGHT + 'px', width:DIMENSIONS.TRIALWIDTH + 'px' }} />
       </div>
     )
   }

@@ -13,7 +13,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Design = require('./components/Design').default
+      const Design = require('./components/DesignView').default
       const reducer = undoable(require('./modules/design').default, {
         limit: 10,
         filter: excludeAction([UPDATE_STRUCTURE, ADD_MESSAGE, DELETE_MESSAGE])

@@ -3,15 +3,15 @@ import * as handle from './handlers'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const ADD_MESSAGE = 'ADD_MESSAGE'
-export const DELETE_MESSAGE = 'DELETE_MESSAGE'
+export const STUDIO_ADD_MESSAGE = 'STUDIO_ADD_MESSAGE'
+export const STUDIO_DELETE_MESSAGE = 'STUDIO_DELETE_MESSAGE'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 export const addMessage = (id, msg) => {
   return {
-    type: ADD_MESSAGE,
+    type: STUDIO_ADD_MESSAGE,
     payload: {
       id: id,
       html: msg
@@ -21,7 +21,7 @@ export const addMessage = (id, msg) => {
 
 export const deleteMessage = (id) => {
   return {
-    type: DELETE_MESSAGE,
+    type: STUDIO_DELETE_MESSAGE,
     payload: { id }
   }
 }
@@ -56,8 +56,8 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [ADD_MESSAGE] : handle.addMessage,
-  [DELETE_MESSAGE] : handle.deleteMessage
+  [STUDIO_ADD_MESSAGE] : handle.addMessage,
+  [STUDIO_DELETE_MESSAGE] : handle.deleteMessage
 }
 
 // ------------------------------------
@@ -67,7 +67,7 @@ const initialState = {
   messages: []
 }
 
-export default function designReducer (state = initialState, action) {
+export default function studioReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

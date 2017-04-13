@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { Card } from 'react-mdl/lib/Card'
 import * as Modules from '../elements/settings'
 import * as fields from '../elements/fields'
 
-export default class BlockBuild extends Component {
+export default class BlockBuild extends PureComponent {
   static propTypes = {
     type: PropTypes.string,
     onChange: PropTypes.func,

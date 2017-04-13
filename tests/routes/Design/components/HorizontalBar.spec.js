@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import HorizontalBar from 'routes/Design/components/HorizontalBar'
 
-describe('(Component) HorizontalBar', () => {
+describe('(Design/components) HorizontalBar', () => {
   let _wrapper
 
   beforeEach(() => {

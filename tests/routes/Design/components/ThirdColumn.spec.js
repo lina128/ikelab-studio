@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import ThreeColumn from 'routes/Design/components/ThirdColumn'
 
-describe('(Component) ThreeColumn', () => {
+describe('(Design/components) ThreeColumn', () => {
   let _wrapper
 
   beforeEach(() => {
