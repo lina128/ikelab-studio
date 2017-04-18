@@ -1,6 +1,6 @@
 import { COLOR_PALETTE } from '../../constants'
 import addMessage from './addMessage'
-import uniqueId from 'lodash/flow'
+import uniqueId from 'lodash/uniqueId'
 
 const addCondition = (state, action) => {
   if (Object.keys(state.condition).length === COLOR_PALETTE.length) {

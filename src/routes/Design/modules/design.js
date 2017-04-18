@@ -17,6 +17,9 @@ export const CLICK_TRIAL = 'CLICK_TRIAL'
 export const COPY_CURRENT_TRIAL = 'COPY_CURRENT_TRIAL'
 export const DELETE_CURRENT_TRIAL = 'DELETE_CURRENT_TRIAL'
 export const DELETE_NODE = 'DELETE_NODE'
+export const FETCH_EXPERIMENT = 'FETCH_EXPERIMENT'
+export const FETCH_EXPERIMENT_SUCCEEDED = 'FETCH_EXPERIMENT_SUCCEEDED'
+export const FETCH_EXPERIMENT_FAILED = 'FETCH_EXPERIMENT_FAILED'
 export const MOVE_INSIDE = 'MOVE_INSIDE'
 export const MOVE_NODE = 'MOVE_NODE'
 export const MOVE_OUTSIDE = 'MOVE_OUTSIDE'
@@ -127,6 +130,13 @@ export const deleteNode = (id) => {
   }
 }
 
+export const fetchExperiment = (id) => {
+  return {
+    type: FETCH_EXPERIMENT,
+    payload: { id }
+  }
+}
+
 export const moveInside = (id, parentId) => {
   return {
     type: MOVE_INSIDE,
@@ -233,6 +243,7 @@ export const actions = {
   copyCurrentTrial,
   deleteCurrentTrial,
   deleteNode,
+  fetchExperiment,
   moveInside,
   moveNode,
   moveOutside,
@@ -263,6 +274,9 @@ const ACTION_HANDLERS = {
   [COPY_CURRENT_TRIAL] : handle.copyCurrentTrial,
   [DELETE_CURRENT_TRIAL] : handle.deleteCurrentTrial,
   [DELETE_NODE]: handle.deleteNode,
+  [FETCH_EXPERIMENT]: handle.fetchExperiment,
+  [FETCH_EXPERIMENT_SUCCEEDED]: handle.fetchExperimentSucceeded,
+  [FETCH_EXPERIMENT_FAILED]: handle.fetchExperimentFailed,
   [MOVE_INSIDE] : handle.moveInside,
   [MOVE_NODE] : handle.moveNode,
   [MOVE_OUTSIDE] : handle.moveOutside,
@@ -279,6 +293,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
+  experimentId: 0,
   counter: 0,
   name: 'Unnamed Experiment',
   condition: {},
@@ -288,7 +303,9 @@ const initialState = {
   selected: [],
   selectId: null,
   selectMode: false,
-  messages: []
+  messages: [],
+  isFetching: false,
+  isSaving: false
 }
 
 export default function designReducer (state = initialState, action) {

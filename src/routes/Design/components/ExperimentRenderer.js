@@ -79,7 +79,6 @@ export default class ExperimentRenderer extends Component {
   }
 
   render () {
-    console.log('updating')
     let experimentView = this.props.experiment ? this.renderExperiment() : null
     let conditionView = this.props.experiment ? this.renderCondition() : null
 

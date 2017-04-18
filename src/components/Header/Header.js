@@ -1,18 +1,13 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import {
   IndexLink,
   Link
 } from 'react-router'
 import './Header.scss'
+import { auth0 } from '../../containers/AppContainer'
 
 export default class Header extends Component {
-  static propTypes = {
-    logOut: PropTypes.func.isRequired
-  }
-
   render () {
-    const { logOut } = this.props
-
     return (
       <div>
         <h1> IKELAB </h1>
@@ -24,13 +19,10 @@ export default class Header extends Component {
           Studio
         </Link>
         { ' · ' }
-        <Link to='/login' activeClassName='route--active' >
-          Log In
-        </Link>
-        { ' · ' }
-        <a onClick={logOut}>
-          Log Out
-        </a>
+        { auth0.loggedIn() ? <a onClick={auth0.logout}>
+          Log Out </a>
+          : <a onClick={auth0.login}>
+          Log In </a>}
       </div>
     )
   }

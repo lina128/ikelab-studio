@@ -4,9 +4,10 @@ import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import flow from 'lodash/flow'
 import uniqueId from 'lodash/uniqueId'
-import { auth0Lock } from '../../../containers/AppContainer'
-import { addMessage, deleteMessage, updateStore } from '../modules/design'
+import { auth0 } from '../../../containers/AppContainer'
+import { fetchExperiment, addMessage, deleteMessage, updateStore } from '../modules/design'
 import { AUTO_SAVE_DURATION } from '../config'
+import Spinner from 'react-mdl/lib/Spinner'
 import Ribbon from './Ribbon'
 import FirstColumn from '../components/FirstColumn'
 import SecondColumn from '../components/SecondColumn'
@@ -24,7 +25,8 @@ const mapStateToProps = (state) => {
     condition: state.design.present.condition,
     structure: state.design.present.structure,
     entity: state.design.present.entity,
-    currentTrial: state.design.present.currentTrial
+    currentTrial: state.design.present.currentTrial,
+    isFetching: state.design.present.isFetching
   }
 }
 
@@ -38,6 +40,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateStore: (data) => {
       dispatch(updateStore(data))
+    },
+    fetchExperiment: (id) => {
+      dispatch(fetchExperiment(id))
     }
   }
 }
@@ -62,44 +67,17 @@ export class DesignContainer extends Component {
     structure: PropTypes.array.isRequired,
     entity: PropTypes.object.isRequired,
     currentTrial: PropTypes.number,
+    isFetching: PropTypes.bool.isRequired,
     addMessage: PropTypes.func.isRequired,
     deleteMessage: PropTypes.func.isRequired,
-    updateStore: PropTypes.func.isRequired
+    updateStore: PropTypes.func.isRequired,
+    fetchExperiment: PropTypes.func.isRequired
   }
 
   componentDidMount () {
-    const { addMessage, updateStore, experimentId } = this.props
+    const { experimentId, fetchExperiment } = this.props
 
-    fetch('http://localhost:7070', {
-      mode: 'cors',
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${auth0Lock.getToken()}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        experimentId: experimentId
-      })
-    })
-    .then(response => {
-      return response.json().then(data => {
-        if (response.ok) {
-          updateStore(data)
-          this.autoSave = setInterval(this.increaseTimer, 1000)
-          this.autoReset = setInterval(this.resetTimer, 360000)
-          window.addEventListener('keydown', this.handleSave, false)
-        } else {
-          this.errorId = uniqueId()
-          addMessage(this.errorId, 'Could not fetch the experiment.')
-          return Promise.reject({ status: response.status, data })
-        }
-      })
-    })
-    .catch(error => {
-      this.errorId = uniqueId()
-      addMessage(this.errorId, 'Could not connect to the server.')
-      console.log(error)
-    })
+    fetchExperiment(experimentId)
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -138,7 +116,7 @@ export class DesignContainer extends Component {
       mode: 'cors',
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${auth0Lock.getToken()}`,
+        'Authorization': `Bearer ${auth0.getToken()}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -178,25 +156,29 @@ export class DesignContainer extends Component {
   }
 
   render () {
-    const { currentTrial, structure, entity } = this.props
+    const { experimentId, isFetching, currentTrial, structure, entity } = this.props
 
     const trial = entity[currentTrial] || null
 
     return (
-      <div className='design_container1'>
-        <Ribbon />
-        <div className='design_container2'>
-          <FirstColumn>
-            <DesignPane structure={structure} />
-          </FirstColumn>
-          <ThirdColumn>
-            <SettingPane id={currentTrial} trial={trial} />
-          </ThirdColumn>
-          <SecondColumn>
-            <TrialPane id={currentTrial} trial={trial} />
-          </SecondColumn>
-        </div>
-        <MessageBar />
+      <div>
+        {experimentId ? (isFetching ? <Spinner />
+         : <div className='design_container1'>
+           <Ribbon />
+           <div className='design_container2'>
+             <FirstColumn>
+               <DesignPane structure={structure} />
+             </FirstColumn>
+             <ThirdColumn>
+               <SettingPane id={currentTrial} trial={trial} />
+             </ThirdColumn>
+             <SecondColumn>
+               <TrialPane id={currentTrial} trial={trial} />
+             </SecondColumn>
+           </div>
+           <MessageBar />
+         </div>)
+        : null}
       </div>
     )
   }

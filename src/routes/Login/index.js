@@ -1,6 +1,6 @@
-import LoginView from './components/LoginView'
+import { auth0 } from '../../containers/AppContainer'
 
 export default {
   path: 'login',
-  component: LoginView
+  onEnter: auth0.parseHash
 }

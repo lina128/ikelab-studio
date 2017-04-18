@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import uniqueId from 'lodash/uniqueId'
 import { Link } from 'react-router'
-import { auth0Lock } from '../../../containers/AppContainer'
+import { auth0 } from '../../../containers/AppContainer'
 import { addMessage, deleteMessage } from '../modules/studio'
 import MessageBar from '../containers/MessageBar'
 
@@ -37,7 +37,7 @@ export class StudioView extends Component {
       mode: 'cors',
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${auth0Lock.getToken()}`,
+        'Authorization': `Bearer ${auth0.getToken()}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -58,7 +58,6 @@ export class StudioView extends Component {
     .catch(error => {
       this.errorId = uniqueId()
       addMessage(this.errorId, 'Could not connect to the server.')
-      console.log('RRRRR')
       console.log(error)
     })
   }
