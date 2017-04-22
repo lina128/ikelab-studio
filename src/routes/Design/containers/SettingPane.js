@@ -11,7 +11,7 @@ import {
   CardTitle,
   CardActions
 } from 'react-mdl/lib/Card'
-import OpenExperimentButton from './OpenExperimentButton'
+import OpenExperimentButton from '../components/OpenExperimentButton'
 import IconButton from 'react-mdl/lib/IconButton'
 import Button from 'react-mdl/lib/Button'
 

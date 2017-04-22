@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { findDOMNode } from 'react-dom'
 import html2canvas from 'html2canvas'
 import Button from 'react-mdl/lib/Button'
 import ExperimentRenderer from './ExperimentRenderer'
@@ -41,7 +42,7 @@ export default class SummaryView extends Component {
   }
 
   print () {
-    let mapNode = this.dialogRef
+    let mapNode = findDOMNode(this.dialogRef)
     if (mapNode) {
       const that = this
       html2canvas(mapNode).then(

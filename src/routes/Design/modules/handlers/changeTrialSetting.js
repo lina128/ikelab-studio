@@ -4,6 +4,7 @@ const changeTrialSetting = (state, action) => {
 
   return {
     ...state,
+    isTakingScreenshot: true,
     entity: {
       ...state.entity,
       [action.payload.id]: {

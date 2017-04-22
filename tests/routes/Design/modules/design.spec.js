@@ -3,7 +3,6 @@ addMessage, deleteMessage,
 changeTrialSetting, changeBlockSetting, clickTrial, copyCurrentTrial,
 deleteCurrentTrial, moveInside, moveNode, moveOutside,
 removeCondition, removeTrialCondition, renameCondition,
-selectTrial, toggleSelectMode,
 default as designReducer } from 'routes/Design/modules/design'
 import text from 'routes/Design/elements/settings/text'
 
@@ -31,9 +30,6 @@ describe('(Design/modules)', () => {
       currentTrial: null,
       structure: [],
       entity: {},
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     }
   })
@@ -75,9 +71,6 @@ describe('(Design/modules)', () => {
           }
         ],
         entity: {},
-        selected: [],
-        selectId: null,
-        selectMode: false,
         messages: []
       })
     })
@@ -119,13 +112,11 @@ describe('(Design/modules)', () => {
               {
                 id: 2,
                 level: 'trial',
-                selected: false,
                 screenshot: null
               },
               {
                 id: 3,
                 level: 'trial',
-                selected: false,
                 screenshot: null
               }
             ]
@@ -145,9 +136,6 @@ describe('(Design/modules)', () => {
             trialSetting: { ...trialSetting, font: 66 }
           }
         },
-        selected: [],
-        selectId: null,
-        selectMode: false,
         messages: []
       })
     })
@@ -168,9 +156,6 @@ describe('(Design/modules)', () => {
         currentTrial: null,
         structure: [],
         entity: {},
-        selected: [],
-        selectId: null,
-        selectMode: false,
         messages: []
       })
     })
@@ -196,9 +181,6 @@ describe('(Design/modules)', () => {
           }
         ],
         entity: {},
-        selected: [],
-        selectId: null,
-        selectMode: false,
         messages: []
       })
     })
@@ -214,9 +196,6 @@ describe('(Design/modules)', () => {
         currentTrial: null,
         structure: [],
         entity: {},
-        selected: [],
-        selectId: null,
-        selectMode: false,
         messages: [
           {
             id: '1',
@@ -234,9 +213,6 @@ describe('(Design/modules)', () => {
         currentTrial: null,
         structure: [],
         entity: {},
-        selected: [],
-        selectId: null,
-        selectMode: false,
         messages: [
           {
             id: 1,
@@ -254,9 +230,6 @@ describe('(Design/modules)', () => {
         currentTrial: null,
         structure: [],
         entity: {},
-        selected: [],
-        selectId: null,
-        selectMode: false,
         messages: []
       })
     })
@@ -274,7 +247,6 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             level: 'trial',
-            selected: false,
             screenshot: null
           }
         ],
@@ -286,9 +258,6 @@ describe('(Design/modules)', () => {
             trialSetting: trialSetting
           }
         },
-        selected: [],
-        selectId: null,
-        selectMode: false,
         messages: []
       })
     })
@@ -302,13 +271,11 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             level: 'trial',
-            selected: false,
             screenshot: null
           },
           {
             id: 2,
             level: 'trial',
-            selected: false,
             screenshot: null
           }
         ],
@@ -325,10 +292,7 @@ describe('(Design/modules)', () => {
             condition: {},
             trialSetting: trialSetting
           }
-        },
-        selected: [],
-        selectId: null,
-        selectMode: false
+        }
       }
 
       const state2 = designReducer(state1, clickTrial(2))
@@ -340,13 +304,11 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             level: 'trial',
-            selected: false,
             screenshot: null
           },
           {
             id: 2,
             level: 'trial',
-            selected: false,
             screenshot: null
           }
         ],
@@ -363,10 +325,7 @@ describe('(Design/modules)', () => {
             condition: {},
             trialSetting: trialSetting
           }
-        },
-        selected: [],
-        selectId: null,
-        selectMode: false
+        }
       })
     })
 
@@ -380,7 +339,6 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             level: 'trial',
-            selected: false,
             screenshot: null
           }
         ],
@@ -391,10 +349,7 @@ describe('(Design/modules)', () => {
             condition: {},
             trialSetting: trialSetting
           }
-        },
-        selected: [],
-        selectId: null,
-        selectMode: false
+        }
       }
 
       const state2 = designReducer(state1, copyCurrentTrial())
@@ -408,13 +363,11 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             level: 'trial',
-            selected: false,
             screenshot: null
           },
           {
             id: 2,
             level: 'trial',
-            selected: false,
             screenshot: null
           }
         ],
@@ -431,10 +384,7 @@ describe('(Design/modules)', () => {
             condition: {},
             trialSetting: trialSetting
           }
-        },
-        selected: [],
-        selectId: null,
-        selectMode: false
+        }
       })
     })
 
@@ -448,7 +398,6 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             level: 'trial',
-            selected: false,
             screenshot: null
           }
         ],
@@ -459,10 +408,7 @@ describe('(Design/modules)', () => {
             condition: {},
             trialSetting: trialSetting
           }
-        },
-        selected: [],
-        selectId: null,
-        selectMode: false
+        }
       }
 
       const state2 = designReducer(state1, deleteCurrentTrial())
@@ -472,10 +418,7 @@ describe('(Design/modules)', () => {
         condition: {},
         currentTrial: null,
         structure: [],
-        entity: {},
-        selected: [],
-        selectId: null,
-        selectMode: false
+        entity: {}
       })
     })
 
@@ -489,7 +432,6 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             level: 'trial',
-            selected: false,
             screenshot: null
           },
           {
@@ -506,10 +448,7 @@ describe('(Design/modules)', () => {
             condition: {},
             trialSetting: trialSetting
           }
-        },
-        selected: [],
-        selectId: null,
-        selectMode: false
+        }
       }
 
       const state2 = designReducer(state1, moveInside(1, 2))
@@ -528,7 +467,6 @@ describe('(Design/modules)', () => {
               {
                 id: 1,
                 level: 'trial',
-                selected: false,
                 screenshot: null
               }
             ]
@@ -541,10 +479,7 @@ describe('(Design/modules)', () => {
             condition: {},
             trialSetting: trialSetting
           }
-        },
-        selected: [],
-        selectId: null,
-        selectMode: false
+        }
       })
 
       const state3 = {
@@ -561,7 +496,6 @@ describe('(Design/modules)', () => {
               {
                 id: 1,
                 level: 'trial',
-                selected: false,
                 screenshot: null
               }
             ]
@@ -580,10 +514,7 @@ describe('(Design/modules)', () => {
             condition: {},
             trialSetting: trialSetting
           }
-        },
-        selected: [],
-        selectId: null,
-        selectMode: false
+        }
       }
 
       const state4 = designReducer(state3, moveInside(2, 3))
@@ -607,7 +538,6 @@ describe('(Design/modules)', () => {
                   {
                     id: 1,
                     level: 'trial',
-                    selected: false,
                     screenshot: null
                   }
                 ]
@@ -622,10 +552,7 @@ describe('(Design/modules)', () => {
             condition: {},
             trialSetting: trialSetting
           }
-        },
-        selected: [],
-        selectId: null,
-        selectMode: false
+        }
       })
     })
   })
@@ -640,13 +567,11 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           level: 'trial',
-          selected: false,
           screenshot: null
         },
         {
           id: 2,
           level: 'trial',
-          selected: false,
           screenshot: null
         }
       ],
@@ -664,9 +589,6 @@ describe('(Design/modules)', () => {
           trialSetting: trialSetting
         }
       },
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     }
 
@@ -681,13 +603,11 @@ describe('(Design/modules)', () => {
         {
           id: 2,
           level: 'trial',
-          selected: false,
           screenshot: null
         },
         {
           id: 1,
           level: 'trial',
-          selected: false,
           screenshot: null
         }
       ],
@@ -705,9 +625,6 @@ describe('(Design/modules)', () => {
           trialSetting: trialSetting
         }
       },
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     })
 
@@ -722,13 +639,11 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           level: 'trial',
-          selected: false,
           screenshot: null
         },
         {
           id: 2,
           level: 'trial',
-          selected: false,
           screenshot: null
         }
       ],
@@ -746,9 +661,6 @@ describe('(Design/modules)', () => {
           trialSetting: trialSetting
         }
       },
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     })
   })
@@ -774,9 +686,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entity: {},
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     }
 
@@ -802,9 +711,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entity: {},
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     })
 
@@ -830,9 +736,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entity: {},
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     })
   })
@@ -858,9 +761,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entity: {},
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     }
 
@@ -886,9 +786,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entity: {},
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     })
 
@@ -914,9 +811,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entity: {},
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     })
   })
@@ -936,7 +830,6 @@ describe('(Design/modules)', () => {
             {
               id: 1,
               level: 'trial',
-              selected: false,
               screenshot: null
             }
           ]
@@ -950,9 +843,6 @@ describe('(Design/modules)', () => {
           trialSetting: trialSetting
         }
       },
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     }
 
@@ -967,7 +857,6 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           level: 'trial',
-          selected: false,
           screenshot: null
         },
         {
@@ -985,9 +874,6 @@ describe('(Design/modules)', () => {
           trialSetting: trialSetting
         }
       },
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     })
   })
@@ -1012,7 +898,6 @@ describe('(Design/modules)', () => {
             {
               id: 1,
               level: 'trial',
-              selected: false,
               screenshot: null
             }
           ]
@@ -1020,7 +905,6 @@ describe('(Design/modules)', () => {
         {
           id: 3,
           level: 'trial',
-          selected: false,
           screenshot: null
         }
       ],
@@ -1048,9 +932,6 @@ describe('(Design/modules)', () => {
           trialSetting: trialSetting
         }
       },
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     }
 
@@ -1070,7 +951,6 @@ describe('(Design/modules)', () => {
             {
               id: 1,
               level: 'trial',
-              selected: false,
               screenshot: null
             }
           ]
@@ -1078,7 +958,6 @@ describe('(Design/modules)', () => {
         {
           id: 3,
           level: 'trial',
-          selected: false,
           screenshot: null
         }
       ],
@@ -1096,9 +975,6 @@ describe('(Design/modules)', () => {
           trialSetting: trialSetting
         }
       },
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     })
   })
@@ -1118,7 +994,6 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           level: 'trial',
-          selected: false,
           screenshot: null
         }
       ],
@@ -1135,9 +1010,6 @@ describe('(Design/modules)', () => {
           trialSetting: trialSetting
         }
       },
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     }
 
@@ -1157,7 +1029,6 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           level: 'trial',
-          selected: false,
           screenshot: null
         }
       ],
@@ -1169,9 +1040,6 @@ describe('(Design/modules)', () => {
           trialSetting: trialSetting
         }
       },
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     })
   })
@@ -1189,9 +1057,6 @@ describe('(Design/modules)', () => {
       currentTrial: null,
       structure: [],
       entity: {},
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     }
 
@@ -1209,9 +1074,6 @@ describe('(Design/modules)', () => {
       currentTrial: null,
       structure: [],
       entity: {},
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     })
   })
@@ -1237,9 +1099,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entity: {},
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     }
     const state2 = designReducer(state1, changeBlockSetting(1, { randomized: true }))
@@ -1264,9 +1123,6 @@ describe('(Design/modules)', () => {
         }
       ],
       entity: {},
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     })
   })
@@ -1281,7 +1137,6 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           level: 'trial',
-          selected: false,
           screenshot: null
         }
       ],
@@ -1293,9 +1148,6 @@ describe('(Design/modules)', () => {
           trialSetting: trialSetting
         }
       },
-      selected: [],
-      selectId: null,
-      selectMode: false,
       messages: []
     }
 
@@ -1310,7 +1162,6 @@ describe('(Design/modules)', () => {
         {
           id: 1,
           level: 'trial',
-          selected: false,
           screenshot: null
         }
       ],
@@ -1326,163 +1177,6 @@ describe('(Design/modules)', () => {
           }
         }
       },
-      selected: [],
-      selectId: null,
-      selectMode: false,
-      messages: []
-    })
-  })
-
-  it('Should handle TOGGLE_SELECT_MODE', () => {
-    const state1 = designReducer(undefined, {})
-    const state2 = designReducer(state1,
-      toggleSelectMode('testId', { condition: { 0: { name: 'Condition1', color: '#3498db' } } }, 'extend'))
-
-    expect(state2).to.deep.equal({
-      counter: 0,
-      name: 'Unnamed Experiment',
-      condition: {},
-      currentTrial: null,
-      structure: [],
-      entity: {},
-      selected: [],
-      selectId: 'testId',
-      selectMode: true,
-      messages: []
-    })
-
-    const state3 = designReducer(state2,
-      toggleSelectMode('anotherId', { condition: { 1: { name: 'Condition2', color: '#000000' } } }, 'extend'))
-
-    expect(state3).to.deep.equal({
-      counter: 0,
-      name: 'Unnamed Experiment',
-      condition: {},
-      currentTrial: null,
-      structure: [],
-      entity: {},
-      selected: [],
-      selectId: 'testId',
-      selectMode: true,
-      messages: []
-    })
-
-    const state4 = designReducer(state3,
-      toggleSelectMode('testId', { condition: { 0: { name: 'Condition1', color: '#3498db' } } }, 'extend'))
-
-    expect(state4).to.deep.equal({
-      counter: 0,
-      name: 'Unnamed Experiment',
-      condition: {},
-      currentTrial: null,
-      structure: [],
-      entity: {},
-      selected: [],
-      selectId: null,
-      selectMode: false,
-      messages: []
-    })
-  })
-
-  it('Should handle SELECT_TRIAL', () => {
-    const state1 = {
-      counter: 1,
-      name: 'Unnamed Experiment',
-      condition: {
-        0: {
-          name: 'Condition1',
-          color: '#3498db'
-        }
-      },
-      currentTrial: 1,
-      structure: [
-        {
-          id: 1,
-          level: 'trial',
-          selected: false,
-          screenshot: null
-        }
-      ],
-      entity: {
-        1: {
-          type: trialType,
-          name: 'Text',
-          condition: {},
-          trialSetting: trialSetting
-        }
-      },
-      selected: [],
-      selectId: null,
-      selectMode: false,
-      messages: []
-    }
-    const state2 = designReducer(state1,
-      toggleSelectMode('testId', { condition: { 0: { name: 'Condition1', color: '#3498db' } } }, 'extend'))
-    const state3 = designReducer(state2, selectTrial(1))
-
-    expect(state3).to.deep.equal({
-      counter: 1,
-      name: 'Unnamed Experiment',
-      condition: {
-        0: {
-          name: 'Condition1',
-          color: '#3498db'
-        }
-      },
-      currentTrial: 1,
-      structure: [
-        {
-          id: 1,
-          level: 'trial',
-          selected: true,
-          screenshot: null
-        }
-      ],
-      entity: {
-        1: {
-          type: trialType,
-          name: 'Text',
-          condition: {},
-          trialSetting: trialSetting
-        }
-      },
-      selected: [1],
-      selectId: 'testId',
-      selectMode: true,
-      messages: []
-    })
-
-    const state4 = designReducer(state3, selectTrial(1))
-
-    expect(state4).to.deep.equal({
-      counter: 1,
-      name: 'Unnamed Experiment',
-      condition: {
-        0: {
-          name: 'Condition1',
-          color: '#3498db'
-        }
-      },
-      currentTrial: 1,
-      structure: [
-        {
-          id: 1,
-          level: 'trial',
-          selected: false,
-          screenshot: null
-        }
-      ],
-      entity: {
-        1: {
-          type: trialType,
-          name: 'Text',
-          condition: {},
-          trialSetting: trialSetting
-        }
-      },
-      selected: [],
-      selectId: 'testId',
-      selectMode: true,
       messages: []
     })
   })

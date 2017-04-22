@@ -48,7 +48,6 @@ const addBlockTrials = (state, action) => {
       {
         id: newCounter,
         level: 'trial',
-        selected: false,
         screenshot: null
       }
     )

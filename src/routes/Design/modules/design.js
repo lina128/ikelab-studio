@@ -8,11 +8,14 @@ export const ADD_BLOCK = 'ADD_BLOCK'
 export const ADD_BLOCK_TRIALS = 'ADD_BLOCK_TRIALS'
 export const ADD_RUN = 'ADD_RUN'
 export const ADD_CONDITION = 'ADD_CONDITION'
+export const CHANGE_STRUCTURE = 'CHANGE_STRUCTURE'
 export const DESIGN_ADD_MESSAGE = 'DESIGN_ADD_MESSAGE'
 export const DESIGN_DELETE_MESSAGE = 'DESIGN_DELETE_MESSAGE'
 export const CHANGE_BLOCK_SETTING = 'CHANGE_BLOCK_SETTING'
 export const CHANGE_RUN_SETTING = 'CHANGE_RUN_SETTING'
 export const CHANGE_TRIAL_SETTING = 'CHANGE_TRIAL_SETTING'
+export const CHANGE_TRIAL_SETTING_SUCCEEDED = 'CHANGE_TRIAL_SETTING_SUCCEEDED'
+export const CHANGE_TRIAL_SETTING_FAILED = 'CHANGE_TRIAL_SETTING_FAILED'
 export const CLICK_TRIAL = 'CLICK_TRIAL'
 export const COPY_CURRENT_TRIAL = 'COPY_CURRENT_TRIAL'
 export const DELETE_CURRENT_TRIAL = 'DELETE_CURRENT_TRIAL'
@@ -20,16 +23,15 @@ export const DELETE_NODE = 'DELETE_NODE'
 export const FETCH_EXPERIMENT = 'FETCH_EXPERIMENT'
 export const FETCH_EXPERIMENT_SUCCEEDED = 'FETCH_EXPERIMENT_SUCCEEDED'
 export const FETCH_EXPERIMENT_FAILED = 'FETCH_EXPERIMENT_FAILED'
+export const SAVE_EXPERIMENT = 'SAVE_EXPERIMENT'
+export const SAVE_EXPERIMENT_SUCCEEDED = 'SAVE_EXPERIMENT_SUCCEEDED'
+export const SAVE_EXPERIMENT_FAILED = 'SAVE_EXPERIMENT_FAILED'
 export const MOVE_INSIDE = 'MOVE_INSIDE'
 export const MOVE_NODE = 'MOVE_NODE'
 export const MOVE_OUTSIDE = 'MOVE_OUTSIDE'
 export const REMOVE_CONDITION = 'REMOVE_CONDITION'
 export const REMOVE_TRIAL_CONDITION = 'DELETE_TRIAL_CONDITION'
 export const RENAME_CONDITION = 'RENAME_CONDITION'
-export const SELECT_TRIAL = 'SELECT_TRIAL'
-export const TOGGLE_SELECT_MODE = 'TOGGLE_SELECT_MODE'
-export const UPDATE_STRUCTURE = 'UPDATE_STRUCTURE'
-export const UPDATE_STORE = 'UPDATE_STORE'
 
 // ------------------------------------
 // Actions
@@ -111,6 +113,13 @@ export const clickTrial = (id) => {
   }
 }
 
+export const changeStructure = (structure) => {
+  return {
+    type: CHANGE_STRUCTURE,
+    payload: { structure }
+  }
+}
+
 export const copyCurrentTrial = () => {
   return {
     type: COPY_CURRENT_TRIAL
@@ -134,6 +143,13 @@ export const fetchExperiment = (id) => {
   return {
     type: FETCH_EXPERIMENT,
     payload: { id }
+  }
+}
+
+export const saveExperiment = (experiment) => {
+  return {
+    type: SAVE_EXPERIMENT,
+    payload: { ...experiment }
   }
 }
 
@@ -179,55 +195,6 @@ export const renameCondition = (id, value) => {
   }
 }
 
-export const selectTrial = (id) => {
-  return {
-    type: SELECT_TRIAL,
-    payload: { id }
-  }
-}
-
-export const toggleSelectMode = (id, setting, op) => {
-  return {
-    type: TOGGLE_SELECT_MODE,
-    payload: { id, setting, op }
-  }
-}
-
-export const updateStructure = (id, change) => {
-  return {
-    type: UPDATE_STRUCTURE,
-    payload: { id, change }
-  }
-}
-
-export const updateStore = (data) => {
-  return {
-    type: UPDATE_STORE,
-    payload: { ...data }
-  }
-}
-
-/*  This is a thunk, meaning it is a function that immediately
-    returns a function for lazy evaluation. It is incredibly useful for
-    creating async actions, especially when combined with redux-thunk!
-
-    NOTE: This is solely for demonstration purposes. In a real application,
-    you'd probably want to dispatch an action of COUNTER_DOUBLE and let the
-    reducer take care of this logic.  */
-
-/*
-export const doubleAsync = () => {
-  return (dispatch, getState) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        dispatch(increment(getState().counter))
-        resolve()
-      }, 200)
-    })
-  }
-}
-*/
-
 export const actions = {
   addTrial,
   addBlock,
@@ -235,6 +202,7 @@ export const actions = {
   addRun,
   addCondition,
   addMessage,
+  changeStructure,
   deleteMessage,
   clickTrial,
   changeBlockSetting,
@@ -250,10 +218,7 @@ export const actions = {
   removeCondition,
   removeTrialCondition,
   renameCondition,
-  selectTrial,
-  toggleSelectMode,
-  updateStructure,
-  updateStore
+  saveExperiment
 }
 
 // ------------------------------------
@@ -270,6 +235,8 @@ const ACTION_HANDLERS = {
   [CHANGE_BLOCK_SETTING]: handle.changeBlockSetting,
   [CHANGE_RUN_SETTING]: handle.changeRunSetting,
   [CHANGE_TRIAL_SETTING] : handle.changeTrialSetting,
+  [CHANGE_TRIAL_SETTING_SUCCEEDED]: handle.changeTrialSettingSucceeded,
+  [CHANGE_TRIAL_SETTING_FAILED]: handle.changeTrialSettingFailed,
   [CLICK_TRIAL] : handle.clickTrial,
   [COPY_CURRENT_TRIAL] : handle.copyCurrentTrial,
   [DELETE_CURRENT_TRIAL] : handle.deleteCurrentTrial,
@@ -283,10 +250,9 @@ const ACTION_HANDLERS = {
   [REMOVE_CONDITION] : handle.removeCondition,
   [REMOVE_TRIAL_CONDITION] : handle.removeTrialCondition,
   [RENAME_CONDITION] : handle.renameCondition,
-  [SELECT_TRIAL] : handle.selectTrial,
-  [TOGGLE_SELECT_MODE] : handle.toggleSelectMode,
-  [UPDATE_STRUCTURE] : handle.updateStructure,
-  [UPDATE_STORE]: handle.updateStore
+  [SAVE_EXPERIMENT]: handle.saveExperiment,
+  [SAVE_EXPERIMENT_SUCCEEDED]: handle.saveExperimentSucceeded,
+  [SAVE_EXPERIMENT_FAILED]: handle.saveExperimentFailed
 }
 
 // ------------------------------------
@@ -300,12 +266,10 @@ const initialState = {
   currentTrial: null,
   structure: [],
   entity: {},
-  selected: [],
-  selectId: null,
-  selectMode: false,
   messages: [],
   isFetching: false,
-  isSaving: false
+  isSaving: false,
+  isTakingScreenshot: false
 }
 
 export default function designReducer (state = initialState, action) {

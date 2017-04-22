@@ -5,6 +5,12 @@ import * as handle from './handlers'
 // ------------------------------------
 export const STUDIO_ADD_MESSAGE = 'STUDIO_ADD_MESSAGE'
 export const STUDIO_DELETE_MESSAGE = 'STUDIO_DELETE_MESSAGE'
+export const CREATE_EXPERIMENT = 'CREATE_EXPERIMENT'
+export const CREATE_EXPERIMENT_SUCCEEDED = 'CREATE_EXPERIMENT_SUCCEEDED'
+export const CREATE_EXPERIMENT_FAILED = 'CREATE_EXPERIMENT_FAILED'
+export const FETCH_EXPERIMENTS = 'FETCH_EXPERIMENTS'
+export const FETCH_EXPERIMENTS_SUCCEEDED = 'FETCH_EXPERIMENTS_SUCCEEDED'
+export const FETCH_EXPERIMENTS_FAILED = 'FETCH_EXPERIMENTS_FAILED'
 
 // ------------------------------------
 // Actions
@@ -26,30 +32,23 @@ export const deleteMessage = (id) => {
   }
 }
 
-/*  This is a thunk, meaning it is a function that immediately
-    returns a function for lazy evaluation. It is incredibly useful for
-    creating async actions, especially when combined with redux-thunk!
-
-    NOTE: This is solely for demonstration purposes. In a real application,
-    you'd probably want to dispatch an action of COUNTER_DOUBLE and let the
-    reducer take care of this logic.  */
-
-/*
-export const doubleAsync = () => {
-  return (dispatch, getState) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        dispatch(increment(getState().counter))
-        resolve()
-      }, 200)
-    })
+export const createExperiment = () => {
+  return {
+    type: CREATE_EXPERIMENT
   }
 }
-*/
+
+export const fetchExperiments = () => {
+  return {
+    type: FETCH_EXPERIMENTS
+  }
+}
 
 export const actions = {
   addMessage,
-  deleteMessage
+  deleteMessage,
+  createExperiment,
+  fetchExperiments
 }
 
 // ------------------------------------
@@ -57,14 +56,22 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [STUDIO_ADD_MESSAGE] : handle.addMessage,
-  [STUDIO_DELETE_MESSAGE] : handle.deleteMessage
+  [STUDIO_DELETE_MESSAGE] : handle.deleteMessage,
+  [CREATE_EXPERIMENT]: handle.createExperiment,
+  [CREATE_EXPERIMENT_SUCCEEDED]: handle.createExperimentSucceeded,
+  [CREATE_EXPERIMENT_FAILED]: handle.createExperimentFailed,
+  [FETCH_EXPERIMENTS]: handle.fetchExperiments,
+  [FETCH_EXPERIMENTS_SUCCEEDED]: handle.fetchExperimentsSucceeded,
+  [FETCH_EXPERIMENTS_FAILED]: handle.fetchExperimentsFailed
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = {
-  messages: []
+  messages: [],
+  isFetching: false,
+  experiments: []
 }
 
 export default function studioReducer (state = initialState, action) {

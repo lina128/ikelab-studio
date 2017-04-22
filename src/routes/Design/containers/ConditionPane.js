@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { addCondition, renameCondition, toggleSelectMode, removeCondition } from '../modules/design'
+import { addCondition, renameCondition, removeCondition } from '../modules/design'
 import List from '../components/List'
 import ListItem from '../components/ListItem'
 import Input from '../components/Input'
@@ -23,9 +23,6 @@ const mapDispatchToProps = (dispatch) => {
     onRenameCondition: (color, value) => {
       dispatch(renameCondition(color, value))
     },
-    onSelectMode: (id, setting, op) => {
-      dispatch(toggleSelectMode(id, setting, op))
-    },
     onRemoveCondition: (id) => {
       dispatch(removeCondition(id))
     }
@@ -41,7 +38,6 @@ export class ConditionPane extends Component {
   static propTypes = {
     addCondition: PropTypes.func.isRequired,
     condition: PropTypes.object.isRequired,
-    onSelectMode: PropTypes.func.isRequired,
     onRenameCondition: PropTypes.func.isRequired,
     onRemoveCondition: PropTypes.func.isRequired
   }

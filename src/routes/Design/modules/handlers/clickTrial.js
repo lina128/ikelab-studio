@@ -1,7 +1,11 @@
 const clickTrial = (state, action) => {
-  return {
-    ...state,
-    currentTrial: action.payload.id
+  if (state.isTakingScreenshot) {
+    return state
+  } else {
+    return {
+      ...state,
+      currentTrial: action.payload.id
+    }
   }
 }
 

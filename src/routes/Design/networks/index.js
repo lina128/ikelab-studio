@@ -1,1 +1,0 @@
-export fetchExperiment from './fetchExperiment'

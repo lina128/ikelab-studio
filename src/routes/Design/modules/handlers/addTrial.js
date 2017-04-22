@@ -25,7 +25,6 @@ const addTrial = (state, action) => {
         {
           id: newCounterT,
           level: 'trial',
-          selected: false,
           screenshot: null
         }),
       entity: {
@@ -48,7 +47,6 @@ const addTrial = (state, action) => {
         {
           id: newCounterT,
           level: 'trial',
-          selected: false,
           screenshot: null
         }
       ],

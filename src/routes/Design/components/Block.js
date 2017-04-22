@@ -1,12 +1,12 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import classNames from 'classnames'
 import Input from './Input'
-import Trial from '../containers/Trial'
+import TrialContainer from '../containers/TrialContainer'
 import IconButton from 'react-mdl/lib/IconButton'
 import IconToggle from 'react-mdl/lib/IconToggle'
 import './Block.scss'
 
-export default class Block extends Component {
+export default class Block extends PureComponent {
   constructor (props) {
     super(props)
     this.handleChangeBlockRandomization = this.handleChangeBlockRandomization.bind(this)
@@ -18,7 +18,6 @@ export default class Block extends Component {
 
   static propTypes = {
     isDragging: PropTypes.bool.isRequired,
-    selectMode: PropTypes.bool.isRequired,
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     blockSetting: PropTypes.object.isRequired,
@@ -58,7 +57,6 @@ export default class Block extends Component {
       connectDragSource,
       isDragging,
       connectDropTarget,
-      selectMode,
       name,
       blockSetting,
       branchStyle,
@@ -74,12 +72,10 @@ export default class Block extends Component {
     for (let i = 0; i < children.length; i++) {
       if (children.length === 1) {
         blockTrials.push(
-          <Trial
+          <TrialContainer
             key={children[i].id}
-            selectMode={selectMode}
             id={children[i].id}
             screenshot={children[i].screenshot}
-            selected={children[i].selected}
             branchStyle={'design_trial_branch_single'}
             moveNode={moveNode}
             moveOutside={moveOutside}
@@ -88,12 +84,10 @@ export default class Block extends Component {
       } else {
         if (i === 0) {
           blockTrials.push(
-            <Trial
+            <TrialContainer
               key={children[i].id}
-              selectMode={selectMode}
               id={children[i].id}
               screenshot={children[i].screenshot}
-              selected={children[i].selected}
               branchStyle={'design_trial_branch_top'}
               moveNode={moveNode}
               moveOutside={moveOutside}
@@ -101,12 +95,10 @@ export default class Block extends Component {
           )
         } else if (i === children.length - 1) {
           blockTrials.push(
-            <Trial
+            <TrialContainer
               key={children[i].id}
-              selectMode={selectMode}
               id={children[i].id}
               screenshot={children[i].screenshot}
-              selected={children[i].selected}
               branchStyle={'design_trial_branch_bottom'}
               moveNode={moveNode}
               moveOutside={moveOutside}
@@ -114,12 +106,10 @@ export default class Block extends Component {
           )
         } else {
           blockTrials.push(
-            <Trial
+            <TrialContainer
               key={children[i].id}
-              selectMode={selectMode}
               id={children[i].id}
               screenshot={children[i].screenshot}
-              selected={children[i].selected}
               branchStyle={'design_trial_branch_middle'}
               moveNode={moveNode}
               moveOutside={moveOutside}
@@ -129,75 +119,42 @@ export default class Block extends Component {
       }
     }
 
-    if (selectMode) {
-      return (
-        <div className={'design_block_default'}>
-          <div>
+    const opacity = isDragging ? 0 : 1
+
+    return connectDropTarget(
+      <div className={'design_block_default'}>
+        {connectDragSource(
+          <div style={{ opacity }}>
             {blockTrials}
-            <div style={{
-              position: 'absolute',
-              top: '0px',
-              left: '0px',
-              fontSize: '12pt',
-              fontFamily: 'Helvetica'
-            }}>
-              <div className={'design_block_decorate'}>
-                {name}
-                <div className={'design_block_verticalDecoration'}>
-                  <IconToggle name='autorenew' ripple checked={blockSetting.randomized} disabled />
-                  <Input
-                    value={blockSetting.repeat}
-                    customStyle={{ marginLeft: '10px', width: '20px', border: 'none' }}
-                    onBlur={() => {}}
-                    disabled />
-                  <IconToggle name='vertical_align_top' ripple checked={blockSetting.lockTop} disabled />
-                  <IconToggle name='vertical_align_bottom' ripple checked={blockSetting.lockBottom} disabled />
-                  <IconToggle name='delete' ripple disabled />
-                </div>
+            <div className={'design_block_decorate'}>
+              {name}
+              <div className={'design_block_verticalDecoration'}>
+                <IconToggle
+                  name='autorenew'
+                  ripple
+                  checked={blockSetting.randomized}
+                  onChange={this.handleChangeBlockRandomization} />
+                <Input
+                  value={blockSetting.repeat}
+                  customStyle={{ marginLeft: '10px', width: '20px', border: 'none' }}
+                  onBlur={this.handleChangeBlockRepeat} />
+                <IconToggle
+                  name='vertical_align_top'
+                  ripple
+                  checked={blockSetting.lockTop}
+                  onChange={this.handleChangeBlockLockTop} />
+                <IconToggle
+                  name='vertical_align_bottom'
+                  ripple
+                  checked={blockSetting.lockBottom}
+                  onChange={this.handleChangeBlockLockBottom} />
+                <IconButton name='delete' accent ripple onClick={this.handleDeleteNode} />
               </div>
             </div>
           </div>
-          <div className={classnames} />
-        </div>
-      )
-    } else {
-      const opacity = isDragging ? 0 : 1
-
-      return connectDropTarget(
-        <div className={'design_block_default'}>
-          {connectDragSource(
-            <div style={{ opacity }}>
-              {blockTrials}
-              <div className={'design_block_decorate'}>
-                {name}
-                <div className={'design_block_verticalDecoration'}>
-                  <IconToggle
-                    name='autorenew'
-                    ripple
-                    checked={blockSetting.randomized}
-                    onChange={this.handleChangeBlockRandomization} />
-                  <Input
-                    value={blockSetting.repeat}
-                    customStyle={{ marginLeft: '10px', width: '20px', border: 'none' }}
-                    onBlur={this.handleChangeBlockRepeat} />
-                  <IconToggle
-                    name='vertical_align_top'
-                    ripple
-                    checked={blockSetting.lockTop}
-                    onChange={this.handleChangeBlockLockTop} />
-                  <IconToggle
-                    name='vertical_align_bottom'
-                    ripple
-                    checked={blockSetting.lockBottom}
-                    onChange={this.handleChangeBlockLockBottom} />
-                  <IconButton name='delete' accent ripple onClick={this.handleDeleteNode} />
-                </div>
-              </div>
-            </div>
-          )}
-          <div className={classnames} />
-        </div>
-      )
-    }
+        )}
+        <div className={classnames} />
+      </div>
+    )
   }
 }

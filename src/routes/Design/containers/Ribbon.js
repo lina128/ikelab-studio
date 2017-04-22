@@ -3,9 +3,8 @@ import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import { ActionCreators } from 'redux-undo'
 import { Link } from 'react-router'
-import Trash from './Trash'
-import PrintView from './PrintView'
-import ModuleLoader from './ModuleLoader'
+import PrintViewContainer from './PrintViewContainer'
+import ModuleLoaderContainer from './ModuleLoaderContainer'
 import RibonCardLoader from '../components/RibonCardLoader'
 import ConditionPane from './ConditionPane'
 import Button from 'react-mdl/lib/Button'
@@ -60,13 +59,12 @@ export class Ribbon extends Component {
 
     return (
       <div className={'design_ribbon_default'}>
-        <PrintView />
+        <PrintViewContainer />
         <Link to='/blueprint' state={{ foo: 'bar' }} />
-        <ModuleLoader />
+        <ModuleLoaderContainer />
         <RibonCardLoader name='Condition'>
           <ConditionPane />
         </RibonCardLoader>
-        <Trash />
         {pastSteps ? <Button raised accent ripple onClick={undo}>Undo</Button> : <Button raised>Undo</Button>}
         {futureSteps ? <Button raised accent ripple onClick={redo}>Redo</Button> : <Button raised>Redo</Button>}
       </div>

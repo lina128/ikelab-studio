@@ -14,7 +14,7 @@ export default class DesignView extends Component {
     return (
       <div>
         {this.props.children}
-        <DesignContainer experimentId={this.props.params.experimentId} />
+        <DesignContainer fetchId={parseInt(this.props.params.experimentId)} />
       </div>
     )
   }

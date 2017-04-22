@@ -11,7 +11,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Studio = require('./components/StudioView').default
+      const Studio = require('./containers/StudioContainer').default
       const reducer = require('./modules/studio').default
 
       injectReducer(store, { key: 'studio', reducer })
