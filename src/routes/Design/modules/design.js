@@ -11,11 +11,9 @@ export const ADD_CONDITION = 'ADD_CONDITION'
 export const CHANGE_STRUCTURE = 'CHANGE_STRUCTURE'
 export const DESIGN_ADD_MESSAGE = 'DESIGN_ADD_MESSAGE'
 export const DESIGN_DELETE_MESSAGE = 'DESIGN_DELETE_MESSAGE'
-export const CHANGE_BLOCK_SETTING = 'CHANGE_BLOCK_SETTING'
-export const CHANGE_RUN_SETTING = 'CHANGE_RUN_SETTING'
-export const CHANGE_TRIAL_SETTING = 'CHANGE_TRIAL_SETTING'
-export const CHANGE_TRIAL_SETTING_SUCCEEDED = 'CHANGE_TRIAL_SETTING_SUCCEEDED'
-export const CHANGE_TRIAL_SETTING_FAILED = 'CHANGE_TRIAL_SETTING_FAILED'
+export const CHANGE_SETTING = 'CHANGE_SETTING'
+export const CHANGE_SETTING_SUCCEEDED = 'CHANGE_SETTING_SUCCEEDED'
+export const CHANGE_SETTING_FAILED = 'CHANGE_SETTING_FAILED'
 export const CLICK_TRIAL = 'CLICK_TRIAL'
 export const COPY_CURRENT_TRIAL = 'COPY_CURRENT_TRIAL'
 export const DELETE_CURRENT_TRIAL = 'DELETE_CURRENT_TRIAL'
@@ -85,23 +83,9 @@ export const deleteMessage = (id) => {
   }
 }
 
-export const changeBlockSetting = (id, setting) => {
+export const changeSetting = (id, setting) => {
   return {
-    type: CHANGE_BLOCK_SETTING,
-    payload: { id, setting }
-  }
-}
-
-export const changeRunSetting = (id, setting) => {
-  return {
-    type: CHANGE_RUN_SETTING,
-    payload: { id, setting }
-  }
-}
-
-export const changeTrialSetting = (id, setting) => {
-  return {
-    type: CHANGE_TRIAL_SETTING,
+    type: CHANGE_SETTING,
     payload: { id, setting }
   }
 }
@@ -205,9 +189,7 @@ export const actions = {
   changeStructure,
   deleteMessage,
   clickTrial,
-  changeBlockSetting,
-  changeRunSetting,
-  changeTrialSetting,
+  changeSetting,
   copyCurrentTrial,
   deleteCurrentTrial,
   deleteNode,
@@ -232,11 +214,9 @@ const ACTION_HANDLERS = {
   [ADD_CONDITION] : handle.addCondition,
   [DESIGN_ADD_MESSAGE] : handle.addMessage,
   [DESIGN_DELETE_MESSAGE] : handle.deleteMessage,
-  [CHANGE_BLOCK_SETTING]: handle.changeBlockSetting,
-  [CHANGE_RUN_SETTING]: handle.changeRunSetting,
-  [CHANGE_TRIAL_SETTING] : handle.changeTrialSetting,
-  [CHANGE_TRIAL_SETTING_SUCCEEDED]: handle.changeTrialSettingSucceeded,
-  [CHANGE_TRIAL_SETTING_FAILED]: handle.changeTrialSettingFailed,
+  [CHANGE_SETTING] : handle.changeSetting,
+  [CHANGE_SETTING_SUCCEEDED]: handle.changeSettingSucceeded,
+  [CHANGE_SETTING_FAILED]: handle.changeSettingFailed,
   [CLICK_TRIAL] : handle.clickTrial,
   [COPY_CURRENT_TRIAL] : handle.copyCurrentTrial,
   [DELETE_CURRENT_TRIAL] : handle.deleteCurrentTrial,

@@ -16,23 +16,23 @@ export default class Run extends PureComponent {
     selectMode: PropTypes.bool.isRequired,
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    runSetting: PropTypes.object.isRequired,
+    setting: PropTypes.object.isRequired,
     children: PropTypes.array.isRequired,
     moveNode: PropTypes.func,
     moveOutside: PropTypes.func,
     moveInside: PropTypes.func,
-    changeRunSetting: PropTypes.func,
+    changeSetting: PropTypes.func,
     deleteNode: PropTypes.func,
     connectDropTarget: PropTypes.func.isRequired,
     clickTrial: PropTypes.func.isRequired
   }
 
   handleChangeRunRandomization () {
-    this.props.changeRunSetting(this.props.id, { randomized: !this.props.runSetting.randomized })
+    this.props.changeSetting(this.props.id, { randomized: !this.props.setting.randomized })
   }
 
   handleChangeRunCounterbalance () {
-    this.props.changeRunSetting(this.props.id, { counterbalanced: !this.props.runSetting.counterbalanced })
+    this.props.changeSetting(this.props.id, { counterbalanced: !this.props.setting.counterbalanced })
   }
 
   handleDeleteNode () {
@@ -43,7 +43,7 @@ export default class Run extends PureComponent {
     const {
       connectDropTarget,
       name,
-      runSetting,
+      setting,
       children,
       moveNode,
       moveOutside,
@@ -60,7 +60,7 @@ export default class Run extends PureComponent {
             key={children[i].id}
             id={children[i].id}
             name={children[i].name}
-            blockSetting={children[i].blockSetting}
+            setting={children[i].setting}
             branchStyle={'design_block_branch_single'}
             children={children[i].children}
             moveNode={moveNode}
@@ -76,7 +76,7 @@ export default class Run extends PureComponent {
               key={children[i].id}
               id={children[i].id}
               name={children[i].name}
-              blockSetting={children[i].blockSetting}
+              setting={children[i].setting}
               branchStyle={'design_block_branch_top'}
               children={children[i].children}
               moveNode={moveNode}
@@ -91,7 +91,7 @@ export default class Run extends PureComponent {
               key={children[i].id}
               id={children[i].id}
               name={children[i].name}
-              blockSetting={children[i].blockSetting}
+              setting={children[i].setting}
               branchStyle={'design_block_branch_bottom'}
               children={children[i].children}
               moveNode={moveNode}
@@ -106,7 +106,7 @@ export default class Run extends PureComponent {
               key={children[i].id}
               id={children[i].id}
               name={children[i].name}
-              blockSetting={children[i].blockSetting}
+              setting={children[i].setting}
               branchStyle={'design_block_branch_middle'}
               children={children[i].children}
               moveNode={moveNode}
@@ -128,9 +128,9 @@ export default class Run extends PureComponent {
             <IconToggle
               name='autorenew'
               ripple
-              checked={runSetting.randomized}
+              checked={setting.randomized}
               onChange={this.handleChangeRunRandomization} />
-            <IconToggle name='A/B' ripple checked={runSetting.counterbalanced}
+            <IconToggle name='A/B' ripple checked={setting.counterbalanced}
               onChange={this.handleChangeRunCounterbalance} />
             <IconButton name='delete' accent ripple onClick={this.handleDeleteNode} />
           </div>

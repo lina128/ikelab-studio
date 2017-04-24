@@ -12,51 +12,51 @@ function getSetting (type) {
 }
 
 const addTrial = (state, action) => {
-  let newCounterT = state.counter + 1
+  let newCounter = state.counter + 1
 
   if (state.currentTrial) {
     return {
       ...state,
-      currentTrial: newCounterT,
-      counter: newCounterT,
+      currentTrial: newCounter,
+      counter: newCounter,
       structure: insertNodeAfter(
         state.structure,
         state.currentTrial,
         {
-          id: newCounterT,
-          level: 'trial',
-          screenshot: null
+          id: newCounter,
+          level: 'trial'
         }),
       entity: {
         ...state.entity,
-        [newCounterT] : {
+        [newCounter] : {
           type: action.payload.type,
           name: action.payload.name,
           condition: {},
-          trialSetting: getSetting(action.payload.type)
+          screenshot: null,
+          setting: getSetting(action.payload.type)
         }
       }
     }
   } else {
     return {
       ...state,
-      currentTrial: newCounterT,
-      counter: newCounterT,
+      currentTrial: newCounter,
+      counter: newCounter,
       structure: [
         ...state.structure,
         {
-          id: newCounterT,
-          level: 'trial',
-          screenshot: null
+          id: newCounter,
+          level: 'trial'
         }
       ],
       entity: {
         ...state.entity,
-        [newCounterT] : {
+        [newCounter] : {
           type: action.payload.type,
           name: action.payload.name,
           condition: {},
-          trialSetting: getSetting(action.payload.type)
+          screenshot: null,
+          setting: getSetting(action.payload.type)
         }
       }
     }

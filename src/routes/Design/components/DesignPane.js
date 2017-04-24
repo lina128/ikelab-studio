@@ -47,12 +47,12 @@ export default class DesignPane extends PureComponent {
               id={x.id}
               color={x.color}
               name={x.name}
-              blockSetting={x.blockSetting}
+              setting={x.setting}
               children={x.children}
               moveNode={onNodeMove}
               moveOutside={onMoveOutside}
               moveInside={onMoveInside}
-              changeBlockSetting={onChangeBlockSetting}
+              changeSetting={onChangeSetting}
               deleteNode={onDeleteNode}
               clickTrial={onClickTrial} />
           }
@@ -61,13 +61,12 @@ export default class DesignPane extends PureComponent {
               key={x.id}
               id={x.id}
               name={x.name}
-              runSetting={x.runSetting}
+              setting={x.setting}
               children={x.children}
               moveNode={onNodeMove}
               moveOutside={onMoveOutside}
               moveInside={onMoveInside}
-              changeBlockSetting={onChangeBlockSetting}
-              changeRunSetting={onChangeRunSetting}
+              changeSetting={onChangeSetting}
               deleteNode={onDeleteNode}
               clickTrial={onClickTrial} />
           }

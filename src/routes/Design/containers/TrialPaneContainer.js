@@ -1,4 +1,4 @@
-import { changeTrialSetting } from '../modules/design'
+import { changeSetting } from '../modules/design'
 import flow from 'lodash/flow'
 import { DropTarget } from 'react-dnd'
 import { connect } from 'react-redux'
@@ -7,7 +7,7 @@ import TrialPane from '../components/TrialPane'
 const mapDispatchToProps = (dispatch) => {
   return {
     handleChange: (id = 0, change) => {
-      dispatch(changeTrialSetting(id, change))
+      dispatch(changeSetting(id, change))
     }
   }
 }

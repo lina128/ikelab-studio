@@ -61,7 +61,7 @@ export default class ExperimentRenderer extends Component {
             key={x.id}
             id={x.id}
             name={x.name}
-            blockSetting={x.blockSetting}
+            setting={x.setting}
             children={x.children}
             entity={experiment.entity} />
         }
@@ -70,7 +70,7 @@ export default class ExperimentRenderer extends Component {
             key={x.id}
             id={x.id}
             name={x.name}
-            runSetting={x.runSetting}
+            setting={x.setting}
             children={x.children}
             entity={experiment.entity} />
         }

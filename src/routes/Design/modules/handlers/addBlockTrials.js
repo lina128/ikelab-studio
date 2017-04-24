@@ -10,13 +10,6 @@ function getDefaultSetting (type) {
   return setting
 }
 
-const defaultBlockSetting = {
-  randomized: false,
-  repeat: 0,
-  lockTop: false,
-  lockBottom: false
-}
-
 const addBlockTrials = (state, action) => {
   // action has type, payload, payload has block and trials,
   // block has setting, each trial in the array has type and setting
@@ -47,8 +40,7 @@ const addBlockTrials = (state, action) => {
     children.push(
       {
         id: newCounter,
-        level: 'trial',
-        screenshot: null
+        level: 'trial'
       }
     )
 
@@ -57,11 +49,17 @@ const addBlockTrials = (state, action) => {
       type: trials[i].type,
       name: trials[i].name,
       condition: trials[i].condition,
-      trialSetting: newTrialSetting
+      setting: newTrialSetting
     }
   }
 
-  let newBlockSetting = action.payload.block.setting ? action.payload.block.setting : {}
+  let newBlockSetting = { ...getDefaultSetting('BLOCK'), ...action.payload.block.setting }
+  newEntity[newCounterB] = {
+    type: 'BLOCK',
+    name: 'Block' + newCounterB,
+    setting: newBlockSetting
+  }
+
   return {
     ...state,
     counter: newCounter,
@@ -70,8 +68,6 @@ const addBlockTrials = (state, action) => {
       {
         id: newCounterB,
         level: 'block',
-        name: 'Block' + newCounterB,
-        blockSetting: { ...defaultBlockSetting, ...newBlockSetting },
         children: children
       }
     ],

@@ -1,6 +1,6 @@
-const changeTrialSetting = (state, action) => {
+const changeSetting = (state, action) => {
   const node = state.entity[action.payload.id]
-  const newSetting = { ...node.trialSetting, ...action.payload.setting }
+  const newSetting = { ...node.setting, ...action.payload.setting }
 
   return {
     ...state,
@@ -9,10 +9,10 @@ const changeTrialSetting = (state, action) => {
       ...state.entity,
       [action.payload.id]: {
         ...node,
-        trialSetting: newSetting
+        setting: newSetting
       }
     }
   }
 }
 
-export default changeTrialSetting
+export default changeSetting

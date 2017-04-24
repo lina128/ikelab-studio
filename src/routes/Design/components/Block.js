@@ -20,12 +20,12 @@ export default class Block extends PureComponent {
     isDragging: PropTypes.bool.isRequired,
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    blockSetting: PropTypes.object.isRequired,
+    setting: PropTypes.object.isRequired,
     branchStyle: PropTypes.string,
     children: PropTypes.array.isRequired,
     moveNode: PropTypes.func,
     moveOutside: PropTypes.func,
-    changeBlockSetting: PropTypes.func,
+    changeSetting: PropTypes.func,
     deleteNode: PropTypes.func,
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
@@ -33,19 +33,19 @@ export default class Block extends PureComponent {
   }
 
   handleChangeBlockRandomization () {
-    this.props.changeBlockSetting(this.props.id, { randomized: !this.props.blockSetting.randomized })
+    this.props.changeSetting(this.props.id, { randomized: !this.props.setting.randomized })
   }
 
   handleChangeBlockRepeat (event) {
-    this.props.changeBlockSetting(this.props.id, { repeat: event.target.value })
+    this.props.changeSetting(this.props.id, { repeat: event.target.value })
   }
 
   handleChangeBlockLockTop (event) {
-    this.props.changeBlockSetting(this.props.id, { lockTop: !this.props.blockSetting.lockTop })
+    this.props.changeSetting(this.props.id, { lockTop: !this.props.setting.lockTop })
   }
 
   handleChangeBlockLockBottom (event) {
-    this.props.changeBlockSetting(this.props.id, { lockBottom: !this.props.blockSetting.lockBottom })
+    this.props.changeSetting(this.props.id, { lockBottom: !this.props.setting.lockBottom })
   }
 
   handleDeleteNode () {
@@ -58,7 +58,7 @@ export default class Block extends PureComponent {
       isDragging,
       connectDropTarget,
       name,
-      blockSetting,
+      setting,
       branchStyle,
       children,
       moveNode,
@@ -132,21 +132,21 @@ export default class Block extends PureComponent {
                 <IconToggle
                   name='autorenew'
                   ripple
-                  checked={blockSetting.randomized}
+                  checked={setting.randomized}
                   onChange={this.handleChangeBlockRandomization} />
                 <Input
-                  value={blockSetting.repeat}
+                  value={setting.repeat}
                   customStyle={{ marginLeft: '10px', width: '20px', border: 'none' }}
                   onBlur={this.handleChangeBlockRepeat} />
                 <IconToggle
                   name='vertical_align_top'
                   ripple
-                  checked={blockSetting.lockTop}
+                  checked={setting.lockTop}
                   onChange={this.handleChangeBlockLockTop} />
                 <IconToggle
                   name='vertical_align_bottom'
                   ripple
-                  checked={blockSetting.lockBottom}
+                  checked={setting.lockBottom}
                   onChange={this.handleChangeBlockLockBottom} />
                 <IconButton name='delete' accent ripple onClick={this.handleDeleteNode} />
               </div>

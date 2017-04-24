@@ -3,7 +3,7 @@ import React, {
   PropTypes
 } from 'react'
 import { connect } from 'react-redux'
-import { changeTrialSetting, copyCurrentTrial, deleteCurrentTrial } from '../modules/design'
+import { changeSetting, copyCurrentTrial, deleteCurrentTrial } from '../modules/design'
 import * as Modules from '../elements/settings'
 import * as fields from '../elements/fields'
 import {
@@ -18,7 +18,7 @@ import Button from 'react-mdl/lib/Button'
 const mapDispatchToProps = (dispatch) => {
   return {
     handleChange: (id, change) => {
-      dispatch(changeTrialSetting(id, change))
+      dispatch(changeSetting(id, change))
     },
     handleCopy: () => {
       dispatch(copyCurrentTrial())

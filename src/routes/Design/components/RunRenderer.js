@@ -9,7 +9,7 @@ export default class RunRenderer extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    runSetting: PropTypes.object.isRequired,
+    setting: PropTypes.object.isRequired,
     children: PropTypes.array.isRequired,
     entity: PropTypes.object.isRequired
   }
@@ -17,7 +17,7 @@ export default class RunRenderer extends PureComponent {
   render () {
     const {
       name,
-      runSetting,
+      setting,
       children,
       entity } = this.props
 
@@ -30,7 +30,7 @@ export default class RunRenderer extends PureComponent {
             key={children[i].id}
             id={children[i].id}
             name={children[i].name}
-            blockSetting={children[i].blockSetting}
+            setting={children[i].setting}
             branchStyle={'design_blockRenderer_branch_single'}
             children={children[i].children}
             entity={entity} />
@@ -42,7 +42,7 @@ export default class RunRenderer extends PureComponent {
               key={children[i].id}
               id={children[i].id}
               name={children[i].name}
-              blockSetting={children[i].blockSetting}
+              setting={children[i].setting}
               branchStyle={'design_blockRenderer_branch_top'}
               children={children[i].children}
               entity={entity} />
@@ -53,7 +53,7 @@ export default class RunRenderer extends PureComponent {
               key={children[i].id}
               id={children[i].id}
               name={children[i].name}
-              blockSetting={children[i].blockSetting}
+              setting={children[i].setting}
               branchStyle={'design_blockRenderer_branch_bottom'}
               children={children[i].children}
               entity={entity} />
@@ -64,7 +64,7 @@ export default class RunRenderer extends PureComponent {
               key={children[i].id}
               id={children[i].id}
               name={children[i].name}
-              blockSetting={children[i].blockSetting}
+              setting={children[i].setting}
               branchStyle={'design_blockRenderer_branch_middle'}
               children={children[i].children} />
           )
@@ -85,8 +85,8 @@ export default class RunRenderer extends PureComponent {
             <IconToggle
               name='autorenew'
               ripple
-              checked={runSetting.randomized} />
-            <IconToggle name='A/B' ripple checked={runSetting.counterbalanced} />
+              checked={setting.randomized} />
+            <IconToggle name='A/B' ripple checked={setting.counterbalanced} />
           </div>
         </div>
       </div>

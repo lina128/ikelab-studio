@@ -10,7 +10,7 @@ export default class BlockRenderer extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    blockSetting: PropTypes.object.isRequired,
+    setting: PropTypes.object.isRequired,
     branchStyle: PropTypes.string,
     children: PropTypes.array.isRequired,
     entity: PropTypes.object.isRequired
@@ -19,7 +19,7 @@ export default class BlockRenderer extends PureComponent {
   render () {
     const {
       name,
-      blockSetting,
+      setting,
       branchStyle,
       children,
       entity } = this.props
@@ -89,18 +89,18 @@ export default class BlockRenderer extends PureComponent {
             <IconToggle
               name='autorenew'
               ripple
-              checked={blockSetting.randomized} />
+              checked={setting.randomized} />
             <div className='design_blockRenderer_divBox'>
-              {blockSetting.repeat}
+              {setting.repeat}
             </div>
             <IconToggle
               name='vertical_align_top'
               ripple
-              checked={blockSetting.lockTop} />
+              checked={setting.lockTop} />
             <IconToggle
               name='vertical_align_bottom'
               ripple
-              checked={blockSetting.lockBottom} />
+              checked={setting.lockBottom} />
           </div>
         </div>
         <div className={classnames} />

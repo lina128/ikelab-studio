@@ -1,6 +1,6 @@
 import { addBlock, addBlockTrials, addCondition, addRun, addTrial,
 addMessage, deleteMessage,
-changeTrialSetting, changeBlockSetting, clickTrial, copyCurrentTrial,
+changeSetting, clickTrial, copyCurrentTrial,
 deleteCurrentTrial, moveInside, moveNode, moveOutside,
 removeCondition, removeTrialCondition, renameCondition,
 default as designReducer } from 'routes/Design/modules/design'
@@ -60,13 +60,6 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             level: 'block',
-            name: 'Block1',
-            blockSetting: {
-              randomized: false,
-              repeat: 1,
-              lockTop: false,
-              lockBottom: false
-            },
             children: []
           }
         ],
@@ -101,13 +94,6 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             level: 'block',
-            name: 'Block1',
-            blockSetting: {
-              randomized: false,
-              repeat: 0,
-              lockTop: false,
-              lockBottom: false
-            },
             children: [
               {
                 id: 2,
@@ -172,11 +158,6 @@ describe('(Design/modules)', () => {
           {
             id: 1,
             level: 'run',
-            name: 'Run1',
-            runSetting: {
-              randomized: false,
-              counterbalanced: false
-            },
             children: []
           }
         ],
@@ -1078,55 +1059,6 @@ describe('(Design/modules)', () => {
     })
   })
 
-  it('Should handle CHANGE_BLOCK_SETTING', () => {
-    const state1 = {
-      counter: 1,
-      name: 'Unnamed Experiment',
-      condition: {},
-      currentTrial: null,
-      structure: [
-        {
-          id: 1,
-          level: 'block',
-          name: 'Block1',
-          blockSetting: {
-            randomized: false,
-            repeat: 0,
-            lockTop: false,
-            lockBottom: false
-          },
-          children: []
-        }
-      ],
-      entity: {},
-      messages: []
-    }
-    const state2 = designReducer(state1, changeBlockSetting(1, { randomized: true }))
-
-    expect(state2).to.deep.equal({
-      counter: 1,
-      name: 'Unnamed Experiment',
-      condition: {},
-      currentTrial: null,
-      structure: [
-        {
-          id: 1,
-          level: 'block',
-          name: 'Block1',
-          blockSetting: {
-            randomized: true,
-            repeat: 0,
-            lockTop: false,
-            lockBottom: false
-          },
-          children: []
-        }
-      ],
-      entity: {},
-      messages: []
-    })
-  })
-
   it('Should handle CHANGE_TRIAL_SETTING', () => {
     const state1 = {
       counter: 1,
@@ -1151,8 +1083,8 @@ describe('(Design/modules)', () => {
       messages: []
     }
 
-    const state2 = designReducer(state1, changeTrialSetting(1, { fontSize: '66' }))
-    const state3 = designReducer(state2, changeTrialSetting(1, { fontWeight: 'bold' }))
+    const state2 = designReducer(state1, changeSetting(1, { fontSize: '66' }))
+    const state3 = designReducer(state2, changeSetting(1, { fontWeight: 'bold' }))
     expect(state3).to.deep.equal({
       counter: 1,
       name: 'Unnamed Experiment',

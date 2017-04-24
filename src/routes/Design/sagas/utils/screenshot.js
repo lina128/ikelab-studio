@@ -1,9 +1,12 @@
 import html2canvas from 'html2canvas'
 
-export const changeTrialSettingAPI = (id) => {
-  let mapNode = document.getElementById('ikelab_trialPane')
+export const changeSettingAPI = (id, currentId) => {
+  if (id !== currentId) {
+    return Promise.resolve()
+  } else {
+    let mapNode = document.getElementById('ikelab_trialPane')
 
-  return html2canvas(mapNode, { useCORS: true })
+    return html2canvas(mapNode, { useCORS: true })
         .then(function (canvas) {
           return canvas
         },
@@ -13,4 +16,5 @@ export const changeTrialSettingAPI = (id) => {
         }
       )
       .catch(error => { error })
+  }
 }
