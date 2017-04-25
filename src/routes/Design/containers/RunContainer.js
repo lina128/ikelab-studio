@@ -4,6 +4,7 @@ import Run from '../components/Run'
 
 const runTarget = {
   hover (props, monitor, component) {
+    console.log('move inside')
     if (monitor.getItem().level === 'block' && props.children.length === 0) {
       props.moveInside(monitor.getItem().id, props.id)
     }

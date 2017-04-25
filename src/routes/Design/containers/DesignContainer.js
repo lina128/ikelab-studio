@@ -4,9 +4,26 @@ import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import flow from 'lodash/flow'
 import Spinner from 'react-mdl/lib/Spinner'
+import FABButton from 'react-mdl/lib/FABButton'
 import { fetchExperiment, saveExperiment } from '../modules/design'
 import MessageBarContainer from './MessageBarContainer'
+import { getPlugin, IKELAB_EXPERIMENT_ENGINE_TRIAL_PREVIEW } from '../plugins/design'
 import Design from '../components/Design'
+
+const style = {
+  zIndex: 1999,
+  position: 'absolute',
+  display: 'none',
+  backgroundColor: 'white',
+  width: '800px',
+  height: '600px'
+}
+
+const btnStyle = {
+  position: 'absolute',
+  top: '-25px',
+  left: '770px'
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -37,6 +54,7 @@ export class DesignContainer extends Component {
   constructor (props) {
     super(props)
     this.handleSave = this.handleSave.bind(this)
+    this.closeIframe = this.closeIframe.bind(this)
   }
 
   static propTypes = {
@@ -73,8 +91,18 @@ export class DesignContainer extends Component {
     }
   }
 
+  closeIframe (e) {
+    const parent = e.target.parentElement
+    if (parent) {
+      parent.style.display = 'none'
+      let lightoff = document.getElementById('lightoff')
+      lightoff.style.height = '0'
+    }
+  }
+
   render () {
     const { experimentId, isFetching, isSaving, currentTrial, condition, structure, entity } = this.props
+    const ikelabExperimentEngineTrialPreview = getPlugin(IKELAB_EXPERIMENT_ENGINE_TRIAL_PREVIEW)
 
     return (
       <div>
@@ -87,6 +115,13 @@ export class DesignContainer extends Component {
           structure={structure}
           entity={entity} /> : null}
         <MessageBarContainer />
+        <div style={style}>
+          <FABButton accent style={btnStyle} onClick={this.closeIframe}>X</FABButton>
+          <iframe
+            id='PLUGIN_IKELAB_EXPERIMENT_ENGINE_TRIAL_PREVIEW'
+            src={ikelabExperimentEngineTrialPreview.url}
+            width='800' height='600' frameBorder='0' />
+        </div>
       </div>
     )
   }

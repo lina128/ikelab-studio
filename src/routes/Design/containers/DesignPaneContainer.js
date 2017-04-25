@@ -1,7 +1,5 @@
 import { connect } from 'react-redux'
-import {
-  changeStructure, moveNode, moveInside, clickTrial,
-  deleteNode, changeSetting } from '../modules/design'
+import { changeStructure, moveNode, moveInside, clickTrial } from '../modules/design'
 import DesignPane from '../components/DesignPane'
 
 const mapDispatchToProps = (dispatch) => {
@@ -17,12 +15,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     clickTrial: (id) => {
       dispatch(clickTrial(id))
-    },
-    changeSetting: (id, setting) => {
-      dispatch(changeSetting(id, setting))
-    },
-    deleteNode: (id) => {
-      dispatch(deleteNode(id))
     }
   }
 }

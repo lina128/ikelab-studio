@@ -6,18 +6,14 @@ import Block from '../components/Block'
 
 const blockSource = {
   beginDrag (props) {
+    console.log('dragging ' + props.id)
     return { id: props.id, level: 'block' }
-  },
-
-  endDrag (props, monitor) {
-    if (!monitor.didDrop()) {
-      props.moveOutside(props.id)
-    }
   }
 }
 
 const blockTarget = {
   hover (props, monitor, component) {
+    console.log('dropping to block')
     if (monitor.getItem().level === 'trial' && props.children.length === 0) {
       // drop trial into block
       props.moveInside(monitor.getItem().id, props.id)

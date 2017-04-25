@@ -6,12 +6,12 @@ import { connect } from 'react-redux'
 import { changeSetting, copyCurrentTrial, deleteCurrentTrial } from '../modules/design'
 import * as Modules from '../elements/settings'
 import * as fields from '../elements/fields'
+import { getPlugin, IKELAB_EXPERIMENT_ENGINE_TRIAL_PREVIEW } from '../plugins/design'
 import {
   Card,
   CardTitle,
   CardActions
 } from 'react-mdl/lib/Card'
-import OpenExperimentButton from '../components/OpenExperimentButton'
 import IconButton from 'react-mdl/lib/IconButton'
 import Button from 'react-mdl/lib/Button'
 
@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => {
 export class SettingPane extends Component {
   constructor (props) {
     super(props)
-    this.postMessage = this.postMessage.bind(this)
+    this.previewTrial = this.previewTrial.bind(this)
   }
 
   static propTypes = {
@@ -43,19 +43,21 @@ export class SettingPane extends Component {
     handleDelete: PropTypes.func.isRequired
   }
 
-  postMessage (target, event) {
-    if (event.origin === 'http://localhost:3000' && event.data === 'loaded') {
-      let { trial, id } = this.props
-      target.postMessage({
-        structure: [
-          {
-            id: id
-          }
-        ],
-        entity: [
-          trial
-        ]
-      }, 'http://localhost:3000')
+  previewTrial () {
+    const { id, trial } = this.props
+    let target = document.getElementById(`PLUGIN_${IKELAB_EXPERIMENT_ENGINE_TRIAL_PREVIEW}`)
+
+    if (target) {
+      let parent = target.parentElement
+      if (parent) {
+        parent.style.display = 'block'
+        parent.style.left = (window.innerWidth - 800) / 2 + 'px'
+        let ikelabExperimentEngineTrialPreview = getPlugin(IKELAB_EXPERIMENT_ENGINE_TRIAL_PREVIEW)
+        target.contentWindow.postMessage({ [id]: trial }, ikelabExperimentEngineTrialPreview.url)
+
+        let lightoff = document.getElementById('lightoff')
+        lightoff.style.height = '100%'
+      }
     }
   }
 
@@ -198,9 +200,7 @@ export class SettingPane extends Component {
           <Card shadow={1} >
             <CardTitle >
               {id}
-              <OpenExperimentButton
-                url='http://localhost:3000'
-                onExperimentWindowReady={this.postMessage} />
+              <IconButton name='visibility' colored ripple onClick={this.previewTrial} />
               <IconButton name='control_point_duplicate' colored ripple onClick={handleCopy} />
             </CardTitle>
             <CardActions border>

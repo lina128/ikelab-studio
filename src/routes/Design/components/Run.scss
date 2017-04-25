@@ -4,7 +4,7 @@
   position: relative;
   float: right;
   clear: both;
-  padding: 0;
+  padding: 10px 0 10px 0;
   cursor: move;
   width: $trialWidth + 179px;
   min-height: 200px;
@@ -17,9 +17,4 @@
   left: 5px;
   font-size: 12pt;
   font-family: Helvetica;
-}
-
-.design_run_verticalDecoration {
-  margin-top: 10px;
-  width: 25px;
 }

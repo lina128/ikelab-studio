@@ -4,12 +4,22 @@
   position: relative;
   float: right;
   clear: both;
-  padding: 0;
+  border: 1px dotted grey;
+  padding: 10px 0 0 0;
   cursor: move;
   width: $trialWidth + 85px;
   min-height: 200px;
   margin-right: 5px;
-  margin-top: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px
+}
+
+.design_block_inner {
+  position: relative;
+  float: right;
+  clear: both;
+  width: $trialWidth + 85px;
+  min-height: 200px;
 }
 
 .design_block_decorate {
@@ -18,43 +28,4 @@
   left: -15px;
   font-size: 12pt;
   font-family: Helvetica;
-}
-
-.design_block_verticalDecoration {
-  margin-top: 10px;
-  width: 25px;
-}
-
-.design_block_branch {
-  position: absolute;
-  left: -90px;
-  width: 70px;
-}
-
-.design_block_branch.design_block_branch_single {
-  top: 50%;
-  height: 2px;
-  border-top: 1px solid grey;
-  border-left: 1px solid grey;
-  border-bottom: 1px solid grey;
-}
-
-.design_block_branch.design_block_branch_top {
-  top: 46px;
-  bottom: 0px;
-  border-top: 1px solid grey;
-  border-left: 1px solid grey;
-}
-
-.design_block_branch.design_block_branch_middle {
-  top: 0px;
-  bottom: 0px;
-  border-left: 1px solid grey;
-}
-
-.design_block_branch.design_block_branch_bottom {
-  top: 0px;
-  bottom: 55px;
-  border-left: 1px solid grey;
-  border-bottom: 1px solid grey;
 }

@@ -25,7 +25,7 @@ export default class Thumbnail extends PureComponent {
     return (
       <div className={'design_thumbnail_default'} onClick={this.onClick || defaultFunc}>
         <img
-          src={screenshot}
+          src={screenshot || ''}
           style={{ height:DIMENSIONS.TRIALHEIGHT + 'px', width:DIMENSIONS.TRIALWIDTH + 'px' }} />
       </div>
     )

@@ -11,9 +11,7 @@ export default class DesignPane extends PureComponent {
     changeStructure: PropTypes.func.isRequired,
     moveNode: PropTypes.func.isRequired,
     moveInside: PropTypes.func.isRequired,
-    clickTrial: PropTypes.func.isRequired,
-    changeSetting: PropTypes.func.isRequired,
-    deleteNode: PropTypes.func.isRequired
+    clickTrial: PropTypes.func.isRequired
   }
 
   componentDidUpdate () {
@@ -23,8 +21,7 @@ export default class DesignPane extends PureComponent {
 
   render () {
     const { structure, entity, moveNode,
-           moveInside, clickTrial, changeSetting,
-           deleteNode } = this.props
+           moveInside, clickTrial } = this.props
 
     return (
       <div className={'design_designPane_default'}>
@@ -34,7 +31,6 @@ export default class DesignPane extends PureComponent {
             return <TrialContainer
               key={x.id}
               id={x.id}
-              branchStyle={''}
               entity={entity}
               moveNode={moveNode}
               clickTrial={clickTrial} />
@@ -43,13 +39,10 @@ export default class DesignPane extends PureComponent {
             return <BlockContainer
               key={x.id}
               id={x.id}
-              branchStyle={''}
               children={x.children}
               entity={entity}
               moveNode={moveNode}
               moveInside={moveInside}
-              changeSetting={changeSetting}
-              deleteNode={deleteNode}
               clickTrial={clickTrial} />
           }
           if (x.level === 'run') {
@@ -60,8 +53,6 @@ export default class DesignPane extends PureComponent {
               entity={entity}
               moveNode={moveNode}
               moveInside={moveInside}
-              changeSetting={changeSetting}
-              deleteNode={deleteNode}
               clickTrial={clickTrial} />
           }
         })
