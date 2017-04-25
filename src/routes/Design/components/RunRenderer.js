@@ -1,25 +1,23 @@
 import React, { PureComponent, PropTypes } from 'react'
 import BlockRenderer from './BlockRenderer'
-import IconToggle from 'react-mdl/lib/IconToggle'
 import './RunRenderer.scss'
 
 const defaultArr = []
 
 export default class RunRenderer extends PureComponent {
+  constructor (props) {
+    super(props)
+    this.renderRunBlocks = this.renderRunBlocks.bind(this)
+  }
+
   static propTypes = {
     id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    setting: PropTypes.object.isRequired,
     children: PropTypes.array.isRequired,
     entity: PropTypes.object.isRequired
   }
 
-  render () {
-    const {
-      name,
-      setting,
-      children,
-      entity } = this.props
+  renderRunBlocks () {
+    const { children, entity } = this.props
 
     let runBlocks = []
 
@@ -29,8 +27,6 @@ export default class RunRenderer extends PureComponent {
           <BlockRenderer
             key={children[i].id}
             id={children[i].id}
-            name={children[i].name}
-            setting={children[i].setting}
             branchStyle={'design_blockRenderer_branch_single'}
             children={children[i].children}
             entity={entity} />
@@ -41,8 +37,6 @@ export default class RunRenderer extends PureComponent {
             <BlockRenderer
               key={children[i].id}
               id={children[i].id}
-              name={children[i].name}
-              setting={children[i].setting}
               branchStyle={'design_blockRenderer_branch_top'}
               children={children[i].children}
               entity={entity} />
@@ -52,8 +46,6 @@ export default class RunRenderer extends PureComponent {
             <BlockRenderer
               key={children[i].id}
               id={children[i].id}
-              name={children[i].name}
-              setting={children[i].setting}
               branchStyle={'design_blockRenderer_branch_bottom'}
               children={children[i].children}
               entity={entity} />
@@ -63,8 +55,6 @@ export default class RunRenderer extends PureComponent {
             <BlockRenderer
               key={children[i].id}
               id={children[i].id}
-              name={children[i].name}
-              setting={children[i].setting}
               branchStyle={'design_blockRenderer_branch_middle'}
               children={children[i].children} />
           )
@@ -72,22 +62,26 @@ export default class RunRenderer extends PureComponent {
       }
     }
 
+    return runBlocks
+  }
+
+  render () {
+    const {
+      id,
+      entity } = this.props
+
+    let runBlocks = this.renderRunBlocks()
+
     if (runBlocks.length === 0) {
       runBlocks = defaultArr
     }
 
+    const name = entity[id].name
     return (
       <div className='design_runRenderer_default'>
         {runBlocks}
         <div className={'design_runRenderer_decorate'}>
           {name}
-          <div className={'design_runRenderer_verticalDecoration'}>
-            <IconToggle
-              name='autorenew'
-              ripple
-              checked={setting.randomized} />
-            <IconToggle name='A/B' ripple checked={setting.counterbalanced} />
-          </div>
         </div>
       </div>
     )

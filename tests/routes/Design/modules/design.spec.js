@@ -19,7 +19,7 @@ function getSetting () {
 describe('(Design/modules)', () => {
   let _initialState
 
-  const trialSetting = getSetting()
+  const setting = getSetting()
   const trialType = 'TEXT'
 
   beforeEach(() => {
@@ -75,7 +75,7 @@ describe('(Design/modules)', () => {
           type: 'TEXT',
           name: 'Text',
           condition: {},
-          setting: trialSetting
+          setting: setting
         },
         {
           type: 'TEXT',
@@ -113,13 +113,13 @@ describe('(Design/modules)', () => {
             type: 'TEXT',
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           },
           3: {
             type: 'TEXT',
             name: 'Text',
             condition: {},
-            trialSetting: { ...trialSetting, font: 66 }
+            setting: { ...setting, font: 66 }
           }
         },
         messages: []
@@ -236,7 +236,7 @@ describe('(Design/modules)', () => {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           }
         },
         messages: []
@@ -265,13 +265,13 @@ describe('(Design/modules)', () => {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           },
           2: {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           }
         }
       }
@@ -298,13 +298,13 @@ describe('(Design/modules)', () => {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           },
           2: {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           }
         }
       })
@@ -328,7 +328,7 @@ describe('(Design/modules)', () => {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           }
         }
       }
@@ -357,13 +357,13 @@ describe('(Design/modules)', () => {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           },
           2: {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           }
         }
       })
@@ -387,7 +387,7 @@ describe('(Design/modules)', () => {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           }
         }
       }
@@ -427,7 +427,7 @@ describe('(Design/modules)', () => {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           }
         }
       }
@@ -458,7 +458,7 @@ describe('(Design/modules)', () => {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           }
         }
       })
@@ -493,7 +493,7 @@ describe('(Design/modules)', () => {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           }
         }
       }
@@ -531,7 +531,7 @@ describe('(Design/modules)', () => {
             type: trialType,
             name: 'Text',
             condition: {},
-            trialSetting: trialSetting
+            setting: setting
           }
         }
       })
@@ -561,13 +561,13 @@ describe('(Design/modules)', () => {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: trialSetting
+          setting: setting
         },
         2: {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: trialSetting
+          setting: setting
         }
       },
       messages: []
@@ -597,13 +597,13 @@ describe('(Design/modules)', () => {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: trialSetting
+          setting: setting
         },
         2: {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: trialSetting
+          setting: setting
         }
       },
       messages: []
@@ -633,13 +633,13 @@ describe('(Design/modules)', () => {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: trialSetting
+          setting: setting
         },
         2: {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: trialSetting
+          setting: setting
         }
       },
       messages: []
@@ -821,7 +821,7 @@ describe('(Design/modules)', () => {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: trialSetting
+          setting: setting
         }
       },
       messages: []
@@ -852,7 +852,7 @@ describe('(Design/modules)', () => {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: trialSetting
+          setting: setting
         }
       },
       messages: []
@@ -899,7 +899,7 @@ describe('(Design/modules)', () => {
               color: '#3498db'
             }
           },
-          trialSetting: trialSetting
+          setting: setting
         },
         3: {
           type: trialType,
@@ -910,7 +910,7 @@ describe('(Design/modules)', () => {
               color: '#3498db'
             }
           },
-          trialSetting: trialSetting
+          setting: setting
         }
       },
       messages: []
@@ -947,13 +947,13 @@ describe('(Design/modules)', () => {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: trialSetting
+          setting: setting
         },
         3: {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: trialSetting
+          setting: setting
         }
       },
       messages: []
@@ -988,7 +988,7 @@ describe('(Design/modules)', () => {
               color: '#3498db'
             }
           },
-          trialSetting: trialSetting
+          setting: setting
         }
       },
       messages: []
@@ -1018,7 +1018,7 @@ describe('(Design/modules)', () => {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: trialSetting
+          setting: setting
         }
       },
       messages: []
@@ -1077,7 +1077,7 @@ describe('(Design/modules)', () => {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: trialSetting
+          setting: setting
         }
       },
       messages: []
@@ -1102,8 +1102,8 @@ describe('(Design/modules)', () => {
           type: trialType,
           name: 'Text',
           condition: {},
-          trialSetting: {
-            ...trialSetting,
+          setting: {
+            ...setting,
             fontSize: '66',
             fontWeight: 'bold'
           }

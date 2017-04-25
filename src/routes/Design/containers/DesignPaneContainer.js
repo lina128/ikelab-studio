@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import {
-  changeStructure, moveNode, moveOutside, moveInside, clickTrial,
-  deleteNode, changeSetting} from '../modules/design'
+  changeStructure, moveNode, moveInside, clickTrial,
+  deleteNode, changeSetting } from '../modules/design'
 import DesignPane from '../components/DesignPane'
 
 const mapDispatchToProps = (dispatch) => {
@@ -9,22 +9,19 @@ const mapDispatchToProps = (dispatch) => {
     changeStructure: () => {
       dispatch(changeStructure())
     },
-    onNodeMove: (id, afterId, direction) => {
+    moveNode: (id, afterId, direction) => {
       dispatch(moveNode(id, afterId, direction))
     },
-    onMoveOutside: (id) => {
-      dispatch(moveOutside(id))
-    },
-    onMoveInside: (id, parentId) => {
+    moveInside: (id, parentId) => {
       dispatch(moveInside(id, parentId))
     },
-    onClickTrial: (id) => {
+    clickTrial: (id) => {
       dispatch(clickTrial(id))
     },
-    onChangeSetting: (id, setting) => {
+    changeSetting: (id, setting) => {
       dispatch(changeSetting(id, setting))
     },
-    onDeleteNode: (id) => {
+    deleteNode: (id) => {
       dispatch(deleteNode(id))
     }
   }

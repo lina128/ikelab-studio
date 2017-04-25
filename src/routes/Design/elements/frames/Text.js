@@ -9,7 +9,7 @@ export default class Text extends Component {
     this.state = {
       editorState: EditorState.createWithContent(
         ContentState.createFromText(
-          this.props.trial.trialSetting.content)) }
+          this.props.trial.setting.content)) }
     this.focus = () => this.refs.editor.focus()
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
@@ -23,7 +23,7 @@ export default class Text extends Component {
 
   componentWillReceiveProps (nextProps) {
     if (this.props !== nextProps) {
-      const newContentState = ContentState.createFromText(nextProps.trial.trialSetting.content)
+      const newContentState = ContentState.createFromText(nextProps.trial.setting.content)
       const editorState = EditorState.push(this.state.editorState, newContentState)
       this.setState({ editorState })
     }
@@ -42,10 +42,10 @@ export default class Text extends Component {
     const classNames = classnames('design_frames_default', 'design_frames_Text_editor')
 
     const customStyle = {
-      fontFamily: trial.trialSetting.font,
-      fontSize: trial.trialSetting.fontSize + 'pt',
-      fontWeight: trial.trialSetting.fontWeight,
-      color: trial.trialSetting.fontColor,
+      fontFamily: trial.setting.font,
+      fontSize: trial.setting.fontSize + 'pt',
+      fontWeight: trial.setting.fontWeight,
+      color: trial.setting.fontColor,
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
       lineHeight: 1.5

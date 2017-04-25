@@ -7,12 +7,6 @@ import Trial from '../components/Trial'
 const trialSource = {
   beginDrag (props) {
     return { id: props.id, level: 'trial' }
-  },
-
-  endDrag (props, monitor) {
-    if (!monitor.didDrop()) {
-      props.moveOutside(props.id)
-    }
   }
 }
 

@@ -70,7 +70,7 @@ export class SettingPane extends Component {
 
     if (trial) {
       const fieldConstant = Modules[trial.type]
-      const fieldSetting = trial.trialSetting
+      const fieldSetting = trial.setting
 
       let Field
       let fieldList = []
@@ -211,14 +211,14 @@ export class SettingPane extends Component {
                 trialId={id}
                 fieldConstantKey='note'
                 fieldConstant={noteConstant}
-                fieldSetting={trial.trialSetting.note || ''}
+                fieldSetting={trial.setting.note || ''}
                 onChange={handleChange}
                 customStyle={{ width: '180px' }} />
               <fields.InputField
                 trialId={id}
                 fieldConstantKey='reminder'
                 fieldConstant={reminderConstant}
-                fieldSetting={trial.trialSetting.reminder || ''}
+                fieldSetting={trial.setting.reminder || ''}
                 onChange={handleChange}
                 customStyle={{ width: '250px' }} />
             </CardActions>
@@ -227,31 +227,31 @@ export class SettingPane extends Component {
                 trialId={id}
                 fieldConstantKey='inputAutoTimedAdvance'
                 fieldConstant={inputConstant0}
-                fieldSetting={trial.trialSetting.inputAutoTimedAdvance || ''}
+                fieldSetting={trial.setting.inputAutoTimedAdvance || ''}
                 onChange={handleChange} />
               <fields.MultiSelectListField
                 trialId={id}
                 fieldConstantKey='inputKeyAdvance'
                 fieldConstant={inputConstant1}
-                fieldSetting={trial.trialSetting.inputKeyAdvance || []}
+                fieldSetting={trial.setting.inputKeyAdvance || []}
                 onChange={handleChange} />
               <fields.MultiSelectListField
                 trialId={id}
                 fieldConstantKey='inputErrorFeedbackKeyAdvance'
                 fieldConstant={inputConstant2}
-                fieldSetting={trial.trialSetting.inputErrorFeedbackKeyAdvance || []}
+                fieldSetting={trial.setting.inputErrorFeedbackKeyAdvance || []}
                 onChange={handleChange} />
               <fields.MultiSelectListField
                 trialId={id}
                 fieldConstantKey='inputErrorFeedbackErrorKey'
                 fieldConstant={inputConstant3}
-                fieldSetting={trial.trialSetting.inputErrorFeedbackErrorKey || []}
+                fieldSetting={trial.setting.inputErrorFeedbackErrorKey || []}
                 onChange={handleChange} />
               <fields.InputField
                 trialId={id}
                 fieldConstantKey='inputErrorFeedbackMessage'
                 fieldConstant={inputConstant4}
-                fieldSetting={trial.trialSetting.inputErrorFeedbackMessage || ''}
+                fieldSetting={trial.setting.inputErrorFeedbackMessage || ''}
                 onChange={handleChange}
                 customStyle={{ width: '250px' }} />
               <fields.SwitchField
@@ -259,30 +259,30 @@ export class SettingPane extends Component {
                 fieldConstantKey='inputErrorFeedbackAllowCorrection'
                 fieldConstant={inputConstant5}
                 fieldSetting={
-                         typeof trial.trialSetting.inputErrorFeedbackAllowCorrection === 'undefined'
-                         ? false : trial.trialSetting.inputErrorFeedbackAllowCorrection}
+                         typeof trial.setting.inputErrorFeedbackAllowCorrection === 'undefined'
+                         ? false : trial.setting.inputErrorFeedbackAllowCorrection}
                 onChange={handleChange} />
               <fields.SwitchField
                 trialId={id}
                 fieldConstantKey='inputNextButton'
                 fieldConstant={inputConstant6}
                 fieldSetting={
-                         typeof trial.trialSetting.inputNextButton === 'undefined'
-                         ? false : trial.trialSetting.inputNextButton}
+                         typeof trial.setting.inputNextButton === 'undefined'
+                         ? false : trial.setting.inputNextButton}
                 onChange={handleChange} />
               <fields.SwitchField
                 trialId={id}
                 fieldConstantKey='inputTextResponse'
                 fieldConstant={inputConstant7}
                 fieldSetting={
-                         typeof trial.trialSetting.inputTextResponse === 'undefined'
-                         ? false : trial.trialSetting.inputTextResponse}
+                         typeof trial.setting.inputTextResponse === 'undefined'
+                         ? false : trial.setting.inputTextResponse}
                 onChange={handleChange} />
               <fields.InputField
                 trialId={id}
                 fieldConstantKey='inputSurveyResponse'
                 fieldConstant={inputConstant8}
-                fieldSetting={trial.trialSetting.inputSurveyResponse ? trial.trialSetting.inputSurveyResponse : ''}
+                fieldSetting={trial.setting.inputSurveyResponse ? trial.setting.inputSurveyResponse : ''}
                 onChange={handleChange}
                 customStyle={{ width: '300px' }} />
             </CardActions>

@@ -97,10 +97,9 @@ export const clickTrial = (id) => {
   }
 }
 
-export const changeStructure = (structure) => {
+export const changeStructure = () => {
   return {
-    type: CHANGE_STRUCTURE,
-    payload: { structure }
+    type: CHANGE_STRUCTURE
   }
 }
 
@@ -244,6 +243,7 @@ const initialState = {
   name: 'Unnamed Experiment',
   condition: {},
   currentTrial: null,
+  currentControl: null,
   structure: [],
   entity: {},
   messages: [],

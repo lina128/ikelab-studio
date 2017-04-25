@@ -1,24 +1,33 @@
-import React, { PureComponent, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 import Badge from 'react-mdl/lib/Badge'
 import Thumbnail from './Thumbnail'
 import './Trial.scss'
 
-export default class Trial extends PureComponent {
+export default class Trial extends Component {
   constructor (props) {
     super(props)
     this.handleThumbnailClick = this.handleThumbnailClick.bind(this)
   }
 
   static propTypes = {
-    moveNode: PropTypes.func,
-    moveOutside: PropTypes.func,
     id: PropTypes.number.isRequired,
-    screenshot: PropTypes.string,
-    branchStyle: PropTypes.string,
+    branchStyle: PropTypes.string.isRequired,
+    entity: PropTypes.object.isRequired,
     clickTrial: PropTypes.func.isRequired,
+    moveNode: PropTypes.func.isRequired,
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    if (nextProps.id !== this.props.id ||
+        nextProps.branchStyle !== this.props.branchStyle ||
+        nextProps.entity[nextProps.id] !== this.props.entity[this.props.id]) {
+      return true
+    } else {
+      return false
+    }
   }
 
   handleThumbnailClick () {
@@ -36,7 +45,7 @@ export default class Trial extends PureComponent {
       connectDragSource,
       connectDropTarget,
       id,
-      screenshot,
+      entity,
       branchStyle } = this.props
 
     const classnames = classNames('design_trial_branch', branchStyle)
@@ -49,7 +58,7 @@ export default class Trial extends PureComponent {
               <div>
                 <Thumbnail
                   id={id}
-                  screenshot={screenshot}
+                  screenshot={entity[id].screenshot}
                   onThumbnailClick={this.handleThumbnailClick} />
               </div>
             </Badge>

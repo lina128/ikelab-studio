@@ -26,7 +26,7 @@ describe('(Design/components) SettingPane', () => {
       trial: {
         id: 1,
         type: 'TEXT',
-        trialSetting: setting,
+        setting: setting,
         screenshot: ''
       },
       ...bindActionCreators({

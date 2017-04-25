@@ -1,107 +1,88 @@
 import React, { PureComponent, PropTypes } from 'react'
 import classNames from 'classnames'
 import TrialRenderer from './TrialRenderer'
-import IconToggle from 'react-mdl/lib/IconToggle'
 import './BlockRenderer.scss'
 
 const defaultArr = []
 
 export default class BlockRenderer extends PureComponent {
+  constructor (props) {
+    super(props)
+    this.renderBlockTrials = this.renderBlockTrials.bind(this)
+  }
+
   static propTypes = {
     id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    setting: PropTypes.object.isRequired,
-    branchStyle: PropTypes.string,
+    branchStyle: PropTypes.string.isRequired,
     children: PropTypes.array.isRequired,
     entity: PropTypes.object.isRequired
   }
 
-  render () {
-    const {
-      name,
-      setting,
-      branchStyle,
-      children,
-      entity } = this.props
-
-    const classnames = classNames('design_blockRenderer_branch', branchStyle)
-
+  renderBlockTrials () {
+    const { children, entity } = this.props
     let blockTrials = []
 
     for (let i = 0; i < children.length; i++) {
-      let node = entity[children[i].id]
-
       if (children.length === 1) {
         blockTrials.push(
           <TrialRenderer
             key={children[i].id}
-            condition={node.condition}
             id={children[i].id}
-            screenshot={children[i].screenshot}
             branchStyle={'design_trialRenderer_branch_single'}
-            setting={node.trialSetting} />
+            entity={entity} />
         )
       } else {
         if (i === 0) {
           blockTrials.push(
             <TrialRenderer
               key={children[i].id}
-              condition={node.condition}
               id={children[i].id}
-              screenshot={children[i].screenshot}
               branchStyle={'design_trialRenderer_branch_top'}
-              setting={node.trialSetting} />
+              entity={entity} />
           )
         } else if (i === children.length - 1) {
           blockTrials.push(
             <TrialRenderer
               key={children[i].id}
-              condition={node.condition}
               id={children[i].id}
-              screenshot={children[i].screenshot}
               branchStyle={'design_trialRenderer_branch_bottom'}
-              setting={node.trialSetting} />
+              entity={entity} />
           )
         } else {
           blockTrials.push(
             <TrialRenderer
               key={children[i].id}
-              condition={node.condition}
               id={children[i].id}
-              screenshot={children[i].screenshot}
               branchStyle={'design_trialRenderer_branch_middle'}
-              setting={node.trialSetting} />
+              entity={entity} />
           )
         }
       }
     }
 
+    return blockTrials
+  }
+
+  render () {
+    const {
+      id,
+      branchStyle,
+      entity } = this.props
+
+    const classnames = classNames('design_blockRenderer_branch', branchStyle)
+
+    let blockTrials = this.renderBlockTrials()
     if (blockTrials.length === 0) {
       blockTrials = defaultArr
     }
+
+    const name = entity[id].name
 
     return (
       <div className={'design_blockRenderer_default'}>
         {blockTrials}
         <div className={'design_blockRenderer_decorate'}>
           {name}
-          <div className={'design_blockRenderer_verticalDecoration'}>
-            <IconToggle
-              name='autorenew'
-              ripple
-              checked={setting.randomized} />
-            <div className='design_blockRenderer_divBox'>
-              {setting.repeat}
-            </div>
-            <IconToggle
-              name='vertical_align_top'
-              ripple
-              checked={setting.lockTop} />
-            <IconToggle
-              name='vertical_align_bottom'
-              ripple
-              checked={setting.lockBottom} />
-          </div>
         </div>
         <div className={classnames} />
       </div>

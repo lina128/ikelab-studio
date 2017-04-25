@@ -41,20 +41,20 @@ export class ChangeDetection extends Component {
   addRedbox () {
     const { id, trial, onChange } = this.props
 
-    let isA = trial.trialSetting.onScreen === 'Image A'
+    let isA = trial.setting.onScreen === 'Image A'
     if (isA) {
       onChange(id,
         { changeA:
         {
-          ...trial.trialSetting.changeA,
-          [ (Object.keys(trial.trialSetting.changeA) + 1).toString() ] :
+          ...trial.setting.changeA,
+          [ (Object.keys(trial.setting.changeA) + 1).toString() ] :
           { top: 0, left: 0, width: 100, height: 100 } } })
     } else {
       onChange(id,
         { changeB:
         {
-          ...trial.trialSetting.changeB,
-          [ (Object.keys(trial.trialSetting.changeB) + 1).toString() ] :
+          ...trial.setting.changeB,
+          [ (Object.keys(trial.setting.changeB) + 1).toString() ] :
           { top: 0, left: 0, width: 100, height: 100 } } })
     }
   }
@@ -62,19 +62,19 @@ export class ChangeDetection extends Component {
   moveRedbox (bid, left, top) {
     const { id, trial, onChange } = this.props
 
-    let isA = trial.trialSetting.onScreen === 'Image A'
+    let isA = trial.setting.onScreen === 'Image A'
 
     if (isA) {
       onChange(id,
         { changeA:
         {
-          ...trial.trialSetting.changeA,
+          ...trial.setting.changeA,
           [bid] : { top: top, left: left, width: 100, height: 100 } } })
     } else {
       onChange(id,
         { changeB:
         {
-          ...trial.trialSetting.changeB,
+          ...trial.setting.changeB,
           [bid] : { top: top, left: left, width: 100, height: 100 } } })
     }
   }
@@ -82,27 +82,27 @@ export class ChangeDetection extends Component {
   grow (bid) {
     const { id, trial, onChange } = this.props
 
-    let isA = trial.trialSetting.onScreen === 'Image A'
+    let isA = trial.setting.onScreen === 'Image A'
     let box
 
     if (isA) {
-      box = trial.trialSetting.changeA[bid]
+      box = trial.setting.changeA[bid]
 
       onChange(id,
         { changeA:
         {
-          ...trial.trialSetting.changeA,
+          ...trial.setting.changeA,
           [bid] : {
             ...box,
             width: box.width + 20,
             height: box.height + 20 } } })
     } else {
-      box = trial.trialSetting.changeB[bid]
+      box = trial.setting.changeB[bid]
 
       onChange(id,
         { changeB:
         {
-          ...trial.trialSetting.changeB,
+          ...trial.setting.changeB,
           [bid] : {
             ...box,
             width: box.width + 20,
@@ -113,27 +113,27 @@ export class ChangeDetection extends Component {
   shrink (bid) {
     const { id, trial, onChange } = this.props
 
-    let isA = trial.trialSetting.onScreen === 'Image A'
+    let isA = trial.setting.onScreen === 'Image A'
     let box
 
     if (isA) {
-      box = trial.trialSetting.changeA[bid]
+      box = trial.setting.changeA[bid]
 
       onChange(id,
         { changeA:
         {
-          ...trial.trialSetting.changeA,
+          ...trial.setting.changeA,
           [bid] : {
             ...box,
             width: box.width - 20,
             height: box.height - 20 } } })
     } else {
-      box = trial.trialSetting.changeB[bid]
+      box = trial.setting.changeB[bid]
 
       onChange(id,
         { changeB:
         {
-          ...trial.trialSetting.changeB,
+          ...trial.setting.changeB,
           [bid] : {
             ...box,
             width: box.width - 20,
@@ -146,10 +146,10 @@ export class ChangeDetection extends Component {
 
     let style = {}
     let itemStyle = {}
-    let isA = trial.trialSetting.onScreen === 'Image A'
+    let isA = trial.setting.onScreen === 'Image A'
 
     if (isA) {
-      switch (trial.trialSetting.alignHA) {
+      switch (trial.setting.alignHA) {
         case 'left':
           style.justifyContent = 'flex-start'
           break
@@ -161,7 +161,7 @@ export class ChangeDetection extends Component {
           break
       }
 
-      switch (trial.trialSetting.alignVA) {
+      switch (trial.setting.alignVA) {
         case 'top':
           itemStyle.alignSelf = 'flex-start'
           break
@@ -173,15 +173,15 @@ export class ChangeDetection extends Component {
           break
       }
 
-      if (trial.trialSetting.widthA) {
-        itemStyle.width = trial.trialSetting.widthA + 'px'
+      if (trial.setting.widthA) {
+        itemStyle.width = trial.setting.widthA + 'px'
       }
 
-      if (trial.trialSetting.heightA) {
-        itemStyle.height = trial.trialSetting.heightA + 'px'
+      if (trial.setting.heightA) {
+        itemStyle.height = trial.setting.heightA + 'px'
       }
     } else {
-      switch (trial.trialSetting.alignHB) {
+      switch (trial.setting.alignHB) {
         case 'left':
           style.justifyContent = 'flex-start'
           break
@@ -193,7 +193,7 @@ export class ChangeDetection extends Component {
           break
       }
 
-      switch (trial.trialSetting.alignVB) {
+      switch (trial.setting.alignVB) {
         case 'top':
           itemStyle.alignSelf = 'flex-start'
           break
@@ -205,17 +205,17 @@ export class ChangeDetection extends Component {
           break
       }
 
-      if (trial.trialSetting.widthB) {
-        itemStyle.width = trial.trialSetting.widthB + 'px'
+      if (trial.setting.widthB) {
+        itemStyle.width = trial.setting.widthB + 'px'
       }
 
-      if (trial.trialSetting.heightB) {
-        itemStyle.height = trial.trialSetting.heightB + 'px'
+      if (trial.setting.heightB) {
+        itemStyle.height = trial.setting.heightB + 'px'
       }
     }
 
     let redBoxes = []
-    let hashMap = isA ? trial.trialSetting.changeA : trial.trialSetting.changeB
+    let hashMap = isA ? trial.setting.changeA : trial.setting.changeB
 
     for (let key in hashMap) {
       redBoxes.push(
@@ -233,7 +233,7 @@ export class ChangeDetection extends Component {
 
     return connectDropTarget(
       <div className='design_frames_default' style={style} >
-        <img src={isA ? trial.trialSetting.imageA : trial.trialSetting.imageB} style={itemStyle} />
+        <img src={isA ? trial.setting.imageA : trial.setting.imageB} style={itemStyle} />
         <Button raised accent style={{ position:'absolute', zIndex: 1999 }}
           onClick={this.addRedbox}>{isA ? 'Add Redbox in A' : 'Add Redbox in B'}</Button>
         {redBoxes}

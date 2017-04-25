@@ -47,21 +47,17 @@ export default class ExperimentRenderer extends Component {
     return (
       experiment.structure.map(x => {
         if (x.level === 'trial') {
-          let node = experiment.entity[x.id]
           return <TrialRenderer
             key={x.id}
             id={x.id}
-            screenshot={x.screenshot}
-            condition={node.condition}
-            name={node.name}
-            setting={node.trialSetting} />
+            branchStyle={''}
+            entity={experiment.entity} />
         }
         if (x.level === 'block') {
           return <BlockRenderer
             key={x.id}
             id={x.id}
-            name={x.name}
-            setting={x.setting}
+            branchStyle={''}
             children={x.children}
             entity={experiment.entity} />
         }
@@ -69,8 +65,6 @@ export default class ExperimentRenderer extends Component {
           return <RunRenderer
             key={x.id}
             id={x.id}
-            name={x.name}
-            setting={x.setting}
             children={x.children}
             entity={experiment.entity} />
         }

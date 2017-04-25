@@ -31,7 +31,7 @@ export default class Design extends PureComponent {
           <Ribbon />
           <div className='design_container2'>
             <FirstColumn>
-              <DesignPaneContainer structure={structure} />
+              <DesignPaneContainer structure={structure} entity={entity} />
             </FirstColumn>
             <ThirdColumn>
               <SettingPane id={currentTrial} trial={trial} />

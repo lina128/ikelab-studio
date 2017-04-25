@@ -11,21 +11,18 @@ const defaultArr = []
 
 export default class TrialRenderer extends PureComponent {
   static propTypes = {
-    condition: PropTypes.object.isRequired,
     id: PropTypes.number.isRequired,
-    screenshot: PropTypes.string,
-    branchStyle: PropTypes.string,
-    setting: PropTypes.object.isRequired
+    branchStyle: PropTypes.string.isRequired,
+    entity: PropTypes.object.isRequired
   }
 
   render () {
     const {
-      condition,
       id,
-      screenshot,
       branchStyle,
-      setting } = this.props
+      entity } = this.props
 
+    const condition = entity[id].condition
     let conditionList = []
 
     for (let id in condition) {
@@ -36,8 +33,8 @@ export default class TrialRenderer extends PureComponent {
 
     const classnames = classNames('design_trialRenderer_branch', branchStyle)
 
+    const setting = entity[id].setting
     let input
-
     if (setting.inputAutoTimedAdvance) {
       input = setting.inputAutoTimedAdvance + 'ms'
     } else if (setting.inputKeyAdvance && setting.inputKeyAdvance.length > 0) {
@@ -66,6 +63,7 @@ export default class TrialRenderer extends PureComponent {
       conditionList = defaultArr
     }
 
+    const screenshot = entity[id].screenshot
     return (
       <div className='design_trialRenderer_wrapper'>
         <div className='design_trialRenderer_default'>
