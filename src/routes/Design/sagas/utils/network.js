@@ -1,8 +1,7 @@
-import { FETCH_EXPERIMENT_URL, SAVE_EXPERIMENT_URL } from '../../../../config'
 import { auth0 } from '../../../../containers/AppContainer'
 
 export const fetchExperimentAPI = (id) => {
-  return fetch(FETCH_EXPERIMENT_URL, {
+  return fetch(__FETCH_EXPERIMENT_URL__, {
     mode: 'cors',
     method: 'POST',
     headers: {
@@ -26,7 +25,7 @@ export const fetchExperimentAPI = (id) => {
 }
 
 export const saveExperimentAPI = (experiment) => {
-  return fetch(SAVE_EXPERIMENT_URL, {
+  return fetch(__SAVE_EXPERIMENT_URL__, {
     mode: 'cors',
     method: 'POST',
     headers: {

@@ -1,16 +1,19 @@
 import { EventEmitter } from 'events'
 import auth0 from 'auth0-js'
 import { browserHistory } from 'react-router'
-import { PROFILE, TOKEN_KEY, EXPIRATION_KEY, AUTH0_DOMAIN, AUTH0_CLIENT_ID, AUTH0_AUDIENCE } from '../config'
+
+const PROFILE = 'profile'
+const TOKEN_KEY = 'access_token'
+const EXPIRATION_KEY = 'expires_in'
 
 export default class AuthService extends EventEmitter {
   constructor (clientId, domain) {
     super()
 
     this.webAuth = new auth0.WebAuth({
-      domain: AUTH0_DOMAIN,
-      clientID: AUTH0_CLIENT_ID,
-      audience: AUTH0_AUDIENCE,
+      domain: __AUTH0_DOMAIN__,
+      clientID: __AUTH0_CLIENT_ID__,
+      audience: __AUTH0_AUDIENCE__,
       scope: 'openid',
       responseType: 'token',
       redirectUri: 'http://app2.com:1234/login'
@@ -109,7 +112,7 @@ export default class AuthService extends EventEmitter {
   logout () {
     this.webAuth.logout({
       returnTo: `${window.location.origin}`,
-      client_id: AUTH0_CLIENT_ID
+      client_id: __AUTH0_CLIENT_ID__
     })
     // Clear user token and profile data from localStorage
     localStorage.removeItem(TOKEN_KEY)

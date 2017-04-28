@@ -1,19 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Dropzone from 'react-dropzone'
+import uniqueId from 'lodash/uniqueId'
 import Textfield from 'react-mdl/lib/Textfield'
 import Button from 'react-mdl/lib/Button'
-import { addMessage } from '../../modules/design'
-import superagent from 'superagent'
+import { addMessage } from '../../../../store/message'
 import './ImageField.scss'
-
-const UPLOAD_PRESET = 'xcdgygdr'
-const UPLOAD_URL = 'https://api.cloudinary.com/v1_1/ikelabrepo/image/upload'
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addMessage: (txt) => {
-      dispatch(addMessage(txt))
+    addMessage: (id, msg) => {
+      dispatch(addMessage(id, msg))
     }
   }
 }
@@ -43,20 +40,43 @@ export class ImageField extends Component {
   }
 
   handleImageUpload (acceptedFiles) {
+    const { addMessage } = this.props
+
     this.setState({ value: '' })
-    superagent.post(UPLOAD_URL)
-      .field('upload_preset', UPLOAD_PRESET)
-      .field('file', acceptedFiles[0])
-      .field('tags', 'private,stimulus')
-      .end((err, response) => {
-        if (err || response.body.error) {
-          this.props.addMessage('Image upload failed. Please try again.')
-        } else {
-          if (response.body.secure_url) {
-            this.handleChange(response.body.secure_url)
-          }
-        }
+    let that = this
+    let file = acceptedFiles[0]
+
+    fetch(`${__IKELAB_IMAGEUPLOAD__}/requestUploadURL`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: file.name,
+        type: file.type,
+        size: file.size
       })
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json().then(json => fetch(json.uploadURL, {
+          mode: 'cors',
+          method: 'PUT',
+          body: file
+        }))
+      } else {
+        if (response.status === 400) {
+          return Promise.reject({ message: 'Image too large.' })
+        } else {
+          return Promise.reject({ message: 'Error uploading image.' })
+        }
+      }
+    })
+    .then(response => that.handleChange(`${__IKELAB_IMAGES_STORE__}/${file.name}`),
+          error => addMessage(uniqueId(), error.message))
+    .catch(error => {
+      console.log(error)
+    })
   }
 
   handleChange (url) {

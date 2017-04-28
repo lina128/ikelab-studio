@@ -6,7 +6,6 @@ import flow from 'lodash/flow'
 import Spinner from 'react-mdl/lib/Spinner'
 import FABButton from 'react-mdl/lib/FABButton'
 import { fetchExperiment, saveExperiment } from '../modules/design'
-import MessageBarContainer from './MessageBarContainer'
 import { getPlugin, IKELAB_EXPERIMENT_ENGINE_TRIAL_PREVIEW } from '../plugins/design'
 import Design from '../components/Design'
 
@@ -114,7 +113,6 @@ export class DesignContainer extends Component {
           condition={condition}
           structure={structure}
           entity={entity} /> : null}
-        <MessageBarContainer />
         <div style={style}>
           <FABButton accent style={btnStyle} onClick={this.closeIframe}>X</FABButton>
           <iframe

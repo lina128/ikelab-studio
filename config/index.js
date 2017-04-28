@@ -55,7 +55,6 @@ const config = {
     'debug',
     'draft-js',
     'html2canvas',
-    'immutability-helper',
     'ip',
     'normalize.css',
     'react',
@@ -107,7 +106,16 @@ config.globals = {
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test',
   '__COVERAGE__' : !argv.watch && config.env === 'test',
-  '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
+  '__BASENAME__' : JSON.stringify(process.env.BASENAME || ''),
+  '__AUTH0_DOMAIN__'  : 'ikelab.auth0.com',
+  '__AUTH0_CLIENT_ID__' : '4HO12itCjqLZh25a2sghmjKs6E5iFUVc',
+  '__AUTH0_AUDIENCE__' : 'https://ikelab.auth0.com/userinfo',
+  '__CREATE_EXPERIMENT_URL__' : 'http://localhost:4040',
+  '__FETCH_EXPERIMENTS_URL__' : 'http://localhost:5050',
+  '__FETCH_EXPERIMENT_URL__' : 'http://localhost:7070',
+  '__SAVE_EXPERIMENT_URL__' : 'http://localhost:6060',
+  '__IKELAB_IMAGES_STORE__' : 'https://s3.amazonaws.com/ikelab-images-store-dev',
+  '__IKELAB_IMAGEUPLOAD__' : 'https://8ht6j9l7dj.execute-api.us-east-1.amazonaws.com/dev'
 }
 
 // ------------------------------------

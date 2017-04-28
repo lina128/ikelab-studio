@@ -9,8 +9,6 @@ export const ADD_BLOCK_TRIALS = 'ADD_BLOCK_TRIALS'
 export const ADD_RUN = 'ADD_RUN'
 export const ADD_CONDITION = 'ADD_CONDITION'
 export const CHANGE_STRUCTURE = 'CHANGE_STRUCTURE'
-export const DESIGN_ADD_MESSAGE = 'DESIGN_ADD_MESSAGE'
-export const DESIGN_DELETE_MESSAGE = 'DESIGN_DELETE_MESSAGE'
 export const CHANGE_SETTING = 'CHANGE_SETTING'
 export const CHANGE_SETTING_SUCCEEDED = 'CHANGE_SETTING_SUCCEEDED'
 export const CHANGE_SETTING_FAILED = 'CHANGE_SETTING_FAILED'
@@ -63,23 +61,6 @@ export const addRun = () => {
 export const addCondition = () => {
   return {
     type: ADD_CONDITION
-  }
-}
-
-export const addMessage = (id, msg) => {
-  return {
-    type: DESIGN_ADD_MESSAGE,
-    payload: {
-      id: id,
-      html: msg
-    }
-  }
-}
-
-export const deleteMessage = (id) => {
-  return {
-    type: DESIGN_DELETE_MESSAGE,
-    payload: { id }
   }
 }
 
@@ -184,9 +165,7 @@ export const actions = {
   addBlockTrials,
   addRun,
   addCondition,
-  addMessage,
   changeStructure,
-  deleteMessage,
   clickTrial,
   changeSetting,
   copyCurrentTrial,
@@ -211,8 +190,6 @@ const ACTION_HANDLERS = {
   [ADD_BLOCK_TRIALS] : handle.addBlockTrials,
   [ADD_RUN] : handle.addRun,
   [ADD_CONDITION] : handle.addCondition,
-  [DESIGN_ADD_MESSAGE] : handle.addMessage,
-  [DESIGN_DELETE_MESSAGE] : handle.deleteMessage,
   [CHANGE_SETTING] : handle.changeSetting,
   [CHANGE_SETTING_SUCCEEDED]: handle.changeSettingSucceeded,
   [CHANGE_SETTING_FAILED]: handle.changeSettingFailed,
@@ -246,7 +223,6 @@ const initialState = {
   currentControl: null,
   structure: [],
   entity: {},
-  messages: [],
   isFetching: false,
   isSaving: false,
   isTakingScreenshot: false

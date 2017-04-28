@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
-import { deleteMessage } from '../modules/design'
-import MessageBar from '../components/MessageBar'
+import { deleteMessage } from '../store/message'
+import MessageBar from '../components/Message/MessageBar'
 
 const mapStateToProps = (state) => {
   return {
-    messages: state.design.present.messages
+    messages: state.message.messages
   }
 }
 

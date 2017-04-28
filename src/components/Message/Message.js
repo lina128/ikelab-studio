@@ -24,8 +24,8 @@ export default class Message extends PureComponent {
     const { message } = this.props
 
     return (
-      <div className='design_message_default'>
-        <div className='design_message_html' dangerouslySetInnerHTML={{ __html: message.html }} />
+      <div className='message_default'>
+        <div className='message_html' dangerouslySetInnerHTML={{ __html: message.html }} />
         <IconButton name='close' colored onClick={this.handleDelete} />
       </div>
     )

@@ -1,7 +1,9 @@
 import { delay } from 'redux-saga'
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { SAVE_EXPERIMENT, SAVE_EXPERIMENT_SUCCEEDED, SAVE_EXPERIMENT_FAILED } from '../../modules/design'
+import { ADD_MESSAGE } from '../../../../store/message'
 import { saveExperimentAPI } from '../utils/network'
+import uniqueId from 'lodash/uniqueId'
 
 function* saveExperimentSaga (action) {
   try {
@@ -14,6 +16,7 @@ function* saveExperimentSaga (action) {
     }
   } catch (e) {
     yield put({ type: SAVE_EXPERIMENT_FAILED, message: e.message })
+    yield put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: 'Error saving the experiment.' } })
   }
 }
 

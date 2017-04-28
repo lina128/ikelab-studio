@@ -16,7 +16,16 @@
     "__DEV__"      : false,
     "__TEST__"     : false,
     "__PROD__"     : false,
-    "__COVERAGE__" : false
+    "__COVERAGE__" : false,
+    "__AUTH0_DOMAIN__"  : false,
+    "__AUTH0_CLIENT_ID__" : false,
+    "__AUTH0_AUDIENCE__" : false,
+    "__CREATE_EXPERIMENT_URL__" : false,
+    "__FETCH_EXPERIMENTS_URL__" : false,
+    "__FETCH_EXPERIMENT_URL__" : false,
+    "__SAVE_EXPERIMENT_URL__" : false,
+    "__IKELAB_IMAGES_STORE__" : false,
+    "__IKELAB_IMAGEUPLOAD__" : false
   },
   "rules": {
     "key-spacing"          : 0,

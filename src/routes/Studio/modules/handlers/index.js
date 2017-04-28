@@ -1,5 +1,3 @@
-export addMessage from './addMessage'
-export deleteMessage from './deleteMessage'
 export createExperiment from './createExperiment'
 export createExperimentSucceeded from './createExperimentSucceeded'
 export createExperimentFailed from './createExperimentFailed'

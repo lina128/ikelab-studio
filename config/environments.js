@@ -24,6 +24,14 @@ module.exports = {
       chunks       : true,
       chunkModules : true,
       colors       : true
-    }
+    },
+    globals: Object.assign({}, config.globals, {
+      __CREATE_EXPERIMENT_URL__ : 'http://localhost:4040',
+      __FETCH_EXPERIMENTS_URL__ : 'http://localhost:5050',
+      __FETCH_EXPERIMENT_URL__ : 'http://localhost:7070',
+      __SAVE_EXPERIMENT_URL__ : 'http://localhost:6060',
+      __IKELAB_IMAGES_STORE__ : 'https://s3.amazonaws.com/ikelab-images-store-prod',
+      __IKELAB_IMAGEUPLOAD__ : 'https://u63flidw69.execute-api.us-east-1.amazonaws.com/prod'
+    })
   })
 }

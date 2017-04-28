@@ -12,7 +12,7 @@ export default class MessageBar extends PureComponent {
     const { messages, deleteMessage } = this.props
 
     return (
-      <div className='design_messageBar_default'>
+      <div className='messageBar_default'>
         {messages.map(
           m => <Message key={m.id} message={m} deleteMessage={deleteMessage} />
         )}
