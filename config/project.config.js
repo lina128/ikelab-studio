@@ -1,6 +1,6 @@
 /* eslint key-spacing:0 spaced-comment:0 */
 const path = require('path')
-const debug = require('debug')('app:config')
+const debug = require('debug')('app:config:project')
 const argv = require('yargs').argv
 const ip = require('ip')
 
@@ -17,6 +17,7 @@ const config = {
   path_base  : path.resolve(__dirname, '..'),
   dir_client : 'src',
   dir_dist   : 'dist',
+  dir_public : 'public',
   dir_server : 'server',
   dir_test   : 'tests',
 
@@ -34,7 +35,6 @@ const config = {
     plugins        : ['transform-runtime'],
     presets        : ['es2015', 'react', 'stage-0']
   },
-  compiler_css_modules     : true,
   compiler_devtool         : 'source-map',
   compiler_hash_type       : 'hash',
   compiler_fail_on_warning : false,
@@ -46,17 +46,6 @@ const config = {
     colors : true
   },
   compiler_vendors : [
-    'babel-plugin-transform-runtime',
-    'babel-preset-es2015',
-    'babel-preset-react',
-    'babel-preset-react',
-    'babel-preset-stage-0',
-    'classnames',
-    'debug',
-    'draft-js',
-    'html2canvas',
-    'ip',
-    'normalize.css',
     'react',
     'react-dom',
     'react-redux',
@@ -69,10 +58,19 @@ const config = {
     'react-mdl',
     'react-mdl-extra',
     'redux',
-    'redux-thunk',
     'redux-undo',
     'reselect',
-    'superagent'
+    'babel-plugin-transform-runtime',
+    'babel-preset-es2015',
+    'babel-preset-react',
+    'babel-preset-react',
+    'babel-preset-stage-0',
+    'classnames',
+    'debug',
+    'draft-js',
+    'html2canvas',
+    'ip',
+    'normalize.css'
   ],
 
   // ----------------------------------
@@ -86,10 +84,8 @@ const config = {
 
 /************************************************
 -------------------------------------------------
-
 All Internal Configuration Below
 Edit at Your Own Risk
-
 -------------------------------------------------
 ************************************************/
 
@@ -107,15 +103,9 @@ config.globals = {
   '__TEST__'     : config.env === 'test',
   '__COVERAGE__' : !argv.watch && config.env === 'test',
   '__BASENAME__' : JSON.stringify(process.env.BASENAME || ''),
-  '__AUTH0_DOMAIN__'  : 'ikelab.auth0.com',
-  '__AUTH0_CLIENT_ID__' : '4HO12itCjqLZh25a2sghmjKs6E5iFUVc',
-  '__AUTH0_AUDIENCE__' : 'https://ikelab.auth0.com/userinfo',
-  '__CREATE_EXPERIMENT_URL__' : 'http://localhost:4040',
-  '__FETCH_EXPERIMENTS_URL__' : 'http://localhost:5050',
-  '__FETCH_EXPERIMENT_URL__' : 'http://localhost:7070',
-  '__SAVE_EXPERIMENT_URL__' : 'http://localhost:6060',
-  '__IKELAB_IMAGES_STORE__' : 'https://s3.amazonaws.com/ikelab-images-store-dev',
-  '__IKELAB_IMAGEUPLOAD__' : 'https://8ht6j9l7dj.execute-api.us-east-1.amazonaws.com/dev'
+  'AUTH0_DOMAIN': JSON.stringify('ikelab.auth0.com'),
+  'AUTH0_CLIENT_ID': JSON.stringify('4HO12itCjqLZh25a2sghmjKs6E5iFUVc'),
+  'AUTH0_AUDIENCE': JSON.stringify('https://ikelab.auth0.com/userinfo')
 }
 
 // ------------------------------------
@@ -142,9 +132,10 @@ function base () {
   return path.resolve.apply(path, args)
 }
 
-config.utils_paths = {
+config.paths = {
   base   : base,
   client : base.bind(null, config.dir_client),
+  public : base.bind(null, config.dir_public),
   dist   : base.bind(null, config.dir_dist)
 }
 
@@ -152,7 +143,7 @@ config.utils_paths = {
 // Environment Configuration
 // ========================================================
 debug(`Looking for environment overrides for NODE_ENV "${config.env}".`)
-const environments = require('./environments')
+const environments = require('./environments.config')
 const overrides = environments[config.env]
 if (overrides) {
   debug('Found overrides, applying to default configuration.')

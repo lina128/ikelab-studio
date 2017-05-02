@@ -9,7 +9,15 @@ module.exports = {
   // are served webpack by to fix this issue:
   // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
   development : (config) => ({
-    compiler_public_path : `http://${config.server_host}:${config.server_port}/`
+    compiler_public_path : `http://${config.server_host}:${config.server_port}/`,
+    globals: Object.assign({}, config.globals, {
+      CREATE_EXPERIMENT_URL: JSON.stringify('http://localhost:4040'),
+      FETCH_EXPERIMENTS_URL: JSON.stringify('http://localhost:5050'),
+      FETCH_EXPERIMENT_URL: JSON.stringify('http://localhost:7070'),
+      SAVE_EXPERIMENT_URL: JSON.stringify('http://localhost:6060'),
+      IKELAB_IMAGES_STORE: JSON.stringify('https://s3.amazonaws.com/ikelab-images-store-dev'),
+      IKELAB_IMAGEUPLOAD: JSON.stringify('https://8ht6j9l7dj.execute-api.us-east-1.amazonaws.com/dev')
+    })
   }),
 
   // ======================================================
@@ -26,12 +34,12 @@ module.exports = {
       colors       : true
     },
     globals: Object.assign({}, config.globals, {
-      __CREATE_EXPERIMENT_URL__ : 'http://localhost:4040',
-      __FETCH_EXPERIMENTS_URL__ : 'http://localhost:5050',
-      __FETCH_EXPERIMENT_URL__ : 'http://localhost:7070',
-      __SAVE_EXPERIMENT_URL__ : 'http://localhost:6060',
-      __IKELAB_IMAGES_STORE__ : 'https://s3.amazonaws.com/ikelab-images-store-prod',
-      __IKELAB_IMAGEUPLOAD__ : 'https://u63flidw69.execute-api.us-east-1.amazonaws.com/prod'
+      'CREATE_EXPERIMENT_URL' : 'http://localhost:4040',
+      'FETCH_EXPERIMENTS_URL' : 'http://localhost:5050',
+      'FETCH_EXPERIMENT_URL' : 'http://localhost:7070',
+      'SAVE_EXPERIMENT_URL' : 'http://localhost:6060',
+      'IKELAB_IMAGES_STORE' : 'https://s3.amazonaws.com/ikelab-images-store-prod',
+      'IKELAB_IMAGEUPLOAD' : 'https://u63flidw69.execute-api.us-east-1.amazonaws.com/prod'
     })
   })
 }
