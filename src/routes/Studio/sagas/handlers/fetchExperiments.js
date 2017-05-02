@@ -8,7 +8,10 @@ function* fetchExperimentsSaga (action) {
   try {
     const response = yield call(fetchExperimentsAPI)
     if (response.error) {
-      yield put({ type: FETCH_EXPERIMENTS_FAILED, message: response.error })
+      yield [
+        put({ type: FETCH_EXPERIMENTS_FAILED, message: response.error }),
+        put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: 'Error fetching experiments.' } })
+      ]
     } else {
       yield put({
         type: FETCH_EXPERIMENTS_SUCCEEDED,
@@ -16,10 +19,7 @@ function* fetchExperimentsSaga (action) {
       })
     }
   } catch (e) {
-    yield [
-      put({ type: FETCH_EXPERIMENTS_FAILED, message: e.message }),
-      put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: 'Error fetching experiments.' } })
-    ]
+    yield put({ type: FETCH_EXPERIMENTS_FAILED, message: e.message })
   }
 }
 

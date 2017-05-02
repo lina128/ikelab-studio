@@ -9,13 +9,15 @@ function* createExperimentSaga (action) {
   try {
     const response = yield call(createExperimentAPI)
     if (response.error || !response.experiment_id) {
-      yield put({ type: CREATE_EXPERIMENT_FAILED, message: response.error })
+      yield [
+        put({ type: CREATE_EXPERIMENT_FAILED, message: response.error }),
+        put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: 'Error creating experiment.' } })
+      ]
     } else {
       browserHistory.push(`/design/${response.experiment_id}`)
     }
   } catch (e) {
     yield put({ type: CREATE_EXPERIMENT_FAILED, message: e.message })
-    yield put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: 'Error creating experiment.' } })
   }
 }
 

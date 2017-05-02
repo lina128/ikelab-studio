@@ -10,13 +10,19 @@ function* saveExperimentSaga (action) {
     yield delay(1000)
     const response = yield call(saveExperimentAPI, action.payload.experiment)
     if (response.error) {
-      yield put({ type: SAVE_EXPERIMENT_FAILED, message: response.error })
+      yield [
+        put({ type: SAVE_EXPERIMENT_FAILED, message: response.error }),
+        put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: 'Error saving the experiment.' } })
+      ]
     } else {
       yield put({ type: SAVE_EXPERIMENT_SUCCEEDED })
     }
   } catch (e) {
-    yield put({ type: SAVE_EXPERIMENT_FAILED, message: e.message })
-    yield put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: 'Error saving the experiment.' } })
+    console.log(e)
+    yield [
+      put({ type: SAVE_EXPERIMENT_FAILED, message: e }),
+      put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: 'Error saving the experiment.' } })
+    ]
   }
 }
 

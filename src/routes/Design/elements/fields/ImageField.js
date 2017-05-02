@@ -8,8 +8,8 @@ import './ImageField.scss'
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    uploadImage: (file) => {
-      dispatch(uploadImage(file))
+    uploadImage: (id, key, file) => {
+      dispatch(uploadImage(id, key, file))
     }
   }
 }
@@ -39,19 +39,14 @@ export class ImageField extends Component {
   }
 
   handleImageUpload (acceptedFiles) {
+    const { trialId, fieldConstantKey, uploadImage } = this.props
     this.setState({ value: '' })
-    this.props.uploadImage(acceptedFiles[0])
+    uploadImage(trialId, fieldConstantKey, acceptedFiles[0])
   }
 
   handleChange (url) {
     const { onChange, trialId, fieldConstantKey } = this.props
-    if (typeof url === 'string') {
-      onChange(trialId, { [fieldConstantKey]: url })
-    } else {
-      if (url.target.value !== '') {
-        onChange(trialId, { [fieldConstantKey]: url.target.value })
-      }
-    }
+    onChange(trialId, { [fieldConstantKey]: url.target.value })
   }
 
   handleInputChange (event) {

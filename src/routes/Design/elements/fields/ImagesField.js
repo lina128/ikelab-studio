@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Dropzone from 'react-dropzone'
 import Textfield from 'react-mdl/lib/Textfield'
-import superagent from 'superagent'
 import { UPLOAD_PRESET, UPLOAD_URL } from '../../constants'
 import './ImagesField.scss'
 
@@ -32,6 +31,7 @@ export default class ImagesField extends Component {
 
   handleImageUpload (acceptedFiles) {
     this.setState({ uploaded: 0, files: [], value: '' })
+    /*
     acceptedFiles.map((file) => {
       superagent.post(UPLOAD_URL)
       .field('upload_preset', UPLOAD_PRESET)
@@ -57,6 +57,7 @@ export default class ImagesField extends Component {
         }
       })
     })
+    */
   }
 
   handleInputUpload (event) {

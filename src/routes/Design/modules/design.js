@@ -160,10 +160,10 @@ export const renameCondition = (id, value) => {
   }
 }
 
-export const uploadImage = (file) => {
+export const uploadImage = (id, key, file) => {
   return {
     type: UPLOAD_IMAGE,
-    payload: { file }
+    payload: { id, key, file }
   }
 }
 

@@ -28,7 +28,6 @@ export const deleteMessage = (id) => {
 // Action Processors
 // ------------------------------------
 const _addMessage = (state, action) => {
-  console.log(state)
   return {
     messages: [
       ...state.messages,

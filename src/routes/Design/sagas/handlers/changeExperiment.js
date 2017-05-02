@@ -7,7 +7,7 @@ export const getExperiment = (state) => state.design.present
 function* changeExperimentSaga (action) {
   const experiment = yield select(getExperiment)
   delay(1000)
-  yield put({ type: SAVE_EXPERIMENT, payload: experiment })
+  yield put({ type: SAVE_EXPERIMENT, payload: { experiment: experiment } })
 }
 
 function* watchChangeExperimentSaga () {

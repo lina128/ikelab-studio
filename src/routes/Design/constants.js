@@ -78,6 +78,4 @@ export const MENU_CONTENT = [
   }
 ]
 
-export const UPLOAD_PRESET = 'xcdgygdr'
-export const UPLOAD_URL = 'https://api.cloudinary.com/v1_1/ikelabrepo/image/upload'
 export const PLUGINS = ['ikelab_experiment_engine', 'ikelab_images']
