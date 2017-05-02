@@ -11,9 +11,9 @@ export default class AuthService extends EventEmitter {
     super()
 
     this.webAuth = new auth0.WebAuth({
-      domain: __AUTH0_DOMAIN__,
-      clientID: __AUTH0_CLIENT_ID__,
-      audience: __AUTH0_AUDIENCE__,
+      domain: AUTH0_DOMAIN,
+      clientID: AUTH0_CLIENT_ID,
+      audience: AUTH0_AUDIENCE,
       scope: 'openid',
       responseType: 'token',
       redirectUri: 'http://app2.com:1234/login'
@@ -112,7 +112,7 @@ export default class AuthService extends EventEmitter {
   logout () {
     this.webAuth.logout({
       returnTo: `${window.location.origin}`,
-      client_id: __AUTH0_CLIENT_ID__
+      client_id: AUTH0_CLIENT_ID
     })
     // Clear user token and profile data from localStorage
     localStorage.removeItem(TOKEN_KEY)

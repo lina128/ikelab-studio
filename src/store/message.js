@@ -25,17 +25,10 @@ export const deleteMessage = (id) => {
 }
 
 // ------------------------------------
-// Action Handlers
-// ------------------------------------
-const ACTION_HANDLERS = {
-  [ADD_MESSAGE] : _addMessage,
-  [DELETE_MESSAGE] : _deleteMessage
-}
-
-// ------------------------------------
 // Action Processors
 // ------------------------------------
 const _addMessage = (state, action) => {
+  console.log(state)
   return {
     messages: [
       ...state.messages,
@@ -59,6 +52,14 @@ const _deleteMessage = (state, action) => {
   }
 
   return state
+}
+
+// ------------------------------------
+// Action Handlers
+// ------------------------------------
+const ACTION_HANDLERS = {
+  [ADD_MESSAGE] : _addMessage,
+  [DELETE_MESSAGE] : _deleteMessage
 }
 
 // ------------------------------------

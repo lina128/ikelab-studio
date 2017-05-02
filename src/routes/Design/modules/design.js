@@ -28,6 +28,7 @@ export const MOVE_OUTSIDE = 'MOVE_OUTSIDE'
 export const REMOVE_CONDITION = 'REMOVE_CONDITION'
 export const REMOVE_TRIAL_CONDITION = 'DELETE_TRIAL_CONDITION'
 export const RENAME_CONDITION = 'RENAME_CONDITION'
+export const UPLOAD_IMAGE = 'UPLOAD_IMAGE'
 
 // ------------------------------------
 // Actions
@@ -113,7 +114,7 @@ export const fetchExperiment = (id) => {
 export const saveExperiment = (experiment) => {
   return {
     type: SAVE_EXPERIMENT,
-    payload: { ...experiment }
+    payload: { experiment }
   }
 }
 
@@ -159,6 +160,13 @@ export const renameCondition = (id, value) => {
   }
 }
 
+export const uploadImage = (file) => {
+  return {
+    type: UPLOAD_IMAGE,
+    payload: { file }
+  }
+}
+
 export const actions = {
   addTrial,
   addBlock,
@@ -178,7 +186,8 @@ export const actions = {
   removeCondition,
   removeTrialCondition,
   renameCondition,
-  saveExperiment
+  saveExperiment,
+  uploadImage
 }
 
 // ------------------------------------
@@ -208,7 +217,8 @@ const ACTION_HANDLERS = {
   [RENAME_CONDITION] : handle.renameCondition,
   [SAVE_EXPERIMENT]: handle.saveExperiment,
   [SAVE_EXPERIMENT_SUCCEEDED]: handle.saveExperimentSucceeded,
-  [SAVE_EXPERIMENT_FAILED]: handle.saveExperimentFailed
+  [SAVE_EXPERIMENT_FAILED]: handle.saveExperimentFailed,
+  [UPLOAD_IMAGE]: handle.uploadImage
 }
 
 // ------------------------------------

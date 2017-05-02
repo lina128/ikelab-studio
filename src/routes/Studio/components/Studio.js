@@ -8,7 +8,6 @@ import {
   CardText
 } from 'react-mdl/lib/Card'
 import { List, WindowScroller, AutoSizer } from 'react-virtualized'
-import MessageBarContainer from '../containers/MessageBarContainer.js'
 import './Studio.scss'
 
 export default class Studio extends PureComponent {
@@ -34,20 +33,7 @@ export default class Studio extends PureComponent {
     isFetching: PropTypes.bool.isRequired,
     experiments: PropTypes.array.isRequired
   }
-/*
-  renderExperiment (experiment) {
-    const path = '/design/' + experiment.experiment_id
 
-    return (
-      <li key={experiment.experiment_id}>
-        <Link to={path}>
-          {experiment.name}
-        </Link>
-      </li>
-    )
-  }
-
-*/
   _rowRenderer ({ key, index, isScrolling, isVisible, style }) {
     const child = []
     let datum
@@ -125,7 +111,6 @@ export default class Studio extends PureComponent {
           : <WindowScroller>
             {this._renderAutoSizer}
           </WindowScroller>}
-        <MessageBarContainer />
       </div>
     )
   }

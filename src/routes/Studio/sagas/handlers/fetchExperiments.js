@@ -16,8 +16,10 @@ function* fetchExperimentsSaga (action) {
       })
     }
   } catch (e) {
-    yield put({ type: FETCH_EXPERIMENTS_FAILED, message: e.message })
-    yield put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: 'Error fetching experiments.' } })
+    yield [
+      put({ type: FETCH_EXPERIMENTS_FAILED, message: e.message }),
+      put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: 'Error fetching experiments.' } })
+    ]
   }
 }
 

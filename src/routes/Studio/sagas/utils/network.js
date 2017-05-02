@@ -1,7 +1,7 @@
 import { auth0 } from '../../../../containers/AppContainer'
 
 export const fetchExperimentsAPI = () => {
-  return fetch(__FETCH_EXPERIMENTS_URL__, {
+  return fetch(FETCH_EXPERIMENTS_URL, {
     mode: 'cors',
     method: 'POST',
     headers: {
@@ -25,7 +25,7 @@ export const fetchExperimentsAPI = () => {
 }
 
 export const createExperimentAPI = () => {
-  return fetch(__CREATE_EXPERIMENT_URL__, {
+  return fetch(CREATE_EXPERIMENT_URL, {
     mode: 'cors',
     method: 'POST',
     headers: {

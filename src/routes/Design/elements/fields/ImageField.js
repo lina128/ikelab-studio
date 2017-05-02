@@ -1,16 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Dropzone from 'react-dropzone'
-import uniqueId from 'lodash/uniqueId'
+import { uploadImage } from '../../modules/design'
 import Textfield from 'react-mdl/lib/Textfield'
 import Button from 'react-mdl/lib/Button'
-import { addMessage } from '../../../../store/message'
 import './ImageField.scss'
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addMessage: (id, msg) => {
-      dispatch(addMessage(id, msg))
+    uploadImage: (file) => {
+      dispatch(uploadImage(file))
     }
   }
 }
@@ -30,7 +29,7 @@ export class ImageField extends Component {
     fieldConstantKey: PropTypes.string.isRequired,
     fieldSetting: PropTypes.any.isRequired,
     onChange: PropTypes.func.isRequired,
-    addMessage: PropTypes.func.isRequired
+    uploadImage: PropTypes.func.isRequired
   }
 
   componentWillReceiveProps (nextProps) {
@@ -40,43 +39,8 @@ export class ImageField extends Component {
   }
 
   handleImageUpload (acceptedFiles) {
-    const { addMessage } = this.props
-
     this.setState({ value: '' })
-    let that = this
-    let file = acceptedFiles[0]
-
-    fetch(`${__IKELAB_IMAGEUPLOAD__}/requestUploadURL`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: file.name,
-        type: file.type,
-        size: file.size
-      })
-    })
-    .then(response => {
-      if (response.ok) {
-        return response.json().then(json => fetch(json.uploadURL, {
-          mode: 'cors',
-          method: 'PUT',
-          body: file
-        }))
-      } else {
-        if (response.status === 400) {
-          return Promise.reject({ message: 'Image too large.' })
-        } else {
-          return Promise.reject({ message: 'Error uploading image.' })
-        }
-      }
-    })
-    .then(response => that.handleChange(`${__IKELAB_IMAGES_STORE__}/${file.name}`),
-          error => addMessage(uniqueId(), error.message))
-    .catch(error => {
-      console.log(error)
-    })
+    this.props.uploadImage(acceptedFiles[0])
   }
 
   handleChange (url) {

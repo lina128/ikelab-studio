@@ -8,7 +8,7 @@ import uniqueId from 'lodash/uniqueId'
 function* saveExperimentSaga (action) {
   try {
     yield delay(1000)
-    const response = yield call(saveExperimentAPI, action.payload)
+    const response = yield call(saveExperimentAPI, action.payload.experiment)
     if (response.error) {
       yield put({ type: SAVE_EXPERIMENT_FAILED, message: response.error })
     } else {
