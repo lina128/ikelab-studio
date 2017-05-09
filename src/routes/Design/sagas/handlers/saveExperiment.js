@@ -2,7 +2,7 @@ import { delay } from 'redux-saga'
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { SAVE_EXPERIMENT, SAVE_EXPERIMENT_SUCCEEDED, SAVE_EXPERIMENT_FAILED } from '../../modules/design'
 import { ADD_MESSAGE } from '../../../../store/message'
-import { saveExperimentAPI } from '../utils/network'
+import { saveExperimentAPI } from '../utils/experiment'
 import uniqueId from 'lodash/uniqueId'
 
 function* saveExperimentSaga (action) {

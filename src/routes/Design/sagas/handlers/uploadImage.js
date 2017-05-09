@@ -2,8 +2,9 @@ import { delay } from 'redux-saga'
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { UPLOAD_IMAGE, CHANGE_SETTING } from '../../modules/design'
 import { ADD_MESSAGE } from '../../../../store/message'
-import { uploadImageAPI, getImageAPI } from '../utils/network'
+import { uploadImageAPI, getImageAPI, addUserTagAPI } from '../utils/image'
 import uniqueId from 'lodash/uniqueId'
+import random from 'lodash/random'
 
 function* getImageSaga (url) {
   for (let i = 0; i < 10; i++) {
@@ -22,18 +23,24 @@ function* getImageSaga (url) {
 
 function* uploadImageSaga (action) {
   try {
-    const response = yield call(uploadImageAPI, action.payload.file)
+    let name = `${random(1000, 9999)}-${action.payload.file.name}`
+    const response = yield call(uploadImageAPI, name, action.payload.file)
     if (response.error) {
       yield put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: response.error } })
     } else {
-      const url = `${IKELAB_IMAGES_STORE}/${action.payload.file.name}`
+      const url = `${IKELAB_IMAGES_STORE}/${name}`
       yield call(getImageSaga, url)
-      yield put({
-        type: CHANGE_SETTING,
-        payload: {
-          id: action.payload.id,
-          setting: { [action.payload.key]: url }
-        } })
+      const taggingCall = yield call(addUserTagAPI, name, 'USER_ID')
+      if (taggingCall.error) {
+        yield put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: taggingCall.error } })
+      } else {
+        yield put({
+          type: CHANGE_SETTING,
+          payload: {
+            id: action.payload.id,
+            setting: { [action.payload.key]: url }
+          } })
+      }
     }
   } catch (e) {
     yield put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: 'Error uploading the image.' } })

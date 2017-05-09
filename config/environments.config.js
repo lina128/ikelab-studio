@@ -16,7 +16,7 @@ module.exports = {
       FETCH_EXPERIMENT_URL: JSON.stringify('http://localhost:7070'),
       SAVE_EXPERIMENT_URL: JSON.stringify('http://localhost:6060'),
       IKELAB_IMAGES_STORE: JSON.stringify('https://s3.amazonaws.com/ikelab-images-store-dev'),
-      IKELAB_IMAGEUPLOAD: JSON.stringify('https://8ht6j9l7dj.execute-api.us-east-1.amazonaws.com/dev')
+      IKELAB_IMAGES: JSON.stringify('https://gyuijdy1mb.execute-api.us-east-1.amazonaws.com/dev')
     })
   }),
 
@@ -39,7 +39,7 @@ module.exports = {
       'FETCH_EXPERIMENT_URL' : 'http://localhost:7070',
       'SAVE_EXPERIMENT_URL' : 'http://localhost:6060',
       'IKELAB_IMAGES_STORE' : 'https://s3.amazonaws.com/ikelab-images-store-prod',
-      'IKELAB_IMAGEUPLOAD' : 'https://u63flidw69.execute-api.us-east-1.amazonaws.com/prod'
+      'IKELAB_IMAGES' : 'https://u63flidw69.execute-api.us-east-1.amazonaws.com/prod'
     })
   })
 }
