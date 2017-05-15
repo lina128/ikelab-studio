@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import Dropzone from 'react-dropzone'
 import Textfield from 'react-mdl/lib/Textfield'
 import { UPLOAD_PRESET, UPLOAD_URL } from '../../constants'
 import './ImagesField.scss'
 
-export default class ImagesField extends Component {
+export default class ImagesField extends PureComponent {
   constructor (props) {
     super(props)
     this.state = { uploaded: 0, files: [], value: '' }

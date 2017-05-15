@@ -1,5 +1,6 @@
 export ColorPickerField from './ColorPickerField'
 export DefaultField from './DefaultField'
+export EffectField from './EffectField'
 export ImageField from './ImageField'
 export ImagesField from './ImagesField'
 export InputField from './InputField'

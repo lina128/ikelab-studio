@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import MultiSelectField from 'react-mdl-extra/lib/MultiSelectField'
 import Option from 'react-mdl-extra/lib/Option'
 
-export default class MultiSelectListField extends Component {
+export default class MultiSelectListField extends PureComponent {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)

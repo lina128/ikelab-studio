@@ -8,7 +8,7 @@
         clientID: '4HO12itCjqLZh25a2sghmjKs6E5iFUVc'
       });
       auth0.parseHash(window.location.hash, function (err, result) {
-        parent.postMessage(err || result, 'http://app2.com:1234');
+        parent.postMessage(result, 'http://app2.com:1234');
       });
     </script>
   </head>

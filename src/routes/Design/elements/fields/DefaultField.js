@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 
-export default class DefaultField extends Component {
+export default class DefaultField extends PureComponent {
   static propTypes = {
     trialId: PropTypes.number.isRequired,
     fieldConstantKey: PropTypes.string.isRequired,

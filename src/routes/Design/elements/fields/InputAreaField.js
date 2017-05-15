@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import Textfield from 'react-mdl/lib/Textfield'
 
-export default class InputAreaField extends Component {
+export default class InputAreaField extends PureComponent {
   constructor (props) {
     super(props)
     this.state = { value: this.props.fieldSetting }

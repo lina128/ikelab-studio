@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Dropzone from 'react-dropzone'
 import { uploadImage } from '../../modules/design'
@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export class ImageField extends Component {
+export class ImageField extends PureComponent {
   constructor (props) {
     super(props)
     this.state = { value: '' }

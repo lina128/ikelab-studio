@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import Menu from 'react-mdl-extra/lib/Menu'
 import MenuItem from 'react-mdl-extra/lib/MenuItem'
 import Button from 'react-mdl/lib/Button'
 
-export default class ListField extends Component {
+export default class ListField extends PureComponent {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)

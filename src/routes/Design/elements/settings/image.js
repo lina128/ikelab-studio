@@ -39,13 +39,13 @@ const IMAGE = {
     display: true,
     hints: 'px'
   },
-  fadeIn: {
-    name: 'Fade In',
-    type: 'InputField',
-    value: '',
-    options: null,
+  effect: {
+    name: 'Effect',
+    type: 'EffectField',
+    value: {},
+    options: ['None', 'blink', 'rotate', 'flip'],
     display: true,
-    hints: 'ms'
+    hints: ''
   }
 }
 

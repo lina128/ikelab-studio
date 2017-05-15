@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import Switch from 'react-mdl/lib/Switch'
 
-export default class InputField extends Component {
+export default class InputField extends PureComponent {
   constructor (props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
