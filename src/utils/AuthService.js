@@ -27,6 +27,7 @@ export default class AuthService extends EventEmitter {
 
   login () {
     let that = this
+    console.log('logging you in')
     this.webAuth.renewAuth({
       redirectUri: 'http://app2.com:1234/sso.html',
       usePostMessage: true
@@ -34,6 +35,7 @@ export default class AuthService extends EventEmitter {
       if (err) {
         that.webAuth.authorize()
       } else {
+        console.log(authResult)
         if (authResult && authResult.accessToken && authResult.expiresIn) {
           that.setToken(authResult.accessToken)
           that.setExpiration(authResult.expiresIn)
@@ -65,7 +67,7 @@ export default class AuthService extends EventEmitter {
             that.setProfile(user)
           }
         })
-        browserHistory.replace('/studio')
+        browserHistory.replace('/home')
       }
     })
   }

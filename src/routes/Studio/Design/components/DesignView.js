@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+
 import DesignContainer from '../containers/DesignContainer'
 
 export default class DesignView extends Component {

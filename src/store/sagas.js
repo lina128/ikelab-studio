@@ -1,6 +1,6 @@
 import { fork } from 'redux-saga/effects'
-import DesignSaga from '../routes/Design/sagas/design'
-import StudioSaga from '../routes/Studio/sagas/studio'
+import DesignSaga from '../routes/Studio/Design/sagas/design'
+import StudioSaga from '../routes/Home/sagas/studio'
 
 const sagas = [
   ...DesignSaga,

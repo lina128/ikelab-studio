@@ -1,4 +1,4 @@
-import { auth0 } from '../../../../containers/AppContainer'
+import { auth0 } from '../../../../../containers/AppContainer'
 
 export const uploadImageAPI = (name, file) => {
   return fetch(`${IKELAB_IMAGES}/requestUploadURL`, {

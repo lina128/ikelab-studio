@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { FETCH_EXPERIMENT, FETCH_EXPERIMENT_SUCCEEDED, FETCH_EXPERIMENT_FAILED } from '../../modules/design'
-import { ADD_MESSAGE } from '../../../../store/message'
+import { ADD_MESSAGE } from '../../../../../store/message'
 import { fetchExperimentAPI } from '../utils/experiment'
 import uniqueId from 'lodash/uniqueId'
 

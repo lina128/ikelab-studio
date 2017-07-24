@@ -1,10 +1,10 @@
-import { injectReducer } from '../../store/reducers'
+import { injectReducer } from '../../../store/reducers'
 import { UPDATE_STRUCTURE, ADD_MESSAGE, DELETE_MESSAGE, FETCH_EXPERIMENT,
        FETCH_EXPERIMENT_FAILED, FETCH_EXPERIMENT_SUCCEEDED, SAVE_EXPERIMENT,
        SAVE_EXPERIMENT_FAILED, SAVE_EXPERIMENT_SUCCEEDED,
        CHANGE_TRIAL_SETTING_FAILED, CHANGE_TRIAL_SETTING_SUCCEEDED } from './modules/design'
 import undoable, { excludeAction } from 'redux-undo'
-import { requireAuth } from '../../containers/AppContainer'
+import { requireAuth } from '../../../containers/AppContainer'
 
 export default (store) => ({
   path : 'design/:experimentId',

@@ -1,4 +1,4 @@
-import { auth0 } from '../../../../containers/AppContainer'
+import { auth0 } from '../../../../../containers/AppContainer'
 
 export const fetchExperimentAPI = (id) => {
   return fetch(FETCH_EXPERIMENT_URL, {

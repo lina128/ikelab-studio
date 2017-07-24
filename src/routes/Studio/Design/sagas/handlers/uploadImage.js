@@ -1,7 +1,7 @@
 import { delay } from 'redux-saga'
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { UPLOAD_IMAGE, CHANGE_SETTING } from '../../modules/design'
-import { ADD_MESSAGE } from '../../../../store/message'
+import { ADD_MESSAGE } from '../../../../../store/message'
 import { uploadImageAPI, getImageAPI, addUserTagAPI } from '../utils/image'
 import uniqueId from 'lodash/uniqueId'
 import random from 'lodash/random'
