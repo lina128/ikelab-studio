@@ -13,10 +13,11 @@ export default class AuthService extends EventEmitter {
     this.webAuth = new auth0.WebAuth({
       domain: AUTH0_DOMAIN,
       clientID: AUTH0_CLIENT_ID,
+      postMessageDataType: 'ikehive-signin',
       audience: AUTH0_AUDIENCE,
       scope: 'openid',
       responseType: 'token',
-      redirectUri: 'http://app2.com:1234/login'
+      redirectUri: `${BASEURI}/login`
     })
 
     this.login = this.login.bind(this)
@@ -27,9 +28,8 @@ export default class AuthService extends EventEmitter {
 
   login () {
     let that = this
-    console.log('logging you in')
     this.webAuth.renewAuth({
-      redirectUri: 'http://app2.com:1234/sso.html',
+      redirectUri: `${BASEURI}/sso.html`,
       usePostMessage: true
     }, function (err, authResult) {
       if (err) {
@@ -67,7 +67,7 @@ export default class AuthService extends EventEmitter {
             that.setProfile(user)
           }
         })
-        browserHistory.replace('/home')
+        browserHistory.replace('/personal')
       }
     })
   }
@@ -113,7 +113,7 @@ export default class AuthService extends EventEmitter {
 
   logout () {
     this.webAuth.logout({
-      returnTo: `${window.location.origin}`,
+      returnTo: `${BASEURI}`,
       client_id: AUTH0_CLIENT_ID
     })
     // Clear user token and profile data from localStorage

@@ -1,8 +1,44 @@
+@import 'base';
+
 .ancillaryNav {
   position: absolute;
   top: 0;
   right: 0;
-  height: 32px;
+  height: 26px;
   width: 400px;
-  font: Oxygen, Regular 14px;
+  font-family: $primaryText;
+  font-size: 12px;
+  background: $primaryLight; /* For browsers that do not support gradients */
+  margin: 0;
+  padding: 0;
+  line-height: 26px;
+  vertical-align: middle;
+}
+
+.ancillaryNav:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 400px;
+  border-bottom: 26px solid transparent;
+  border-right: 26px solid $primaryLight;
+  width: 0;
+}
+
+.ancillaryNav > .ancillaryLink {
+  color: white;
+  float: right;
+  margin-right: 15px;
+  cursor: pointer;
+  cursor: hand;
+  text-decoration: none !important;
+  &:hover {
+    color: $accent;
+  }
+  &:active {
+    color: $accent;
+  }
+  &:visited {
+    color: white;
+  }
 }

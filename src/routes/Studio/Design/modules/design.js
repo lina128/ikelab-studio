@@ -11,7 +11,6 @@ export const ADD_CONDITION = 'ADD_CONDITION'
 export const CHANGE_STRUCTURE = 'CHANGE_STRUCTURE'
 export const CHANGE_SETTING = 'CHANGE_SETTING'
 export const CHANGE_SETTING_SUCCEEDED = 'CHANGE_SETTING_SUCCEEDED'
-export const CHANGE_SETTING_FAILED = 'CHANGE_SETTING_FAILED'
 export const CLICK_TRIAL = 'CLICK_TRIAL'
 export const COPY_CURRENT_TRIAL = 'COPY_CURRENT_TRIAL'
 export const DELETE_CURRENT_TRIAL = 'DELETE_CURRENT_TRIAL'
@@ -33,10 +32,10 @@ export const UPLOAD_IMAGE = 'UPLOAD_IMAGE'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const addTrial = (type, name) => {
+export const addTrial = (type) => {
   return {
     type: ADD_TRIAL,
-    payload: { type, name }
+    payload: { type }
   }
 }
 
@@ -97,13 +96,6 @@ export const deleteCurrentTrial = () => {
   }
 }
 
-export const deleteNode = (id) => {
-  return {
-    type: DELETE_NODE,
-    payload: { id }
-  }
-}
-
 export const fetchExperiment = (id) => {
   return {
     type: FETCH_EXPERIMENT,
@@ -132,10 +124,9 @@ export const moveNode = (id, afterId, direction) => {
   }
 }
 
-export const moveOutside = (id) => {
+export const moveOutside = () => {
   return {
-    type: MOVE_OUTSIDE,
-    payload: { id }
+    type: MOVE_OUTSIDE
   }
 }
 
@@ -178,7 +169,6 @@ export const actions = {
   changeSetting,
   copyCurrentTrial,
   deleteCurrentTrial,
-  deleteNode,
   fetchExperiment,
   moveInside,
   moveNode,
@@ -201,14 +191,10 @@ const ACTION_HANDLERS = {
   [ADD_CONDITION] : handle.addCondition,
   [CHANGE_SETTING] : handle.changeSetting,
   [CHANGE_SETTING_SUCCEEDED]: handle.changeSettingSucceeded,
-  [CHANGE_SETTING_FAILED]: handle.changeSettingFailed,
   [CLICK_TRIAL] : handle.clickTrial,
   [COPY_CURRENT_TRIAL] : handle.copyCurrentTrial,
   [DELETE_CURRENT_TRIAL] : handle.deleteCurrentTrial,
-  [DELETE_NODE]: handle.deleteNode,
-  [FETCH_EXPERIMENT]: handle.fetchExperiment,
   [FETCH_EXPERIMENT_SUCCEEDED]: handle.fetchExperimentSucceeded,
-  [FETCH_EXPERIMENT_FAILED]: handle.fetchExperimentFailed,
   [MOVE_INSIDE] : handle.moveInside,
   [MOVE_NODE] : handle.moveNode,
   [MOVE_OUTSIDE] : handle.moveOutside,
@@ -224,19 +210,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {
-  experimentId: 0,
-  counter: 0,
-  name: 'Unnamed Experiment',
-  condition: {},
-  currentTrial: null,
-  currentControl: null,
-  structure: [],
-  entity: {},
-  isFetching: false,
-  isSaving: false,
-  isTakingScreenshot: false
-}
+const initialState = {}
 
 export default function designReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://cdn.auth0.com/js/auth0/8.0.4/auth0.min.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0/8.8.0/auth0.min.js"></script>
     <script type="text/javascript">
-      var auth0 = new auth0.WebAuth({
-        domain: 'ikelab.auth0.com',
-        clientID: '4HO12itCjqLZh25a2sghmjKs6E5iFUVc'
-      });
-      auth0.parseHash(window.location.hash, function (err, result) {
-        parent.postMessage(result, 'http://app2.com:1234');
-      });
+      parent.postMessage({
+        hash: window.location.hash,
+        type: 'ikehive-signin'
+      }, 'http://app2.com:1234')
     </script>
   </head>
   <body></body>

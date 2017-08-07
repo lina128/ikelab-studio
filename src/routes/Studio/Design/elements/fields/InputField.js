@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react'
-import Textfield from 'react-mdl/lib/Textfield'
+import './field.scss'
 
 export default class InputField extends PureComponent {
   constructor (props) {
@@ -37,15 +37,20 @@ export default class InputField extends PureComponent {
     const { fieldConstant, customStyle } = this.props
 
     return (
-      <div>
-        {fieldConstant.name}:
-        <Textfield
-          style={customStyle || { width: '80px' }}
-          value={this.state.value}
-          label=''
-          onChange={this.handleInputChange}
-          onBlur={this.handleChange} />
-        {fieldConstant.hints}
+      <div className='design_field_default'>
+        <div className='design_field_field'>
+          {fieldConstant.name}
+        </div>
+        <div className='design_field_field'>
+          <input
+            className='design_inputfield_default'
+            style={customStyle}
+            value={this.state.value}
+            label=''
+            onChange={this.handleInputChange}
+            onBlur={this.handleChange} />
+          {fieldConstant.hints}
+        </div>
       </div>
     )
   }

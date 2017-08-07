@@ -1,4 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+import StudioNav from '../../components/StudioNav'
+import '../../../../styles/core.scss'
+import './CoreLayout.scss'
 
 export default class CoreLayout extends Component {
   static propTypes = {
@@ -11,8 +14,10 @@ export default class CoreLayout extends Component {
   render () {
     return (
       <div>
-        {this.props.children}
-        <div>design studio</div>
+        <StudioNav />
+        <div className='core-layout__studio'>
+          {this.props.children}
+        </div>
       </div>
     )
   }

@@ -1,12 +1,13 @@
 export const ITEMTYPES = {
   TRIAL: 'trial',
   BLOCK: 'block',
+  RUN: 'run',
   REDBOX: 'redbox'
 }
 
 export const DIMENSIONS = {
-  TRIALHEIGHT: 45,
-  TRIALWIDTH: 60
+  TRIALHEIGHT: 78,
+  TRIALWIDTH: 104
 }
 
 export const COLOR_PALETTE = [

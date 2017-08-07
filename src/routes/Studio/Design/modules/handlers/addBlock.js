@@ -11,24 +11,28 @@ function getSetting (type) {
 }
 
 const addBlock = (state, action) => {
-  let newCounter = state.counter + 1
+  let newCounter = state.experiment.counter + 1
   return {
     ...state,
-    counter: newCounter,
-    structure: [
-      ...state.structure,
-      {
-        id: newCounter,
-        level: 'block',
-        children: []
-      }
-    ],
-    entity: {
-      ...state.entity,
-      [newCounter] : {
-        type: 'BLOCK',
-        name: 'Block' + newCounter,
-        setting: getSetting('BLOCK')
+    experiment: {
+      ...state.experiment,
+      currentTrial: newCounter,
+      counter: newCounter,
+      structure: [
+        ...state.experiment.structure,
+        {
+          id: newCounter,
+          level: 'block',
+          children: []
+        }
+      ],
+      entity: {
+        ...state.experiment.entity,
+        [newCounter] : {
+          type: 'BLOCK',
+          name: 'BLOCK' + newCounter,
+          setting: getSetting('BLOCK')
+        }
       }
     }
   }

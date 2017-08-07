@@ -1,0 +1,16 @@
+.design_trialtools_default {
+  width: 50%;
+  height: 100%;
+  float: right;
+  overflow-x: auto;
+  overflow-y: hidden;
+  font-weight: 500;
+  line-height: 100% !important;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.design_trialtools_default::-webkit-scrollbar {
+    height: 2px;
+}
+

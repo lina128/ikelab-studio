@@ -1,24 +1,23 @@
-import { insertNodeAfter, findNode } from '../utils/node'
+import { insertNodeAfter, findNode, copyNode } from '../utils/node'
 
 const copyCurrentTrial = (state, action) => {
-  let newCounterT = state.counter + 1
-  const nodeStructure = findNode(state.structure, state.currentTrial)
-  const nodeEntity = state.entity[state.currentTrial]
+  if (!state.experiment.currentTrial) return state
+
+  const nodeId = state.experiment.currentTrial
+  const node = findNode(state.experiment.structure, nodeId)
+  const newNode = copyNode(node, state.experiment.entity, state.experiment.counter)
 
   return {
     ...state,
-    currentTrial: newCounterT,
-    counter: newCounterT,
-    structure: insertNodeAfter(
-      state.structure,
-      state.currentTrial,
-      {
-        ...nodeStructure,
-        id: newCounterT
-      }),
-    entity: {
-      ...state.entity,
-      [newCounterT]: { ...nodeEntity }
+    experiment: {
+      ...state.experiment,
+      currentTrial: null,
+      counter: newNode.counter,
+      structure: insertNodeAfter(
+        state.experiment.structure,
+        nodeId,
+        newNode.node),
+      entity: newNode.entity
     }
   }
 }

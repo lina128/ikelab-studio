@@ -1,9 +1,7 @@
 @import 'base';
 
-.design_thumbnail_default {
-  position: relative;
-  float: left;
-  border: 1px solid grey;
-  width: 60px;
-  height: 45px;
+.design_thumbnail_img {
+  width: $trialWidth + px;
+  height: $trialHeight + px;
+  background: #fff;
 }

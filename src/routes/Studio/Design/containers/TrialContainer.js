@@ -15,22 +15,19 @@ const trialTarget = {
     const draggedId = monitor.getItem().id
     const droppedComponentPosition = ReactDOM.findDOMNode(component).getBoundingClientRect()
     const draggedComponentPosition = monitor.getClientOffset()
+    const draggedComponentInitialPosition = monitor.getInitialClientOffset()
     var direction
-
-    if (draggedComponentPosition.y <
-        droppedComponentPosition.bottom &&
-        draggedComponentPosition.y >
-        droppedComponentPosition.top) {
+    if (draggedComponentInitialPosition.y >
+        draggedComponentPosition.y &&
+        draggedComponentPosition.y <
+        droppedComponentPosition.bottom) {
       direction = 'UP'
-    } else if (((draggedComponentPosition.y +
-               DIMENSIONS.TRIALHEIGHT) <
-               droppedComponentPosition.bottom) &&
-               ((draggedComponentPosition.y +
-                DIMENSIONS.TRIALHEIGHT) >
-               droppedComponentPosition.top)) {
+    } else if (draggedComponentInitialPosition.y <
+               draggedComponentPosition.y &&
+               draggedComponentPosition.y >
+               droppedComponentPosition.top) {
       direction = 'DOWN'
     }
-
     if (draggedId !== props.id && direction) {
       props.moveNode(draggedId, props.id, direction)
     }

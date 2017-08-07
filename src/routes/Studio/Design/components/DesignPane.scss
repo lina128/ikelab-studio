@@ -1,6 +1,31 @@
 .design_designPane_default {
-  width: 240px;
-  height: auto;
-  overflow: auto;
-  padding: 15px 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.design_designPane_pane {
+  height: 640px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 5px;
+  padding-right: 15px;
+  border-bottom: 1px solid #b6b6b6;
+}
+
+.design_designPane_tools {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  padding: 0;
+  margin: 0;
+}
+
+.design_designPane_tools button {
+  width: 130px;
 }

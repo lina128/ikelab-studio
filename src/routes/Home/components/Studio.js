@@ -50,7 +50,7 @@ export default class Studio extends PureComponent {
 
       child.push(
         <div key={i} style={{ width:'auto', padding:this.gutterSize, float:'left', display:'inline-block' }}>
-          <Link to={`/design/${datum.experiment_id}`}>
+          <Link to={`/studio/${datum.experiment_id}`}>
             <Card shadow={0}>
               <CardTitle>{datum.experiment_id}</CardTitle>
               <CardText>{moment(datum.modified_at).local().format('MM/D/YYYY hh:mm a')}</CardText>

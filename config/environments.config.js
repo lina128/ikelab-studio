@@ -11,6 +11,10 @@ module.exports = {
   development : (config) => ({
     compiler_public_path : `http://${config.server_host}:${config.server_port}/`,
     globals: Object.assign({}, config.globals, {
+      AUTH0_DOMAIN: JSON.stringify('ikelab.auth0.com'),
+      AUTH0_CLIENT_ID: JSON.stringify('4HO12itCjqLZh25a2sghmjKs6E5iFUVc'),
+      AUTH0_AUDIENCE: JSON.stringify('https://ikelab.auth0.com/userinfo'),
+      BASEURI: JSON.stringify('http://app2.com:1234'),
       CREATE_EXPERIMENT_URL: JSON.stringify('http://localhost:4040'),
       FETCH_EXPERIMENTS_URL: JSON.stringify('http://localhost:5050'),
       FETCH_EXPERIMENT_URL: JSON.stringify('http://localhost:7070'),
@@ -34,12 +38,16 @@ module.exports = {
       colors       : true
     },
     globals: Object.assign({}, config.globals, {
-      'CREATE_EXPERIMENT_URL' : 'http://localhost:4040',
-      'FETCH_EXPERIMENTS_URL' : 'http://localhost:5050',
-      'FETCH_EXPERIMENT_URL' : 'http://localhost:7070',
-      'SAVE_EXPERIMENT_URL' : 'http://localhost:6060',
-      'IKELAB_IMAGES_STORE' : 'https://s3.amazonaws.com/ikelab-images-store-prod',
-      'IKELAB_IMAGES' : 'https://u63flidw69.execute-api.us-east-1.amazonaws.com/prod'
+      AUTH0_DOMAIN: JSON.stringify('ikelab.auth0.com'),
+      AUTH0_CLIENT_ID: JSON.stringify('4HO12itCjqLZh25a2sghmjKs6E5iFUVc'),
+      AUTH0_AUDIENCE: JSON.stringify('https://ikelab.auth0.com/userinfo'),
+      BASEURI: JSON.stringify('http://app2.com:1234'),
+      CREATE_EXPERIMENT_URL : 'http://localhost:4040',
+      FETCH_EXPERIMENTS_URL : 'http://localhost:5050',
+      FETCH_EXPERIMENT_URL : 'http://localhost:7070',
+      SAVE_EXPERIMENT_URL : 'http://localhost:6060',
+      IKELAB_IMAGES_STORE : 'https://s3.amazonaws.com/ikelab-images-store-prod',
+      IKELAB_IMAGES : 'https://u63flidw69.execute-api.us-east-1.amazonaws.com/prod'
     })
   })
 }

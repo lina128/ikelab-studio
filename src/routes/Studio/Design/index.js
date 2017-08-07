@@ -7,7 +7,6 @@ import undoable, { excludeAction } from 'redux-undo'
 import { requireAuth } from '../../../containers/AppContainer'
 
 export default (store) => ({
-  path : 'design/:experimentId',
   onEnter: requireAuth,
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
@@ -16,7 +15,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Design = require('./components/DesignView').default
+      const Design = require('./containers/DesignContainer').default
       const reducer = undoable(require('./modules/design').default, {
         limit: 50,
         filter: excludeAction([

@@ -1,37 +1,60 @@
 import React, { PureComponent, PropTypes } from 'react'
-import Ribbon from '../containers/Ribbon'
+import Toolbar from './Toolbar'
 import FirstColumn from './FirstColumn'
 import SecondColumn from './SecondColumn'
 import ThirdColumn from './ThirdColumn'
+import Titlebar from './Titlebar'
+import PrimaryTools from '../containers/PrimaryTools'
+import TrialTools from '../containers/TrialTools'
+import ConditionTools from '../containers/ConditionTools'
 import DesignPaneContainer from '../containers/DesignPaneContainer'
 import TrialPaneContainer from '../containers/TrialPaneContainer'
 import SettingPane from '../containers/SettingPane'
-import './Design.scss'
+import '../../../../styles/core.scss'
+
+const DEFAULT_NAME = ''
+const DEFAULT_TRIAL = null
 
 export default class Design extends PureComponent {
   static propTypes = {
-    experimentId: PropTypes.number.isRequired,
-    name: PropTypes.string,
-    condition: PropTypes.object.isRequired,
-    structure: PropTypes.array.isRequired,
-    entity: PropTypes.object.isRequired,
-    currentTrial: PropTypes.number,
-    isSaving: PropTypes.bool.isRequired
+    experiment: PropTypes.object.isRequired
   }
 
   render () {
-    const { isSaving, currentTrial, structure, entity } = this.props
+    const { experiment } = this.props
 
-    const trial = entity[currentTrial] || null
+    const trial = experiment.entity[experiment.currentTrial] || DEFAULT_TRIAL
 
     return (
-      <div>
-        { isSaving && <div>Saving ...</div> }
-        <div className='design_container1'>
-          <Ribbon />
-          <div className='design_container2'>
+      <div className='wrapper'>
+        <Toolbar>
+          <PrimaryTools />
+        </Toolbar>
+        <Toolbar>
+          <ConditionTools experiment={experiment} />
+          {trial ? <TrialTools id={experiment.currentTrial} trial={trial} /> : null}
+        </Toolbar>
+        <div className='wrapper' style={{ height: '700px' }}>
+          <FirstColumn>
+            {experiment ? <DesignPaneContainer experiment={experiment} /> : null}
+          </FirstColumn>
+          <ThirdColumn>
+          </ThirdColumn>
+          <SecondColumn>
+            <Titlebar expName={experiment ? experiment.name : DEFAULT_NAME} unitName={trial ? trial.name : DEFAULT_TRIAL} />
+            {trial && trial.type !== 'BLOCK' && trial.type !== 'RUN' ? <TrialPaneContainer id={experiment.currentTrial} trial={trial} /> : null}
+          </SecondColumn>
+        </div>
+      </div>
+    )
+  }
+}
+
+      /*
+                <Ribbon />
+      <div className='design_container2'>
             <FirstColumn>
-              <DesignPaneContainer structure={structure} entity={entity} />
+              <DesignPaneContainer experiment={experiment} />
             </FirstColumn>
             <ThirdColumn>
               <SettingPane id={currentTrial} trial={trial} />
@@ -40,8 +63,4 @@ export default class Design extends PureComponent {
               <TrialPaneContainer id={currentTrial} trial={trial} />
             </SecondColumn>
           </div>
-        </div>
-      </div>
-    )
-  }
-}
+          */

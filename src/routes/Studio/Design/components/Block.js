@@ -3,6 +3,11 @@ import TrialContainer from '../containers/TrialContainer'
 import './Block.scss'
 
 export default class Block extends PureComponent {
+  constructor (props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   static propTypes = {
     id: PropTypes.number.isRequired,
     children: PropTypes.array.isRequired,
@@ -14,6 +19,11 @@ export default class Block extends PureComponent {
     connectDropTarget: PropTypes.func.isRequired
   }
 
+  handleClick (e) {
+    e.stopPropagation()
+    this.props.clickTrial(this.props.id)
+  }
+
   render () {
     const {
       connectDragSource,
@@ -21,15 +31,13 @@ export default class Block extends PureComponent {
       isDragging,
       clickTrial,
       moveNode,
-      id,
       children,
       entity } = this.props
 
     const opacity = isDragging ? 0 : 1
-    const name = entity[id].name
 
     return connectDropTarget(
-      <div className={'design_block_default'}>
+      <div className={'design_block_default'} onClick={this.handleClick}>
         {connectDragSource(
           <div className={'design_block_inner'} style={{ opacity }}>
             {children.map(c =>
@@ -40,9 +48,6 @@ export default class Block extends PureComponent {
                 clickTrial={clickTrial}
                 moveNode={moveNode} />))
             }
-            <div className={'design_block_decorate'}>
-              {name}
-            </div>
           </div>
         )}
       </div>

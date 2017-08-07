@@ -3,41 +3,56 @@ import BlockContainer from '../containers/BlockContainer'
 import './Run.scss'
 
 export default class Run extends PureComponent {
+  constructor (props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   static propTypes = {
     id: PropTypes.number.isRequired,
     children: PropTypes.array.isRequired,
     entity: PropTypes.object.isRequired,
+    isDragging: PropTypes.bool.isRequired,
     moveNode: PropTypes.func.isRequired,
     moveInside: PropTypes.func.isRequired,
+    connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
     clickTrial: PropTypes.func.isRequired
   }
 
+  handleClick (e) {
+    e.stopPropagation()
+    this.props.clickTrial(this.props.id)
+  }
+
   render () {
     const {
+      connectDragSource,
       connectDropTarget,
+      isDragging,
       moveNode,
       moveInside,
       clickTrial,
-      id,
       children,
       entity } = this.props
 
-    const name = entity[id].name
+    const opacity = isDragging ? 0 : 1
+
     return connectDropTarget(
-      <div className='design_run_default'>
-        {children.map(c =>
-          <BlockContainer
-            key={c.id}
-            id={c.id}
-            children={c.children}
-            entity={entity}
-            moveNode={moveNode}
-            moveInside={moveInside}
-            clickTrial={clickTrial} />)}
-        <div className={'design_run_decorate'}>
-          {name}
-        </div>
+      <div className='design_run_default' onClick={this.handleClick}>
+        {connectDragSource(
+          <div className={'design_run_inner'} style={{ opacity }}>
+            {children.map(c =>
+              <BlockContainer
+                key={c.id}
+                id={c.id}
+                children={c.children}
+                entity={entity}
+                moveNode={moveNode}
+                moveInside={moveInside}
+                clickTrial={clickTrial} />)}
+          </div>
+        )}
       </div>
     )
   }

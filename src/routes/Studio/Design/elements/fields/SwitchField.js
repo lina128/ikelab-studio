@@ -24,13 +24,15 @@ export default class InputField extends PureComponent {
     const { fieldConstant, fieldSetting } = this.props
 
     return (
-      <div>
-        {fieldConstant.name}:
-        <Switch
-          ripple
-          checked={fieldSetting}
-          onChange={this.handleChange} />
-        {fieldConstant.hints}
+      <div className='design_field_default'>
+        <div className='design_field_field'>{fieldConstant.name}</div>
+        <div className='design_field_field'>
+          <Switch
+            ripple
+            checked={fieldSetting}
+            onChange={this.handleChange} />
+          {fieldConstant.hints}
+        </div>
       </div>
     )
   }

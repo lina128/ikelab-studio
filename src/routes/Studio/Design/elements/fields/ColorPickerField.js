@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react'
-import { BlockPicker } from 'react-color'
+import { TwitterPicker } from 'react-color'
 
 export default class ColorPickerField extends PureComponent {
   constructor (props) {
@@ -24,10 +24,14 @@ export default class ColorPickerField extends PureComponent {
     const { fieldConstant, fieldSetting } = this.props
 
     return (
-      <div>
-        {fieldConstant.name}:
-        <BlockPicker color={fieldSetting} onChange={this.handleChange} />
-        {fieldConstant.hints}
+      <div className='design_field_default'>
+        <div className='design_field_field'>
+          {fieldConstant.name}
+        </div>
+        <div className='design_field_field'>
+          <TwitterPicker color={fieldSetting} onChange={this.handleChange} />
+          {fieldConstant.hints}
+        </div>
       </div>
     )
   }

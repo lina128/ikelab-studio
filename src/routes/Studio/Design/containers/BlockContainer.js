@@ -1,19 +1,17 @@
 import ReactDOM from 'react-dom'
 import flow from 'lodash/flow'
-import { ITEMTYPES, DIMENSIONS } from '../constants'
+import { ITEMTYPES } from '../constants'
 import { DragSource, DropTarget } from 'react-dnd'
 import Block from '../components/Block'
 
 const blockSource = {
   beginDrag (props) {
-    console.log('dragging ' + props.id)
     return { id: props.id, level: 'block' }
   }
 }
 
 const blockTarget = {
   hover (props, monitor, component) {
-    console.log('dropping to block')
     if (monitor.getItem().level === 'trial' && props.children.length === 0) {
       // drop trial into block
       props.moveInside(monitor.getItem().id, props.id)
@@ -22,15 +20,16 @@ const blockTarget = {
       const draggedId = monitor.getItem().id
       const droppedComponentPosition = ReactDOM.findDOMNode(component).getBoundingClientRect()
       const draggedComponentPosition = monitor.getSourceClientOffset()
+      const draggedComponentInitialPosition = monitor.getInitialClientOffset()
       var direction
-      if (draggedComponentPosition.y <
-          droppedComponentPosition.bottom && draggedComponentPosition.y > droppedComponentPosition.top) {
+      if (draggedComponentInitialPosition.y >
+          draggedComponentPosition.y &&
+          draggedComponentPosition.y <
+          droppedComponentPosition.bottom) {
         direction = 'UP'
-      } else if ((draggedComponentPosition.y +
-                  DIMENSIONS.TRIALHEIGHT) <
-                 droppedComponentPosition.bottom &&
-                 (draggedComponentPosition.y +
-                  DIMENSIONS.TRIALHEIGHT) >
+      } else if (draggedComponentInitialPosition.y <
+                 draggedComponentPosition.y &&
+                 draggedComponentPosition.y >
                  droppedComponentPosition.top) {
         direction = 'DOWN'
       }

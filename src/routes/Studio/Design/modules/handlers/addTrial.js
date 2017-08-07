@@ -12,51 +12,57 @@ function getSetting (type) {
 }
 
 const addTrial = (state, action) => {
-  let newCounter = state.counter + 1
+  let newCounter = state.experiment.counter + 1
 
-  if (state.currentTrial) {
+  if (state.experiment.currentTrial) {
     return {
       ...state,
-      currentTrial: newCounter,
-      counter: newCounter,
-      structure: insertNodeAfter(
-        state.structure,
-        state.currentTrial,
-        {
-          id: newCounter,
-          level: 'trial'
-        }),
-      entity: {
-        ...state.entity,
-        [newCounter] : {
-          type: action.payload.type,
-          name: action.payload.name,
-          condition: {},
-          screenshot: null,
-          setting: getSetting(action.payload.type)
+      experiment: {
+        ...state.experiment,
+        currentTrial: newCounter,
+        counter: newCounter,
+        structure: insertNodeAfter(
+          state.experiment.structure,
+          state.experiment.currentTrial,
+          {
+            id: newCounter,
+            level: 'trial'
+          }),
+        entity: {
+          ...state.experiment.entity,
+          [newCounter] : {
+            type: action.payload.type,
+            name: action.payload.type + newCounter,
+            condition: {},
+            screenshot: null,
+            setting: getSetting(action.payload.type)
+          }
         }
       }
     }
   } else {
     return {
       ...state,
-      currentTrial: newCounter,
-      counter: newCounter,
-      structure: [
-        ...state.structure,
-        {
-          id: newCounter,
-          level: 'trial'
-        }
-      ],
-      entity: {
-        ...state.entity,
-        [newCounter] : {
-          type: action.payload.type,
-          name: action.payload.name,
-          condition: {},
-          screenshot: null,
-          setting: getSetting(action.payload.type)
+      experiment: {
+        ...state.experiment,
+        currentTrial: newCounter,
+        counter: newCounter,
+        structure: [
+          ...state.experiment.structure,
+          {
+            id: newCounter,
+            level: 'trial'
+          }
+        ],
+        entity: {
+          ...state.experiment.entity,
+          [newCounter] : {
+            type: action.payload.type,
+            name: action.payload.type + newCounter,
+            condition: {},
+            screenshot: null,
+            setting: getSetting(action.payload.type)
+          }
         }
       }
     }

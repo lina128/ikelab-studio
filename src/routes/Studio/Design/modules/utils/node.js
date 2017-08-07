@@ -87,6 +87,45 @@ export const findNodeParent = (arr, id) => {
   return null
 }
 
+export const copyNode = (node, entity, counter) => {
+  const newNode = {}
+  newNode.counter = counter
+
+  newNode.counter++
+
+  if (node.children) {
+    newNode.node = {
+      ...node,
+      id: newNode.counter,
+      children: []
+    }
+  } else {
+    newNode.node = {
+      ...node,
+      id: newNode.counter
+    }
+  }
+
+  newNode.entity = {
+    ...entity,
+    [newNode.counter]: {
+      ...JSON.parse(JSON.stringify(entity[node.id])),
+      name: entity[node.id].type + newNode.counter
+    }
+  }
+
+  if (node.children && node.children.length > 0) {
+    for (let i = 0; i < node.children.length; i++) {
+      let childNode = copyNode(node.children[i], newNode.entity, newNode.counter)
+      newNode.node.children.push(childNode.node)
+      newNode.entity = childNode.entity
+      newNode.counter = childNode.counter
+    }
+  }
+
+  return newNode
+}
+
 // return the new array after the node is inserted before a target node, if target node not found, return null
 export const insertNodeBefore = (arr, id, node) => {
   if (!Array.isArray(arr)) return null
@@ -96,12 +135,12 @@ export const insertNodeBefore = (arr, id, node) => {
     if (arr[i].id === id) {
       return [
         ...arr.slice(0, i),
-        { ...node },
+        node,
         { ...arr[i] },
         ...arr.slice(i + 1)
       ]
     }
-    if (arr[i].children) {
+    if (arr[i].children && arr[i].children.length > 0) {
       const newArr = insertNodeBefore(arr[i].children, id, node)
       if (newArr) {
         return [
@@ -126,11 +165,11 @@ export const insertNodeAfter = (arr, id, node) => {
       return [
         ...arr.slice(0, i),
         { ...arr[i] },
-        { ...node },
+        node,
         ...arr.slice(i + 1)
       ]
     }
-    if (arr[i].children) {
+    if (arr[i].children && arr[i].children.length > 0) {
       const newArr = insertNodeAfter(arr[i].children, id, node)
       if (newArr) {
         return [
@@ -291,57 +330,6 @@ export const remove = (arr, id, c) => {
 
   return null
 }
-
-/*
-  export const removeAll = (arr, c) => {
-  if (!c) return arr
-
-  const keys = Object.keys(c)
-  if (keys.length === 0 || keys.length > 1) return arr
-
-  const key = keys[0]
-  const isArray = Array.isArray(c[key])
-  const isObject = (typeof c[key] === 'object') && (c[key] !== null)
-
-  let oldC
-  let newArr = []
-
-  for (let i = 0; i < arr.length; i++) {
-    if (Object.keys(arr[i]).indexOf(key) > -1) {
-      if (isArray) {
-        oldC = arr[i][key]
-        let idx = arr[i][key].indexOf(c[key][0])
-
-        if (idx > -1) {
-          newArr.push({
-            ...arr[i],
-            [key]: [ ...oldC.slice(0, idx), ...oldC.slice(idx + 1) ]
-          })
-        } else {
-          newArr.push(arr[i])
-        }
-      } else if (isObject) {
-        delete arr[i][key][Object.keys(c[key])[0]]
-
-        newArr.push({ ...arr[i] })
-      } else {
-        delete arr[i][keys[0]]
-
-        newArr.push({ ...arr[i] })
-      }
-    } else {
-      newArr.push(arr[i])
-    }
-
-    if (arr[i].children) {
-      const childArr = removeAll(arr[i].children, c)
-      newArr[i].children = childArr
-    }
-  }
-
-  return newArr
-}
-*/
 
 // only one key-value pair in c is allowed,
 // the value in c can be a primitive type, array of size 1, or object

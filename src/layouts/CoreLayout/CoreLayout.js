@@ -13,7 +13,7 @@ export default class CoreLayout extends Component {
 
   render () {
     return (
-      <div className='container-fluid text-left'>
+      <div>
         <Header />
         <div className='core-layout__viewport'>
           {this.props.children}

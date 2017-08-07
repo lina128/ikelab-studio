@@ -1,21 +1,25 @@
 import { findNode, findNodeParent, removeNode, insertNodeBefore } from '../utils/node'
 
 const moveOutside = (state, action) => {
-  const id = action.payload.id
+  if (!state.experiment.currentTrial) return state
 
-  const trial = findNode(state.structure, id)
+  const id = state.experiment.currentTrial
+  const trial = findNode(state.experiment.structure, id)
 
-  const parent = findNodeParent(state.structure, id)
+  const parent = findNodeParent(state.experiment.structure, id)
 
   if (parent && parent.id !== id) {
     const result = {}
-    removeNode(state.structure, state.entity, id, result)
+    removeNode(state.experiment.structure, state.experiment.entity, id, result)
 
-    const newStructure = insertNodeBefore(result.arr, parent.id, trial)
+    const newStructure = insertNodeBefore(result.arr, parent.id, { ...trial })
 
     return {
       ...state,
-      structure: newStructure
+      experiment: {
+        ...state.experiment,
+        structure: newStructure
+      }
     }
   } else {
     return state

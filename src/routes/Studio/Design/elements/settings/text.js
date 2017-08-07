@@ -33,7 +33,7 @@ const TEXT = {
   },
   fontColor: {
     name: 'Font Color',
-    type: 'ColorPickerField',
+    type: 'InputField',
     value: '#000000',
     options: null,
     display: true,

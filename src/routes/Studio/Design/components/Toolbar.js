@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react'
+import './Toolbar.scss'
 
-import DesignContainer from '../containers/DesignContainer'
-
-export default class DesignView extends Component {
+export default class Toolbar extends Component {
   static propTypes = {
-    params: PropTypes.objectOf(PropTypes.string),
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
@@ -13,9 +11,8 @@ export default class DesignView extends Component {
 
   render () {
     return (
-      <div>
+      <div className='design_toolbar_default'>
         {this.props.children}
-        <DesignContainer fetchId={parseInt(this.props.params.experimentId)} />
       </div>
     )
   }

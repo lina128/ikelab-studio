@@ -8,6 +8,7 @@ import FABButton from 'react-mdl/lib/FABButton'
 import { fetchExperiment, saveExperiment } from '../modules/design'
 import { getPlugin, IKELAB_EXPERIMENT_ENGINE_TRIAL_PREVIEW } from '../plugins/design'
 import Design from '../components/Design'
+import '../../../../styles/core.scss'
 
 const style = {
   zIndex: 1999,
@@ -26,15 +27,7 @@ const btnStyle = {
 
 const mapStateToProps = (state) => {
   return {
-    experimentId: state.design.present.experimentId,
-    counter: state.design.present.counter,
-    name: state.design.present.name,
-    condition: state.design.present.condition,
-    structure: state.design.present.structure,
-    entity: state.design.present.entity,
-    currentTrial: state.design.present.currentTrial,
-    isFetching: state.design.present.isFetching,
-    isSaving: state.design.present.isSaving
+    experiment: state.design.present.experiment
   }
 }
 
@@ -57,22 +50,15 @@ export class DesignContainer extends Component {
   }
 
   static propTypes = {
-    fetchId: PropTypes.number.isRequired,
-    experimentId: PropTypes.number.isRequired,
-    counter: PropTypes.number.isRequired,
-    name: PropTypes.string,
-    condition: PropTypes.object.isRequired,
-    structure: PropTypes.array.isRequired,
-    entity: PropTypes.object.isRequired,
-    currentTrial: PropTypes.number,
-    isFetching: PropTypes.bool.isRequired,
-    isSaving: PropTypes.bool.isRequired,
+    params: PropTypes.objectOf(PropTypes.string),
+    experiment: PropTypes.object,
     fetchExperiment: PropTypes.func.isRequired,
     saveExperiment: PropTypes.func.isRequired
   }
 
   componentDidMount () {
-    const { fetchId, fetchExperiment } = this.props
+    const fetchId = parseInt(this.props.params.experimentId)
+    const { fetchExperiment } = this.props
 
     fetchExperiment(fetchId)
 
@@ -100,25 +86,19 @@ export class DesignContainer extends Component {
   }
 
   render () {
-    const { experimentId, isFetching, isSaving, currentTrial, condition, structure, entity } = this.props
+    const { experiment } = this.props
     const ikelabExperimentEngineTrialPreview = getPlugin(IKELAB_EXPERIMENT_ENGINE_TRIAL_PREVIEW)
 
     return (
-      <div>
-        { isFetching && <Spinner />}
-        { experimentId ? <Design
-          experimentId={experimentId}
-          isSaving={isSaving}
-          currentTrial={currentTrial}
-          condition={condition}
-          structure={structure}
-          entity={entity} /> : null}
+      <div className='wrapper'>
+        { !experiment ? <Spinner /> : <Design
+          experiment={experiment} />}
         <div style={style}>
           <FABButton accent style={btnStyle} onClick={this.closeIframe}>X</FABButton>
-          <iframe
+          {ikelabExperimentEngineTrialPreview ? <iframe
             id='PLUGIN_IKELAB_EXPERIMENT_ENGINE_TRIAL_PREVIEW'
             src={ikelabExperimentEngineTrialPreview.url}
-            width='800' height='600' frameBorder='0' />
+            width='800' height='600' frameBorder='0' /> : null}
         </div>
       </div>
     )

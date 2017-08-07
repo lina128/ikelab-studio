@@ -4,28 +4,17 @@
   position: relative;
   float: right;
   clear: both;
-  border: 1px dotted grey;
-  padding: 10px 0 0 0;
-  cursor: move;
-  width: $trialWidth + 85px;
-  min-height: 200px;
-  margin-right: 5px;
+  border-top: 5px solid #bac4d3;
+  border-bottom: 5px solid #bac4d3;
+  border-left: 5px solid #bac4d3;
+  border-right: 1px solid #bac4d3;
+  cursor: pointer;
   margin-top: 10px;
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
 
 .design_block_inner {
-  position: relative;
   float: right;
-  clear: both;
-  width: $trialWidth + 85px;
-  min-height: 200px;
-}
-
-.design_block_decorate {
-  position: absolute;
-  top: 0px;
-  left: -15px;
-  font-size: 12pt;
-  font-family: Helvetica;
+  padding: 10px 0;
+  width: $trialWidth + 65px;
 }

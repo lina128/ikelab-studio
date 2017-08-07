@@ -2,13 +2,19 @@ import { removeNode } from '../utils/node'
 
 const deleteCurrentTrial = (state, action) => {
   const result = {}
-  removeNode(state.structure, state.entity, state.currentTrial, result)
+
+  if (!state.experiment.currentTrial) return state
+
+  removeNode(state.experiment.structure, state.experiment.entity, state.experiment.currentTrial, result)
 
   return {
     ...state,
-    currentTrial: null,
-    structure: result.arr,
-    entity: result.s
+    experiment: {
+      ...state.experiment,
+      currentTrial: null,
+      structure: result.arr,
+      entity: result.s
+    }
   }
 }
 

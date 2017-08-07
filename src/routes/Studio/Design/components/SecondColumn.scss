@@ -1,6 +1,7 @@
 @import 'base';
 
 .design_secondColumn_default {
-  height: auto;
+  height: 100%;
   overflow: hidden;
+  background: $editorColorDark;
 }

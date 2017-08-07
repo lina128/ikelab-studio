@@ -6,6 +6,7 @@ import MenuItem from 'react-mdl-extra/lib/MenuItem'
 import { MENU_CONTENT } from '../constants'
 import BlockBuild from './BlockBuild'
 import * as wizards from '../elements/wizards'
+import './ModuleLoader.scss'
 
 export default class ModuleLoader extends PureComponent {
   constructor (props) {
@@ -64,7 +65,7 @@ export default class ModuleLoader extends PureComponent {
         if (typeof this.props[options[i].onClick] === 'function') {
           // use functions from mapDispatchToProps
           arr.push(<MenuItem key={options[i].type}
-            onClick={() => { this.props[options[i].onClick](options[i].type, options[i].name) }}>
+            onClick={() => { this.props[options[i].onClick](options[i].type) }}>
             <span className={'design_moduleLoader_option_lvl' + lvl}>
               {options[i].name}
             </span></MenuItem>)
@@ -75,7 +76,7 @@ export default class ModuleLoader extends PureComponent {
           // use functions from ModuleLoader
           arr.push(<MenuItem
             key={options[i].type}
-            onClick={() => { this[options[i].onClick](options[i].type, options[i].name) }}>
+            onClick={() => { this[options[i].onClick](options[i].type) }}>
             <span className={'design_moduleLoader_option_lvl' + lvl}>
               {options[i].name}
             </span></MenuItem>)
@@ -107,9 +108,7 @@ export default class ModuleLoader extends PureComponent {
     const menuItems = []
     this.renderOptions(menuItems, MENU_CONTENT, 0)
 
-    const btn = (<Button raised colored ripple>
-      Add
-    </Button>)
+    const btn = (<Button className='design_moduleLoader_btn' ripple>Add<i className='material-icons'>add</i></Button>)
 
     return (
       <div className='design_moduleLoader_default'>

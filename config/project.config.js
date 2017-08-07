@@ -102,10 +102,7 @@ config.globals = {
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test',
   '__COVERAGE__' : !argv.watch && config.env === 'test',
-  '__BASENAME__' : JSON.stringify(process.env.BASENAME || ''),
-  'AUTH0_DOMAIN': JSON.stringify('ikelab.auth0.com'),
-  'AUTH0_CLIENT_ID': JSON.stringify('4HO12itCjqLZh25a2sghmjKs6E5iFUVc'),
-  'AUTH0_AUDIENCE': JSON.stringify('https://ikelab.auth0.com/userinfo')
+  '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
 }
 
 // ------------------------------------

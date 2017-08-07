@@ -1,0 +1,22 @@
+.design_toolbar_default {
+  width: 100%;
+  height: 35px;
+  background: #f9fafc;
+  border-bottom: 1px solid #b6b6b6;
+  padding: 2px;
+}
+
+.design_toolbar_default button,
+.design_designPane_tools button {
+  display: inline-block !important;
+  background: #f0f0f0 !important;
+  color: #333 !important;
+  border: 1px solid #b6b6b6;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 500;
+  height: 30px;
+  min-width: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+}

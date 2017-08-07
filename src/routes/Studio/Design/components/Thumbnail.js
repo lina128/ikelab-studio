@@ -1,5 +1,4 @@
 import React, { PureComponent, PropTypes } from 'react'
-import { DIMENSIONS } from '../constants'
 import './Thumbnail.scss'
 
 const defaultFunc = () => {}
@@ -15,7 +14,8 @@ export default class Thumbnail extends PureComponent {
     onThumbnailClick: PropTypes.func
   }
 
-  onClick () {
+  onClick (e) {
+    e.stopPropagation()
     this.props.onThumbnailClick()
   }
 
@@ -23,10 +23,11 @@ export default class Thumbnail extends PureComponent {
     const { screenshot } = this.props
 
     return (
-      <div className={'design_thumbnail_default'} onClick={this.onClick || defaultFunc}>
-        <img
+      <div onClick={this.onClick || defaultFunc}>
+        {screenshot ? <img
           src={screenshot || ''}
-          style={{ height:DIMENSIONS.TRIALHEIGHT + 'px', width:DIMENSIONS.TRIALWIDTH + 'px' }} />
+          className='design_thumbnail_img' /> : <div className='design_thumbnail_img'></div>}
+
       </div>
     )
   }

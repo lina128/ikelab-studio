@@ -4,5 +4,6 @@
   float: left;
   height: auto;
   width: $firstCol+px;
-  overflow: hidden;
+  height: 100%;
+  background: $editorColorLight;
 }

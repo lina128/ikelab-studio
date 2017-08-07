@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import Badge from 'react-mdl/lib/Badge'
 import Thumbnail from './Thumbnail'
 import './Trial.scss'
 
@@ -47,15 +46,11 @@ export default class Trial extends Component {
     return connectDropTarget(
       <div className='design_trial_default'>
         {connectDragSource(
-          <div style={{ height:'100%' }}>
-            <Badge text={id}>
-              <div>
-                <Thumbnail
-                  id={id}
-                  screenshot={entity[id].screenshot}
-                  onThumbnailClick={this.handleThumbnailClick} />
-              </div>
-            </Badge>
+          <div className='design_trial_dragger'>
+            <Thumbnail
+            id={id}
+            screenshot={entity[id].screenshot}
+            onThumbnailClick={this.handleThumbnailClick} />
           </div>
         )}
       </div>

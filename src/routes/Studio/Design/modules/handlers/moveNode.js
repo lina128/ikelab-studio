@@ -7,24 +7,30 @@ const moveNode = (state, action) => {
 
   if (!direction) return state
 
-  const trial = findNode(state.structure, id)
+  const trial = findNode(state.experiment.structure, id)
 
   const result = {}
-  removeNode(state.structure, state.entity, id, result)
+  removeNode(state.experiment.structure, state.experiment.entity, id, result)
 
   let newStructure = []
   if (direction === 'UP') {
-    newStructure = insertNodeBefore(result.arr, afterId, trial)
+    newStructure = insertNodeBefore(result.arr, afterId, { ...trial })
     return {
       ...state,
-      structure: newStructure
+      experiment: {
+        ...state.experiment,
+        structure: newStructure
+      }
     }
   } else {
     // direction is DOWN
-    newStructure = insertNodeAfter(result.arr, afterId, trial)
+    newStructure = insertNodeAfter(result.arr, afterId, { ...trial })
     return {
       ...state,
-      structure: newStructure
+      experiment: {
+        ...state.experiment,
+        structure: newStructure
+      }
     }
   }
 }

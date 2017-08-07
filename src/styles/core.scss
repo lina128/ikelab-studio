@@ -8,7 +8,8 @@ html {
 }
 
 html,
-body {
+body,
+.wrapper{
   margin: 0;
   padding: 0;
   height: 100%;
@@ -21,17 +22,26 @@ body {
 }
 
 input {
-	display: inline-block;
-	margin: 0 5px;
+  display: inline-block;
+  margin: 0 5px;
 }
 
 ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 li {
-	padding-left: 1em;
-	text-index: -.7em
+  padding-left: 1em;
+  text-index: -.7em
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    background: #e9edf2;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b4c0d0;
 }

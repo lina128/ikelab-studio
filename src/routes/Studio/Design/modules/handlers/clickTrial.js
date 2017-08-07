@@ -1,9 +1,8 @@
 const clickTrial = (state, action) => {
-  if (state.isTakingScreenshot) {
-    return state
-  } else {
-    return {
-      ...state,
+  return {
+    ...state,
+    experiment: {
+      ...state.experiment,
       currentTrial: action.payload.id
     }
   }

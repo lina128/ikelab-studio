@@ -4,8 +4,8 @@ import ModuleLoader from '../components/ModuleLoader'
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTrial: (type, name) => {
-      dispatch(addTrial(type, name))
+    addTrial: (type) => {
+      dispatch(addTrial(type))
     },
     addBlock: () => {
       dispatch(addBlock())
