@@ -14,7 +14,7 @@ app.use(compress())
 // ------------------------------------
 // Apply Webpack HMR Middleware
 // ------------------------------------
-if (project.env === 'development') {
+if (project.env === 'development' || project.env === 'stg') {
   const compiler = webpack(webpackConfig)
 
   debug('Enabling webpack dev and HMR middleware')

@@ -4,6 +4,7 @@ import * as fields from './'
 import Menu from 'react-mdl-extra/lib/Menu'
 import MenuItem from 'react-mdl-extra/lib/MenuItem'
 import Button from 'react-mdl/lib/Button'
+import './field.scss'
 
 export default class EffectField extends PureComponent {
   constructor (props) {
@@ -52,7 +53,7 @@ export default class EffectField extends PureComponent {
     const { trialId } = this.props
     const fieldConstant = Effects[setting.type]
     const fieldSetting = setting.setting
-
+    console.log(setting)
     let Field
     let fieldList = []
 
@@ -68,7 +69,7 @@ export default class EffectField extends PureComponent {
           onChange={this.handleEffectChange} />)
       }
     }
-
+    console.log(fieldList)
     return fieldList
   }
 
@@ -80,15 +81,17 @@ export default class EffectField extends PureComponent {
     </Button>)
 
     return (
-      <div>
-        {fieldConstant.name}:
-        <Menu target={btn} align={'tl bl'}>
-          {fieldConstant.options.map(this.renderOption)}
-        </Menu>
-        {fieldConstant.hints}
-        <div>
-          {fieldSetting.type ? this.renderEffect(fieldSetting) : null}
+      <div className='design_field_effect_default'>
+        <div className='design_field_default'>
+          <div className='design_field_field'>{fieldConstant.name}</div>
+          <div className='design_field_field'>
+            <Menu target={btn} align={'tl bl'}>
+              {fieldConstant.options.map(this.renderOption)}
+            </Menu>
+            {fieldConstant.hints}
+          </div>
         </div>
+        {fieldSetting.type ? this.renderEffect(fieldSetting) : null}
       </div>
     )
   }

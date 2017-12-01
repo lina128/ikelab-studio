@@ -11,23 +11,20 @@
   justify-content: center;
   align-content: center;
   position: relative;
-  height: 200px;
-  width: 300px;
-  border: dashed 3px #9932cc;
+  height: 100%;
+  width: 100%;
 }
 
 .design_imageField_default img {
   align-self: center;
-  max-width: 180px;
-  max-height: 180px;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
 }
 
 .design_imageField_label {
   position: absolute;
-  left: 35px;
-  top: 60px;
+  left: 260px;
+  top: 90px;
 }
 
 .design_imageField_label p {
@@ -36,4 +33,24 @@
   font-size: 16px;
   font-weight: 700;
   color: rgba(0,0,0,.26);
+}
+
+.design_imageField_dialog {
+  width: 800px;
+  height: 480px;
+}
+
+.design_imageField_box {
+  width: 730px;
+  height: 280px;
+  border: 1px solid #b6b6b6;
+}
+
+.design_urlField_default {
+  margin-left: 40px;
+  margin-top: 90px;
+}
+
+.design_urlField_textfield {
+  width: 550px;
 }

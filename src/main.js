@@ -28,14 +28,14 @@ let render = () => {
 // ========================================================
 // Developer Tools Setup
 // ========================================================
-if (__DEV__) {
+if (__DEV__||__STG__) {
   if (window.devToolsExtension) {
     window.devToolsExtension.open()
   }
 }
 
 // This code is excluded from production bundle
-if (__DEV__) {
+if (__DEV__||__STG__) {
   if (module.hot) {
     // Development render functions
     const renderApp = render

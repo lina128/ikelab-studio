@@ -7,6 +7,15 @@
   margin: 0;
 }
 
+.design_designPane_pane::-webkit-scrollbar {
+    width: 7px;
+    background: #e9edf2;
+}
+
+.design_designPane_pane::-webkit-scrollbar-thumb {
+    background: #b4c0d0;
+}
+
 .design_designPane_pane {
   height: 640px;
   overflow-y: auto;

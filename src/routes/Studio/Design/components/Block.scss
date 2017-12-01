@@ -13,6 +13,20 @@
   margin-bottom: 10px;
 }
 
+.design_block_highlight {
+  position: relative;
+  float: right;
+  clear: both;
+  border-top: 5px solid #bac4d3;
+  border-bottom: 5px solid #bac4d3;
+  border-left: 5px solid #bac4d3;
+  border-right: 1px solid #bac4d3;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 0 2px rgba(220, 164, 66, 0.5);
+}
+
 .design_block_inner {
   float: right;
   padding: 10px 0;

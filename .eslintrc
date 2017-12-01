@@ -14,7 +14,7 @@
   },
   "globals": {
     "__DEV__"      : false,
-    "__TEST__"     : false,
+    "__STG__"     : false,
     "__PROD__"     : false,
     "__COVERAGE__" : false,
     "AUTH0_DOMAIN"  : false,

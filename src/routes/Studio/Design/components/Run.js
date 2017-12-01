@@ -11,6 +11,7 @@ export default class Run extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
     children: PropTypes.array.isRequired,
+    currentTrial: PropTypes.number.isRequired,
     entity: PropTypes.object.isRequired,
     isDragging: PropTypes.bool.isRequired,
     moveNode: PropTypes.func.isRequired,
@@ -34,12 +35,15 @@ export default class Run extends PureComponent {
       moveInside,
       clickTrial,
       children,
+      id,
+      currentTrial,
       entity } = this.props
 
     const opacity = isDragging ? 0 : 1
 
     return connectDropTarget(
-      <div className='design_run_default' onClick={this.handleClick}>
+      <div className={currentTrial === id
+      ? 'design_run_highlight' : 'design_run_default'} onClick={this.handleClick}>
         {connectDragSource(
           <div className={'design_run_inner'} style={{ opacity }}>
             {children.map(c =>
@@ -47,6 +51,7 @@ export default class Run extends PureComponent {
                 key={c.id}
                 id={c.id}
                 children={c.children}
+                currentTrial={currentTrial}
                 entity={entity}
                 moveNode={moveNode}
                 moveInside={moveInside}

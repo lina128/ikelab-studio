@@ -1,22 +1,9 @@
-import React, {
-  Component,
-  PropTypes
-} from 'react'
-import { connect } from 'react-redux'
-import * as Modules from '../elements/settings'
+import React, { PureComponent, PropTypes } from 'react'
+import RESPONSE from '../elements/settings/response'
 import * as fields from '../elements/fields'
-import { changeSetting } from '../modules/design'
-import './TrialTools.scss'
+import './TrialToolsVertical.scss'
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    handleChange: (id, change) => {
-      dispatch(changeSetting(id, change))
-    }
-  }
-}
-
-export class TrialTools extends Component {
+export default class TrialToolsVertical extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
     trial: PropTypes.object.isRequired,
@@ -26,7 +13,7 @@ export class TrialTools extends Component {
   render () {
     const { id, trial, handleChange } = this.props
 
-    const fieldConstant = Modules[trial.type]
+    const fieldConstant = RESPONSE
     const fieldSetting = trial.setting
 
     let Field
@@ -41,17 +28,15 @@ export class TrialTools extends Component {
             trialId={id}
             fieldConstantKey={s}
             fieldConstant={fieldConstant[s]}
-            fieldSetting={fieldSetting[s]}
+            fieldSetting={fieldSetting[s] || fieldConstant[s].value}
             onChange={handleChange} />)
       }
     }
 
     return (
-      <div className='design_trialtools_default'>
+      <div className='design_trialToolsVertical_default'>
         {fieldList}
       </div>
     )
   }
 }
-
-export default connect(null, mapDispatchToProps)(TrialTools)

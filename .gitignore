@@ -1,9 +1,9 @@
+# files automatically generated
 .DS_STORE
 *.log
-
-node_modules
-
 dist
 coverage
+
+node_modules
 
 .idea/

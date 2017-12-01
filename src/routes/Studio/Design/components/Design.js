@@ -5,11 +5,12 @@ import SecondColumn from './SecondColumn'
 import ThirdColumn from './ThirdColumn'
 import Titlebar from './Titlebar'
 import PrimaryTools from '../containers/PrimaryTools'
-import TrialTools from '../containers/TrialTools'
-import ConditionTools from '../containers/ConditionTools'
+import TrialToolsContainer from '../containers/TrialToolsContainer'
+import TrialToolsVerticalContainer from '../containers/TrialToolsVerticalContainer'
+import ConditionToolsContainer from '../containers/ConditionToolsContainer'
 import DesignPaneContainer from '../containers/DesignPaneContainer'
 import TrialPaneContainer from '../containers/TrialPaneContainer'
-import SettingPane from '../containers/SettingPane'
+import MiscPaneContainer from '../containers/MiscPaneContainer'
 import '../../../../styles/core.scss'
 
 const DEFAULT_NAME = ''
@@ -31,36 +32,27 @@ export default class Design extends PureComponent {
           <PrimaryTools />
         </Toolbar>
         <Toolbar>
-          <ConditionTools experiment={experiment} />
-          {trial ? <TrialTools id={experiment.currentTrial} trial={trial} /> : null}
+          <ConditionToolsContainer experiment={experiment} />
+          {trial ? <TrialToolsContainer id={experiment.currentTrial} trial={trial} /> : null}
         </Toolbar>
         <div className='wrapper' style={{ height: '700px' }}>
           <FirstColumn>
             {experiment ? <DesignPaneContainer experiment={experiment} /> : null}
           </FirstColumn>
           <ThirdColumn>
+            {trial ? <TrialToolsVerticalContainer id={experiment.currentTrial} trial={trial} /> : null}
           </ThirdColumn>
           <SecondColumn>
-            <Titlebar expName={experiment ? experiment.name : DEFAULT_NAME} unitName={trial ? trial.name : DEFAULT_TRIAL} />
-            {trial && trial.type !== 'BLOCK' && trial.type !== 'RUN' ? <TrialPaneContainer id={experiment.currentTrial} trial={trial} /> : null}
+            <Titlebar expName={experiment
+              ? experiment.name : DEFAULT_NAME}
+              unitName={trial ? trial.name : DEFAULT_TRIAL} />
+            {trial && trial.type !== 'BLOCK' && trial.type !== 'RUN'
+              ? <div className='wrapper'><TrialPaneContainer
+                id={experiment.currentTrial} trial={trial} />
+                <MiscPaneContainer id={experiment.currentTrial} trial={trial} /></div> : null}
           </SecondColumn>
         </div>
       </div>
     )
   }
 }
-
-      /*
-                <Ribbon />
-      <div className='design_container2'>
-            <FirstColumn>
-              <DesignPaneContainer experiment={experiment} />
-            </FirstColumn>
-            <ThirdColumn>
-              <SettingPane id={currentTrial} trial={trial} />
-            </ThirdColumn>
-            <SecondColumn>
-              <TrialPaneContainer id={currentTrial} trial={trial} />
-            </SecondColumn>
-          </div>
-          */

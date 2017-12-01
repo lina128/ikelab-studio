@@ -8,24 +8,21 @@ export const ADD_BLOCK = 'ADD_BLOCK'
 export const ADD_BLOCK_TRIALS = 'ADD_BLOCK_TRIALS'
 export const ADD_RUN = 'ADD_RUN'
 export const ADD_CONDITION = 'ADD_CONDITION'
-export const CHANGE_STRUCTURE = 'CHANGE_STRUCTURE'
+export const TOGGLE_TRIAL_CONDITION = 'TOGGLE_TRIAL_CONDITION'
 export const CHANGE_SETTING = 'CHANGE_SETTING'
 export const CHANGE_SETTING_SUCCEEDED = 'CHANGE_SETTING_SUCCEEDED'
 export const CLICK_TRIAL = 'CLICK_TRIAL'
 export const COPY_CURRENT_TRIAL = 'COPY_CURRENT_TRIAL'
 export const DELETE_CURRENT_TRIAL = 'DELETE_CURRENT_TRIAL'
+export const DELETE_CONDITION = 'DELETE_CONDITION'
 export const DELETE_NODE = 'DELETE_NODE'
 export const FETCH_EXPERIMENT = 'FETCH_EXPERIMENT'
 export const FETCH_EXPERIMENT_SUCCEEDED = 'FETCH_EXPERIMENT_SUCCEEDED'
-export const FETCH_EXPERIMENT_FAILED = 'FETCH_EXPERIMENT_FAILED'
 export const SAVE_EXPERIMENT = 'SAVE_EXPERIMENT'
 export const SAVE_EXPERIMENT_SUCCEEDED = 'SAVE_EXPERIMENT_SUCCEEDED'
-export const SAVE_EXPERIMENT_FAILED = 'SAVE_EXPERIMENT_FAILED'
 export const MOVE_INSIDE = 'MOVE_INSIDE'
 export const MOVE_NODE = 'MOVE_NODE'
 export const MOVE_OUTSIDE = 'MOVE_OUTSIDE'
-export const REMOVE_CONDITION = 'REMOVE_CONDITION'
-export const REMOVE_TRIAL_CONDITION = 'DELETE_TRIAL_CONDITION'
 export const RENAME_CONDITION = 'RENAME_CONDITION'
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE'
 
@@ -64,6 +61,13 @@ export const addCondition = () => {
   }
 }
 
+export const toggleTrialCondition = (key) => {
+  return {
+    type: TOGGLE_TRIAL_CONDITION,
+    payload: { key }
+  }
+}
+
 export const changeSetting = (id, setting) => {
   return {
     type: CHANGE_SETTING,
@@ -78,12 +82,6 @@ export const clickTrial = (id) => {
   }
 }
 
-export const changeStructure = () => {
-  return {
-    type: CHANGE_STRUCTURE
-  }
-}
-
 export const copyCurrentTrial = () => {
   return {
     type: COPY_CURRENT_TRIAL
@@ -93,6 +91,13 @@ export const copyCurrentTrial = () => {
 export const deleteCurrentTrial = () => {
   return {
     type: DELETE_CURRENT_TRIAL
+  }
+}
+
+export const deleteCondition = (id) => {
+  return {
+    type: DELETE_CONDITION,
+    payload: { id }
   }
 }
 
@@ -130,20 +135,6 @@ export const moveOutside = () => {
   }
 }
 
-export const removeCondition = (id) => {
-  return {
-    type: REMOVE_CONDITION,
-    payload: { id }
-  }
-}
-
-export const removeTrialCondition = (id, cid) => {
-  return {
-    type: REMOVE_TRIAL_CONDITION,
-    payload: { id, cid }
-  }
-}
-
 export const renameCondition = (id, value) => {
   return {
     type: RENAME_CONDITION,
@@ -164,17 +155,16 @@ export const actions = {
   addBlockTrials,
   addRun,
   addCondition,
-  changeStructure,
+  toggleTrialCondition,
   clickTrial,
   changeSetting,
   copyCurrentTrial,
   deleteCurrentTrial,
+  deleteCondition,
   fetchExperiment,
   moveInside,
   moveNode,
   moveOutside,
-  removeCondition,
-  removeTrialCondition,
   renameCondition,
   saveExperiment,
   uploadImage
@@ -189,21 +179,20 @@ const ACTION_HANDLERS = {
   [ADD_BLOCK_TRIALS] : handle.addBlockTrials,
   [ADD_RUN] : handle.addRun,
   [ADD_CONDITION] : handle.addCondition,
+  [TOGGLE_TRIAL_CONDITION]: handle.toggleTrialCondition,
   [CHANGE_SETTING] : handle.changeSetting,
   [CHANGE_SETTING_SUCCEEDED]: handle.changeSettingSucceeded,
   [CLICK_TRIAL] : handle.clickTrial,
   [COPY_CURRENT_TRIAL] : handle.copyCurrentTrial,
   [DELETE_CURRENT_TRIAL] : handle.deleteCurrentTrial,
+  [DELETE_CONDITION] : handle.deleteCondition,
   [FETCH_EXPERIMENT_SUCCEEDED]: handle.fetchExperimentSucceeded,
   [MOVE_INSIDE] : handle.moveInside,
   [MOVE_NODE] : handle.moveNode,
   [MOVE_OUTSIDE] : handle.moveOutside,
-  [REMOVE_CONDITION] : handle.removeCondition,
-  [REMOVE_TRIAL_CONDITION] : handle.removeTrialCondition,
   [RENAME_CONDITION] : handle.renameCondition,
   [SAVE_EXPERIMENT]: handle.saveExperiment,
   [SAVE_EXPERIMENT_SUCCEEDED]: handle.saveExperimentSucceeded,
-  [SAVE_EXPERIMENT_FAILED]: handle.saveExperimentFailed,
   [UPLOAD_IMAGE]: handle.uploadImage
 }
 

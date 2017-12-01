@@ -99,6 +99,7 @@ config.globals = {
   },
   'NODE_ENV'     : config.env,
   '__DEV__'      : config.env === 'development',
+  '__STG__'      : config.env === 'stg',
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test',
   '__COVERAGE__' : !argv.watch && config.env === 'test',

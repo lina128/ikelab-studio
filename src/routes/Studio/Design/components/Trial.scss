@@ -8,8 +8,21 @@
   margin: 7px 0;
   background-color: white;
   cursor: pointer;
-  width: $trialWidth;
-  height: $trialHeight;
+  width: $trialWidth + px;
+  height: $trialHeight + px;
+}
+
+.design_trial_highlight {
+  position: relative;
+  float: right;
+  clear: both;
+  padding: 0;
+  margin: 7px 0;
+  background-color: white;
+  cursor: pointer;
+  width: $trialWidth + px;
+  height: $trialHeight + px;
+  box-shadow: 0 0 0 2px rgba(220, 164, 66, 0.5);
 }
 
 .design_trial_dragger {

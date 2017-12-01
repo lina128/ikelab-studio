@@ -1,15 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { browserHistory, Router } from 'react-router'
 import { Provider } from 'react-redux'
-import AuthService from '../utils/AuthService'
-
-export const auth0 = new AuthService('4HO12itCjqLZh25a2sghmjKs6E5iFUVc', 'ikelab.auth0.com')
-
-export const requireAuth = (nextState, replace) => {
-  if (!auth0.loggedIn()) {
-    auth0.login()
-  }
-}
 
 class AppContainer extends Component {
   static propTypes = {

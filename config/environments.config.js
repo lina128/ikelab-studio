@@ -9,11 +9,8 @@ module.exports = {
   // are served webpack by to fix this issue:
   // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
   development : (config) => ({
-    compiler_public_path : `http://${config.server_host}:${config.server_port}/`,
+    compiler_public_path : 'http://studio.ikehive.com-dev.s3-website-us-east-1.amazonaws.com/',
     globals: Object.assign({}, config.globals, {
-      AUTH0_DOMAIN: JSON.stringify('ikelab.auth0.com'),
-      AUTH0_CLIENT_ID: JSON.stringify('4HO12itCjqLZh25a2sghmjKs6E5iFUVc'),
-      AUTH0_AUDIENCE: JSON.stringify('https://ikelab.auth0.com/userinfo'),
       BASEURI: JSON.stringify('http://app2.com:1234'),
       CREATE_EXPERIMENT_URL: JSON.stringify('http://localhost:4040'),
       FETCH_EXPERIMENTS_URL: JSON.stringify('http://localhost:5050'),
@@ -25,9 +22,25 @@ module.exports = {
   }),
 
   // ======================================================
-  // Overrides when NODE_ENV === 'production'
+  // Overrides when NODE_ENV === 'stg'
   // ======================================================
-  production : (config) => ({
+  stg : (config) => ({
+    compiler_public_path : 'http://studio.ikehive.com-dev.s3-website-us-east-1.amazonaws.com/',
+    globals: Object.assign({}, config.globals, {
+      BASEURI: JSON.stringify('http://app2.com:1234'),
+      CREATE_EXPERIMENT_URL : JSON.stringify('https://agvzj6my61.execute-api.us-east-1.amazonaws.com/stg/experiment'),
+      FETCH_EXPERIMENTS_URL : JSON.stringify('https://agvzj6my61.execute-api.us-east-1.amazonaws.com/stg/experiments'),
+      FETCH_EXPERIMENT_URL : JSON.stringify('https://agvzj6my61.execute-api.us-east-1.amazonaws.com/stg/experiment'),
+      SAVE_EXPERIMENT_URL : JSON.stringify('https://agvzj6my61.execute-api.us-east-1.amazonaws.com/stg/experiment'),
+      IKELAB_IMAGES_STORE : JSON.stringify('https://s3.amazonaws.com/ikelab-images-store-dev'),
+      IKELAB_IMAGES : JSON.stringify('https://gyuijdy1mb.execute-api.us-east-1.amazonaws.com/dev')
+    })
+  }),
+
+  // ======================================================
+  // Overrides when NODE_ENV === 'prod'
+  // ======================================================
+  prod : (config) => ({
     compiler_public_path     : '/',
     compiler_fail_on_warning : false,
     compiler_hash_type       : 'chunkhash',
@@ -38,9 +51,6 @@ module.exports = {
       colors       : true
     },
     globals: Object.assign({}, config.globals, {
-      AUTH0_DOMAIN: JSON.stringify('ikelab.auth0.com'),
-      AUTH0_CLIENT_ID: JSON.stringify('4HO12itCjqLZh25a2sghmjKs6E5iFUVc'),
-      AUTH0_AUDIENCE: JSON.stringify('https://ikelab.auth0.com/userinfo'),
       BASEURI: JSON.stringify('http://app2.com:1234'),
       CREATE_EXPERIMENT_URL : 'http://localhost:4040',
       FETCH_EXPERIMENTS_URL : 'http://localhost:5050',

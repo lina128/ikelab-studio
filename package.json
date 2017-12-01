@@ -51,7 +51,7 @@
     "deploy:prod": {
       "command": "npm run deploy",
       "env": {
-        "NODE_ENV": "production",
+        "NODE_ENV": "prod",
         "DEBUG": "app:*"
       }
     },

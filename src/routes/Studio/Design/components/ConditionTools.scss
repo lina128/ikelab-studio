@@ -1,0 +1,36 @@
+.design_toolbar_default .design_trialtools_default .condition_btn_default {
+  float: left;
+  background-color: #666 !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 0;
+  margin-left: 3px;
+}
+
+.design_toolbar_default .design_trialtools_default .condition_btn_highlight {
+  float: left;
+  background-color: #1e1e1e !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 0;
+  margin-left: 3px;
+}
+
+.condition_btn_end {
+  display: inline-block;
+  float: left;
+  height: 30px;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.condition_btn_end i {
+  line-height: 30px;
+}
+
+.design_conditionTools_input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 2px solid #666;
+}

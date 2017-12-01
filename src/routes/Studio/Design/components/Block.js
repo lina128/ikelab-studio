@@ -9,6 +9,7 @@ export default class Block extends PureComponent {
   }
 
   static propTypes = {
+    currentTrial: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
     children: PropTypes.array.isRequired,
     entity: PropTypes.object.isRequired,
@@ -26,6 +27,8 @@ export default class Block extends PureComponent {
 
   render () {
     const {
+      id,
+      currentTrial,
       connectDragSource,
       connectDropTarget,
       isDragging,
@@ -37,13 +40,15 @@ export default class Block extends PureComponent {
     const opacity = isDragging ? 0 : 1
 
     return connectDropTarget(
-      <div className={'design_block_default'} onClick={this.handleClick}>
+      <div className={currentTrial === id
+      ? 'design_block_highlight' : 'design_block_default'} onClick={this.handleClick}>
         {connectDragSource(
           <div className={'design_block_inner'} style={{ opacity }}>
             {children.map(c =>
               (<TrialContainer
                 key={c.id}
                 id={c.id}
+                currentTrial={currentTrial}
                 entity={entity}
                 clickTrial={clickTrial}
                 moveNode={moveNode} />))

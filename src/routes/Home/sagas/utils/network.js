@@ -1,11 +1,11 @@
 import { auth0 } from '../../../../containers/AppContainer'
 
+// 'Authorization': `Bearer ${auth0.getToken()}`,
 export const fetchExperimentsAPI = () => {
   return fetch(FETCH_EXPERIMENTS_URL, {
     mode: 'cors',
-    method: 'POST',
+    method: 'GET',
     headers: {
-      'Authorization': `Bearer ${auth0.getToken()}`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
@@ -24,12 +24,12 @@ export const fetchExperimentsAPI = () => {
   .catch(error => { error })
 }
 
+//      'Authorization': `Bearer ${auth0.getToken()}`,
 export const createExperimentAPI = () => {
   return fetch(CREATE_EXPERIMENT_URL, {
     mode: 'cors',
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${auth0.getToken()}`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({

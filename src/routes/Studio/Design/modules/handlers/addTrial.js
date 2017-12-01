@@ -33,7 +33,7 @@ const addTrial = (state, action) => {
           [newCounter] : {
             type: action.payload.type,
             name: action.payload.type + newCounter,
-            condition: {},
+            condition: [],
             screenshot: null,
             setting: getSetting(action.payload.type)
           }
@@ -59,7 +59,7 @@ const addTrial = (state, action) => {
           [newCounter] : {
             type: action.payload.type,
             name: action.payload.type + newCounter,
-            condition: {},
+            condition: [],
             screenshot: null,
             setting: getSetting(action.payload.type)
           }

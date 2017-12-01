@@ -1,6 +1,6 @@
 import { delay } from 'redux-saga'
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { FETCH_EXPERIMENT, FETCH_EXPERIMENT_SUCCEEDED, FETCH_EXPERIMENT_FAILED } from '../../modules/design'
+import { FETCH_EXPERIMENT, FETCH_EXPERIMENT_SUCCEEDED } from '../../modules/design'
 import { ADD_MESSAGE } from '../../../../../store/message'
 import { fetchExperimentAPI } from '../utils/experiment'
 import uniqueId from 'lodash/uniqueId'
@@ -18,10 +18,9 @@ function* fetchExperimentSaga (action) {
       const response = yield call(fetchExperimentAPI, action.payload.id)
 
       if (response.error) {
-        yield [
-          put({ type: FETCH_EXPERIMENT_FAILED, message: response.error }),
-          put({ type: ADD_MESSAGE, payload: { id: uniqueId(), html: 'Error fetching the experiment.' } })
-        ]
+        yield put({
+          type: ADD_MESSAGE,
+          payload: { id: uniqueId(), html: 'Error fetching the experiment.' } })
       } else {
         const experiment = {
           experimentId: parseInt(action.payload.id),
@@ -34,7 +33,7 @@ function* fetchExperimentSaga (action) {
       }
     }
   } catch (e) {
-    yield put({ type: FETCH_EXPERIMENT_FAILED, message: e.message })
+    console.log('Fetch experiment failed.', e.message)
   }
 }
 

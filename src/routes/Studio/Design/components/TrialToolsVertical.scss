@@ -1,0 +1,31 @@
+.design_trialToolsVertical_default {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.design_trialToolsVertical_default .design_field_default {
+  float: left;
+  display: block;
+  width: 100%;
+  height: auto !important;
+  padding: 5px 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 5px;
+  background: transparent;
+}
+
+.design_trialToolsVertical_default .design_field_default .design_field_field {
+  height: auto;
+  width: 100%;
+}
+
+.design_trialToolsVertical_default .design_field_default .design_field_field > * {
+  max-width: 100%;
+}
+
+.design_trialToolsVertical_default .design_field_default .design_field_field input {
+  width: 90%;
+}

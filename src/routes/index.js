@@ -10,10 +10,9 @@ import Studio from './Studio'
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
-  indexRoute  : FrontPage,
+  indexRoute  : Home(store),
   childRoutes : [
     Login,
-    Home(store),
     Studio(store)
   ]
 })

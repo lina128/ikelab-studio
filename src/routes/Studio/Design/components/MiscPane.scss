@@ -1,0 +1,29 @@
+@import 'base';
+
+.design_miscPane_default {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px;
+  width: $trialPaneWidth + px;
+  height: 100%;
+}
+
+.design_miscPane_default .design_field_default {
+  float: left;
+  background: transparent;
+  border: none;
+  height: 100% !important;
+  width: 50% !important;
+}
+
+.design_miscPane_default .design_field_default .design_field_field {
+  width: 100%;
+  color: #fff;
+}
+
+.design_miscPane_default .design_field_default .design_field_field textarea {
+  width: 220px;
+  height: 120px;
+  padding: 0 5px;
+  color: #000;
+}

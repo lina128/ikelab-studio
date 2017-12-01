@@ -31,6 +31,7 @@ export default class DesignPane extends PureComponent {
                 return <TrialContainer
                   key={x.id}
                   id={x.id}
+                  currentTrial={experiment.currentTrial}
                   entity={experiment.entity}
                   moveNode={moveNode}
                   clickTrial={clickTrial} />
@@ -40,6 +41,7 @@ export default class DesignPane extends PureComponent {
                   key={x.id}
                   id={x.id}
                   children={x.children}
+                  currentTrial={experiment.currentTrial}
                   entity={experiment.entity}
                   moveNode={moveNode}
                   moveInside={moveInside}
@@ -50,6 +52,7 @@ export default class DesignPane extends PureComponent {
                   key={x.id}
                   id={x.id}
                   children={x.children}
+                  currentTrial={experiment.currentTrial}
                   entity={experiment.entity}
                   moveNode={moveNode}
                   moveInside={moveInside}
@@ -59,11 +62,11 @@ export default class DesignPane extends PureComponent {
           }
         </div>
         <div className='design_designPane_tools'>
-          <Button onClick={ copyCurrentTrial }>copy<i className='material-icons'>content_copy</i></Button>
-          <Button onClick={ deleteCurrentTrial }>delete<i className='material-icons'>delete_forever</i></Button>
+          <Button onClick={copyCurrentTrial}>copy<i className='material-icons'>content_copy</i></Button>
+          <Button onClick={deleteCurrentTrial}>delete<i className='material-icons'>delete_forever</i></Button>
           <Button onClick={moveOutside}>move out<i className='material-icons'>reorder</i></Button>
-          <Button onClick={ ()=>{} }>preview<i className='material-icons'>play_arrow</i></Button>
-       </div>
+          <Button onClick={() => {}}>preview<i className='material-icons'>play_arrow</i></Button>
+        </div>
       </div>
     )
   }

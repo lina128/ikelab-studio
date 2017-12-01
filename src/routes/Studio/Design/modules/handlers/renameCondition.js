@@ -1,10 +1,13 @@
 import { extendSet } from '../utils/node'
 
 const renameCondition = (state, action) => {
-  const newCondition = extendSet(state.condition, action.payload.id, { name: action.payload.value })
+  const newCondition = extendSet(state.experiment.condition, action.payload.id, { name: action.payload.value })
   return {
     ...state,
-    condition: newCondition
+    experiment: {
+      ...state.experiment,
+      condition: newCondition
+    }
   }
 }
 

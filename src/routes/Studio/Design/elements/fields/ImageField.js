@@ -4,6 +4,8 @@ import Dropzone from 'react-dropzone'
 import { uploadImage } from '../../modules/design'
 import Textfield from 'react-mdl/lib/Textfield'
 import Button from 'react-mdl/lib/Button'
+import { Dialog, DialogTitle, DialogContent, DialogActions } from 'react-mdl/lib/Dialog'
+import './field.scss'
 import './ImageField.scss'
 
 const mapDispatchToProps = (dispatch) => {
@@ -17,10 +19,18 @@ const mapDispatchToProps = (dispatch) => {
 export class ImageField extends PureComponent {
   constructor (props) {
     super(props)
-    this.state = { value: '' }
+    this.state = {
+      value: '',
+      dialogOpen: false,
+      mode: 'upload'
+    }
     this.handleImageUpload = this.handleImageUpload.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleOpenDialog = this.handleOpenDialog.bind(this)
+    this.handleCloseDialog = this.handleCloseDialog.bind(this)
+    this.setUpload = this.setUpload.bind(this)
+    this.setURL = this.setURL.bind(this)
   }
 
   static propTypes = {
@@ -34,13 +44,12 @@ export class ImageField extends PureComponent {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps !== this.props || nextProps.dialogOpen === false) {
-      this.setState({ value: '' })
+      this.handleCloseDialog()
     }
   }
 
   handleImageUpload (acceptedFiles) {
     const { trialId, fieldConstantKey, uploadImage } = this.props
-    this.setState({ value: '' })
     uploadImage(trialId, fieldConstantKey, acceptedFiles[0])
   }
 
@@ -50,16 +59,49 @@ export class ImageField extends PureComponent {
   }
 
   handleInputChange (event) {
-    this.setState({ value: event.target.value })
+    this.setState({
+      ...this.state,
+      value: event.target.value
+    })
+  }
+
+  handleOpenDialog () {
+    this.setState({
+      ...this.state,
+      dialogOpen: true
+    })
+  }
+
+  handleCloseDialog () {
+    this.setState({
+      ...this.state,
+      value: '',
+      dialogOpen: false,
+      mode: 'upload'
+    })
+  }
+
+  setUpload () {
+    this.setState({
+      ...this.state,
+      mode: 'upload'
+    })
+  }
+
+  setURL () {
+    this.setState({
+      ...this.state,
+      mode: 'url'
+    })
   }
 
   render () {
     const { fieldConstant } = this.props
-
-    return (
-      <div>
-        {fieldConstant.name}:
-        <Dropzone
+    console.log(this.state)
+    let mode
+    switch (this.state.mode) {
+      case 'upload':
+        mode = <Dropzone
           className='design_imageField_default'
           multiple={false}
           accept='image/*'
@@ -71,15 +113,61 @@ export class ImageField extends PureComponent {
             click to select a file to upload.</p>
           </div>
         </Dropzone>
-        <Textfield
-          onChange={this.handleInputChange}
-          onBlur={this.handleChange}
-          label='Or paste an image URL here'
-          floatingLabel
-          value={this.state.value}
-        />
-        <Button raised ripple>Or pick one from your library</Button>
-        {fieldConstant.hints}
+        break
+      case 'url':
+        mode = <div className='design_urlField_default'>
+          <Textfield
+            className='design_urlField_textfield'
+            onChange={this.handleInputChange}
+            onBlur={this.handleChange}
+            label='Paste an image URL here'
+            floatingLabel
+            value={this.state.value}
+          />
+        </div>
+        break
+      default:
+        mode = <Dropzone
+          className='design_imageField_default'
+          multiple={false}
+          accept='image/*'
+          onDrop={this.handleImageUpload}>
+          <div
+            className='design_imageField_label'>
+            <p>Drop an image here<br />
+            or<br />
+            click to select a file to upload.</p>
+          </div>
+        </Dropzone>
+        break
+    }
+
+    return (
+      <div className='design_field_default'>
+        <div className='design_field_field'>
+          {fieldConstant.name}
+        </div>
+        <div className='design_field_field'>
+          <Button onClick={this.handleOpenDialog}>Add</Button>
+          {fieldConstant.hints}
+        </div>
+        <Dialog className='design_imageField_dialog' open={this.state.dialogOpen}>
+          <DialogTitle>
+            Insert Image
+          </DialogTitle>
+          <DialogContent>
+            <div>
+              <Button onClick={this.setUpload}>Upload</Button>
+              <Button onClick={this.setURL}>By URL</Button>
+            </div>
+            <div className='design_imageField_box'>
+              {mode}
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleCloseDialog}>Cancel</Button>
+          </DialogActions>
+        </Dialog>
       </div>
     )
   }

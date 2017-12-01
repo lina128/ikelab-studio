@@ -1,23 +1,15 @@
-import { COLOR_PALETTE } from '../../constants'
-
 const addCondition = (state, action) => {
-  if (Object.keys(state.experiment.condition).length === COLOR_PALETTE.length) {
-    return state
-  }
+  let newCounter = state.experiment.counter + 1
 
-  for (let i = 0; i < COLOR_PALETTE.length; i++) {
-    if (!state.experiment.condition[i]) {
-      return {
-        ...state,
-        experiment: {
-          ...state.experiment,
-          condition: {
-            ...state.experiment.condition,
-            [i]: {
-              name: 'NewCondition',
-              color: COLOR_PALETTE[i]
-            }
-          }
+  return {
+    ...state,
+    experiment: {
+      ...state.experiment,
+      counter: newCounter,
+      condition: {
+        ...state.experiment.condition,
+        [newCounter]: {
+          name: 'NewCondition'
         }
       }
     }
